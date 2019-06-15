@@ -1,0 +1,222 @@
+/*
+ 	#
+	# Alamraya Custom Style 
+ 	#
+*/
+
+.table > thead,
+.table > thead > tr > th
+{
+	background-color: #1ab394;
+	color:white;
+}
+.table thead .sorting_asc,
+.table thead .sorting_desc
+{
+	background: #148970;
+}
+.table thead tr th{
+	text-align: center;
+}
+.table .form-control {
+    width: 100%;
+}
+.tab-content .ibox .ibox-title{
+	border-width: 0;
+}
+.nav-tabs a .tab-title{
+	/*max-width: 0;*/
+	transition: .5s;
+	overflow: hidden;
+	height: 17px;
+	display: inline-block;
+}
+/*.nav-tabs a:hover .tab-title,
+.nav-tabs a:focus-within .tab-title,
+.nav-tabs .active a .tab-title
+
+{
+	max-width: 100%;
+}*/
+/*.input-group-append > .btn-sm{
+	height: 31px;
+}
+.input-group-append > .btn-md{
+	height: 38px;
+}
+.input-group-append > .btn-lg{
+	height: 48px;
+}*/
+.select2-container--default .select2-selection--single{
+	border: 1px solid #ced4da;
+}
+.form-control ~ .select2-container .select2-selection--single{
+	height: 38px;
+}
+.input-sm ~ .select2-container .select2-selection--single{
+	height: 31px;
+}
+.input-lg ~ .select2-container .select2-selection--single{
+	height: 48px;
+}
+/*.input-group-addon {
+    padding: 0 7px 0 7px;
+    display: flex;
+    align-items: center;
+}*/
+
+body.mini-navbar .navbar-default .nav-second-level .arrow,
+body.mini-navbar .navbar-default .nav li a .label,
+body.mini-navbar .navbar-default .nav-second-level .label
+{
+	display: block;
+}
+body.mini-navbar .navbar-default .nav li a{
+	position: relative;
+}
+body.mini-navbar .navbar-default .nav li a .label{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+body.mini-navbar .navbar-default .nav.nav-second-level li a .label,
+body.mini-navbar .navbar-default .nav.nav-third-level li a .label
+{
+	position: initial;
+	right: unset;
+	top: unset;
+}
+
+.sidebar-collapse ul > li > a > i {
+    width: 15px;
+    text-align: center;
+}
+fieldset {
+    border: 1px solid #e7eaec;
+    padding: 13px 13px 0px;
+    margin-bottom: 1.5rem;
+}
+
+.metismenu li.nav-active > a
+{
+    color: #ffffff;
+    background-color: #1ab394;
+}
+
+.metismenu li.nav-active > a:hover,
+
+.metismenu li.nav-active > a:focus
+{
+    color: #ffffff;
+    background-color: #148970;
+}
+.panel-footer{
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+}
+.note-editor.note-frame {
+    border: 1px solid #e7eaec;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th {
+	vertical-align: middle;
+}
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+	vertical-align:unset;
+	text-align: center;
+}
+.modal-xl{
+	width: 1500px;
+}
+@media (max-width: 1600px){
+	.modal-xl{
+		width: 1300px;
+	}
+}
+
+@media (max-width: 1366px){
+	.modal-xl{
+		width: 1024px;
+	}
+}
+
+@media (max-width: 1024px){
+	.modal-xl{
+		width: 768px;
+	}
+}
+
+@media (max-width: 768px){
+	.modal-xl{
+		width: auto;
+	}
+}
+.select2-container--open {
+    z-index: 9999;
+}
+.clockpicker-popover {
+	z-index: 999999 !important;
+}
+.table .table-checked{
+    background-color: #71E9CF !important;
+    color: #fff;
+}
+.table-hover .table-checked:hover,
+.table-hover .table-checked:active{
+    background-color: #34DFB7 !important;
+    color: #fff;
+}
+
+    .slider {
+        
+        margin: 100px auto;
+    }
+
+    .slick-slide {
+      margin: 0px 20px;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
+
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+      opacity: .2;
+    }
+
+    .slick-active {
+      opacity: .5;
+    }
+
+    .slick-current {
+      opacity: 1;
+    }
+
+    .countdown-number{
+    	font-size: 50pt;
+    	background-color: #545454;
+    	color: white;
+    	padding: 0 10px 0 10px; 
+    	border-radius: 10px;
+    }
+    .countdown-unit{
+    	font-size: 30pt;
+    	margin: 0 10px 0 10px;
+    }
+    textarea{
+    	resize: vertical;
+    }
+    legend{
+    	width: auto;
+    }
