@@ -55,6 +55,11 @@
                             <td width="65">
                                 <input type="text" class="form-control" placeholder="1">
                             </td>
+                            <td width="65">
+                                <select class="form-control" name="">
+                                    
+                                </select>
+                            </td>
                             <td>
                                 <h4>
                                     $180,00
@@ -100,6 +105,11 @@
                             </td>
                             <td width="65">
                                 <input type="text" class="form-control" placeholder="2">
+                            </td>
+                            <td width="65">
+                                <select class="form-control" name="">
+                                    
+                                </select>
                             </td>
                             <td>
                                 <h4>
@@ -148,6 +158,11 @@
                             <td width="65">
                                 <input type="text" class="form-control" placeholder="1">
                             </td>
+                            <td width="65">
+                                <select class="form-control" name="">
+                                    
+                                </select>
+                            </td>
                             <td>
                                 <h4>
                                     $110,00
@@ -194,6 +209,12 @@
                             <td width="65">
                                 <input type="text" class="form-control" placeholder="1">
                             </td>
+                            <td width="65">
+                                <select class="form-control" name="">
+                                    
+                                </select>
+                            </td>
+
                             <td>
                                 <h4>
                                     $130,00
@@ -239,6 +260,11 @@
                             </td>
                             <td width="65">
                                 <input type="text" class="form-control" placeholder="1">
+                            </td>
+                            <td width="65">
+                                <select class="form-control" name="">
+                                    
+                                </select>
                             </td>
                             <td>
                                 <h4>

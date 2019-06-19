@@ -137,7 +137,10 @@ body.mini-navbar .sidebar-collapse .nav.nav-third-level li a .label
     border-top: 0;
 }
 .product-detail .product-qty{
-	width: 50px;
+	width: 150px;
+}
+.group-product-qty{
+  display: flex;
 }
 .dropdown-messages-box .media-body .row [class^="col"],
 .dropdown-messages-box .media-body .row
