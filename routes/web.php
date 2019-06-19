@@ -42,6 +42,10 @@ Route::get('pembelian/dikirim', 'Frontpage\FrontpageController@pembelian')->name
 // Wishlist
 Route::get('/wishlist', 'Frontpage\FrontpageController@wishlist')->name('wishlist-frontpage');
 
+// Profile
+Route::get('/profile', 'Frontpage\FrontpageController@profile')->name('profile');
 
+// Checkout
+Route::get('/checkout', 'Frontpage\FrontpageController@checkout')->name('checkout');
 	
 });//End Route::Group wib-cpanel

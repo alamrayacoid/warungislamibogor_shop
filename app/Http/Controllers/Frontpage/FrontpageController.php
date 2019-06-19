@@ -46,5 +46,12 @@ class FrontpageController extends Controller
     {
     	return view('frontpage.wishlist-frontpage');
     }
-
+    public function profile()
+    {
+        return view('frontpage.profile');
+    }
+    public function checkout()
+    {
+        return view('frontpage.checkout');
+    }
 }

@@ -35,7 +35,7 @@
                         <p class="text-muted text-center">
                             <small>Tidak punya akun?</small>
                         </p>
-                        <a class="btn btn-sm btn-white btn-block" href="">Buat akun sekarang</a>
+                        <a class="btn btn-sm btn-white btn-block" href="{{route('register-frontpage')}}">Buat akun sekarang</a>
                     </form>
                     <p class="m-t">
                         <small>Warung Islami Bogor &copy; 2019</small>
@@ -46,7 +46,7 @@
         <hr/>
         <div class="row">
             <div class="col-md-6">
-                Copyright <strong>Alamraya Sebar Barokah</strong>
+                Created by <strong>Alamraya Sebar Barokah</strong>
             </div>
             <div class="col-md-6 text-right">
                <small>© 2019</small>

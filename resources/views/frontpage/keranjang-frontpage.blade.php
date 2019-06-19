@@ -44,15 +44,13 @@
                                 </dl>
 
                                 <div class="m-t-sm">
-                                    <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                    |
-                                    <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
                                 </div>
                             </td>
 
                             <td>
                                 $180,00
-                                <s class="small text-muted">$230,00</s>
+                                
                             </td>
                             <td width="65">
                                 <input type="text" class="form-control" placeholder="1">
@@ -92,15 +90,13 @@
                                 </dl>
 
                                 <div class="m-t-sm">
-                                    <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                    |
-                                    <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
                                 </div>
                             </td>
 
                             <td>
                                 $50,00
-                                <s class="small text-muted">$63,00</s>
+                                
                             </td>
                             <td width="65">
                                 <input type="text" class="form-control" placeholder="2">
@@ -142,9 +138,7 @@
                                 </dl>
 
                                 <div class="m-t-sm">
-                                    <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                    |
-                                    <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
                                 </div>
                             </td>
 
@@ -190,9 +184,7 @@
                                 </dl>
 
                                 <div class="m-t-sm">
-                                    <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                    |
-                                    <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
                                 </div>
                             </td>
 
@@ -238,9 +230,7 @@
                                 </dl>
 
                                 <div class="m-t-sm">
-                                    <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                    |
-                                    <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
                                 </div>
                             </td>
 
@@ -285,13 +275,10 @@
                     $390,00
                 </h2>
 
-                <hr/>
-                <span class="text-muted small">
-                    *For United States, France and Germany applicable sales tax will be applied
-                </span>
+                <hr>
                 <div class="m-t-sm">
                     <div class="btn-group">
-                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
+                    <a href="{{route('checkout')}}" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
                     <a href="#" class="btn btn-white btn-sm"> Cancel</a>
                     </div>
                 </div>

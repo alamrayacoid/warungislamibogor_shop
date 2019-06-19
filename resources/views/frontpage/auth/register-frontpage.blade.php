@@ -17,7 +17,7 @@
             <form id="register"  method="POST" class="m-t" role="form" action="$">
                 @csrf 
                 <div class="form-group">
-                    <input type="hidden" class="form-control" name="code" id="code" placeholder="Code" value="us{{$code}}" hidden>
+                    <input type="hidden" class="form-control" name="code" id="code" placeholder="Code" value="" hidden>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" placeholder="Name" required="">
@@ -37,36 +37,13 @@
                 <div class="form-group" >
                         <div class="checkbox i-checks" id="syarat_group"><label> <input class="syarat" name="persyaratan"  type="checkbox"><i></i> Setujui persyaratan dan kebijakan. </label></div>
                 </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses Management User</i></label><br><br><input name="menu_access_management_user" type="radio" value="true"> Yes &nbsp;<input name="menu_access_management_user" type="radio" value="false" checked> No </div>
-                </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses Master Data</i></label><br><br><input name="menu_access_master" type="radio" value="true"> Yes &nbsp;<input name="menu_access_master" type="radio" value="false" checked> No </div>
-                </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses marketing</i></label><br><br><input name="menu_access_marketing" type="radio" value="true"> Yes &nbsp;<input name="menu_access_marketing" type="radio" value="false" checked> No </div>
-                </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses gudang</i></label><br><br><input name="menu_access_gudang" type="radio" value="true"> Yes &nbsp;<input name="menu_access_gudang" type="radio" value="false" checked> No </div>
-                </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses SDM</i></label><br><br><input name="menu_access_sdm" type="radio" value="true"> Yes &nbsp;<input name="menu_access_sdm" type="radio" value="false" checked> No </div>
-                </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses budgeting</i></label><br><br><input name="menu_access_budgeting" type="radio" value="true"> Yes &nbsp;<input name="menu_access_budgeting" type="radio" value="false" checked> No </div>
-                </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses keuangan</i></label><br><br><input name="menu_access_keuangan" type="radio" value="true"> Yes &nbsp;<input name="menu_access_keuangan" type="radio" value="false" checked> No </div>
-                </div>
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label><i>Menu Akses manajement aset</i></label><br><br><input name="menu_access_management" type="radio" value="true"> Yes &nbsp;<input name="menu_access_management" type="radio" value="false" checked> No </div>
-                </div>
+                
                 <button id="input_register" type="submit" class="btn btn-primary block full-width m-b">Daftar</button>
                 <input type="submit" id="trigger_register" hidden></a>
                 <p class="text-muted text-center"><small>Sudah punya Akun?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="{{route('login')}}">Login</a>
+                <a class="btn btn-sm btn-white btn-block" href="{{route('login-frontpage')}}">Login</a>
             </form>
-            <p class="m-t"> Copyright By <strong>Alamraya Sebar Barokah</strong> <br>
+            <p class="m-t"> Created by <strong>Alamraya Sebar Barokah</strong> <br>
              <small>Warung Islami Bogor &copy; 2019</small> </p>
         </div>
     </div>
@@ -78,7 +55,8 @@
     <script src="{{asset('assets/js/plugins/iCheck/icheck.min.js')}}"></script>
     <script src="{{asset('assets/iziToast/iziToast.min.js')}}"></script>
     <script>
-            $(document).on('click','#input_register',function(){ 
+        $(document).ready(function(){
+            $('#input_register').on('click',function(){ 
                     var trigger = $('.icheckbox_square-green').addClass('checked');
                     if (trigger) {
                         var check = 'true';
@@ -89,10 +67,8 @@
                 if (check === 'true') {
                     $('#trigger_register').click();
                 }else{
-                    iziToast.show({
-                                color: '#DC143C',
-                                titleColor: '#ffffff',
-                                messageColor: '#ffffff',
+                    iziToast.error({
+                                
                                 title: 'Gagal!',
                                 message: 'Ada yang kosong',
                             });

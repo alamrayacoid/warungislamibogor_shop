@@ -1,4 +1,4 @@
-<div class="row border-bottom white-bg">    
+<div class="row border-bottom white-bg" id="navbar-top">    
     <nav class="navbar navbar-static-top" role="navigation">
         <div class="navbar-header">
             <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
@@ -12,7 +12,10 @@
                 </span>
             </a>
             {{-- @if(Cookie::get('tes_frontpage')) --}}
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                    <i class="fa fa-bars"></i>
+                    <span class="label label-info">0</span>
+                </a>
             {{-- @endif --}}
             <form role="search" class="navbar-form-cust">
                 <div class="form-group">
@@ -80,7 +83,13 @@
                             <i class="fa fa-star"></i>
                         </a>
                     </li>
-
+                    <li>
+                        <a href="{{route('profile')}}" >
+                            <img src="{{asset('assets/img/a3.jpg')}}" height="24px" width="24px" class="rounded">
+                            <small>Nama Customer</small>
+                        </a>
+                        
+                    </li>
                     @if(Auth::check())
                     <li>
                         <a href="{{route('logoutt')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

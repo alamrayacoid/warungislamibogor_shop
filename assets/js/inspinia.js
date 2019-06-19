@@ -57,6 +57,11 @@ $(document).ready(function () {
         SmoothlyMenu();
     });
 
+    $('.mini-navbar-show').click(function(){
+        $('body').removeClass('mini-navbar');
+        SmoothlyMenu();
+    });
+
     // Run menu of canvas
     $('body.canvas-menu .sidebar-collapse').slimScroll({
         height: '100%',

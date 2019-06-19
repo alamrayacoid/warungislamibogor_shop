@@ -3,6 +3,9 @@
 @include('frontpage.layouts._head-frontpage')
 @yield('extra_style')
 <body class="canvas-menu top-navigation">
+
+	<div class="mini-navbar-show"></div>
+	
 	<div id="wrapper">
 
 		{{-- @if(Cookie::get('tes_frontpage')) --}}
@@ -15,10 +18,10 @@
 			
 			@include('frontpage.layouts._navbar-frontpage')
 
-	        <div class="wrapper wrapper-content animated fadeInRight">
-
-				@yield('content')
-
+	        <div class="wrapper wrapper-content">
+				<div class="container">
+					@yield('content')
+				</div>
 			</div>
 
 

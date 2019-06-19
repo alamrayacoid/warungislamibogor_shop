@@ -505,3 +505,56 @@ ul.ibox-list-pembelian .label {
 .mx-auto {
   margin-left: auto !important;
 }
+.navbar-scroll {
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    
+    animation-name: animHeight;
+    animation-duration: 2s;
+}
+
+@keyframes animHeight{
+  0%{
+    max-height: 0px;
+  }
+  100%{
+    max-height: 50px;
+  }
+}
+body.canvas-menu nav.navbar-static-side{
+  display: initial;
+  left: -220px;
+}
+body.canvas-menu.mini-navbar nav.navbar-static-side{
+  display: initial;
+  left: 0;
+}
+.mini-navbar .mini-navbar-show{
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,.3);
+  z-index: 1005;
+  cursor: pointer;
+}
+body.canvas-menu.mini-navbar .navbar-default .nav > li > .nav-second-level li a{
+  border-radius: 0;
+}
+.select2-container--default .select2-selection--single{
+  border:1px solid #e5e6e7;
+}
+.rounded{
+  border-radius: 50%;
+}
+.minimalize-styl-2{
+  position: relative;
+}
+.minimalize-styl-2 .label{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+.table.table-cart > tbody > tr > td{
+  border:0px;
+}

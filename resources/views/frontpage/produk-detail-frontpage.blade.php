@@ -51,10 +51,14 @@
                                     <div class="m-t-md">
                                         <h2 class="product-main-price">$406,602 <small class="text-muted">Exclude Tax</small> </h2>
                                     </div>
-                                    <div class="product-qty">
-                                        <label>Qty</label>
-                                        <input type="number" value="1" min="1" class="form-control" name="">
-                                    </div>
+
+                                        <div class="product-qty">
+                                            <label>Qty</label>
+                                            <div class="group-product-qty">
+                                                <input type="number" value="1" min="1" class="form-control" name="">
+                                                <select class="form-control" name=""></select>
+                                            </div>
+                                        </div>
                                     <hr>
 
                                     <h4>Product description</h4>
