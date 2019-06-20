@@ -23,19 +23,22 @@
                                     <div class="product-images">
 
                                         <div>
-                                            <div class="image-imitation">
-                                                [IMAGE 1]
-                                            </div>
+                                            <a href="{{asset('assets/img/gallery/1.jpg')}}" data-gallery="">
+                                                
+                                                <img src="{{asset('assets/img/gallery/1s.png')}}">
+                                            </a>
                                         </div>
                                         <div>
-                                            <div class="image-imitation">
-                                                [IMAGE 2]
-                                            </div>
+                                            <a href="{{asset('assets/img/gallery/2.jpg')}}" data-gallery="">
+                                                
+                                                <img src="{{asset('assets/img/gallery/2s.png')}}">
+                                            </a>
                                         </div>
                                         <div>
-                                            <div class="image-imitation">
-                                                [IMAGE 3]
-                                            </div>
+                                            <a href="{{asset('assets/img/gallery/3.jpg')}}" data-gallery="">
+                                                
+                                                <img src="{{asset('assets/img/gallery/3s.png')}}">
+                                            </a>
                                         </div>
 
 
@@ -116,7 +119,12 @@
 
 
         $('.product-images').slick({
-            dots: true
+            autoplay:true,
+            autoplaySpeed:5000,
+            dots: true,
+            centerMode: true,
+            infinite: true,
+            variableWidth: true
         });
 
     });

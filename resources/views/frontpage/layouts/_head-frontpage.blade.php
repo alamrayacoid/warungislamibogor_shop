@@ -13,6 +13,7 @@
     <link href="{{asset('assets/css/bootstrap-marginpadding.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/bootstrap-display.css')}}" rel="stylesheet">
 
+    <link href="{{asset('assets/css/plugins/jQueryUI/jquery-ui.css')}}" rel="stylesheet">
 
     <!-- Toastr style -->
     <link href="{{asset('assets/css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
@@ -30,6 +31,12 @@
     <link href="{{asset('assets/css/plugins/slick/slick-theme.css')}}" rel="stylesheet">
     
     <link href="{{asset('assets/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/jquery-cropper/cropper.min.css')}}" rel="stylesheet">
+
+    <link href="{{asset('assets/css/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet">
+
+    <link href="{{asset('assets/css/plugins/blueimp/css/blueimp-gallery.min.css')}}" rel="stylesheet">
+
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/alamraya-customer-style.css')}}">
 

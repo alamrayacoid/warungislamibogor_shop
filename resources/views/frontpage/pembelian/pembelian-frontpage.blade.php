@@ -57,8 +57,9 @@
 
 @section('content')
     
-@include('frontpage.modal-detailpembelian')
-@include('frontpage.modal-detailpengiriman')
+@include('frontpage.pembelian.modal-detailpembelian')
+@include('frontpage.pembelian.modal-detailpengiriman')
+@include('frontpage.pembelian.modal-pembayaran')
 
         <div class="ibox">
             <div class="ibox-content m-b-sm border-bottom">
@@ -202,7 +203,7 @@
                             </div>
                             
                             <div id="tab-2" class="tab-pane animated fadeIn">
-                                @for($i=1; $i<=6 ;$i++)
+                                
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
@@ -218,6 +219,7 @@
                                                     <label>Total Belanja</label>
                                                     <span class="text-warning">Rp. 30.000</span>
                                                     <br>
+                                                    <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a href="#modal-detail" data-toggle="modal" class="btn btn-success btn-sm">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
@@ -266,7 +268,7 @@
 
                                         </div>
                                     </div>
-                                @endfor
+                                
                             </div>
 
                             <div id="tab-3" class="tab-pane animated fadeIn">
@@ -416,7 +418,6 @@
             </div>   
         
 
-
             
 @endsection
 @section('extra_script')
@@ -434,6 +435,23 @@
         console.log(status);
 
         $('.input-daterange').datepicker();
+
+        $('[name="foto"]').change(function(){
+            readURL(this);
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(input).parents('.form-group').find('img').attr('src', e.target.result);
+                    $(input).parents('.form-group').find('a').attr('href', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
     });
 </script>

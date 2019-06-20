@@ -48,16 +48,35 @@
     <script src="{{asset('assets/js-cookie/js.cookie.js')}}"></script>
     <script src="{{asset('assets/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
+    <!-- Image cropper -->
+    <script src="{{asset('assets/jquery-cropper/cropper.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js')}}"></script>
+
+
     <script>
         $(document).ready(function() {
 
-            // $('.navbar-minimalize.minimalize-styl-2, .close-canvas-menu').click(function(){
-            //     ($('body').hasClass('mini-navbar')) ? localStorage.setItem('_canvasmenu', 'mini-navbar') : localStorage.removeItem('_canvasmenu');
-            // })
+        var availableTags = [
+          "Botol Aqua",
+          "Botol Air",
+          "Botol Cat",
+          "Galon",
+          "Botol Kosmetik"
+        ];
+        $( "#top-search" ).autocomplete({
+          source: availableTags,
+          select: noResiChange
+        });
 
-            // var check_canvasmenu = localStorage.getItem('_canvasmenu');
-
-            // (check_canvasmenu) ? $('body').addClass(check_canvasmenu) : '';
+        function noResiChange(event, ui)
+        {
+            console.log('selected', ui);
+            
+            window.location.href = '{{route('produk-detail-frontpage')}}';
+        }
 
             $.extend(true, $.fn.dataTable.defaults, {
                 "responsive":true,

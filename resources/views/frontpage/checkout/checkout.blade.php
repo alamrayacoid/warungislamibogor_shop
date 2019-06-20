@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+
+@include('frontpage.checkout.modal_gantialamat')
+
 <div class="row">
     <div class="col-md-9">
 
@@ -49,7 +52,7 @@
             </div>
 
             <div class="ibox-footer text-right">
-                <button class="btn btn-warning btn-sm" type="button"><i class="fa fa-pencil-alt"></i> Ubah Alamat</button>
+                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-gantialamat" type="button"><i class="fa fa-pencil-alt"></i> Ubah Alamat</button>
             </div>
             
         </div>
@@ -92,7 +95,10 @@
                                 
                             </td>
                             <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
+                                (Qty)
+                            </td>
+                            <td width="65">
+                                (Satuan)
                             </td>
                             <td>
                                 <h4>
@@ -135,7 +141,10 @@
                                 
                             </td>
                             <td width="65">
-                                <input type="text" class="form-control" placeholder="2">
+                                (Qty)
+                            </td>
+                            <td width="65">
+                                (Satuan)
                             </td>
                             <td>
                                 <h4>
@@ -179,7 +188,10 @@
                                 $110,00
                             </td>
                             <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
+                                (Qty)
+                            </td>
+                            <td width="65">
+                                (Satuan)
                             </td>
                             <td>
                                 <h4>
@@ -222,7 +234,10 @@
                                 $130,00
                             </td>
                             <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
+                                (Qty)
+                            </td>
+                            <td width="65">
+                                (Satuan)
                             </td>
                             <td>
                                 <h4>
@@ -265,7 +280,10 @@
                                 $700,00
                             </td>
                             <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
+                                (Qty)
+                            </td>
+                            <td width="65">
+                                (Satuan)
                             </td>
                             <td>
                                 <h4>
@@ -304,7 +322,7 @@
                 <hr/>
                 <div class="m-t-sm">
                     <div class="btn-group">
-                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-money-bill-alt"></i> Bayar</a>
+                    <a href="#" class="btn btn-warning btn-sm" id="btn-confirm"><i class="fa fa-money-bill-alt"></i> Bayar</a>
                     <a href="#" class="btn btn-white btn-sm"> Cancel</a>
                     </div>
                 </div>
@@ -363,4 +381,35 @@
 
     </div>
 </div>
+@endsection
+
+@section('extra_script')
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+
+        $('#btn-confirm').click(function(){
+
+            swal({
+                title: "Apa anda yakin?",
+                text: "Transaksi akan dibuat!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ya",
+                cancelButtonText: "Tidak!",
+                closeOnConfirm: false,
+                closeOnCancel: true },
+            function (isConfirm) {
+                if (isConfirm) {
+                    swal("Informasi!", "Transfer ke Rekening WIB dan kirim bukti transfer di menu pembayaran.", "success");
+                } else {
+                    //
+                }
+            });
+        });
+
+    })
+
+</script>
 @endsection
