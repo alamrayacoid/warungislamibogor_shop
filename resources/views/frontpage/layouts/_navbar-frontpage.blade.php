@@ -36,10 +36,12 @@
 
             </ul>
             <ul class="nav navbar-top-links navbar-right">
-                {{-- @if(Cookie::get('tes_frontpage')) --}}
+               
                     <li>
                         <span class="m-r-sm text-muted welcome-message">Selamat datang di Warung Islami Bogor.</span>
                     </li>
+                    @if(!Auth::check())
+                    @else
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-shopping-cart"></i>  <span class="label label-warning">5</span>
@@ -83,6 +85,7 @@
                             <i class="fa fa-star"></i>
                         </a>
                     </li>
+                    @endif
                     @if(!Auth::check())
                     @else
                     <li>

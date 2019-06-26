@@ -132,92 +132,99 @@
                         <div class="tab-content">
 
                             <div id="tab-1" class="tab-pane animated fadeIn active">
-                                @for($i=1; $i<=6 ;$i++)
+                                    @foreach($group as $row)
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">NOTA/20190509/{{$i}}</label>
-                                                    <span>9 Mei 2019</span>
+                                                    <label class="d-block">{{$row->sell_nota}}</label>
+                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-primary">Transaksi Selesai</span>
+                                                    <span class="label label-primary">{{$row->sell_status}}</span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. 30.000</span>
+                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
                                                     <br>
                                                     <a href="#modal-detail" data-toggle="modal" class="btn btn-success btn-sm">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
+                                                @foreach($allstatus as $roww)
+                                                @if($roww->sell_nota == $row->sell_nota)
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
-                                                        @for($j=0;$j<2;$j++)
                                                             <tr>
+                                                                @foreach($gambar as $image)
+                                                                @if($image->sell_nota == $row->sell_nota)
                                                                 <td width="90">
-                                                                    <img src="{{asset('assets/img/gallery/'.($i + $j).'s.jpg')}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
                                                                 </td>
+                                                                @endif
+                                                                @endforeach
                                                                 <td class="desc">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            Text editor
+                                                                            {{$roww->i_name}}
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        There are many variations of passages of Lorem Ipsum available
+                                                                        {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        <dt>Description lists</dt>
-                                                                        <dd>List is perfect for defining terms.</dd>
+                                                                        {{$roww->itp_description}}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. 10.000</span>
+                                                                        <span class="text-warning">{{$roww->ipr_sunitprice}}</span>
                                                                         |
-                                                                        <span class="text-muted">3 Produk</span>
+                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. 30.000</span>
+                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
                                                                 </td>
                                                                 <td width="65">
                                                                     <button class="btn btn-warning" type="button">Belanja Lagi</button>
                                                                 </td>
 
                                                             </tr>
-                                                        @endfor
                                                     </tbody>
                                                 </table>
+                                                @endif
+                                        @endforeach                             
                                             </div>
 
                                         </div>
                                     </div>
-                                @endfor                                
+                                    @endforeach
                             </div>
                             
                             <div id="tab-2" class="tab-pane animated fadeIn">
-                                
+                                    @foreach($groupp as $row)
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
+
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">NOTA/20190509/{{$i}}</label>
-                                                    <span>9 Mei 2019</span>
+                                                    <label class="d-block">{{$row->sell_nota}}</label>
+                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-warning">Pembayaran</span>
+                                                    <span class="label label-primary">{{$row->sell_status}}</span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. 30.000</span>
+                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
                                                     <br>
                                                     <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a href="#modal-detail" data-toggle="modal" class="btn btn-success btn-sm">Lihat Detail Transaksi</a>
@@ -226,135 +233,152 @@
                                         </div>
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
+                                                @foreach($pembayaran as $roww)
+                                                @if($roww->sell_nota == $row->sell_nota)
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
-                                                        @for($j=0;$j<2;$j++)
                                                             <tr>
+                                                                @foreach($gambar as $image)
+                                                                @if($image->sell_nota == $row->sell_nota)
                                                                 <td width="90">
-                                                                    <img src="{{asset('assets/img/gallery/'.($i + $j).'s.jpg')}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
                                                                 </td>
+                                                                @endif
+                                                                @endforeach
                                                                 <td class="desc">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            Text editor
+                                                                            {{$roww->i_name}}
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        There are many variations of passages of Lorem Ipsum available
+                                                                        {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        <dt>Description lists</dt>
-                                                                        <dd>List is perfect for defining terms.</dd>
+                                                                        {{$roww->itp_description}}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. 10.000</span>
+                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
                                                                         |
-                                                                        <span class="text-muted">3 Produk</span>
+                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. 30.000</span>
+                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
                                                                 </td>
 
                                                             </tr>
-                                                        @endfor
                                                     </tbody>
                                                 </table>
+                                                @endif
+                                                @endforeach
                                             </div>
 
                                         </div>
                                     </div>
+                                    @endforeach
                                 
                             </div>
 
                             <div id="tab-3" class="tab-pane animated fadeIn">
-                                @for($i=1; $i<=6 ;$i++)
+                                @foreach($group as $row)
+                                @if($row->sell_status == 'Sedang Proses')
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
+
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">NOTA/20190509/{{$i}}</label>
-                                                    <span>9 Mei 2019</span>
+                                                    <label class="d-block">{{$row->sell_nota}}</label>
+                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-success">Sedang Diproses</span>
+                                                    <span class="label label-warning">{{$row->sell_status}}</span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. 30.000</span>
+                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
                                                     <br>
+                                                    <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a href="#modal-detail" data-toggle="modal" class="btn btn-success btn-sm">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
+                                                @foreach($proses as $roww)
+                                                @if($roww->sell_nota == $row->sell_nota)
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
-                                                        @for($j=0;$j<2;$j++)
                                                             <tr>
+                                                                @foreach($gambar as $image)
+                                                                @if($image->sell_nota == $row->sell_nota)
                                                                 <td width="90">
-                                                                    <img src="{{asset('assets/img/gallery/'.($i + $j).'s.jpg')}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
                                                                 </td>
+                                                                @endif
+                                                                @endforeach
                                                                 <td class="desc">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            Text editor
+                                                                            {{$roww->i_name}}
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        There are many variations of passages of Lorem Ipsum available
+                                                                        {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        <dt>Description lists</dt>
-                                                                        <dd>List is perfect for defining terms.</dd>
+                                                                        {{$roww->itp_description}}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. 10.000</span>
+                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
                                                                         |
-                                                                        <span class="text-muted">3 Produk</span>
+                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. 30.000</span>
+                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
                                                                 </td>
 
                                                             </tr>
-                                                        @endfor
                                                     </tbody>
                                                 </table>
+                                                @endif
+                                                @endforeach
                                             </div>
 
                                         </div>
                                     </div>
-                                @endfor
+                                    @endif
+                                @endforeach
                             </div>                            
 
-                            <div id="tab-4" class="tab-pane animated fadeIn">                            
-                                @for($i=1; $i<=6 ;$i++)
+                            <div id="tab-4" class="tab-pane animated fadeIn"> 
+                                @foreach($group as $row)
+                                @if($row->sell_status == 'Sedang Dikirim')
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
+
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">NOTA/20190509/{{$i}}</label>
-                                                    <span>9 Mei 2019</span>
+                                                    <label class="d-block">{{$row->sell_nota}}</label>
+                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-info">Sedang dikirim</span>
+                                                    <span class="label label-primary">{{$row->sell_status}}</span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. 30.000</span>
+                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
                                                     <br>
                                                     <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modal-pengiriman">Lacak</button>
                                                     <a href="#modal-detail" data-toggle="modal" class="btn btn-success btn-sm">Lihat Detail Transaksi</a>
@@ -363,49 +387,55 @@
                                         </div>
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
+                                                @foreach($pengiriman as $roww)
+                                                @if($roww->sell_nota == $row->sell_nota)
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
-                                                        @for($j=0;$j<2;$j++)
                                                             <tr>
+                                                                @foreach($gambar as $image)
+                                                                @if($image->sell_nota == $row->sell_nota)
                                                                 <td width="90">
-                                                                    <img src="{{asset('assets/img/gallery/'.($i + $j).'s.jpg')}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
                                                                 </td>
+                                                                @endif
+                                                                @endforeach
                                                                 <td class="desc">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            Text editor
+                                                                            {{$roww->i_name}}
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        There are many variations of passages of Lorem Ipsum available
+                                                                        {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        <dt>Description lists</dt>
-                                                                        <dd>List is perfect for defining terms.</dd>
+                                                                        {{$roww->itp_description}}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. 10.000</span>
+                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
                                                                         |
-                                                                        <span class="text-muted">3 Produk</span>
+                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. 30.000</span>
+                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
                                                                 </td>
 
                                                             </tr>
-                                                        @endfor
                                                     </tbody>
                                                 </table>
+                                                @endif
+                                                @endforeach
                                             </div>
 
                                         </div>
                                     </div>
-                                @endfor
+                                    @endif
+                                @endforeach
                             </div>
 
                         </div>

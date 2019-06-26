@@ -66,31 +66,37 @@
                     </section>
 
                     <div class="row mt-5">
-                        @for($i = 1 ; $i <= 12 ; $i++)
+                        @foreach($data as $row)
                         <div class="col-md-3">
                             <div class="ibox">
                                 <div class="ibox-content product-box">
                                     <div class="product-wishlist onproduk-page">
                                         <button class="btn btn-circle btn-lg btn-wishlist" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
                                     </div>
+                                        @foreach($gambar as $roww)
+                                        @if($row->i_code == $roww->ip_ciproduct)
                                     <div class="product-imitations">
-                                        <img src="{{asset('assets/img/gallery/'.$i.'.jpg')}}">
+                                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}">
                                     </div>
+                                    @endif
+                                        @endforeach
                                     <div class="product-desc">
                                         <span class="product-price">
-                                            Rp. 10.000
+                                            Rp. {{$row->ipr_sunitprice}}
                                         </span>
-                                        <small class="text-muted">Category</small>
-                                        <a href="#" class="product-name"> Product</a>
+                                        <small class="text-muted">{{$row->ity_name}}</small>
+                                        <a href="#" class="product-name"> {{$row->i_name}}</a>
 
 
 
                                         <div class="small m-t-xs">
-                                            Many desktop publishing packages and web page editors now.
+                                            {{$row->itp_tagdesc}}
                                         </div>
                                         <div class="m-t text-right">
-
-                                            <a href="{{route('produk-detail-frontpage')}}" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                            <form action="{{route('produk-detail-frontpage')}}" method="GET">
+                                                <input type="hidden" name="code" value="{{$row->i_code}}">
+                                            <button  class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +104,7 @@
                         </div>
 
 
-                        @endfor
+                        @endforeach
                     </div>
                 
         </div>

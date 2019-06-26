@@ -13,7 +13,16 @@ class DCart extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('d_cart', function (Blueprint $table) {
+            $table->bigIncrements('cart_id');
+            $table->string('cart_ci_product',50);
+            $table->string('cart_cmember',50);
+            $table->string('cart_label');
+            $table->integer('cart_qty');
+            $table->string('cart_location',50)->nullable();
+            $table->string('status_data',5);
+        });
+
     }
 
     /**
@@ -23,6 +32,6 @@ class DCart extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('d_cart');
     }
 }
