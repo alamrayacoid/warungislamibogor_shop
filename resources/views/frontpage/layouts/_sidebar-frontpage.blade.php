@@ -4,6 +4,8 @@
         <a class="close-canvas-menu"><i class="fa fa-times"></i></a>
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
+                @if(!Auth::user())
+                @else
                 <div class="dropdown profile-element"> 
                     <span>
                         <img alt="image" class="img-circle" src="{{asset('assets/img/a3.jpg')}}" width="48px" height="48px">
@@ -17,6 +19,7 @@
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </div>
+                @endif
                 <div class="logo-element">
                     WIB
                 </div>
@@ -39,6 +42,14 @@
             <li class="{{Request::is('wishlist/*') ? 'active' : '' || Request::is('wishlist') ? 'active' : ''}}">
                 <a href="{{route('wishlist-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Wishlist</span></a>
             </li>
+            @if(!Auth::user())
+            <li class="{{Request::is('wishlist/*') ? 'active' : '' || Request::is('wishlist') ? 'active' : ''}}">
+                <a href="{{route('wishlist-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Login</span></a>
+            </li>
+            <li class="{{Request::is('wishlist/*') ? 'active' : '' || Request::is('wishlist') ? 'active' : ''}}">
+                <a href="{{route('wishlist-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Register</span></a>
+            </li>
+            @endif
             
         </ul>
 

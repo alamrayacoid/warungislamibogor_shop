@@ -83,6 +83,8 @@
                             <i class="fa fa-star"></i>
                         </a>
                     </li>
+                    @if(!Auth::check())
+                    @else
                     <li>
                         <a href="{{route('profile')}}" >
                             <img src="{{asset('assets/img/a3.jpg')}}" height="24px" width="24px" class="rounded">
@@ -90,7 +92,9 @@
                         </a>
                         
                     </li>
-                    @if(Auth::check())
+                    @endif
+                    @if(Auth::check() == NULL)
+                    @else
                     <li>
                         <a href="{{route('logoutt')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out"></i> Log out
@@ -100,7 +104,6 @@
                         </form>
                     </li>
                     @endif
-                {{-- @else --}}
                     @if(!Auth::check())
                     <li>
                         <a href="{{route('login-frontpage')}}">Login </a>
@@ -111,7 +114,6 @@
                         <a href="{{route('register-frontpage')}}">Register </a>
                     </li>
                     @endif
-                {{-- @endif --}}
 
 </ul>
         </div>
