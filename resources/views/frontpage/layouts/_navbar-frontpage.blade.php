@@ -1,3 +1,7 @@
+<?php $cek = App\Http\Controllers\cartController::cart();
+      $notifp = App\Http\Controllers\notifController::pembelian();
+      $menu = App\Http\Controllers\menuController::menu();
+?>
 <div class="row border-bottom white-bg" id="navbar-top">    
     <nav class="navbar navbar-static-top" role="navigation">
         <div class="navbar-header">
@@ -14,7 +18,7 @@
             {{-- @if(Cookie::get('tes_frontpage')) --}}
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
                     <i class="fa fa-bars"></i>
-                    <span class="label label-info">0</span>
+                    <span class="label label-info">{{$notifp}}</span>
                 </a>
             {{-- @endif --}}
             <form role="search" class="navbar-form-cust">
@@ -30,7 +34,9 @@
                     <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Produk </a>
                     <ul role="menu" class="dropdown-menu">
                         <li><a href="{{route('produk-frontpage')}}">Semua</a></li>
-                        <li><a href="{{route('produk-frontpage')}}">Botol </a></li>
+                        @foreach($menu as $row)
+                        <li><a href="#">{{$row->ity_name}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
 
@@ -44,33 +50,35 @@
                     @else
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-shopping-cart"></i>  <span class="label label-warning">5</span>
+                            <i class="fa fa-shopping-cart"></i>  <span class="label label-warning" id="ncart"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
-                            @for($i = 1; $i <= 5; $i++)
-                                <li>
+                            @foreach($cek as $row)
+                            @if($row->cart_cmember == Auth::user()->cm_code)
+                                <li class="ncart">
                                     <div class="dropdown-messages-box">
-                                        <a href="{{route('keranjang-frontpage')}}">
-                                            <div class="pull-left dropdown-img">
-                                                <img alt="image" class="img-circle" src="{{asset('assets/img/gallery/'.$i.'s.jpg')}}">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="row">
-                                                    <div class="col-xs-7">
-                                                        <strong>Nama Produk</strong>
-                                                    </div>
-                                                    <div class="col-xs-5">
-                                                        <small class="pull-right text-warning">Rp. 10.000</small>
-                                                        <br>
-                                                        <small class="pull-right text-muted">1 buah</small>
+                                            <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}">
+                                                <div class="pull-left dropdown-img">
+                                                    <img alt="image" class="img-circle" src="{{asset('assets/img/gallery/s.jpg')}}">
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-7">
+                                                            <strong>{{$row->i_name}}</strong>
+                                                        </div>
+                                                        <div class="col-xs-5">
+                                                            <small class="pull-right text-warning">Rp. {{$row->ipr_sunitprice}}</small>
+                                                            <br>
+                                                            <small class="pull-right text-muted">{{$row->cart_qty}}</small>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
                                     </div>
                                 </li>
                                 <li class="divider"></li>
-                            @endfor
+                                @endif
+                            @endforeach
                             <li>
                                 <div class="text-center link-block">
                                     <a href="{{route('keranjang-frontpage')}}">
@@ -91,7 +99,7 @@
                     <li>
                         <a href="{{route('profile')}}" >
                             <img src="{{asset('assets/img/a3.jpg')}}" height="24px" width="24px" class="rounded">
-                            <small>Nama Customer</small>
+                            <small>{{Auth::user()->cm_name}}</small>
                         </a>
                         
                     </li>
@@ -99,11 +107,11 @@
                     @if(Auth::check() == NULL)
                     @else
                     <li>
-                        <a href="{{route('logoutt')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            <i class="fa fa-sign-out"></i> Log out
-                        </a>
-                        <form id="logout-form" action="{{ route('logoutt') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
+                        <button type="submit" href="{{route('logout')}}">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </button>
                         </form>
                     </li>
                     @endif
@@ -114,7 +122,7 @@
                     @endif
                     @if(!Auth::check())
                     <li>
-                        <a href="{{route('register-frontpage')}}">Register </a>
+                        <a href="{{route('register_frontpage-frontpage')}}">Register </a>
                     </li>
                     @endif
 
@@ -125,6 +133,7 @@
 
 @section('extra_script')
 <script type="text/javascript">
+
     $(document).ready(function(){
         
         $('[data-target="#navbar"]').click(function(){

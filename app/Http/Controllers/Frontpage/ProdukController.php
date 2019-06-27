@@ -16,6 +16,7 @@ class ProdukController extends Controller
     public function produk_detail(Request $request)
     {
     	$code = $request->code;
+        $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->where('i_code',$code)->get();
     	$data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
             ->join('m_itemproduct','itp_ciproduct','i_code')
@@ -25,6 +26,8 @@ class ProdukController extends Controller
             ->get();
     	return view('frontpage.produk.produk-detail-frontpage',array(
     		'data' => $data,
+            'gambar' => $gambar,
+            'code' => $code,
     	));
     }
 

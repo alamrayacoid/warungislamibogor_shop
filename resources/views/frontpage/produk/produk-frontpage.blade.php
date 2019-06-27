@@ -81,6 +81,7 @@
 @section('extra_script')
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#ncart').html($('.ncart').length);
 
         $('.btn-wishlist').click(function(){
             $(this).find('i').toggleClass('fa far');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DCart extends Migration
+class DWishlist extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class DCart extends Migration
      */
     public function up()
     {
-        Schema::create('d_cart', function (Blueprint $table) {
+        Schema::create('d_wishlist', function (Blueprint $table) {
             $table->bigIncrements('cart_id');
-            $table->string('cart_ciproduct',50);
-            $table->string('cart_cmember',50);
-            $table->string('cart_label');
-            $table->integer('cart_qty');
-            $table->string('cart_location',50)->nullable();
+            $table->string('wl_ciproduct',50);
+            $table->string('wl_cmember',50);
             $table->string('status_data',5);
         });
 
@@ -32,6 +29,6 @@ class DCart extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('d_cart');
+        Schema::dropIfExists('d_wishlist');
     }
 }

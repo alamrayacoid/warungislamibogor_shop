@@ -64,15 +64,28 @@
                         </div>
                         
                     </section>
-
+                    @if(Auth::check())
                     <div class="row mt-5">
                         @foreach($data as $row)
                         <div class="col-md-3">
                             <div class="ibox">
                                 <div class="ibox-content product-box">
-                                    <div class="product-wishlist onproduk-page">
-                                        <button class="btn btn-circle btn-lg btn-wishlist" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                    @foreach($wish as $wis)
+                                    @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
+                                    <div class="product-wishlist onproduk-page onwishlist">
+                                        <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
                                     </div>
+                                    @else
+                                    <div class="product-wishlist onproduk-page">
+                                        <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                    @if($wish == '[]')
+                                    <div class="product-wishlist onproduk-page">
+                                        <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                    </div>
+                                    @endif
                                         @foreach($gambar as $roww)
                                         @if($row->i_code == $roww->ip_ciproduct)
                                     <div class="product-imitations">
@@ -106,6 +119,7 @@
 
                         @endforeach
                     </div>
+                    @endif
                 
         </div>
     </div>
@@ -114,6 +128,9 @@
 @section('extra_script')
 <script>
     $(document).ready(function(){
+
+        $('#ncart').html($('.ncart').length);
+
          $(".variable").slick({
             autoplay:true,
             autoplaySpeed:5000,
@@ -124,8 +141,18 @@
         });
 
         $('.btn-wishlist').click(function(){
+            var code = $(this).data('ciproduct');
             $(this).find('i').toggleClass('fa far');
             $(this).parents('.product-wishlist').toggleClass('onwishlist');
+            $.ajax({
+                url : '{{route("addwishlist")}}',
+                method : 'POST',
+                data : {
+                    '_token' : '{{csrf_token()}}',
+                    'code' : code,
+                },
+
+            })
         })
     });    
 </script>

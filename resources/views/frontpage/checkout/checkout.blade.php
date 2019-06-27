@@ -387,7 +387,8 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
-
+        $('#ncart').html($('.ncart').length);
+        
         $('#btn-confirm').click(function(){
 
             swal({

@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-6">
                 <div class="ibox-content">
-                    <form action="#" method="POST" class="m-t" role="form" >
+                    <form action="{{route('login')}}" method="POST" class="m-t" role="form" >
                         @csrf
                         <div class="form-group">
                             <input type="username" class="form-control" name="username" placeholder="Username">
@@ -35,7 +35,7 @@
                         <p class="text-muted text-center">
                             <small>Tidak punya akun?</small>
                         </p>
-                        <a class="btn btn-sm btn-white btn-block" href="{{route('register-frontpage')}}">Buat akun sekarang</a>
+                        <a class="btn btn-sm btn-white btn-block" href="{{route('register_frontpage-frontpage')}}">Buat akun sekarang</a>
                     </form>
                     <p class="m-t">
                         <small>Warung Islami Bogor &copy; 2019</small>
@@ -84,6 +84,12 @@
     </script>
     @endif
     <script type="text/javascript">
+        @if(Session::get('registerc') != '')
+            iziToast.success({
+                    title: 'Berhasil!',
+                    message: 'Register',
+            });
+        @endif
         // $('#btn-login').click(function(){
 
         //     Cookies.set('tes_frontpage', 'Y', { expires : 365})

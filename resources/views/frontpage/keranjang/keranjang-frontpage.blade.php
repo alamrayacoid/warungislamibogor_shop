@@ -364,3 +364,10 @@
     </div>
 </div>
 @endsection
+@section('extra_script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#ncart').html($('.ncart').length);
+    })
+</script>
+@endsecction

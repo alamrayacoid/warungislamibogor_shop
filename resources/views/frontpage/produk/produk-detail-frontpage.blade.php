@@ -20,28 +20,18 @@
                                 <div class="col-md-5">
 
 
-                                    <div class="product-images">
-
-                                        <div>
-                                            <a href="{{asset('assets/img/gallery/1.jpg')}}" data-gallery="">
-                                                
-                                                <img src="{{asset('assets/img/gallery/1s.png')}}">
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <a href="{{asset('assets/img/gallery/2.jpg')}}" data-gallery="">
-                                                
-                                                <img src="{{asset('assets/img/gallery/2s.png')}}">
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <a href="{{asset('assets/img/gallery/3.jpg')}}" data-gallery="">
-                                                
-                                                <img src="{{asset('assets/img/gallery/3s.png')}}">
-                                            </a>
-                                        </div>
-
-
+                                    <div class="product-images product-imitations" >
+                                        
+                                        @foreach($gambar as $roww)
+                                            @if($roww->ip_ciproduct)
+                                                <div>
+                                                    <a href="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" sty data-gallery="">
+                                                        
+                                                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}">
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
 
                                 </div>
@@ -59,9 +49,17 @@
                                         <div class="product-qty">
                                             <label>Qty</label>
                                             <div class="group-product-qty">
-                                                <input type="number" value="1" min="1" class="form-control" name="">
-                                                <select class="form-control" name=""></select>
+                                                <input type="number" id="qty" value="1" min="1" class="form-control" name="">
                                             </div>
+                                            <select class="form-control" id="cabang" name="">
+                                                    <option value="" selected>~ pilih cabang ~</option>
+                                                    <option value="Surabaya">Surabaya</option>
+                                                    <option value="Malang">Malang</option>
+                                                </select>
+                                                <select class="form-control" id="label" name="">
+                                                    <option value="" selected>~ pilih Merk ~</option>
+                                                    <option value="AL">AL</option>
+                                                </select>
                                         </div>
                                     <hr>
 
@@ -78,7 +76,7 @@
 
                                     <div>
                                         <div class="btn-group">
-                                            <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i> Add to cart</button>
+                                            <button class="btn btn-primary btn-sm" id="addcart" data-product="{{$code}}"><i class="fa fa-cart-plus"></i> Add to cart</button>
                                             <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
                                         </div>
                                     </div>
@@ -103,7 +101,42 @@
 @section('extra_script')
 <script>
     $(document).ready(function(){
+        $('#ncart').html($('.ncart').length);
 
+
+        $('#addcart').on('click',function(){
+            var cproduct = $(this).data('product');
+            var label = $('#label').val();
+            var qty = $('#qty').val();
+            var cabang = $('#cabang').val();
+            $.ajax({
+                url : '{{route("addcart")}}',
+                method : 'POST',
+                data : {
+                    '_token' : '{{csrf_token()}}',
+                    'code' : cproduct,
+                    'user' : 'user',
+                    'cart_label' : label,
+                    'cart_qty' : qty,
+                    'cart_location' : cabang,
+                },
+                success : function(get){
+                    console.log(get['error']);  
+                    if (get['error'] != '') {
+                            iziToast.error({
+                                        title: 'Gagal!',
+                                        message: 'Barang Sudah Di Keranjang',
+                                    });
+                        }
+                },
+                error:function(xhr,textStatus,errorThrow){
+                                iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Barang Sudah dikeranjang',
+                            });
+                        }
+            })
+        })
 
         $('.product-images').slick({
             autoplay:true,
@@ -111,7 +144,6 @@
             dots: true,
             centerMode: true,
             infinite: true,
-            variableWidth: true
         });
 
     });

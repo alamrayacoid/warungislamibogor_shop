@@ -133,6 +133,7 @@
 
                             <div id="tab-1" class="tab-pane animated fadeIn active">
                                     @foreach($group as $row)
+                                    @if($row->sell_ccustomer == Auth::user()->cm_code)
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
@@ -168,7 +169,7 @@
                                                                 </td>
                                                                 @endif
                                                                 @endforeach
-                                                                <td class="desc">
+                                                                <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
                                                                             {{$roww->i_name}}
@@ -178,11 +179,11 @@
                                                                         {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {{$roww->itp_description}}
+                                                                        {!! html_entity_decode($roww->itp_description) !!}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">{{$roww->ipr_sunitprice}}</span>
+                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
                                                                         |
                                                                         <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
                                                                     </div>
@@ -205,11 +206,14 @@
 
                                         </div>
                                     </div>
+                                    @endif
                                     @endforeach
                             </div>
                             
                             <div id="tab-2" class="tab-pane animated fadeIn">
                                     @foreach($groupp as $row)
+                                    @if($row->sell_ccustomer == Auth::user()->cm_code)
+
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
@@ -246,7 +250,7 @@
                                                                 </td>
                                                                 @endif
                                                                 @endforeach
-                                                                <td class="desc">
+                                                                <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
                                                                             {{$roww->i_name}}
@@ -256,7 +260,7 @@
                                                                         {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {{$roww->itp_description}}
+                                                                        {!! html_entity_decode($roww->itp_description) !!}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
@@ -280,13 +284,15 @@
 
                                         </div>
                                     </div>
+                                    @endif
                                     @endforeach
                                 
                             </div>
 
                             <div id="tab-3" class="tab-pane animated fadeIn">
                                 @foreach($group as $row)
-                                @if($row->sell_status == 'Sedang Proses')
+                                @if($row->sell_status == 'Sedang Proses' && $row->sell_ccustomer == Auth::user()->cm_code)
+
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
@@ -323,7 +329,7 @@
                                                                 </td>
                                                                 @endif
                                                                 @endforeach
-                                                                <td class="desc">
+                                                                <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
                                                                             {{$roww->i_name}}
@@ -333,7 +339,7 @@
                                                                         {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {{$roww->itp_description}}
+                                                                        {!! html_entity_decode($roww->itp_description) !!}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
@@ -357,13 +363,14 @@
 
                                         </div>
                                     </div>
+
                                     @endif
                                 @endforeach
                             </div>                            
 
                             <div id="tab-4" class="tab-pane animated fadeIn"> 
                                 @foreach($group as $row)
-                                @if($row->sell_status == 'Sedang Dikirim')
+                                @if($row->sell_status == 'Sedang Dikirim' && $row->sell_ccustomer == Auth::user()->cm_code)
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
@@ -400,7 +407,7 @@
                                                                 </td>
                                                                 @endif
                                                                 @endforeach
-                                                                <td class="desc">
+                                                                <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
                                                                             {{$roww->i_name}}
@@ -410,7 +417,7 @@
                                                                         {{$roww->itp_tagdesc}}
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {{$roww->itp_description}}
+                                                                        {!! html_entity_decode($roww->itp_description) !!}
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
@@ -453,7 +460,8 @@
 @section('extra_script')
 <script type="text/javascript">
     $(document).ready(function(){
-
+        $('#ncart').html($('.ncart').length);
+        console.log($('.ncart').length)
 
         var url_string = window.location.href;
         var url = new URL(url_string);
