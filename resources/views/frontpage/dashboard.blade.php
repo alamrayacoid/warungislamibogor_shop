@@ -64,17 +64,23 @@
                         </div>
                         
                     </section>
-                    @if(Auth::check())
+                    
                     <div class="row mt-5">
                         @foreach($data as $row)
                         <div class="col-md-3">
                             <div class="ibox">
                                 <div class="ibox-content product-box">
                                     @foreach($wish as $wis)
-                                    @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
-                                    <div class="product-wishlist onproduk-page onwishlist">
-                                        <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
-                                    </div>
+                                    @if(Auth::check())
+                                        @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
+                                        <div class="product-wishlist onproduk-page onwishlist">
+                                            <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
+                                        </div>
+                                        @else
+                                        <div class="product-wishlist onproduk-page">
+                                            <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                        </div>
+                                        @endif
                                     @else
                                     <div class="product-wishlist onproduk-page">
                                         <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
@@ -119,7 +125,8 @@
 
                         @endforeach
                     </div>
-                    @endif
+                    
+
                 
         </div>
     </div>

@@ -31,10 +31,12 @@ Route::post('/logout', 'Frontpage\FrontpageController@logout')->name('logout');
 Route::get('/produk', 'Frontpage\ProdukController@produk')->name('produk-frontpage');
 Route::get('/produk-detail', 'Frontpage\ProdukController@produk_detail')->name('produk-detail-frontpage');
 // Group wib-cpanel
-Route::get('/keranjang', 'Frontpage\KeranjangController@keranjang')->name('keranjang-frontpage');
 //add cart 
 Route::post('/addcart', 'Frontpage\KeranjangController@addcart')->name('addcart');
 
+Route::group(['middleware' => ['auth.custom']], function(){
+Route::get('/keranjang', 'Frontpage\KeranjangController@keranjang')->name('keranjang-frontpage');
+Route::post('/keranjang/remove', 'Frontpage\KeranjangController@removecart')->name('remove.keranjang');
 // Status semua
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
 // Status pembayaran
@@ -55,5 +57,7 @@ Route::get('/profile', 'Frontpage\ProfileController@profile')->name('profile');
 
 // Checkout
 Route::get('/checkout', 'Frontpage\CheckoutController@checkout')->name('checkout');
+Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.checkout');
+Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
 	
-//End Route::Group wib-cpanel
+}); //End Route::Group wib-cpanel

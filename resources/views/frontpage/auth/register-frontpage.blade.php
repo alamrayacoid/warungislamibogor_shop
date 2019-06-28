@@ -5,7 +5,7 @@
 
 <body class="gray-bg">
 
-    <div class="middle-box text-center loginscreen   animated fadeInDown">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
 
@@ -53,13 +53,15 @@
     <script src="{{asset('assets/iziToast/iziToast.min.js')}}"></script>
     <script>
         $(document).ready(function(){
+            console.log()
             @if(Session::get('registerc') != '')
                 iziToast.success({
                         title: 'Berhasil!',
                         message: 'Menambah',
                 });
-                @else
-                iziToast.error({
+            @endif
+            @if(Session::get('registere') != '')
+            iziToast.error({
                         title: 'Gagal!',
                         message: '{{Session::get("registere")}}',
                 });

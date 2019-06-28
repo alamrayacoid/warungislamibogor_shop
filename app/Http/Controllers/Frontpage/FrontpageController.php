@@ -57,7 +57,7 @@ class FrontpageController extends Controller
                 ]);
             return redirect()->route('home')->with(['berhasil' => 'berhasil']);
         } else {
-            return redirect()->route('login')->with(['gagal' => 'gagal']);
+            return redirect()->route('login-frontpage')->with(['gagal' => 'gagal']);
         }
     }
 
@@ -68,15 +68,17 @@ class FrontpageController extends Controller
                 'cm_lastlogout' => Carbon::now('Asia/Jakarta')
             ]);
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
     public function register(Request $request){
         $address = $request->email;
+        $username = $request->username;
         $check = DB::table('m_member')->where('cm_email',$address)->count();
+        $checku = DB::table('m_member')->where('cm_username',$username)->count();
         $urutan = DB::table('m_member')->count();
         $code = 'SA'.$urutan.Carbon::now()->format('yhs');
-        if ($check == 0 ) {
+        if ($check == 0 && $checku == 0  ) {
             d_user::create([
                 'cm_name' => $request->name,
                 'cm_username' => $request->username,
@@ -89,7 +91,7 @@ class FrontpageController extends Controller
 
             return redirect()->route('login-frontpage')->with('registerc','berhasil register'); 
         }else{
-            return redirect()->back()->with('registere','Email Sudah Terpakai'); 
+            return redirect()->back()->with('registere','Email atau Username Sudah Terpakai'); 
         }
     }
 

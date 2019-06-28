@@ -53,12 +53,15 @@
                                             </div>
                                             <select class="form-control" id="cabang" name="">
                                                     <option value="" selected>~ pilih cabang ~</option>
-                                                    <option value="Surabaya">Surabaya</option>
-                                                    <option value="Malang">Malang</option>
+                                                    @foreach($cabang as $cbng)
+                                                    <option value="{{$cbng->b_code}}">{{$cbng->c_name}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <select class="form-control" id="label" name="">
                                                     <option value="" selected>~ pilih Merk ~</option>
-                                                    <option value="AL">AL</option>
+                                                    @foreach($label as $rows)
+                                                    <option value="{{$rows->s_code}}">{{$rows->s_name}}</option>
+                                                    @endforeach
                                                 </select>
                                         </div>
                                     <hr>
@@ -76,8 +79,13 @@
 
                                     <div>
                                         <div class="btn-group">
+                                            @if(Auth::check())
                                             <button class="btn btn-primary btn-sm" id="addcart" data-product="{{$code}}"><i class="fa fa-cart-plus"></i> Add to cart</button>
                                             <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
+                                            @else
+                                            <button class="btn btn-primary btn-sm" onclick="window.location.href='http://localhost/warungislamibogor_shop/signin'"><i class="fa fa-cart-plus"></i> Add to cart</button>
+                                            <button class="btn btn-white btn-sm" onclick="window.location.href='http://localhost/warungislamibogor_shop/signin'"><i class="fa fa-star"></i> Add to wishlist </button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -121,18 +129,32 @@
                     'cart_location' : cabang,
                 },
                 success : function(get){
+                    console.log(get);
                     console.log(get['error']);  
-                    if (get['error'] != '') {
+                    if (get['error'] == 'error') {
                             iziToast.error({
                                         title: 'Gagal!',
-                                        message: 'Barang Sudah Di Keranjang',
+                                        message: 'Cabang dan Merk kosong / Barang Sudah Di Keranjang',
+                                    });
+                        }else if(get['done'] == 'done'){
+                            iziToast.success({
+                                        title: 'Berhasil!',
+                                        message: 'Memasukkan Barang ke Keranjang',
+                                    });
+                            setTimeout(function(){
+                                 window.location.href="{{route('home')}}";
+                             },1000);
+                        }else if(get['error'] == 'stock'){
+                            iziToast.error({
+                                        title: 'Gagal!',
+                                        message: 'Stock Gudang Tinggal '+get['stock'],
                                     });
                         }
                 },
                 error:function(xhr,textStatus,errorThrow){
                                 iziToast.error({
                                 title: 'Gagal!',
-                                message: 'Barang Sudah dikeranjang',
+                                message: 'Masukkan Cabang dan Merk Barang',
                             });
                         }
             })

@@ -17,270 +17,76 @@
                 <span class="pull-right">(<strong>5</strong>) items</span>
                 <h5>Items in your cart</h5>
             </div>
-            <div class="ibox-content">
+            <form id="keranjang_checkout">
+                @csrf
+                <input type="hidden" id="count" name="count">
+                 @foreach($produk as $row)
+                 <input type="hidden" value="{{$row->cart_id}}" name="id[]">
+                <div class="ibox-content">
 
 
-                <div class="table-responsive">
-                    <table class="table shoping-cart-table">
+                    <div class="table-responsive">
+                        <table class="table shoping-cart-table">
 
-                        <tbody>
-                        <tr>
-                            <td width="90">
-                                <img src="{{asset('assets/img/gallery/1s.jpg')}}" width="100px">
-                            </td>
-                            <td class="desc">
-                                <h3>
-                                <a href="#" class="text-navy">
-                                    Desktop publishing software
-                                </a>
-                                </h3>
-                                <p class="small">
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                </p>
-                                <dl class="small m-b-none">
-                                    <dt>Description lists</dt>
-                                    <dd>A description list is perfect for defining terms.</dd>
-                                </dl>
-
-                                <div class="m-t-sm">
-                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
-                                </div>
-                            </td>
-
-                            <td>
-                                $180,00
-                                
-                            </td>
-                            <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
-                            </td>
-                            <td width="65">
-                                <select class="form-control" name="">
-                                    
-                                </select>
-                            </td>
-                            <td>
-                                <h4>
-                                    $180,00
-                                </h4>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="ibox-content">
-                <div class="table-responsive">
-                    <table class="table shoping-cart-table">
-
-                        <tbody>
-                        <tr>
-                            <td width="90">
-                                <img src="{{asset('assets/img/gallery/2s.jpg')}}" width="100px">
-                            </td>
-                            <td class="desc">
-                                <h3>
+                            <tbody>
+                            <tr>
+                                @foreach($gambar as $roww)
+                                            @if($row->i_code == $roww->ip_ciproduct)
+                                        <td width="90">
+                                            <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" width="100px">
+                                        </td>
+                                        @endif
+                                @endforeach
+                                <td class="desc">
+                                    <h3>
                                     <a href="#" class="text-navy">
-                                        Text editor
+                                        {{$row->i_name}}
+                                        <input type="hidden" value="{{$row->i_code}}" name="ciproduct[]">
+                                        <input type="hidden" value="{{$row->cart_label}}" name="label[]">
+                                        <input type="hidden" value="{{$row->ipr_sunitprice}}" name="qty[]">
+                                        <input type="hidden" value="{{$row->ipr_sunitprice * $row->cart_qty}}" name="total[]">
                                     </a>
-                                </h3>
-                                <p class="small">
-                                    There are many variations of passages of Lorem Ipsum available
-                                </p>
-                                <dl class="small m-b-none">
-                                    <dt>Description lists</dt>
-                                    <dd>List is perfect for defining terms.</dd>
-                                </dl>
+                                    </h3>
+                                    <p class="small">
+                                        {!! html_entity_decode($row->itp_description) !!}
+                                    </p>
+                                    <dl class="small m-b-none">
+                                        <dt>Description lists</dt>
+                                        <dd>{{$row->itp_tagdesc}}</dd>
+                                    </dl>
 
-                                <div class="m-t-sm">
-                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
-                                </div>
-                            </td>
+                                    <div class="m-t-sm">
+                                        <a  data-id="{{$row->cart_id}}" data-ciproduct="{{$row->cart_ciproduct}}" data-label="{{$row->cart_label}}" data-qty="{{$row->cart_qty}}" class="text-danger remove"><i class="fa fa-trash"></i> Remove item</a>
+                                    </div>
+                                </td>
 
-                            <td>
-                                $50,00
-                                
-                            </td>
-                            <td width="65">
-                                <input type="text" class="form-control" placeholder="2">
-                            </td>
-                            <td width="65">
-                                <select class="form-control" name="">
+                                <td>
+                                    Rp. {{$row->ipr_sunitprice}}
                                     
-                                </select>
-                            </td>
-                            <td>
-                                <h4>
-                                    $100,00
-                                </h4>
-                            </td>
+                                </td>
+                                <td width="65">
+                                    <input type="number" readonly="" value="{{$row->cart_qty}}" class="form-control" placeholder="1">
+                                    <select class="form-control" name="">
+                                        
+                                    </select>
+                                </td>
+                                <td>
+                                    <h4>
+                                        Rp. {{$row->ipr_sunitprice * $row->cart_qty}}
+                                        <input type="hidden" value="{{$row->ipr_sunitprice * $row->cart_qty}}" class="total" id="total{{$row->cart_id}}" name="">
+                                    </h4>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
-
-            </div>
-            <div class="ibox-content">
-                <div class="table-responsive">
-                    <table class="table shoping-cart-table">
-
-                        <tbody>
-                        <tr>
-                            <td width="90">
-                                <img src="{{asset('assets/img/gallery/3s.jpg')}}" width="100px">
-                            </td>
-                            <td class="desc">
-                                <h3>
-                                    <a href="#" class="text-navy">
-                                        CRM software
-                                    </a>
-                                </h3>
-                                <p class="small">
-                                    Distracted by the readable
-                                    content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                </p>
-                                <dl class="small m-b-none">
-                                    <dt>Description lists</dt>
-                                    <dd>A description list is perfect for defining terms.</dd>
-                                </dl>
-
-                                <div class="m-t-sm">
-                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
-                                </div>
-                            </td>
-
-                            <td>
-                                $110,00
-                            </td>
-                            <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
-                            </td>
-                            <td width="65">
-                                <select class="form-control" name="">
-                                    
-                                </select>
-                            </td>
-                            <td>
-                                <h4>
-                                    $110,00
-                                </h4>
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="ibox-content">
-                <div class="table-responsive">
-                    <table class="table shoping-cart-table">
-
-                        <tbody>
-                        <tr>
-                            <td width="90">
-                                <img src="{{asset('assets/img/gallery/4s.jpg')}}" width="100px">
-                            </td>
-                            <td class="desc">
-                                <h3>
-                                    <a href="#" class="text-navy">
-                                        PM software
-                                    </a>
-                                </h3>
-                                <p class="small">
-                                    Readable content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                </p>
-                                <dl class="small m-b-none">
-                                    <dt>Description lists</dt>
-                                    <dd>A description list is perfect for defining terms.</dd>
-                                </dl>
-
-                                <div class="m-t-sm">
-                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
-                                </div>
-                            </td>
-
-                            <td>
-                                $130,00
-                            </td>
-                            <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
-                            </td>
-                            <td width="65">
-                                <select class="form-control" name="">
-                                    
-                                </select>
-                            </td>
-
-                            <td>
-                                <h4>
-                                    $130,00
-                                </h4>
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="ibox-content">
-                <div class="table-responsive">
-                    <table class="table shoping-cart-table">
-
-                        <tbody>
-                        <tr>
-                            <td width="90">
-                                <img src="{{asset('assets/img/gallery/5s.jpg')}}" width="100px">
-                            </td>
-                            <td class="desc">
-                                <h3>
-                                    <a href="#" class="text-navy">
-                                        Photo editor
-                                    </a>
-                                </h3>
-                                <p class="small">
-                                    Page when looking at its layout. The point of using Lorem Ipsum is
-                                </p>
-                                <dl class="small m-b-none">
-                                    <dt>Description lists</dt>
-                                    <dd>A description list is perfect for defining terms.</dd>
-                                </dl>
-
-                                <div class="m-t-sm">
-                                    <a href="#" class="text-danger"><i class="fa fa-trash"></i> Remove item</a>
-                                </div>
-                            </td>
-
-                            <td>
-                                $700,00
-                            </td>
-                            <td width="65">
-                                <input type="text" class="form-control" placeholder="1">
-                            </td>
-                            <td width="65">
-                                <select class="form-control" name="">
-                                    
-                                </select>
-                            </td>
-                            <td>
-                                <h4>
-                                    $70,00
-                                </h4>
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
+            @endforeach
+            </form>
             <div class="ibox-content">
 
-                <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
+                <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart checkouts"></i> Checkout</button>
                 <button class="btn btn-white" onclick="javascript: window.history.back();"><i class="fa fa-arrow-left"></i> Continue shopping</button>
 
             </div>
@@ -291,20 +97,20 @@
 
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Cart Summary</h5>
+                <h5>Total Keranjang</h5>
             </div>
             <div class="ibox-content">
                 <span>
                     Total
                 </span>
                 <h2 class="font-bold">
-                    $390,00
+                     <p id="totalview"></p>
                 </h2>
 
                 <hr>
                 <div class="m-t-sm">
                     <div class="btn-group">
-                    <a href="{{route('checkout')}}" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
+                    <a class="btn btn-primary btn-sm checkouts"><i class="fa fa-shopping-cart"></i> Checkout</a>
                     <a href="#" class="btn btn-white btn-sm"> Cancel</a>
                     </div>
                 </div>
@@ -367,7 +173,53 @@
 @section('extra_script')
 <script type="text/javascript">
     $(document).ready(function(){
+        var totall = $('.total').length;
+        $('#count').val(totall);
+        console.log(totall);
+        var total = 0;
+        $('.total').each(function(){
+            total+= parseInt(this.value);
+        });
+
+        $('#totalview').html('Rp. ' + total);
+
+        $('.remove').on('click',function(){
+            var id = $(this).data('id');
+            var code = $(this).data('ciproduct');
+            var label = $(this).data('label');
+            var jumlah = $(this).data('qty');
+            $.ajax({
+                url : '{{route("remove.keranjang")}}',
+                method : 'POST',
+                data : {
+                    '_token' : '{{csrf_token()}}',
+                    'id' : id,
+                    'code' : code,
+                    'label' : label,
+                    'qty' : jumlah,
+                },
+                success : function(get){
+                    console.log(get);
+
+                }
+            })
+
+        })
+
+        $('.checkouts').on('click',function(){;
+            var form = $('#keranjang_checkout').serialize();
+            $.ajax({
+                url : '{{route("sell.checkout")}}',
+                method : 'POST',
+                data : form,
+                success : function(get){
+                }
+            })
+        })
+
+
+
         $('#ncart').html($('.ncart').length);
     })
 </script>
-@endsecction
+@endsection

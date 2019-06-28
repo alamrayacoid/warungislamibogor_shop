@@ -65,7 +65,7 @@
                 titleColor: '#ffffff',
                 messageColor: '#ffffff',
                 title: 'Gagal!',
-                message: 'Anda Tidak Boleh Mengakses',
+                message: 'Anda Belum Terdaftar',
             });
         });
     </script>

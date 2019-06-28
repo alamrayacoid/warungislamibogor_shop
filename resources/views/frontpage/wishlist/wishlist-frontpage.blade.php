@@ -28,6 +28,7 @@
             <div class="row">
                 <div class="row mt-5">
                         @foreach($data as $row)
+                        @if($row->wl_cmember == Auth::user()->cm_code)
                         <div class="col-md-3">
                             <div class="ibox">
                                 <div class="ibox-content product-box">
@@ -72,8 +73,7 @@
                                 </div>
                             </div>
                         </div>
-
-
+                        @endif
                         @endforeach
                     </div>
 
@@ -83,6 +83,7 @@
 @section('extra_script')
 <script type="text/javascript">
     $(document).ready(function(){
+        console.log('{{Auth::user()->cm_code}}');
         $('#ncart').html($('.ncart').length);
 
         $('#btn-hapus').click(function(){

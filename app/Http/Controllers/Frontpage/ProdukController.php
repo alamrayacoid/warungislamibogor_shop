@@ -16,6 +16,17 @@ class ProdukController extends Controller
     public function produk_detail(Request $request)
     {
     	$code = $request->code;
+        $cabang = DB::table('m_warehouse')
+            ->join('m_branch','b_code','ware_cbranch')
+            ->groupBy('ware_cbranch')
+            ->get();
+
+        $label = DB::table('m_warehouse')
+            ->join('m_supplier','s_code','ware_csupplier')
+            ->where('ware_ciproduct',$code)
+            ->groupBy('ware_csupplier')
+            ->get();
+
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->where('i_code',$code)->get();
     	$data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
@@ -28,6 +39,8 @@ class ProdukController extends Controller
     		'data' => $data,
             'gambar' => $gambar,
             'code' => $code,
+            'label' => $label,
+            'cabang' => $cabang,
     	));
     }
 

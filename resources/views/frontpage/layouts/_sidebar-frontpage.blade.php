@@ -48,11 +48,29 @@
             </li>
                 @endif
             @if(!Auth::user())
-            <li class="{{Request::is('wishlist/*') ? 'active' : '' || Request::is('wishlist') ? 'active' : ''}}">
-                <a href="{{route('wishlist-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Login</span></a>
+            <li class="nav-header">
+                <div class="dropdown profile-element"> 
+                    <span style="display: none;">
+                        <img alt="image" class="img-circle" src="{{asset('assets/img/a3.jpg')}}" width="48px" height="48px">
+                    </span>
+                    <a style="display: none;" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"></strong>
+                         </span> <span class="text-muted text-xs block"><b class="caret"></b></span> </span> </a>
+                    <ul style="display: none;" class="dropdown-menu animated fadeInRight m-t-xs">  
+                        <li><a href="{{route('profile')}}">Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    WIB
+                </div>
             </li>
             <li class="{{Request::is('wishlist/*') ? 'active' : '' || Request::is('wishlist') ? 'active' : ''}}">
-                <a href="{{route('wishlist-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Register</span></a>
+                <a href="{{route('login-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Login</span></a>
+            </li>
+            <li class="{{Request::is('wishlist/*') ? 'active' : '' || Request::is('wishlist') ? 'active' : ''}}">
+                <a href="{{route('register_frontpage-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Register</span></a>
             </li>
             @endif
             
