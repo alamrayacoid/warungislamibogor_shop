@@ -149,6 +149,10 @@
                                         title: 'Gagal!',
                                         message: 'Stock Gudang Tinggal '+get['stock'],
                                     });
+                            iziToast.warning({
+                                        title: 'Peringatan!',
+                                        message: 'Cek Merk Yang Dimasukkan',
+                                    });
                         }
                 },
                 error:function(xhr,textStatus,errorThrow){

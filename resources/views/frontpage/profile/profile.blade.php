@@ -235,12 +235,12 @@
 
 
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <label>Password Lama</label>
+                                <label>Password baru</label>
                             </div>
 
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    <input type="password" class="form-control  input-sm" name="oldpassword">
+                                    <input type="password" class="form-control  input-sm" name="newpassword">
                                 </div>
                             </div>
                         </div>

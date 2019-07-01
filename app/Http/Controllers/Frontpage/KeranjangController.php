@@ -16,6 +16,7 @@ class KeranjangController extends Controller
                     ->join('m_itemproduct','itp_ciproduct','i_code')
                     ->join('m_itemprice','ipr_ciproduct','i_code')
                     ->where('cart_cmember',Auth::user()->cm_code)
+                    ->where('d_cart.status_data','true')
                     ->groupBy('cart_ciproduct')
                     ->get();
 
@@ -65,7 +66,7 @@ class KeranjangController extends Controller
         $code = $request->code;
         $stock = DB::table('m_warehouse')->where('ware_ciproduct',$code)->where('ware_csupplier',$request->label)->sum('ware_stock');
         $cek = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->where('cart_ciproduct',$code)->count();
-        $update = $stock - $request->qty;
+        $update = $stock + $request->qty;
         if ($id != '') {
             DB::table('d_cart')
                 ->where('cart_id',$id)

@@ -13,7 +13,7 @@
             <li class="nav-header">
                 <div class="dropdown profile-element"> 
                     <span>
-                        <img alt="image" class="img-circle" src="{{asset('assets/img/a3.jpg')}}" width="48px" height="48px">
+                        <img alt="image" class="img-circle" src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}" width="48px" height="48px">
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{Auth::user()->cm_name}}</strong>
@@ -51,7 +51,7 @@
             <li class="nav-header">
                 <div class="dropdown profile-element"> 
                     <span style="display: none;">
-                        <img alt="image" class="img-circle" src="{{asset('assets/img/a3.jpg')}}" width="48px" height="48px">
+                        <img alt="image" class="img-circle" src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}" width="48px" height="48px">
                     </span>
                     <a style="display: none;" data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"></strong>

@@ -98,7 +98,7 @@
                     @else
                     <li>
                         <a href="{{route('profile')}}" >
-                            <img src="{{asset('assets/img/a3.jpg')}}" height="24px" width="24px" class="rounded">
+                            <img src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}" height="24px" width="24px" class="rounded">
                             <small>{{Auth::user()->cm_name}}</small>
                         </a>
                         

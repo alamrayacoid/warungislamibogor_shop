@@ -14,14 +14,14 @@
 
         <div class="ibox">
             <div class="ibox-title">
-                <span class="pull-right">(<strong>5</strong>) items</span>
+                <span class="pull-right">(<strong id="itemt"></strong>) items</span>
                 <h5>Items in your cart</h5>
             </div>
             <form id="keranjang_checkout">
                 @csrf
                 <input type="hidden" id="count" name="count">
                  @foreach($produk as $row)
-                 <input type="hidden" value="{{$row->cart_id}}" name="id[]">
+                 <input type="hidden" class="count" value="{{$row->cart_id}}" name="id[]">
                 <div class="ibox-content">
 
 
@@ -173,6 +173,10 @@
 @section('extra_script')
 <script type="text/javascript">
     $(document).ready(function(){
+
+        setInterval(function(){
+            $('#itemt').html($('.count').length);
+        },500);
         var totall = $('.total').length;
         $('#count').val(totall);
         console.log(totall);

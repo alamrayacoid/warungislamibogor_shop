@@ -11,14 +11,26 @@ class ProdukController extends Controller
     public function produk(Request $request)
     {
         $kategory = $request->ctr;
-        $data = DB::table('m_item')
-            ->join('m_itemprice','ipr_ciproduct','i_code')
-            ->join('m_itemproduct','itp_ciproduct','i_code')
-            ->join('m_itemtype','ity_code','itp_citype')
-            ->where('itp_citype',$kategory)
-            ->groupBy('i_name')
-            ->get();
-            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->where('itp_citype',$kategory)->get();
+            if ($kategory != null) {
+            $data = DB::table('m_item')
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+                ->join('m_itemtype','ity_code','itp_citype')
+                ->where('itp_citype',$kategory)
+                ->groupBy('i_name')
+                ->get();
+
+                $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->where('itp_citype',$kategory)->get();
+        }else{
+            $data = DB::table('m_item')
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+                ->join('m_itemtype','ity_code','itp_citype')
+                ->groupBy('i_name')
+                ->get();
+
+            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
+        }
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
 
     	return view('frontpage.produk.produk-frontpage',array(
