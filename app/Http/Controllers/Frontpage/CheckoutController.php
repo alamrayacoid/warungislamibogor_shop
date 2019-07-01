@@ -36,14 +36,14 @@ class CheckoutController extends Controller
             'status_data' => 'true',
         );
 
-        $datastock = DB::table('m_warehouse')->where('ware_ciproduct',$request->ciproduct[$run])->where('ware_csupplier',$request->label[$run])->SUM('ware_stock');
         
         $id = $request->id[$run];
+        $datastock = DB::table('m_warehouse')->where('ware_ciproduct',$request->ciproduct[$run])->where('ware_csupplier',$request->label[$run])->SUM('ware_stock');
 
             DB::table('d_cart')
                 ->where('cart_id',$id)
                 ->update([
-                	'status_data' => 'true',
+                	'status_data' => 'false',
                 ]);
 
         $update = $datastock - $request->qty[$run];
@@ -55,9 +55,9 @@ class CheckoutController extends Controller
             ]);
            
         array_push($data, $arr);
+        print_r($request->qty[$run]);
         };
 
-        
 
         orderpenjualan::insert($data);
     }

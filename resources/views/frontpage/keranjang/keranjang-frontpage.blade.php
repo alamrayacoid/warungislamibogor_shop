@@ -43,7 +43,7 @@
                                         {{$row->i_name}}
                                         <input type="hidden" value="{{$row->i_code}}" name="ciproduct[]">
                                         <input type="hidden" value="{{$row->cart_label}}" name="label[]">
-                                        <input type="hidden" value="{{$row->ipr_sunitprice}}" name="qty[]">
+                                        <input type="hidden" value="{{$row->cart_qty}}" name="qty[]">
                                         <input type="hidden" value="{{$row->ipr_sunitprice * $row->cart_qty}}" name="total[]">
                                     </a>
                                     </h3>
@@ -199,8 +199,7 @@
                     'qty' : jumlah,
                 },
                 success : function(get){
-                    console.log(get);
-
+                    window.location.reload();
                 }
             })
 
@@ -213,6 +212,7 @@
                 method : 'POST',
                 data : form,
                 success : function(get){
+                    window.location.href='{{route("checkout")}}';
                 }
             })
         })

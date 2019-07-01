@@ -41,6 +41,8 @@ Route::post('/keranjang/remove', 'Frontpage\KeranjangController@removecart')->na
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
 // Status pembayaran
 Route::get('pembelian/pembayaran', 'Frontpage\PembelianController@pembelian')->name('pembelian-pembayaran-frontpage');
+//system pembayaran
+Route::post('pembelian/gambar', 'Frontpage\PembelianController@bayar')->name('bayar.pembelian');
 // Status diproses
 Route::get('pembelian/diproses', 'Frontpage\PembelianController@pembelian')->name('pembelian-diproses-frontpage');
 // Status dikirim
@@ -54,6 +56,9 @@ Route::post('/addwishlist', 'Frontpage\WishlistController@addwishlist')->name('a
 
 // Profile
 Route::get('/profile', 'Frontpage\ProfileController@profile')->name('profile');
+// system profile
+Route::post('/profile/update', 'Frontpage\ProfileController@update')->name('update.profile');
+
 
 // Checkout
 Route::get('/checkout', 'Frontpage\CheckoutController@checkout')->name('checkout');

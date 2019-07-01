@@ -41,39 +41,64 @@
             </div>
 
             <div class="row mt-3">
-                @for($i = 1 ; $i <= 12 ; $i++)
-                <div class="col-md-3">
-                    <div class="ibox">
-                        <div class="ibox-content product-box">
-                            <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
-                            </div>
-                            <div class="product-imitations">
-                                <img src="{{asset('assets/img/gallery/'.$i.'.jpg')}}">
-                            </div>
-                            <div class="product-desc">
-                                <span class="product-price">
-                                    Rp. 10.000
-                                </span>
-                                <small class="text-muted">Category</small>
-                                <a href="#" class="product-name"> Product</a>
+               @foreach($data as $row)
+                        <div class="col-md-3">
+                            <div class="ibox">
+                                <div class="ibox-content product-box">
+                                    @foreach($wish as $wis)
+                                    @if(Auth::check())
+                                        @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
+                                        <div class="product-wishlist onproduk-page onwishlist">
+                                            <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
+                                        </div>
+                                        @else
+                                        <div class="product-wishlist onproduk-page">
+                                            <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                        </div>
+                                        @endif
+                                    @else
+                                    <div class="product-wishlist onproduk-page">
+                                        <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                    @if($wish == '[]')
+                                    <div class="product-wishlist onproduk-page">
+                                        <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                    </div>
+                                    @endif
+                                        @foreach($gambar as $roww)
+                                        @if($row->i_code == $roww->ip_ciproduct)
+                                    <div class="product-imitations">
+                                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}">
+                                    </div>
+                                    @endif
+                                        @endforeach
+                                    <div class="product-desc">
+                                        <span class="product-price">
+                                            Rp. {{$row->ipr_sunitprice}}
+                                        </span>
+                                        <small class="text-muted">{{$row->ity_name}}</small>
+                                        <a href="#" class="product-name"> {{$row->i_name}}</a>
 
 
 
-                                <div class="small m-t-xs">
-                                    Many desktop publishing packages and web page editors now.
-                                </div>
-                                <div class="m-t text-righ">
-
-                                    <a href="{{route('produk-detail-frontpage')}}" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                        <div class="small m-t-xs">
+                                            {{$row->itp_tagdesc}}
+                                        </div>
+                                        <div class="m-t text-right">
+                                            <form action="{{route('produk-detail-frontpage')}}" method="GET">
+                                                <input type="hidden" name="code" value="{{$row->i_code}}">
+                                            <button  class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
 
-                @endfor
+                        @endforeach
 
             </div>
 

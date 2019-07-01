@@ -230,7 +230,7 @@
                                                     <label>Total Belanja</label>
                                                     <span class="text-warning">Rp. {{$row->sell_total}}</span>
                                                     <br>
-                                                    <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
+                                                    <button class="btn btn-warning btn-sm bayar" data-nota="{{$row->sell_nota}}" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a href="#modal-detail" data-toggle="modal" class="btn btn-success btn-sm">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
@@ -460,8 +460,39 @@
 @section('extra_script')
 <script type="text/javascript">
     $(document).ready(function(){
+
+    @if(Session::get('success'))
+        iziToast.success({
+            title: 'Berhasil!',
+            message: 'Mengupload Bukti Bayar',
+        });
+    @endif
+    @if(Session::get('error'))
+     iziToast.error({
+         title: 'Error!',
+         message: 'Mengupload Bukti Bayar',
+    });
+    @endif
+    @if(Session::get('many'))
+     iziToast.warning({
+         title: 'Peringatan!',
+         message: 'sudah ada Bukti Bayar',
+    });
+    @endif
+    
+
+        $('.bayar').on('click',function(){
+            var nota = $(this).data('nota');
+            var isi = $('#cnota');
+            if (isi.val() != '') {
+                $('#cnota').val('#');
+                $('#cnota').val(nota);
+            }else{
+                $('#cnota').val(nota);
+            }
+        })
+
         $('#ncart').html($('.ncart').length);
-        console.log($('.ncart').length)
 
         var url_string = window.location.href;
         var url = new URL(url_string);

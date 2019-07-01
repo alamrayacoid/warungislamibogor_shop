@@ -30,21 +30,21 @@
                 </div>
                 <div>
                     <div class="ibox-content" align="center">
-                        <img alt="image" class="img-responsive rounded" src="{{asset('assets/img/a3.jpg')}}">
+                        <img alt="image" width="200" class="img-responsive rounded" src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}">
                     </div>
                     <div class="ibox-content profile-content">
-                        <h4><strong>Monica Smith</strong></h4>
-                        <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
-                        <p><i class="fa fa-envelope"></i> email@domain.com</p>
-                        <p><i class="fa fa-phone"></i> +62851122334455</p>
+                        <h4><strong>{{Auth::user()->cm_name}}</strong></h4>
+                        <p><i class="fa fa-map-marker"> </i> &nbsp;{{Auth::user()->cm_address}}</p>
+                        <p><i class="fa fa-envelope"> </i> &nbsp;{{Auth::user()->cm_email}}</p>
+                        <p><i class="fa fa-phone"> </i> &nbsp;{{Auth::user()->cm_nphone}}</p>
                         <div class="row m-t-lg">
                             <div class="col-md-6">
                                 
-                                <h5><i class="fa fa-star"></i> <strong>169</strong> Wishlist</h5>
+                                <h5><i class="fa fa-star"></i> <strong>{{$wishlist}}</strong> Barang</h5>
                             </div>
                             <div class="col-md-6">
                                 
-                                <h5><i class="fa fa-shopping-cart"></i> <strong>28</strong> Transaksi</h5>
+                                <h5><i class="fa fa-shopping-cart"></i> <strong>{{$transaksi}}</strong> Transaksi</h5>
                             </div>
                             {{-- <div class="col-md-4">
                                 
@@ -72,169 +72,185 @@
                         </a>
                     </div>
                 </div>
-                <div class="ibox-content">
+                <form action="{{route('update.profile')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" id="gambar" name="gambar">
+                    <div class="ibox-content">
 
 
-                    <div class="row">
+                        <div class="row">
 
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Foto</label>
-                        </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Foto</label>
+                            </div>
 
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group text-center">
-                                <div class="foto-terpilih m-auto">
-                                    
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group text-center">
+                                    <div class="foto-terpilih m-auto">
+                                        
+                                    </div>
+
+                                    @include('frontpage.profile.modal-editfoto')
+
+
+                                    <button class="btn btn-info btn-block mt-5" type="button" data-toggle="modal" data-target="#modal-foto"> <i class="fa fa-images"></i> Edit Foto</button>
                                 </div>
+                            </div>
 
-                                @include('frontpage.profile.modal-editfoto')
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Nama</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-sm" value="{{Auth::user()->cm_name}}" name="name">
+                                </div>
+                            </div>
 
 
-                                <button class="btn btn-info btn-block mt-5" type="button" data-toggle="modal" data-target="#modal-foto"> <i class="fa fa-images"></i> Edit Foto</button>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>E-mail</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-sm" value="{{Auth::user()->cm_email}}" name="email">
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>No. Handphone</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-sm" value="{{Auth::user()->cm_nphone}}"  name="nphone">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Provinsi</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <select class="form-control input-sm select2" name="province">
+                                        <option hidden value="{{Auth::user()->cm_province}}">{{Auth::user()->cm_province}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Kabupaten/Kota</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <select class="form-control input-sm select2" name="{{Auth::user()->cm_city}}">
+                                        <option value="{{Auth::user()->cm_city}}">{{Auth::user()->cm_city}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Kecamatan</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <select class="form-control input-sm select2" name="district">
+                                        <option hidden value="{{Auth::user()->cm_district}}">{{Auth::user()->cm_district}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Alamat</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="address">{{Auth::user()->cm_address}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Jenis Kelamin</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    @if(Auth::user()->cm_gender === 'L')
+                                    <label class="mr-5"><input type="radio" name="gender" value="L" checked=""> Laki-laki</label>
+                                    <label><input type="radio" name="gender" value="P"> Perempuan</label>
+                                    @elseif(Auth::user()->cm_gender === 'P')
+                                    <label class="mr-5"><input type="radio" name="gender" value="L"> Laki-laki</label>
+                                    <label><input type="radio" name="gender" value="P" checked=""> Perempuan</label>
+                                    @else
+                                    <label class="mr-5"><input type="radio" name="gender" value="L"> Laki-laki</label>
+                                    <label><input type="radio" name="gender" value="P"> Perempuan</label>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Bank</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <select class="form-control input-sm" name="bank">
+                                        <option value="" selected>~ Pilih Bank ~</option>
+                                        <option value="BCA">BCA</option>
+                                        <option value="BRI">BRI</option>
+                                        <option value="BNI">BNI</option>
+                                        <option value="BTN">BTN</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>No. Rekening</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control  input-sm" value="{{ Auth::user()->cm_nbank}}" name="nbank">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Password</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <input type="password" class="form-control input-sm" name="password">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <label>Password Lama</label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <input type="password" class="form-control  input-sm" name="oldpassword">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Nama</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control input-sm" name="">
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>E-mail</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control input-sm" name="">
-                            </div>
-                        </div>
-
-                        
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>No. Handphone</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control input-sm" name="">
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Provinsi</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <select class="form-control input-sm select2" name="">
-                                    <option value="">~ Pilih Provinsi ~</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Kabupaten/Kota</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <select class="form-control input-sm select2" name="">
-                                    <option value="">~ Pilih Kabupaten/Kota ~</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Kecamatan</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <select class="form-control input-sm select2" name="">
-                                    <option value="">~ Pilih Kecamatan ~</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Alamat</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <textarea class="form-control" name=""></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Jenis Kelamin</label>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <label class="mr-5"><input type="radio" name="gender" value="L"> Laki-laki</label>
-                                <label><input type="radio" name="gender" value="P"> Perempuan</label>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Bank</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <select class="form-control input-sm" name="">
-                                    <option value="">~ Pilih Bank ~</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>No. Rekening</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control  input-sm" name="">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Password</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <input type="password" class="form-control  input-sm" name="">
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Password Konfirm</label>
-                        </div>
-
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <input type="password" class="form-control  input-sm" name="">
-                            </div>
-                        </div>
                     </div>
-
-                </div>
-                <div class="ibox-footer text-right">
-                    <button class="btn btn-primary" type="button">Simpan</button>
-                    <button class="btn btn-warning" type="button">Batal</button>
-                </div>
+                    <div class="ibox-footer text-right">
+                        <button class="btn btn-primary" type="submit">Simpan</button>
+                        <button class="btn btn-warning" type="button">Batal</button>
+                    </div>
+                </form>
             </div>
 
         </div>
@@ -259,7 +275,7 @@
                 cropBoxMovable: true,
                 cropBoxResizable: true,
                 done: function(data) {
-                    // Output the result data for cropping image.
+
                 }
             });
 
@@ -286,6 +302,7 @@
                         showMessage("Please choose an image file.");
                     }
                 });
+
             } else {
                 $inputImage.addClass("hide");
             }
@@ -315,6 +332,9 @@
                 var is = $image.cropper("getCroppedCanvas", { width: 120, height: 120 });
 
                 $('.foto-terpilih').html(is);
+
+                var urlll = $('#gambar').val($('.image-crop > img').cropper('getCroppedCanvas').toDataURL());
+                console.log(urlll);
 
                 is.toBlob((blob) => {
                   const formData = new FormData();
