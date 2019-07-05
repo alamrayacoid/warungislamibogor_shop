@@ -8,19 +8,19 @@
             <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                 <i class="fa fa-caret-down"></i>
             </button>
-            <a href="{{url('/')}}" class="navbar-brand">
+            <a href="<?php echo e(url('/')); ?>" class="navbar-brand">
                 <span>
-                    <img src="{{asset('assets/img/logo-wib-cilik-maning.png')}}" width="60px" height="50px"
+                    <img src="<?php echo e(asset('assets/img/logo-wib-cilik-maning.png')); ?>" width="60px" height="50px"
                     alt="Warung Islami Bogor"
                     > 
                 </span>
             </a>
-            {{-- @if(Cookie::get('tes_frontpage')) --}}
+            
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
                     <i class="fa fa-bars"></i>
-                    <span class="label label-info">{{$notifp}}</span>
+                    <span class="label label-info"><?php echo e($notifp); ?></span>
                 </a>
-            {{-- @endif --}}
+            
             <form role="search" class="navbar-form-cust">
                 <div class="form-group">
                     <input type="text" placeholder="Cari Produk..." class="form-control" name="top-search" id="top-search">
@@ -33,10 +33,10 @@
                 <li class="dropdown">
                     <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Produk </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="{{route('produk-frontpage')}}">Semua</a></li>
-                        @foreach($menu as $row)
-                        <li><a href="#">{{$row->ity_name}}</a></li>
-                        @endforeach
+                        <li><a href="<?php echo e(route('produk-frontpage')); ?>">Semua</a></li>
+                        <?php $__currentLoopData = $menu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><a href="#"><?php echo e($row->ity_name); ?></a></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </li>
 
@@ -46,30 +46,30 @@
                     <li>
                         <span class="m-r-sm text-muted welcome-message">Selamat datang di Warung Islami Bogor.</span>
                     </li>
-                    @if(!Auth::check())
-                    @else
+                    <?php if(!Auth::check()): ?>
+                    <?php else: ?>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-shopping-cart"></i>  <span class="label label-warning" id="ncart"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
-                            @foreach($cek as $row)
-                            @if($row->cart_cmember == Auth::user()->cm_code)
+                            <?php $__currentLoopData = $cek; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($row->cart_cmember == Auth::user()->cm_code): ?>
                                 <li class="ncart">
                                     <div class="dropdown-messages-box">
-                                            <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}">
+                                            <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>">
                                                 <div class="pull-left dropdown-img">
-                                                    <img alt="image" class="img-circle" src="{{asset('assets/img/gallery/s.jpg')}}">
+                                                    <img alt="image" class="img-circle" src="<?php echo e(asset('assets/img/gallery/s.jpg')); ?>">
                                                 </div>
                                                 <div class="media-body">
                                                     <div class="row">
                                                         <div class="col-xs-7">
-                                                            <strong>{{$row->i_name}}</strong>
+                                                            <strong><?php echo e($row->i_name); ?></strong>
                                                         </div>
                                                         <div class="col-xs-5">
-                                                            <small class="pull-right text-warning">Rp. {{$row->ipr_sunitprice}}</small>
+                                                            <small class="pull-right text-warning">Rp. <?php echo e($row->ipr_sunitprice); ?></small>
                                                             <br>
-                                                            <small class="pull-right text-muted">{{$row->cart_qty}}</small>
+                                                            <small class="pull-right text-muted"><?php echo e($row->cart_qty); ?></small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,11 +77,11 @@
                                     </div>
                                 </li>
                                 <li class="divider"></li>
-                                @endif
-                            @endforeach
+                                <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <li>
                                 <div class="text-center link-block">
-                                    <a href="{{route('keranjang-frontpage')}}">
+                                    <a href="<?php echo e(route('keranjang-frontpage')); ?>">
                                         <i class="fa fa-shopping-cart"></i> <strong>Buka Keranjang</strong>
                                     </a>
                                 </div>
@@ -89,49 +89,50 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="dropdown-toggle count-info" href="{{route('wishlist-frontpage')}}">
+                        <a class="dropdown-toggle count-info" href="<?php echo e(route('wishlist-frontpage')); ?>">
                             <i class="fa fa-star"></i>
                         </a>
                     </li>
-                    @endif
-                    @if(!Auth::check())
-                    @else
+                    <?php endif; ?>
+                    <?php if(!Auth::check()): ?>
+                    <?php else: ?>
                     <li>
-                        <a href="{{route('profile')}}" >
-                            <img src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}" height="24px" width="24px" class="rounded">
-                            <small>{{Auth::user()->cm_name}}</small>
+                        <a href="<?php echo e(route('profile')); ?>" >
+                            <img src="/warungislamibogor_shop/storage/image/member/profile/<?php echo e(Auth::user()->cm_path); ?>" height="24px" width="24px" class="rounded">
+                            <small><?php echo e(Auth::user()->cm_name); ?></small>
                         </a>
                         
                     </li>
-                    @endif
-                    @if(Auth::check() == NULL)
-                    @else
+                    <?php endif; ?>
+                    <?php if(Auth::check() == NULL): ?>
+                    <?php else: ?>
                     <li>
-                        <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out"></i> Log out
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
+                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                            <?php echo e(csrf_field()); ?>
+
                         </form>
                     </li>
-                    @endif
-                    @if(!Auth::check())
+                    <?php endif; ?>
+                    <?php if(!Auth::check()): ?>
                     <li>
-                        <a href="{{route('login-frontpage')}}">Login </a>
+                        <a href="<?php echo e(route('login-frontpage')); ?>">Login </a>
                     </li>
-                    @endif
-                    @if(!Auth::check())
+                    <?php endif; ?>
+                    <?php if(!Auth::check()): ?>
                     <li>
-                        <a href="{{route('register_frontpage-frontpage')}}">Register </a>
+                        <a href="<?php echo e(route('register_frontpage-frontpage')); ?>">Register </a>
                     </li>
-                    @endif
+                    <?php endif; ?>
 
 </ul>
         </div>
     </nav>
 </div>
 
-@section('extra_script')
+<?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
 
     $(document).ready(function(){
@@ -144,4 +145,4 @@
     })
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_navbar-frontpage.blade.php ENDPATH**/ ?>

@@ -37,10 +37,13 @@ Route::post('/addcart', 'Frontpage\KeranjangController@addcart')->name('addcart'
 Route::group(['middleware' => ['auth.custom']], function(){
 Route::get('/keranjang', 'Frontpage\KeranjangController@keranjang')->name('keranjang-frontpage');
 Route::post('/keranjang/remove', 'Frontpage\KeranjangController@removecart')->name('remove.keranjang');
+Route::post('/keranjang/check', 'Frontpage\KeranjangController@gocheck')->name('check.keranjang');
 // Status semua
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
 // Status pembayaran
 Route::get('pembelian/pembayaran', 'Frontpage\PembelianController@pembelian')->name('pembelian-pembayaran-frontpage');
+//detail pembayaran
+Route::post('pembelian/pembayaran/detail', 'Frontpage\PembelianController@detail')->name('detail.pembayaran');
 //system pembayaran
 Route::post('pembelian/gambar', 'Frontpage\PembelianController@bayar')->name('bayar.pembelian');
 // Status diproses

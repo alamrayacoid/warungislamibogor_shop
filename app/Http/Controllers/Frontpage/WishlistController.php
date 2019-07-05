@@ -16,6 +16,7 @@ class WishlistController extends Controller
             ->join('m_itemproduct','itp_ciproduct','i_code')
             ->join('m_itemtype','ity_code','itp_citype')
             ->join('d_wishlist','wl_ciproduct','i_code')
+            ->where('wl_cmember',Auth::user()->cm_code)
             ->where('d_wishlist.status_data','true')
             ->groupBy('i_name')
             ->get();

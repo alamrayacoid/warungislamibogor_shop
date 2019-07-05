@@ -1,14 +1,12 @@
-@extends('frontpage.main-frontpage')
-
-@section('extra_style')
+<?php $__env->startSection('extra_style'); ?>
 <style type="text/css">
     .shoping-cart-table input{
         min-width: 50px;
     }
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="row">
     <div class="col-md-9">
 
@@ -18,10 +16,10 @@
                 <h5>Items in your cart</h5>
             </div>
             <form id="keranjang_checkout">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <input type="hidden" id="count" name="count">
-                 @foreach($produk as $row)
-                 <input type="hidden" class="count" value="{{$row->cart_id}}" name="id[]">
+                 <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                 <input type="hidden" class="count" value="<?php echo e($row->cart_id); ?>" name="id[]">
                 <div class="ibox-content">
 
 
@@ -30,50 +28,54 @@
 
                             <tbody>
                             <tr>
-                                @foreach($gambar as $roww)
-                                            @if($row->i_code == $roww->ip_ciproduct)
+                                <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                         <td width="90">
-                                            <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" width="100px">
+                                            <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" width="100px">
                                         </td>
-                                        @endif
-                                @endforeach
+                                        <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <td class="desc">
                                     <h3>
                                     <a href="#" class="text-navy">
-                                        {{$row->i_name}}
-                                        <input type="hidden" value="{{$row->i_code}}" name="ciproduct[]">
-                                        <input type="hidden" value="{{$row->cart_label}}" name="label[]">
-                                        <input type="hidden" value="{{$row->cart_qty}}" name="qty[]">
-                                        <input type="hidden" value="{{$row->ipr_sunitprice * $row->cart_qty}}" name="total[]">
+                                        <?php echo e($row->i_name); ?>
+
+                                        <input type="hidden" value="<?php echo e($row->i_code); ?>" name="ciproduct[]">
+                                        <input type="hidden" value="<?php echo e($row->cart_label); ?>" name="label[]">
+                                        <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
+                                        <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>" name="total[]">
                                     </a>
                                     </h3>
                                     <p class="small">
-                                        {!! html_entity_decode($row->itp_description) !!}
+                                        <?php echo html_entity_decode($row->itp_description); ?>
+
                                     </p>
                                     <dl class="small m-b-none">
                                         <dt>Description lists</dt>
-                                        <dd>{{$row->itp_tagdesc}}</dd>
+                                        <dd><?php echo e($row->itp_tagdesc); ?></dd>
                                     </dl>
 
                                     <div class="m-t-sm">
-                                        <a  data-id="{{$row->cart_id}}" data-ciproduct="{{$row->cart_ciproduct}}" data-label="{{$row->cart_label}}" data-qty="{{$row->cart_qty}}" class="text-danger remove"><i class="fa fa-trash"></i> Remove item</a>
+                                        <a  data-id="<?php echo e($row->cart_id); ?>" data-ciproduct="<?php echo e($row->cart_ciproduct); ?>" data-label="<?php echo e($row->cart_label); ?>" data-qty="<?php echo e($row->cart_qty); ?>" class="text-danger remove"><i class="fa fa-trash"></i> Remove item</a>
                                     </div>
                                 </td>
 
                                 <td>
-                                    Rp. {{$row->ipr_sunitprice}}
+                                    Rp. <?php echo e($row->ipr_sunitprice); ?>
+
                                     
                                 </td>
                                 <td width="65">
-                                    <input type="number" readonly="" value="{{$row->cart_qty}}" class="form-control" placeholder="1">
+                                    <input type="number" readonly="" value="<?php echo e($row->cart_qty); ?>" class="form-control" placeholder="1">
                                     <select class="form-control" name="">
                                         
                                     </select>
                                 </td>
                                 <td>
                                     <h4>
-                                        Rp. {{$row->ipr_sunitprice * $row->cart_qty}}
-                                        <input type="hidden" value="{{$row->ipr_sunitprice * $row->cart_qty}}" class="total" id="total{{$row->cart_id}}" name="">
+                                        Rp. <?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>
+
+                                        <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>" class="total" id="total<?php echo e($row->cart_id); ?>" name="">
                                     </h4>
                                 </td>
                             </tr>
@@ -82,7 +84,7 @@
                     </div>
 
                 </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </form> 
             <div class="ibox-content">
 
@@ -169,8 +171,8 @@
 
     </div>
 </div>
-@endsection
-@section('extra_script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
 
@@ -193,10 +195,10 @@
             var label = $(this).data('label');
             var jumlah = $(this).data('qty');
             $.ajax({
-                url : '{{route("remove.keranjang")}}',
+                url : '<?php echo e(route("remove.keranjang")); ?>',
                 method : 'POST',
                 data : {
-                    '_token' : '{{csrf_token()}}',
+                    '_token' : '<?php echo e(csrf_token()); ?>',
                     'id' : id,
                     'code' : code,
                     'label' : label,
@@ -212,11 +214,11 @@
         $(document).on('click','.checkouts',function(){;
             var form = $('#keranjang_checkout').serialize();
             $.ajax({
-                url : '{{route("check.keranjang")}}',
+                url : '<?php echo e(route("check.keranjang")); ?>',
                 method : 'POST',
                 data : form,
                 success : function(get){
-                    window.location.href='{{route("checkout")}}';
+                    window.location.href='<?php echo e(route("checkout")); ?>';
                 }
             })
         })
@@ -226,4 +228,5 @@
         $('#ncart').html($('.ncart').length);
     })
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/keranjang/keranjang-frontpage.blade.php ENDPATH**/ ?>

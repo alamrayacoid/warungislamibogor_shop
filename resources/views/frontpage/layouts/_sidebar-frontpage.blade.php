@@ -8,7 +8,7 @@
     <div class="sidebar-collapse">
         <a class="close-canvas-menu"><i class="fa fa-times"></i></a>
         <ul class="nav metismenu" id="side-menu">
-                @if(!Auth::user())
+                @if(!Auth::check())
                 @else
             <li class="nav-header">
                 <div class="dropdown profile-element"> 
@@ -47,11 +47,11 @@
                 <a href="{{route('wishlist-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Wishlist</span></a>
             </li>
                 @endif
-            @if(!Auth::user())
+            @if(!Auth::check())
             <li class="nav-header">
                 <div class="dropdown profile-element"> 
                     <span style="display: none;">
-                        <img alt="image" class="img-circle" src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}" width="48px" height="48px">
+                        <img alt="image" class="img-circle" src="" width="48px" height="48px">
                     </span>
                     <a style="display: none;" data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"></strong>
@@ -72,6 +72,7 @@
             <li class="{{Request::is('wishlist/*') ? 'active' : '' || Request::is('wishlist') ? 'active' : ''}}">
                 <a href="{{route('register_frontpage-frontpage')}}"><i class="fa fa-star"></i> <span class="nav-label">Register</span></a>
             </li>
+            @else
             @endif
             
         </ul>

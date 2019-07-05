@@ -1,5 +1,4 @@
-@extends('frontpage.main-frontpage')
-@section('extra_style')
+<?php $__env->startSection('extra_style'); ?>
 <style type="text/css">
 
     .image-preview{
@@ -18,8 +17,8 @@
           border-radius: 50%;
     }
 </style>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
     
     <div class="row animated fadeInRight">
@@ -30,26 +29,23 @@
                 </div>
                 <div>
                     <div class="ibox-content" align="center">
-                        <img alt="image" width="200" class="img-responsive rounded" src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}">
+                        <img alt="image" width="200" class="img-responsive rounded" src="/warungislamibogor_shop/storage/image/member/profile/<?php echo e(Auth::user()->cm_path); ?>">
                     </div>
                     <div class="ibox-content profile-content">
-                        <h4><strong>{{Auth::user()->cm_name}}</strong></h4>
-                        <p><i class="fa fa-map-marker"> </i> &nbsp;{{Auth::user()->cm_address}}</p>
-                        <p><i class="fa fa-envelope"> </i> &nbsp;{{Auth::user()->cm_email}}</p>
-                        <p><i class="fa fa-phone"> </i> &nbsp;{{Auth::user()->cm_nphone}}</p>
+                        <h4><strong><?php echo e(Auth::user()->cm_name); ?></strong></h4>
+                        <p><i class="fa fa-map-marker"> </i> &nbsp;<?php echo e(Auth::user()->cm_address); ?></p>
+                        <p><i class="fa fa-envelope"> </i> &nbsp;<?php echo e(Auth::user()->cm_email); ?></p>
+                        <p><i class="fa fa-phone"> </i> &nbsp;<?php echo e(Auth::user()->cm_nphone); ?></p>
                         <div class="row m-t-lg">
                             <div class="col-md-6">
                                 
-                                <h5><i class="fa fa-star"></i> <strong>{{$wishlist}}</strong> Barang</h5>
+                                <h5><i class="fa fa-star"></i> <strong><?php echo e($wishlist); ?></strong> Barang</h5>
                             </div>
                             <div class="col-md-6">
                                 
-                                <h5><i class="fa fa-shopping-cart"></i> <strong>{{$transaksi}}</strong> Transaksi</h5>
+                                <h5><i class="fa fa-shopping-cart"></i> <strong><?php echo e($transaksi); ?></strong> Transaksi</h5>
                             </div>
-                            {{-- <div class="col-md-4">
-                                
-                                <h5><strong>240</strong> Followers</h5>
-                            </div> --}}
+                            
                         </div>
                         <div class="user-button">
                             <div class="row">
@@ -72,8 +68,8 @@
                         </a>
                     </div>
                 </div>
-                <form action="{{route('update.profile')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form action="<?php echo e(route('update.profile')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
                     <input type="hidden" id="gambar" name="gambar">
                     <div class="ibox-content">
 
@@ -91,7 +87,7 @@
                                         
                                     </div>
 
-                                    @include('frontpage.profile.modal-editfoto')
+                                    <?php echo $__env->make('frontpage.profile.modal-editfoto', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
                                     <button class="btn btn-info btn-block mt-5" type="button" data-toggle="modal" data-target="#modal-foto"> <i class="fa fa-images"></i> Edit Foto</button>
@@ -104,7 +100,7 @@
 
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control input-sm" value="{{Auth::user()->cm_name}}" name="name">
+                                    <input type="text" class="form-control input-sm" value="<?php echo e(Auth::user()->cm_name); ?>" name="name">
                                 </div>
                             </div>
 
@@ -115,7 +111,7 @@
 
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control input-sm" value="{{Auth::user()->cm_email}}" name="email">
+                                    <input type="text" class="form-control input-sm" value="<?php echo e(Auth::user()->cm_email); ?>" name="email">
                                 </div>
                             </div>
 
@@ -126,7 +122,7 @@
 
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control input-sm" value="{{Auth::user()->cm_nphone}}"  name="nphone">
+                                    <input type="text" class="form-control input-sm" value="<?php echo e(Auth::user()->cm_nphone); ?>"  name="nphone">
                                 </div>
                             </div>
 
@@ -138,7 +134,7 @@
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
                                     <select class="form-control input-sm select2" name="province">
-                                        <option hidden value="{{Auth::user()->cm_province}}">{{Auth::user()->cm_province}}</option>
+                                        <option hidden value="<?php echo e(Auth::user()->cm_province); ?>"><?php echo e(Auth::user()->cm_province); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -150,8 +146,8 @@
 
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    <select class="form-control input-sm select2" name="{{Auth::user()->cm_city}}">
-                                        <option value="{{Auth::user()->cm_city}}">{{Auth::user()->cm_city}}</option>
+                                    <select class="form-control input-sm select2" name="<?php echo e(Auth::user()->cm_city); ?>">
+                                        <option value="<?php echo e(Auth::user()->cm_city); ?>"><?php echo e(Auth::user()->cm_city); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -164,7 +160,7 @@
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
                                     <select class="form-control input-sm select2" name="district">
-                                        <option hidden value="{{Auth::user()->cm_district}}">{{Auth::user()->cm_district}}</option>
+                                        <option hidden value="<?php echo e(Auth::user()->cm_district); ?>"><?php echo e(Auth::user()->cm_district); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -175,7 +171,7 @@
 
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" name="address">{{Auth::user()->cm_address}}</textarea>
+                                    <textarea class="form-control" name="address"><?php echo e(Auth::user()->cm_address); ?></textarea>
                                 </div>
                             </div>
 
@@ -184,16 +180,16 @@
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    @if(Auth::user()->cm_gender === 'L')
+                                    <?php if(Auth::user()->cm_gender === 'L'): ?>
                                     <label class="mr-5"><input type="radio" name="gender" value="L" checked=""> Laki-laki</label>
                                     <label><input type="radio" name="gender" value="P"> Perempuan</label>
-                                    @elseif(Auth::user()->cm_gender === 'P')
+                                    <?php elseif(Auth::user()->cm_gender === 'P'): ?>
                                     <label class="mr-5"><input type="radio" name="gender" value="L"> Laki-laki</label>
                                     <label><input type="radio" name="gender" value="P" checked=""> Perempuan</label>
-                                    @else
+                                    <?php else: ?>
                                     <label class="mr-5"><input type="radio" name="gender" value="L"> Laki-laki</label>
                                     <label><input type="radio" name="gender" value="P"> Perempuan</label>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -219,7 +215,7 @@
 
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control  input-sm" value="{{ Auth::user()->cm_nbank}}" name="nbank">
+                                    <input type="text" class="form-control  input-sm" value="<?php echo e(Auth::user()->cm_nbank); ?>" name="nbank">
                                 </div>
                             </div>
 
@@ -256,8 +252,8 @@
         </div>
     </div>
     
-@endsection
-@section('extra_script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('extra_script'); ?>
 <script>
 
     $(document).ready(function(){
@@ -344,4 +340,5 @@
 
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/profile/profile.blade.php ENDPATH**/ ?>

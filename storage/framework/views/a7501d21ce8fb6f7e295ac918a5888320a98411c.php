@@ -1,12 +1,10 @@
-@extends('frontpage.main-frontpage')
-
-@section('extra_style')
+<?php $__env->startSection('extra_style'); ?>
 <style type="text/css">
 
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
             <div class="ibox">
 
                 <div class="ibox-title">
@@ -27,45 +25,47 @@
 
             <div class="row">
                 <div class="row mt-5">
-                        @foreach($data as $row)
+                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         
                         <div class="col-md-3">
                             <div class="ibox">
                                 <div class="ibox-content product-box">
-                                    @foreach($wish as $wis)
-                                    @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
+                                    <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
                                     <div class="product-wishlist onproduk-page onwishlist">
-                                        <button data-ciproduct="{{$wis->wl_ciproduct}}" data-member="{{Auth::user()->cm_code}}" class="btn btn-circle btn-lg btn-danger btn-wishlist" type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
+                                        <button data-ciproduct="<?php echo e($wis->wl_ciproduct); ?>" data-member="<?php echo e(Auth::user()->cm_code); ?>" class="btn btn-circle btn-lg btn-danger btn-wishlist" type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
                                     </div>
-                                    @endif
-                                    @endforeach
-                                    @if($wish == '[]')
+                                    <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($wish == '[]'): ?>
                                     <div class="product-wishlist onproduk-page">
-                                        <button data-ciproduct="{{$row->i_code}}" class="btn btn-circle btn-lg btn-wishlist" id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
+                                        <button data-ciproduct="<?php echo e($row->i_code); ?>" class="btn btn-circle btn-lg btn-wishlist" id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i class="far fa-heart"></i></button>
                                     </div>
-                                    @endif
-                                        @foreach($gambar as $roww)
-                                        @if($row->i_code == $roww->ip_ciproduct)
+                                    <?php endif; ?>
+                                        <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                     <div class="product-imitations">
-                                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}">
+                                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
                                     </div>
-                                    @endif
-                                        @endforeach
+                                    <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <div class="product-desc">
                                         <span class="product-price">
-                                            Rp. {{$row->ipr_sunitprice}}
+                                            Rp. <?php echo e($row->ipr_sunitprice); ?>
+
                                         </span>
-                                        <small class="text-muted">{{$row->ity_name}}</small>
-                                        <a href="#" class="product-name"> {{$row->i_name}}</a>
+                                        <small class="text-muted"><?php echo e($row->ity_name); ?></small>
+                                        <a href="#" class="product-name"> <?php echo e($row->i_name); ?></a>
 
 
 
                                         <div class="small m-t-xs">
-                                            {{$row->itp_tagdesc}}
+                                            <?php echo e($row->itp_tagdesc); ?>
+
                                         </div>
                                         <div class="m-t text-right">
-                                            <form action="{{route('produk-detail-frontpage')}}" method="GET">
-                                                <input type="hidden" name="code" value="{{$row->i_code}}">
+                                            <form action="<?php echo e(route('produk-detail-frontpage')); ?>" method="GET">
+                                                <input type="hidden" name="code" value="<?php echo e($row->i_code); ?>">
                                             <button  class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </button>
                                             </form>
                                         </div>
@@ -74,13 +74,13 @@
                             </div>
                         </div>
                         
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
 
             </div>
 
-@endsection
-@section('extra_script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#ncart').html($('.ncart').length);
@@ -103,10 +103,10 @@
             $(this).find('i').toggleClass('fa far');
             $(this).parents('.product-wishlist').toggleClass('onwishlist');
             $.ajax({
-                url : '{{route("addwishlist")}}',
+                url : '<?php echo e(route("addwishlist")); ?>',
                 method : 'POST',
                 data : {
-                    '_token' : '{{csrf_token()}}',
+                    '_token' : '<?php echo e(csrf_token()); ?>',
                     'code' : code,
                     'member' : member,
                 },
@@ -115,4 +115,5 @@
         })
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/wishlist/wishlist-frontpage.blade.php ENDPATH**/ ?>

@@ -74,4 +74,19 @@ class KeranjangController extends Controller
             return redirect()->with('done','produk dihapus');
         }
     }
+
+    public function gocheck(Request $request){
+        $id = $request->id;
+        for ($i=0; $i < $request->count ; $i++) { 
+            if ($request->count != '') {
+                DB::table('d_cart')
+                    ->where('cart_id',$id[$i])
+                    ->update([
+                        'status_data' => 'check',
+                    ]);
+            }else{
+                return false;
+            }
+        }
+    }
 }

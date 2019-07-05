@@ -1,6 +1,4 @@
-@extends('frontpage.main-frontpage')
-
-@section('extra_style')
+<?php $__env->startSection('extra_style'); ?>
 <style type="text/css">
     .ibox-produk{
         padding:0px;
@@ -53,13 +51,13 @@
         margin-right: 0;
     }
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     
-@include('frontpage.pembelian.modal-detailpembelian')
-@include('frontpage.pembelian.modal-detailpengiriman')
-@include('frontpage.pembelian.modal-pembayaran')
+<?php echo $__env->make('frontpage.pembelian.modal-detailpembelian', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('frontpage.pembelian.modal-detailpengiriman', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('frontpage.pembelian.modal-pembayaran', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <div class="ibox">
             <div class="ibox-content m-b-sm border-bottom">
@@ -93,17 +91,7 @@
                             </select>
                         </div>
                     </div>
-                    {{-- <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="status" class="text-primary">Status</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="1" selected="">Semua</option>
-                                <option value="2">Pembayaran</option>
-                                <option value="3">Sedang Diproses</option>
-                                <option value="4">Proses Pengiriman</option>
-                            </select>
-                        </div>
-                    </div> --}}
+                    
 
                 </div>
 
@@ -132,66 +120,69 @@
                         <div class="tab-content">
 
                             <div id="tab-1" class="tab-pane animated fadeIn active">
-                                    @foreach($group as $row)
-                                    @if($row->sell_ccustomer == Auth::user()->cm_code)
+                                    <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($row->sell_ccustomer == Auth::user()->cm_code): ?>
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">{{$row->sell_nota}}</label>
-                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
+                                                    <label class="d-block"><?php echo e($row->sell_nota); ?></label>
+                                                    <span><?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?></span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-primary">{{$row->sell_status}}</span>
+                                                    <span class="label label-primary"><?php echo e($row->sell_status); ?></span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning" id="count">Rp. {{$row->totalbayar}}</span>
+                                                    <span class="text-warning" id="count">Rp. <?php echo e($row->totalbayar); ?></span>
                                                     <br>
-                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}" data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}" data-totalb="{{$row->totalbeli}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
+                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>" data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>" data-customer="<?php echo e(Auth::user()->cm_name); ?>" data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>" data-totalb="<?php echo e($row->totalbeli); ?>" data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
-                                                @foreach($allstatus as $roww)
-                                                @if($roww->sell_nota == $row->sell_nota)
+                                                <?php $__currentLoopData = $allstatus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($roww->sell_nota == $row->sell_nota): ?>
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
                                                             <tr>
-                                                                @foreach($gambar as $image)
-                                                                @if($image->sell_nota == $row->sell_nota)
+                                                                <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <?php if($image->sell_nota == $row->sell_nota): ?>
                                                                 <td width="90">
-                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>" width="100px">
                                                                 </td>
-                                                                @endif
-                                                                @endforeach
+                                                                <?php endif; ?>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            {{$roww->i_name}}
+                                                                            <?php echo e($roww->i_name); ?>
+
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        {{$roww->itp_tagdesc}}
+                                                                        <?php echo e($roww->itp_tagdesc); ?>
+
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {!! html_entity_decode($roww->itp_description) !!}
+                                                                        <?php echo html_entity_decode($roww->itp_description); ?>
+
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
+                                                                        <span class="text-warning">Rp. <?php echo e($roww->ipr_sunitprice); ?></span>
                                                                         |
-                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
+                                                                        <span class="text-muted"><?php echo e($roww->sell_quantity); ?> Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
+                                                                    <span class="text-info">Rp. <?php echo e($roww->sell_total); ?></span>
                                                                 </td>
                                                                 <td width="65">
                                                                     <button class="btn btn-warning" type="button">Belanja Lagi</button>
@@ -200,249 +191,258 @@
                                                             </tr>
                                                     </tbody>
                                                 </table>
-                                                @endif
-                                        @endforeach                             
+                                                <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                             
                                             </div>
 
                                         </div>
                                     </div>
-                                    @endif
-                                    @endforeach
+                                    <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             
                             <div id="tab-2" class="tab-pane animated fadeIn">
-                                    @foreach($groupp as $row)
-                                    @if($row->sell_ccustomer == Auth::user()->cm_code)
+                                    <?php $__currentLoopData = $groupp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($row->sell_ccustomer == Auth::user()->cm_code): ?>
 
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
 
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">{{$row->sell_nota}}</label>
-                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
+                                                    <label class="d-block"><?php echo e($row->sell_nota); ?></label>
+                                                    <span><?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?></span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-primary">{{$row->sell_status}}</span>
+                                                    <span class="label label-primary"><?php echo e($row->sell_status); ?></span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
+                                                    <span class="text-warning">Rp. <?php echo e($row->sell_total); ?></span>
                                                     <br>
-                                                    <button class="btn btn-warning btn-sm bayar"  data-nota="{{$row->sell_nota}}" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
-                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}" data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}" data-totalb="{{$row->totalbeli}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
+                                                    <button class="btn btn-warning btn-sm bayar"  data-nota="<?php echo e($row->sell_nota); ?>" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
+                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>" data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>" data-customer="<?php echo e(Auth::user()->cm_name); ?>" data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>" data-totalb="<?php echo e($row->totalbeli); ?>" data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
-                                                @foreach($pembayaran as $roww)
-                                                @if($roww->sell_nota == $row->sell_nota)
+                                                <?php $__currentLoopData = $pembayaran; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($roww->sell_nota == $row->sell_nota): ?>
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
                                                             <tr>
-                                                                @foreach($gambar as $image)
-                                                                @if($image->sell_nota == $row->sell_nota)
+                                                                <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <?php if($image->sell_nota == $row->sell_nota): ?>
                                                                 <td width="90">
-                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>" width="100px">
                                                                 </td>
-                                                                @endif
-                                                                @endforeach
+                                                                <?php endif; ?>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            {{$roww->i_name}}
+                                                                            <?php echo e($roww->i_name); ?>
+
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        {{$roww->itp_tagdesc}}
+                                                                        <?php echo e($roww->itp_tagdesc); ?>
+
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {!! html_entity_decode($roww->itp_description) !!}
+                                                                        <?php echo html_entity_decode($roww->itp_description); ?>
+
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
+                                                                        <span class="text-warning">Rp. <?php echo e($roww->ipr_sunitprice); ?></span>
                                                                         |
-                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
+                                                                        <span class="text-muted"><?php echo e($roww->sell_quantity); ?> Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
+                                                                    <span class="text-info">Rp. <?php echo e($roww->sell_total); ?></span>
                                                                 </td>
 
                                                             </tr>
                                                     </tbody>
                                                 </table>
-                                                @endif
-                                                @endforeach
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
 
                                         </div>
                                     </div>
-                                    @endif
-                                    @endforeach
+                                    <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 
                             </div>
 
                             <div id="tab-3" class="tab-pane animated fadeIn">
-                                @foreach($group as $row)
-                                @if($row->sell_status == 'Sedang Proses' && $row->sell_ccustomer == Auth::user()->cm_code)
+                                <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($row->sell_status == 'Sedang Proses' && $row->sell_ccustomer == Auth::user()->cm_code): ?>
 
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
 
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">{{$row->sell_nota}}</label>
-                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
+                                                    <label class="d-block"><?php echo e($row->sell_nota); ?></label>
+                                                    <span><?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?></span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-warning">{{$row->sell_status}}</span>
+                                                    <span class="label label-warning"><?php echo e($row->sell_status); ?></span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
+                                                    <span class="text-warning">Rp. <?php echo e($row->sell_total); ?></span>
                                                     <br>
                                                     <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
-                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}" data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}" data-totalb="{{$row->totalbeli}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
+                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>" data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>" data-customer="<?php echo e(Auth::user()->cm_name); ?>" data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>" data-totalb="<?php echo e($row->totalbeli); ?>" data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
-                                                @foreach($proses as $roww)
-                                                @if($roww->sell_nota == $row->sell_nota)
+                                                <?php $__currentLoopData = $proses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($roww->sell_nota == $row->sell_nota): ?>
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
                                                             <tr>
-                                                                @foreach($gambar as $image)
-                                                                @if($image->sell_nota == $row->sell_nota)
+                                                                <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <?php if($image->sell_nota == $row->sell_nota): ?>
                                                                 <td width="90">
-                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>" width="100px">
                                                                 </td>
-                                                                @endif
-                                                                @endforeach
+                                                                <?php endif; ?>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            {{$roww->i_name}}
+                                                                            <?php echo e($roww->i_name); ?>
+
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        {{$roww->itp_tagdesc}}
+                                                                        <?php echo e($roww->itp_tagdesc); ?>
+
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {!! html_entity_decode($roww->itp_description) !!}
+                                                                        <?php echo html_entity_decode($roww->itp_description); ?>
+
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
+                                                                        <span class="text-warning">Rp. <?php echo e($roww->ipr_sunitprice); ?></span>
                                                                         |
-                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
+                                                                        <span class="text-muted"><?php echo e($roww->sell_quantity); ?> Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
+                                                                    <span class="text-info">Rp. <?php echo e($roww->sell_total); ?></span>
                                                                 </td>
 
                                                             </tr>
                                                     </tbody>
                                                 </table>
-                                                @endif
-                                                @endforeach
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                    @endif
-                                @endforeach
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>                            
 
                             <div id="tab-4" class="tab-pane animated fadeIn"> 
-                                @foreach($group as $row)
-                                @if($row->sell_status == 'Sedang Dikirim' && $row->sell_ccustomer == Auth::user()->cm_code)
+                                <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($row->sell_status == 'Sedang Dikirim' && $row->sell_ccustomer == Auth::user()->cm_code): ?>
                                     <div class="ibox ibox-custom">
                                         <div class="ibox-title ibox-produk-title">
                                             <div class="row">
 
                                                 <div class="col-sm-4">
-                                                    <label class="d-block">{{$row->sell_nota}}</label>
-                                                    <span>{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}</span>
+                                                    <label class="d-block"><?php echo e($row->sell_nota); ?></label>
+                                                    <span><?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?></span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="d-block">Status</label>
-                                                    <span class="label label-primary">{{$row->sell_status}}</span>
+                                                    <span class="label label-primary"><?php echo e($row->sell_status); ?></span>
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
+                                                    <span class="text-warning">Rp. <?php echo e($row->sell_total); ?></span>
                                                     <br>
                                                     <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modal-pengiriman">Lacak</button>
-                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}" data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}" data-totalb="{{$row->totalbeli}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
+                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>" data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>" data-customer="<?php echo e(Auth::user()->cm_name); ?>" data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>" data-totalb="<?php echo e($row->totalbeli); ?>" data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="ibox-content mb-4">
                                             <div class="table-responsive">
-                                                @foreach($pengiriman as $roww)
-                                                @if($roww->sell_nota == $row->sell_nota)
+                                                <?php $__currentLoopData = $pengiriman; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($roww->sell_nota == $row->sell_nota): ?>
                                                 <table class="table shoping-cart-table">
 
                                                     <tbody>
                                                             <tr>
-                                                                @foreach($gambar as $image)
-                                                                @if($image->sell_nota == $row->sell_nota)
+                                                                <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <?php if($image->sell_nota == $row->sell_nota): ?>
                                                                 <td width="90">
-                                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}" width="100px">
+                                                                    <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>" width="100px">
                                                                 </td>
-                                                                @endif
-                                                                @endforeach
+                                                                <?php endif; ?>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 <td class="desc" style="width: 50%">
                                                                     <h3>
                                                                         <a href="#" class="text-navy">
-                                                                            {{$roww->i_name}}
+                                                                            <?php echo e($roww->i_name); ?>
+
                                                                         </a>
                                                                     </h3>
                                                                     <p class="small">
-                                                                        {{$roww->itp_tagdesc}}
+                                                                        <?php echo e($roww->itp_tagdesc); ?>
+
                                                                     </p>
                                                                     <dl class="small m-b-none">
-                                                                        {!! html_entity_decode($roww->itp_description) !!}
+                                                                        <?php echo html_entity_decode($roww->itp_description); ?>
+
                                                                     </dl>
 
                                                                     <div class="m-t-sm">
-                                                                        <span class="text-warning">Rp. {{$roww->ipr_sunitprice}}</span>
+                                                                        <span class="text-warning">Rp. <?php echo e($roww->ipr_sunitprice); ?></span>
                                                                         |
-                                                                        <span class="text-muted">{{$roww->sell_quantity}} Produk</span>
+                                                                        <span class="text-muted"><?php echo e($roww->sell_quantity); ?> Produk</span>
                                                                     </div>
                                                                 </td>
 
                                                                 <td>
                                                                     <label class="d-block">Total Harga Produk</label>
-                                                                    <span class="text-info">Rp. {{$roww->sell_total}}</span>
+                                                                    <span class="text-info">Rp. <?php echo e($roww->sell_total); ?></span>
                                                                 </td>
 
                                                             </tr>
                                                     </tbody>
                                                 </table>
-                                                @endif
-                                                @endforeach
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
 
                                         </div>
                                     </div>
-                                    @endif
-                                @endforeach
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
 
                         </div>
@@ -456,8 +456,8 @@
         
 
             
-@endsection
-@section('extra_script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
 
@@ -493,10 +493,10 @@
                 paging:false,
                 filter:false,
                 ajax: {
-                    url: "{{ route('detail.pembayaran') }}",
+                    url: "<?php echo e(route('detail.pembayaran')); ?>",
                     type: "post",
                     data: {
-                        "_token": "{{ csrf_token() }}",
+                        "_token": "<?php echo e(csrf_token()); ?>",
                         'nota' : nota,
                     }
                 },
@@ -508,24 +508,24 @@
 
         })
 
-    @if(Session::get('success'))
+    <?php if(Session::get('success')): ?>
         iziToast.success({
             title: 'Berhasil!',
             message: 'Mengupload Bukti Bayar',
         });
-    @endif
-    @if(Session::get('error'))
+    <?php endif; ?>
+    <?php if(Session::get('error')): ?>
      iziToast.error({
          title: 'Error!',
          message: 'Mengupload Bukti Bayar',
     });
-    @endif
-    @if(Session::get('many'))
+    <?php endif; ?>
+    <?php if(Session::get('many')): ?>
      iziToast.warning({
          title: 'Peringatan!',
          message: 'sudah ada Bukti Bayar',
     });
-    @endif
+    <?php endif; ?>
     
 
         $('.bayar').on('click',function(){
@@ -571,4 +571,5 @@
 
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/pembelian/pembelian.blade.php ENDPATH**/ ?>

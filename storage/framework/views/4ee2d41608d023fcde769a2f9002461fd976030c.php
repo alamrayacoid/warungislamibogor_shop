@@ -1,4 +1,4 @@
-    {{-- Modal --}}
+    
     <div class="modal" id="modal-gantialamat" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content animated bounceInRight">
@@ -74,4 +74,4 @@
             </div>
         </div>
     </div>
-    {{-- End Modal --}}
+    <?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/checkout/modal_gantialamat.blade.php ENDPATH**/ ?>

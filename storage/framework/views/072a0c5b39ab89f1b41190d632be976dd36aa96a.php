@@ -1,6 +1,6 @@
-    {{-- Modal --}}
+    
 <form id="salin_form" action="#" method="get">
-    @csrf
+    <?php echo csrf_field(); ?>
     <input type="hidden" id="notaa" name="nota">
     <div class="modal" id="modal-detail" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -93,4 +93,4 @@
         </div>
     </div>
 </form>
-    {{-- End Modal --}}
+    <?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/pembelian/modal-detailpembelian.blade.php ENDPATH**/ ?>
