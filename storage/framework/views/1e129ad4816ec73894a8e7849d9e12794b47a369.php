@@ -2,7 +2,7 @@
     
 
 
-
+        <form action="<?php echo e(route('produk-frontpage')); ?>" method="get">
             <div class="ibox-content border-bottom">
                 <div class="row">
                     <div class="col-sm-4">
@@ -28,14 +28,17 @@
                             <label class="control-label" for="jenis">Jenis Produk</label>
                             <select name="jenis" id="jenis" class="form-control">
                                 <option value="All">Semua</option>
-                                <option value="1">Botol</option>
+                                <?php $__currentLoopData = $tipe; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row->ity_code); ?>"><?php echo e($row->ity_name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
+                    <input type="submit" name="">
                 </div>
 
             </div>
-
+        </form>
             <div class="row mt-5">
                         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-3">

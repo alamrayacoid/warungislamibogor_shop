@@ -21,9 +21,9 @@
                     <span class="label label-info">{{$notifp}}</span>
                 </a>
             {{-- @endif --}}
-            <form role="search" class="navbar-form-cust">
+            <form role="search" action="{{route('produk-frontpage')}}" method="get" class="navbar-form-cust">
                 <div class="form-group">
-                    <input type="text" placeholder="Cari Produk..." class="form-control" name="top-search" id="top-search">
+                    <input type="text" placeholder="Cari Produk..." class="form-control" name="search" id="top-search">
                 </div>
             </form>
         </div>

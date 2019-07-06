@@ -6,7 +6,7 @@
     
 
 
-
+        <form action="{{route('produk-frontpage')}}" method="get">
             <div class="ibox-content border-bottom">
                 <div class="row">
                     <div class="col-sm-4">
@@ -32,14 +32,17 @@
                             <label class="control-label" for="jenis">Jenis Produk</label>
                             <select name="jenis" id="jenis" class="form-control">
                                 <option value="All">Semua</option>
-                                <option value="1">Botol</option>
+                                @foreach($tipe as $row)
+                                    <option value="{{$row->ity_code}}">{{$row->ity_name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
+                    <input type="submit" name="">
                 </div>
 
             </div>
-
+        </form>
             <div class="row mt-5">
                         @foreach($data as $row)
                         <div class="col-md-3">

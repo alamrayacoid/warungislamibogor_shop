@@ -10,33 +10,77 @@ class ProdukController extends Controller
 {
     public function produk(Request $request)
     {
+        $type = DB::table('m_itemtype')->get();
         $kategory = $request->ctr;
             if ($kategory != null) {
             $data = DB::table('m_item')
                 ->join('m_itemprice','ipr_ciproduct','i_code')
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
-                ->where('itp_citype',$kategory)
                 ->groupBy('i_name')
                 ->get();
 
-                $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->where('itp_citype',$kategory)->get();
+            
+
+            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->where('itp_citype',$kategory)->get();
+
+            if ($request->search != null) {
+                $data->where('i_name',$request->search)->get();
+            }
+
+            if ($request->nama_produk != null) {
+                $data->where('i_name',$request->nama_produk)->get();
+            }
+
+            if ($request->harga_min != null && $request->harga_max != null) {
+                $data->whereBetween('ipr_sunitprice',[$request->harga_min,$request->harga_max])->get();
+            }
+
+            if ($request->jenis != null) {
+                $data->where('itp_citype',$request->jenis)->get();
+            }
         }else{
             $data = DB::table('m_item')
                 ->join('m_itemprice','ipr_ciproduct','i_code')
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
-                ->groupBy('i_name')
-                ->get();
+                ->groupBy('i_name');
+                
 
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
+
         }
+
+            
+
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
 
+            if ($request->search != null) {
+                $data->where('i_name',$request->search)->get();
+            }
+
+            if ($request->nama_produk != null) {
+                $data->where('i_name',$request->nama_produk)->get();
+            }
+
+            if ($request->harga_min != null && $request->harga_max != null) {
+                $data->whereBetween('ipr_sunitprice',[$request->harga_min,$request->harga_max])->get();
+            }
+
+            if ($request->jenis != null) {
+                if ($request->jenis == 'All') {
+                    $data->get();
+                }else{
+                    $data->where('itp_citype',$request->jenis)->get();
+                }
+            }
+
+
     	return view('frontpage.produk.produk-frontpage',array(
-                'data' => $data,
+                'data' => $data->get(),
                 'gambar' => $gambar,
                 'wish' => $wish,
+                'tipe' => $type,
             ));
     }
 

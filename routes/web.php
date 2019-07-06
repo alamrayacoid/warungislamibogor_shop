@@ -16,6 +16,7 @@
 //     // for enable login
 //     // return redirect('home');
 // });
+
 Route::get('/', 'Frontpage\FrontpageController@frontpage')->name('home');
 
 
