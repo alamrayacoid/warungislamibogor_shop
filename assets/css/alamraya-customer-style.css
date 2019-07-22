@@ -77,12 +77,13 @@ body.mini-navbar .sidebar-collapse .nav.nav-third-level li a .label
     padding:0px;
     position: relative;
 }
+
 .product-imitations img{
     
-    height: 280px;
+    height: auto;
+    max-height: 400px;
     width: 100%;
     /*max-width: 240px;*/
-    object-fit: cover;
 }
 @media(max-width: 768px){
     .product-imitations img{

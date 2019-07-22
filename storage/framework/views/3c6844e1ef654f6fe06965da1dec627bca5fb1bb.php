@@ -1,4 +1,4 @@
-<?php $notifp = App\Http\Controllers\notifController::pembelian();
+<!-- <?php $notifp = App\Http\Controllers\notifController::pembelian();
       $notifpro = App\Http\Controllers\notifController::proses();
       $notifpem = App\Http\Controllers\notifController::pembayaran();
       $notifpen = App\Http\Controllers\notifController::pengiriman();
@@ -77,4 +77,4 @@
         </ul>
 
     </div>
-</nav><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_sidebar-frontpage.blade.php ENDPATH**/ ?>
+</nav> --><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_sidebar-frontpage.blade.php ENDPATH**/ ?>

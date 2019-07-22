@@ -174,6 +174,30 @@
                 ($('#navbar').hasClass('in')) ? $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down') : $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
 
             });
-        })
+            $('.tooltip-demo').tooltip({
+                selector: "[data-toggle=tooltip]",
+                container: "body"
+            });         
+        });
+        $(function () {
+        $(".btn-scrollTop").hide();
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+            if (scroll > 150) {
+                $(".btn-scrollTop").slideDown();
+            } else {
+                $(".btn-scrollTop").slideUp();
+            }
+        });
+
+        });
+        $(document).ready(function (){
+            $(".btn-scrollTop").click(function (){
+                $('html, body').animate({
+                    scrollTop: $("#bodytop").offset().top
+                }, 2000);
+            });
+        });
+        
 
     </script>

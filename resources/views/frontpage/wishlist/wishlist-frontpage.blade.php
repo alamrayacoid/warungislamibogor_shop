@@ -7,6 +7,8 @@
 @endsection
 
 @section('content')
+<section style="margin-top:10em;">
+<div class="container">
             <div class="ibox">
 
                 <div class="ibox-title">
@@ -78,7 +80,8 @@
                     </div>
 
             </div>
-
+</div>
+</section>
 @endsection
 @section('extra_script')
 <script type="text/javascript">

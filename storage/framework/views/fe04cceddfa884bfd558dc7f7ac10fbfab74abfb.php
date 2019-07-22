@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-@include('frontpage.auth._head-auth')
+<?php echo $__env->make('frontpage.auth._head-auth', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <style>
 
 </style>
@@ -9,8 +9,8 @@
 <body class="gray-bg">
     <nav class="navbar navbar-login navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{route('home')}}">
-                <img src="{{asset('assets/img/img-product/warungislamibogor-text.png')}}" width="200" height="50">
+            <a class="navbar-brand" href="<?php echo e(route('home')); ?>">
+                <img src="<?php echo e(asset('assets/img/img-product/warungislamibogor-text.png')); ?>" width="200" height="50">
             </a>
         </div>
     </nav>
@@ -19,14 +19,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <img src="{{asset('assets/img/img-product/bg-login.jpg')}}" class="img-header">
+                    <img src="<?php echo e(asset('assets/img/img-product/bg-login.jpg')); ?>" class="img-header">
                 </div>
                 <div class="col-lg-5">
                     <h5 class="title-login-page">Welcome Back :)</h5>
                     <p class="desc-login-page">To Keep connected with us please login with your personal information
                         by email address and password</p>
-                    <form id="register" method="POST" class="m-t" role="form" action="{{route('register')}}">
-                        @csrf
+                    <form id="register" method="POST" class="m-t" role="form" action="<?php echo e(route('register')); ?>">
+                        <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="code" id="code" placeholder="Code" value=""
                                 hidden>
@@ -71,7 +71,7 @@
                         <button id="input_register" type="submit" class="btn btn-login-page">Daftar</button>
                         <input type="submit" id="trigger_register" hidden></a>
                         <div class="text-opsi-login"><span>Sudah memiliki akun ? </span></div>
-                        <a href="{{route('login-frontpage')}}">
+                        <a href="<?php echo e(route('login-frontpage')); ?>">
                             <button type="button" class="btn btn-register-opsi">Masuk</button>
                         </a>
                     </form>
@@ -80,26 +80,26 @@
     </section>
 
     <!-- Mainly scripts -->
-    <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="<?php echo e(asset('assets/js/jquery-2.1.1.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap.min.js')); ?>"></script>
     <!-- iCheck -->
-    <script src="{{asset('assets/js/plugins/iCheck/icheck.min.js')}}"></script>
-    <script src="{{asset('assets/iziToast/iziToast.min.js')}}"></script>
+    <script src="<?php echo e(asset('assets/js/plugins/iCheck/icheck.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/iziToast/iziToast.min.js')); ?>"></script>
     <script>
         $(document).ready(function () {
             console.log()
-            @if(Session::get('registerc') != '')
+            <?php if(Session::get('registerc') != ''): ?>
             iziToast.success({
                 title: 'Berhasil!',
                 message: 'Menambah',
             });
-            @endif
-            @if(Session::get('registere') != '')
+            <?php endif; ?>
+            <?php if(Session::get('registere') != ''): ?>
             iziToast.error({
                 title: 'Gagal!',
-                message: '{{Session::get("registere")}}',
+                message: '<?php echo e(Session::get("registere")); ?>',
             });
-            @endif
+            <?php endif; ?>
             $('#input_register').on('click', function () {
                 var trigger = $('.icheckbox_square-green').addClass('checked');
                 if (trigger) {
@@ -136,4 +136,4 @@
     </script>
 </body>
 
-</html>
+</html><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/auth/register-frontpage.blade.php ENDPATH**/ ?>

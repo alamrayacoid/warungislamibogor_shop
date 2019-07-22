@@ -5,6 +5,8 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
+<section style="margin-top:10em;">
+<div class="container">
             <div class="ibox">
 
                 <div class="ibox-title">
@@ -78,7 +80,8 @@
                     </div>
 
             </div>
-
+</div>
+</section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
