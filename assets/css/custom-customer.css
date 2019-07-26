@@ -239,6 +239,12 @@ transition: 0.5s;
     color: black !important;
     font-weight: 600;
 }
+.title-product-opsi-same{
+ font-size: 16px;
+    color: black !important;
+    font-weight: 600;
+    padding:15px;   
+}
 .slick .slick-prev-product{
     position: absolute;
     top: 48%;
@@ -608,7 +614,7 @@ transition: 0.5s;
 }
 /* //login style */
 .header_login_section {
-    height: 88.1vh;
+    min-height: 88.1vh;
     display: flex;
     align-items: center;
 }

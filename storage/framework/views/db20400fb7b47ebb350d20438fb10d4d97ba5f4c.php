@@ -141,27 +141,7 @@
                         <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -181,28 +161,7 @@
                         <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -222,7 +181,28 @@
                         <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -239,10 +219,30 @@
                 </div>
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" alt="...">
+                        <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -271,27 +271,7 @@
                         <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -311,28 +291,7 @@
                         <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -352,7 +311,7 @@
                         <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -370,10 +329,51 @@
 
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" alt="...">
+                        <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -393,7 +393,7 @@
 
         <div class="row">
         <div class="product-opsi-group">
-                <h3 class="title-product-opsi">Produk Paling Banyak Dicari</h3>
+                <h3 class="title-product-opsi">Semua Produk</h3>
                 <button class="btn view-more-product">Lihat Semua</button>
             </div>
             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
