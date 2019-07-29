@@ -150,7 +150,7 @@
             </div>
         </div>
         <div class="row">
-        <h3 class="title-product-opsi">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
+        <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
                     <div class="image-product-box">

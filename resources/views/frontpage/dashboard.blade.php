@@ -183,27 +183,7 @@
                         <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -223,28 +203,7 @@
                         <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -264,7 +223,28 @@
                         <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -281,10 +261,30 @@
                 </div>
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
+                        <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -313,27 +313,7 @@
                         <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -353,28 +333,7 @@
                         <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
-                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
-                    </div>
-                    <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -394,7 +353,7 @@
                         <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -412,10 +371,51 @@
 
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
+                        <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
                     </div>
                     <div class="caption">
-                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
+                            class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box">
+                        <img src="{{asset('assets/img/img-product/product-3.jpg')}}" alt="...">
+                    </div>
+                    <div class="caption">
+                        <a href="javascript:void(0)"
                             class="title-product-item">Botol Bekas Aqua Gelas 250 mili liter</a>
                         <div class="footer-product-item">
                             <div class="">
@@ -435,7 +435,7 @@
 
         <div class="row">
         <div class="product-opsi-group">
-                <h3 class="title-product-opsi">Produk Paling Banyak Dicari</h3>
+                <h3 class="title-product-opsi">Semua Produk</h3>
                 <button class="btn view-more-product">Lihat Semua</button>
             </div>
             @foreach($data as $row)
