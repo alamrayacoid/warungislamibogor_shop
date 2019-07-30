@@ -54,7 +54,7 @@
                                             <select class="form-control" id="cabang" name="">
                                                     <option value="" selected>~ pilih cabang ~</option>
                                                     @foreach($cabang as $cbng)
-                                                    <option value="{{$cbng->b_code}}">{{$cbng->c_name}}</option>
+                                                    <option value="{{$cbng->b_code}}">{{$cbng->b_name}}</option>
                                                     @endforeach
                                                 </select>
                                                 <select class="form-control" id="label" name="">

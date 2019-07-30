@@ -16,4 +16,12 @@ class cartController extends Controller
     	->get();
     	return $datacart;
     }
+
+    static function img(){
+    	$gambar = DB::table('m_imgproduct')
+    	->join('m_item','i_code','ip_ciproduct')
+    	->groupBy('ip_ciproduct')
+    	->get();
+    	return $gambar;
+    }
 }

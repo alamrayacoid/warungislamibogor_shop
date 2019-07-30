@@ -1,4 +1,5 @@
 <?php $cek = App\Http\Controllers\cartController::cart();
+      $img = App\Http\Controllers\cartController::img();
       $notifp = App\Http\Controllers\notifController::pembelian();
       $menu = App\Http\Controllers\menuController::menu();
 ?>
@@ -58,9 +59,11 @@
                                 <li class="ncart">
                                     <div class="dropdown-messages-box">
                                             <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}">
+                                                @foreach($img as $gambar)
                                                 <div class="pull-left dropdown-img">
-                                                    <img alt="image" class="img-circle" src="{{asset('assets/img/gallery/s.jpg')}}">
+                                                    <img alt="image" class="img-circle" src="/warungislamibogor/storage/image/master/produk/{{$gambar->ip_path}}">
                                                 </div>
+                                                @endforeach
                                                 <div class="media-body">
                                                     <div class="row">
                                                         <div class="col-xs-7">

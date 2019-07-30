@@ -62,35 +62,37 @@
         <div class="ibox">
             <div class="ibox-content m-b-sm border-bottom">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="nama_produk">Nama Produk</label>
-                            <input type="text" id="nama_produk" name="nama_produk" value="" placeholder="Nama Produk" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-8 ">
-                        
+                    <form id="">
+                        <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="tanggal_transaksi_awal">Tanggal Transaksi Awal</label>
-                                <div class="input-group input-daterange">
-                                    <input type="text" name="tanggal_transaksi_awal" value="" placeholder="Tanggal Awal" class="form-control datepicker">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-minus"></i>
-                                    </span>
-                                    <input type="text" name="tanggal_transaksi_akhir" value="" placeholder="Tanggal Akhir" class="form-control datepicker">
-                                </div>
+                                <label for="nama_produk">Nama Produk</label>
+                                <input type="text" id="nama_produk" name="nama_produk" value="" placeholder="Nama Produk" class="form-control">
                             </div>
-                        
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="quantity">Urutan Berdasarkan</label>
-                            <select name="orderby" id="orderby" class="form-control">
-                                <option value="1" selected="">Terbaru</option>
-                                <option value="2">Total Belanja</option>
-                            </select>
                         </div>
-                    </div>
+                        <div class="col-sm-8 ">
+                            
+                                <div class="form-group">
+                                    <label for="tanggal_transaksi_awal">Tanggal Transaksi Awal</label>
+                                    <div class="input-group input-daterange">
+                                        <input type="text" name="tanggal_transaksi_awal" value="" placeholder="Tanggal Awal" class="form-control datepicker">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-minus"></i>
+                                        </span>
+                                        <input type="text" name="tanggal_transaksi_akhir" value="" placeholder="Tanggal Akhir" class="form-control datepicker">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="quantity">Urutan Berdasarkan</label>
+                                <select name="orderby" id="orderby" class="form-control">
+                                    <option value="1" selected="">Terbaru</option>
+                                    <option value="2">Total Belanja</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
                     
 
                 </div>
@@ -219,7 +221,7 @@
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. <?php echo e($row->sell_total); ?></span>
+                                                    <span class="text-warning">Rp. <?php echo e($row->totalbayar); ?></span>
                                                     <br>
                                                     <button class="btn btn-warning btn-sm bayar"  data-nota="<?php echo e($row->sell_nota); ?>" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>" data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>" data-customer="<?php echo e(Auth::user()->cm_name); ?>" data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>" data-totalb="<?php echo e($row->totalbeli); ?>" data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
@@ -301,7 +303,7 @@
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. <?php echo e($row->sell_total); ?></span>
+                                                    <span class="text-warning">Rp. <?php echo e($row->totalbayar); ?></span>
                                                     <br>
                                                     <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>" data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>" data-customer="<?php echo e(Auth::user()->cm_name); ?>" data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>" data-totalb="<?php echo e($row->totalbeli); ?>" data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
@@ -382,7 +384,7 @@
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. <?php echo e($row->sell_total); ?></span>
+                                                    <span class="text-warning">Rp. <?php echo e($row->totalbayar); ?></span>
                                                     <br>
                                                     <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modal-pengiriman">Lacak</button>
                                                     <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>" data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>" data-customer="<?php echo e(Auth::user()->cm_name); ?>" data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>" data-totalb="<?php echo e($row->totalbeli); ?>" data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>

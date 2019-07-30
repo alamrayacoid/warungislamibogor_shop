@@ -230,7 +230,7 @@
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
+                                                    <span class="text-warning">Rp. {{$row->totalbayar}}</span>
                                                     <br>
                                                     <button class="btn btn-warning btn-sm bayar"  data-nota="{{$row->sell_nota}}" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}" data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}" data-totalb="{{$row->totalbeli}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
@@ -309,7 +309,7 @@
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
+                                                    <span class="text-warning">Rp. {{$row->totalbayar}}</span>
                                                     <br>
                                                     <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar</button>
                                                     <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}" data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}" data-totalb="{{$row->totalbeli}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>
@@ -387,7 +387,7 @@
                                                 </div>
                                                 <div class="col-sm-4 text-right">
                                                     <label>Total Belanja</label>
-                                                    <span class="text-warning">Rp. {{$row->sell_total}}</span>
+                                                    <span class="text-warning">Rp. {{$row->totalbayar}}</span>
                                                     <br>
                                                     <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modal-pengiriman">Lacak</button>
                                                     <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}" data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}" data-totalb="{{$row->totalbeli}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="btn btn-success btn-sm detail">Lihat Detail Transaksi</a>

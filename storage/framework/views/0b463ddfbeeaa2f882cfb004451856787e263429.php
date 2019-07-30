@@ -53,7 +53,7 @@
                                             <select class="form-control" id="cabang" name="">
                                                     <option value="" selected>~ pilih cabang ~</option>
                                                     <?php $__currentLoopData = $cabang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cbng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($cbng->b_code); ?>"><?php echo e($cbng->c_name); ?></option>
+                                                    <option value="<?php echo e($cbng->b_code); ?>"><?php echo e($cbng->b_name); ?></option>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                                 <select class="form-control" id="label" name="">

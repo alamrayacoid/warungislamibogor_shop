@@ -18,9 +18,8 @@ class PembelianController extends Controller
     {
         
             $group = DB::table('d_seller')->join('m_item','i_code','sell_ciproduct')
-    		->join('m_imgproduct','ip_ciproduct','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-    		->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
+    		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
+    		->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
     		->groupBy('sell_nota');
     		
 
@@ -58,10 +57,10 @@ class PembelianController extends Controller
     		'pembayaran' => $allstatus->where('sell_status','Pembayaran')->groupBy('sell_nota')->get(),
     		'proses' => $allstatus->where('sell_status','Sedang Proses')->get(),
     		'pengiriman' => $allstatus->where('sell_status','Sedang Dikirim')->get(),
-    		'group' => $group->select('d_seller.*','m_imgproduct.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
-    		'groupp' => $group->where('sell_status','Pembayaran')->select('d_seller.*','m_imgproduct.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
-    		'grouppro' => $group->where('sell_status','Sedang Proses')->select('d_seller.*','m_imgproduct.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
-    		'groupppeng' => $group->where('sell_status','Sedang Dikirim')->select('d_seller.*','m_imgproduct.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'group' => $group->select('d_seller.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
+    		'groupp' => $group->where('sell_status','Pembayaran')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'grouppro' => $group->where('sell_status','Sedang Proses')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'groupppeng' => $group->where('sell_status','Sedang Dikirim')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'gambar' => $gambar->get(),
     	));
     }
@@ -106,6 +105,7 @@ class PembelianController extends Controller
                 ->join('m_item','i_code','sell_ciproduct')
                 ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
                 ->where('sell_nota',$request->nota)
+                ->groupBy('sell_ciproduct')
                 ->get();
 
         return Datatables::of($data)
