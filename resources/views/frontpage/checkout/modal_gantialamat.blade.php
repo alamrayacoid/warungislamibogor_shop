@@ -1,5 +1,5 @@
     {{-- Modal --}}
-    <div class="modal" id="modal-gantialamat" role="dialog" aria-hidden="true">
+    <div class="modal" id="modal-gantialamat" style="margin-top:10em;" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">

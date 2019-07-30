@@ -174,6 +174,54 @@
                 ($('#navbar').hasClass('in')) ? $(this).find('i').removeClass('fa-caret-up').addClass('fa-caret-down') : $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-up')
 
             });
-        })
+            $('.tooltip-demo').tooltip({
+                selector: "[data-toggle=tooltip]",
+                container: "body"
+            });         
+        });
+        $(function () {
+        $(".btn-scrollTop").hide();
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+            if (scroll > 150) {
+                $(".btn-scrollTop").slideDown();
+            } else {
+                $(".btn-scrollTop").slideUp();
+            }
+        });
 
+        });
+        $(document).ready(function (){
+            $(".btn-scrollTop").click(function (){
+                $('html, body').animate({
+                    scrollTop: $("#bodytop").offset().top
+                }, 2000);
+            });
+        });
+        $(document).ready(function(){
+            $(".searchbarang").autocomplete({
+            source: "{{route('cari-barang')}}",
+            minLength: 1,
+            select: function (event, data) {
+                console.log(data);
+                setTimeout(function(){
+                    $("#tombolcaribarang").click();
+                     }, 200);
+            },
+        });
+
+        });
+        $(document).ready(function(){
+            $("#dropdown-categories").click(function(){
+                $(".Sidenav-backdoor").toggleClass("w-100");
+            });
+        });
+        $(document).ready(function(){
+            $(".Sidenav-backdoor").click(function(){
+                $(".Sidenav-backdoor").removeClass("w-100");
+            });
+        });
+        $(document).ready(function(){
+            $('.select2').select2();
+        })
     </script>

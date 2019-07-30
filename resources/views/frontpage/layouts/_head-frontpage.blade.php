@@ -9,9 +9,9 @@
 
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/fontawesome-new/css/all.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/bootstrap-textcolor.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/bootstrap-marginpadding.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/bootstrap-display.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
+    
+    
 
     <link href="{{asset('assets/css/plugins/jQueryUI/jquery-ui.css')}}" rel="stylesheet">
 
@@ -39,5 +39,60 @@
 
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/alamraya-customer-style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/custom-customer.css')}}">
 
 </head>
+<style>
+    
+.tooltip-custom::after {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    position: absolute;
+    text-align: center;
+    display:none;
+    z-index: 999;
+    width: 160px !important;
+}
+.tooltip-custom::before {
+    background-color: #333;
+    content: ' ';
+    display:none;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    z-index: 999;
+}
+.ui-autocomplete{
+    z-index:9999999;
+}
+.ui-menu .ui-menu-item a{
+    font-size:12px !important;
+    padding: 10px 5px;
+    border:0;
+    background: white;
+}
+.ui-menu .ui-menu-item a:hover{
+    background: #f2f2f2;
+    border:0;
+}
+.tooltip-custom:hover::after {
+    display: block;
+}
+
+.tooltip-custom:hover::before {
+    display: block;
+}
+.tooltip-custom.bottom::after {
+    content:""attr(value)"";
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, calc(100% + 10px));
+}
+
+.tooltip-custom.bottom::before {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, calc(100% + 5px)) rotate(45deg);
+}
+    </style>

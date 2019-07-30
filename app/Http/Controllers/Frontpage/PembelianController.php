@@ -50,7 +50,7 @@ class PembelianController extends Controller
             }
 
             $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota');
-
+            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
 
     	return view('frontpage.pembelian.pembelian',array(
     		'allstatus' => $allstatus->get(),
@@ -62,6 +62,7 @@ class PembelianController extends Controller
     		'grouppro' => $group->where('sell_status','Sedang Proses')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
     		'groupppeng' => $group->where('sell_status','Sedang Dikirim')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'gambar' => $gambar->get(),
+            'kategori'=>$kategori,
     	));
     }
 

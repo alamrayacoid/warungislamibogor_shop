@@ -21,11 +21,13 @@ class WishlistController extends Controller
             ->groupBy('i_name')
             ->get();
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
-            $wish = DB::table('d_wishlist')->where('status_data','true')->get();
+			$wish = DB::table('d_wishlist')->where('status_data','true')->get();
+			$kategori = DB::table('m_itemtype')->where('status_data','true')->get();
             return view('frontpage.wishlist.wishlist-frontpage',array(
                 'data' => $data,
                 'gambar' => $gambar,
-                'wish' => $wish,
+				'wish' => $wish,
+				'kategori'=>$kategori,
             ));
     }
 

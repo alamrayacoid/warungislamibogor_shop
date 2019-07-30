@@ -74,13 +74,15 @@ class ProdukController extends Controller
                     $data->where('itp_citype',$request->jenis)->get();
                 }
             }
-
-
+            $namabarang = $request->search;
+            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
     	return view('frontpage.produk.produk-frontpage',array(
                 'data' => $data->get(),
                 'gambar' => $gambar,
                 'wish' => $wish,
                 'tipe' => $type,
+                'namabarang' => $namabarang,
+                'kategori'=>$kategori,
             ));
     }
 
@@ -106,13 +108,48 @@ class ProdukController extends Controller
             ->where('i_code',$code)
             ->groupBy('i_name')
             ->get();
+            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
     	return view('frontpage.produk.produk-detail-frontpage',array(
     		'data' => $data,
             'gambar' => $gambar,
             'code' => $code,
             'label' => $label,
             'cabang' => $cabang,
+            'kategori' => $kategori,
     	));
     }
+    public function caribarang(Request $request){
+        $term = $request->get('term');
+        $results = array();
+        $queries = DB::table('m_item')
+            ->where('i_name', 'LIKE', '%'.$term.'%')
+            ->take(10)->get();
+        
+        foreach ($queries as $query)
+        {
+            $results[] = [ 'id' => $query->i_id, 'value' => $query->i_name];
+        }
+    return response()->json($results);
+    }
+    public function produk_kategori($id){
+        $datas = DB::table('m_itemtype')->where('ity_name',$id)->first();
+        $data = DB::table('m_item')
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+                ->join('m_itemtype','ity_code','itp_citype')
+                ->where('itp_citype',$datas->ity_code)
+                ->get();
 
+                $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+                $type = DB::table('m_itemtype')->get();
+                $wish = DB::table('d_wishlist')->where('status_data','true')->get();
+                $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
+        return view('frontpage.produk.produk-kategori-frontpage',array(
+            'test'=>$data,
+            'kategori'=>$kategori,
+            'tipe'=>$type,
+            'wish'=>$wish,
+            'gambar'=>$gambar,
+        ));
+    }
 }

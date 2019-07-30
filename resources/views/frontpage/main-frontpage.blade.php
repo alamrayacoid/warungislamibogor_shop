@@ -6,7 +6,7 @@
 
 	<div class="mini-navbar-show"></div>
 	
-	<div id="wrapper">
+	<div id="wrapper" style="background:white;">
 
 		{{-- @if(Cookie::get('tes_frontpage')) --}}
 
@@ -14,15 +14,15 @@
 
 		{{-- @endif --}}
 
-        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div id="page-wrapper" class="white-bg dashbard-1" style="padding:0;">
 			
 			@include('frontpage.layouts._navbar-frontpage')
-
-	        <div class="wrapper wrapper-content">
-				<div class="container">
+		
+	        <div class="wrapper_content">
+				
 					@yield('content')
-				</div>
-			</div>
+				
+			
 
 
 			@include('layouts._footer')

@@ -20,11 +20,6 @@
 		width: 100%;
 	}
 }
-.top-navigation .navbar-brand {
-    background: transparent;
-    color: #fff;
-    padding: 0px 5px 0 5px;
-}
 .dropdown-menu.dropdown-messages .dropdown-messages-box a .dropdown-img{
 	padding: 3px 10px 2px 0px;
 }
@@ -77,12 +72,13 @@ body.mini-navbar .sidebar-collapse .nav.nav-third-level li a .label
     padding:0px;
     position: relative;
 }
+
 .product-imitations img{
     
-    height: 280px;
+    height: auto;
+    max-height: 400px;
     width: 100%;
     /*max-width: 240px;*/
-    object-fit: cover;
 }
 @media(max-width: 768px){
     .product-imitations img{

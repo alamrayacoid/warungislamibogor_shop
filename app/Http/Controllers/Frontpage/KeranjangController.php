@@ -21,10 +21,11 @@ class KeranjangController extends Controller
                     ->get();
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
-
+        $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
     	return view('frontpage.keranjang.keranjang-frontpage',array(
             'produk' => $produk,
-            'gambar' => $gambar
+            'gambar' => $gambar,
+            'kategori'=>$kategori,
         ));
     }
 
