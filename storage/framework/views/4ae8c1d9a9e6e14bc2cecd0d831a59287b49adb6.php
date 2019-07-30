@@ -1,5 +1,5 @@
-<section class="follow_social_media_section mt-5">
-    <div class="container">
+<section class="follow_social_media_section">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 column-footer-logo" style="padding:0;">
                 <img src="<?php echo e(asset('assets/img/img-product/warungislamibogor-text.png')); ?>" width="300px" height="80px"
@@ -20,7 +20,7 @@
     </div>
 </section>
 <section class="footer-wrapper">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
                 <h5 class="title-footer-item">Tentang Warungislamibogor</h5>

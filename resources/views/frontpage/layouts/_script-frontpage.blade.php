@@ -198,6 +198,30 @@
                 }, 2000);
             });
         });
-        
+        $(document).ready(function(){
+            $(".searchbarang").autocomplete({
+            source: "{{route('cari-barang')}}",
+            minLength: 1,
+            select: function (event, data) {
+                console.log(data);
+                setTimeout(function(){
+                    $("#tombolcaribarang").click();
+                     }, 200);
+            },
+        });
 
+        });
+        $(document).ready(function(){
+            $("#dropdown-categories").click(function(){
+                $(".Sidenav-backdoor").toggleClass("w-100");
+            });
+        });
+        $(document).ready(function(){
+            $(".Sidenav-backdoor").click(function(){
+                $(".Sidenav-backdoor").removeClass("w-100");
+            });
+        });
+        $(document).ready(function(){
+            $('.select2').select2();
+        })
     </script>

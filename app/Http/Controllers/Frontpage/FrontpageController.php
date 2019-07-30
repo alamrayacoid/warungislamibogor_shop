@@ -21,12 +21,15 @@ class FrontpageController extends Controller
             ->join('m_itemtype','ity_code','itp_citype')
             ->groupBy('i_name')
             ->get();
+
+            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
             return view('frontpage.dashboard',array(
                 'data' => $data,
                 'gambar' => $gambar,
                 'wish' => $wish,
+                'kategori' => $kategori,
             ));
     }
     public function login_frontpage()

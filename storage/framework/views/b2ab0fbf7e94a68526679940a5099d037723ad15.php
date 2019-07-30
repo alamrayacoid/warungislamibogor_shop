@@ -1,19 +1,17 @@
-@extends('frontpage.main-frontpage')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
   
 </style>
 <section style="margin-top:5em">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Pencarian</a></li>
-        <li class="active">{{$namabarang}}</li>
+        <li><a href="#">Kategori</a></li>
     </ol>
     <div class="row header-search-filter-group">
         <div class="col-md-6">
         
             <div class="text-header-filter">
-                Hasil Pencarian Anda <span>"{{$namabarang}}"</span>
+               Kategori Barang
             </div>
             
         </div>
@@ -35,13 +33,13 @@
                 <h5 class="entry-v-nav__heading pt-5">Cari Lebih Detail</h5>
                 <div class="product-filter-field-group">
                 <h5 class="entry-v-nav__heading">Kategori</h5>
-                    <ul> 
-                    @foreach($kategori as $row)
-                        <li><a href="{{route('kategori-produk',['id'=> $row->ity_name ])}}" style="color:#009a51 !important;">{{$row->ity_name}}</a></li>
-                        @endforeach
+                    <ul>
+                        <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><a href="<?php echo e(route('kategori-produk',['id'=> $row->ity_name ])); ?>" style="color:#009a51 !important;"><?php echo e($row->ity_name); ?></a></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
-                <form action="{{route('produk-frontpage')}}" method="get">
+                <form action="<?php echo e(route('produk-frontpage')); ?>" method="get">
                     <div class="product-filter-field-group">
                     <h5 class="entry-v-nav__heading">Nama Produk</h5>
                         <div class="form-group">
@@ -54,9 +52,9 @@
                         <div class="form-group">
                             <select name="jenis" id="jenis" class="form-control select2">
                                 <option value="All">Semua</option>
-                                @foreach($tipe as $row)
-                                <option value="{{$row->ity_code}}">{{$row->ity_name}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $tipe; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($row->ity_code); ?>"><?php echo e($row->ity_name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -77,49 +75,48 @@
             <div class="col-sm-8 col-md-9 col-lg-10 column-product-filter">
                 <h5 class="header-product-item-filter">Produk Warung Islami Bogor</h5>
                 <div class="row">
-                    @foreach($data as $row)
+                    <?php $__currentLoopData = $test; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
-                            @foreach($wish as $wis)
-                            @if(Auth::check())
-                            @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
+                            <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(Auth::check()): ?>
+                            <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
                             <div class="product-wishlist onproduk-page onwishlist">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
                                     type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
                             </div>
-                            @else
+                            <?php else: ?>
                             <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
-                                    id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
                                         class="far fa-heart"></i></button>
                             </div>
-                            @endif
-                            @else
+                            <?php endif; ?>
+                            <?php else: ?>
                             <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
-                                    id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
                                         class="far fa-heart"></i></button>
                             </div>
-                            @endif
-                            @endforeach
-                            @if($wish == '[]')
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($wish == '[]'): ?>
                             <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
-                                    id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
                                         class="far fa-heart"></i></button>
                             </div>
-                            @endif
-                            @foreach($gambar as $roww)
-                            @if($row->i_code == $roww->ip_ciproduct)
-                            <div class="image-product-box" style="background:url('/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
-                                <!-- <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}"> -->
+                            <?php endif; ?>
+                            <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($row->i_code == $roww->ip_ciproduct): ?>
+                            <div class="image-product-box" style="background:url('/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                             </div>
-                            @endif
-                            @endforeach
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <div class="caption">
                                 <div class="title-product-group">
-                                    <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
-                                        class="title-product-item">{{$row->i_name}}</a>
+                                    <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                                        class="title-product-item"><?php echo e($row->i_name); ?></a>
                                 </div>
                                 <div class="footer-product-item">
                                     <div class="">
@@ -129,24 +126,26 @@
                                         <i class="fa fa-star c-gold"></i>
                                         <i class="fa fa-star c-grey"></i>
                                     </div>
-                                    <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
+                                    <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
                                 </div>
                             </div>
                             <!-- <div class="product-desc">
                                 <span class="product-price">
-                                    Rp. {{$row->ipr_sunitprice}}
+                                    Rp. <?php echo e($row->ipr_sunitprice); ?>
+
                                 </span>
-                                <small class="text-muted">{{$row->ity_name}}</small>
-                                <a href="#" class="product-name"> {{$row->i_name}}</a>
+                                <small class="text-muted"><?php echo e($row->ity_name); ?></small>
+                                <a href="#" class="product-name"> <?php echo e($row->i_name); ?></a>
 
 
 
                                 <div class="small m-t-xs">
-                                    {{$row->itp_tagdesc}}
+                                    <?php echo e($row->itp_tagdesc); ?>
+
                                 </div>
                                 <div class="m-t text-right">
-                                    <form action="{{route('produk-detail-frontpage')}}" method="GET">
-                                        <input type="hidden" name="code" value="{{$row->i_code}}">
+                                    <form action="<?php echo e(route('produk-detail-frontpage')); ?>" method="GET">
+                                        <input type="hidden" name="code" value="<?php echo e($row->i_code); ?>">
                                         <button class="btn btn-xs btn-outline btn-primary">Info <i
                                                 class="fa fa-long-arrow-right"></i> </button>
                                     </form>
@@ -157,13 +156,13 @@
                     </div>
 
 
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
         </div>
 </section>
-@endsection
-@section('extra_script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#ncart').html($('.ncart').length);
@@ -173,10 +172,10 @@
             $(this).find('i').toggleClass('fa far');
             $(this).parents('.product-wishlist').toggleClass('onwishlist');
             $.ajax({
-                url: '{{route("addwishlist")}}',
+                url: '<?php echo e(route("addwishlist")); ?>',
                 method: 'POST',
                 data: {
-                    '_token': '{{csrf_token()}}',
+                    '_token': '<?php echo e(csrf_token()); ?>',
                     'code': code,
                 },
 
@@ -185,4 +184,5 @@
 
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/produk/produk-kategori-frontpage.blade.php ENDPATH**/ ?>

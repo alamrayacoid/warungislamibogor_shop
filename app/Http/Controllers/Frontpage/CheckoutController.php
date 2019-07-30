@@ -23,11 +23,12 @@ class CheckoutController extends Controller
                     
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
-
+        $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
         return view('frontpage.checkout.checkout',array(
             'produk' => $produk->get(),
             'gambar' => $gambar,
             'count' => $produk->count(),
+            'kategori' => $kategori,
         ));
     }
 

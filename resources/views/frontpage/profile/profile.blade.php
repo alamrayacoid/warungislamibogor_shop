@@ -76,15 +76,11 @@
                             </a>
                         </div>
                     </div>
-                    <form action="{{route('update.profile')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
+                    <form  id="frmeditprofile" method="post" action="{{route('update.profile')}}" enctype="multipart/form-data" >
+                        {{csrf_field()}}
                         <input type="hidden" id="gambar" name="gambar">
                         <div class="ibox-content">
-
-
                             <div class="row">
-
-
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Foto</label>
                                 </div>
@@ -99,7 +95,7 @@
 
 
                                         <button class="btn btn-info btn-block mt-5" type="button" data-toggle="modal"
-                                            data-target="#modal-foto"> <i class="fa fa-images"></i> Edit Foto</button>
+                                            data-target="#modal-foto"> <i class="fa fa-picture-o"></i> Edit Foto</button>
                                     </div>
                                 </div>
 
@@ -139,7 +135,7 @@
                                 </div>
 
 
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Provinsi</label>
                                 </div>
 
@@ -150,10 +146,10 @@
                                                 {{Auth::user()->cm_province}}</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
 
 
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Kabupaten/Kota</label>
                                 </div>
 
@@ -163,10 +159,10 @@
                                             <option value="{{Auth::user()->cm_city}}">{{Auth::user()->cm_city}}</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
 
 
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Kecamatan</label>
                                 </div>
 
@@ -177,7 +173,7 @@
                                                 {{Auth::user()->cm_district}}</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Alamat</label>
@@ -219,10 +215,10 @@
                                     <div class="form-group">
                                         <select class="form-control input-sm" name="bank">
                                             <option value="" selected>~ Pilih Bank ~</option>
-                                            <option value="BCA">BCA</option>
-                                            <option value="BRI">BRI</option>
-                                            <option value="BNI">BNI</option>
-                                            <option value="BTN">BTN</option>
+                                            <option value="BCA" {{ (Auth::user()->cm_bank == 'BCA') ? 'selected' : '' }}>BCA</option>
+                                            <option value="BRI" {{ (Auth::user()->cm_bank == 'BRI') ? 'selected' : '' }}>BRI</option>
+                                            <option value="BNI" {{ (Auth::user()->cm_bank == 'BNI') ? 'selected' : '' }}>BNI</option>
+                                            <option value="BTN" {{ (Auth::user()->cm_bank == 'BTN') ? 'selected' : '' }}>BTN</option>
                                         </select>
                                     </div>
                                 </div>
@@ -238,15 +234,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Password</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <input type="password" class="form-control input-sm" name="password">
-                                    </div>
-                                </div>
 
 
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -261,11 +248,13 @@
                             </div>
 
                         </div>
+                        </form>
                         <div class="ibox-footer text-right">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
+                            <button class="btn btn-primary" type="button" id="simpanprofile">Simpan</button>
+                            <input type="submit" id="submit" name="" hidden="hidden">
                             <button class="btn btn-warning" type="button">Batal</button>
                         </div>
-                    </form>
+                    
                 </div>
 
             </div>
@@ -294,7 +283,7 @@
             }
         });
 
-        var $inputImage = $("[name='foto']");
+        var $inputImage = $("[name='gambar']");
         if (window.FileReader) {
             $inputImage.change(function () {
                 var fileReader = new FileReader(),
@@ -352,14 +341,40 @@
             $('.foto-terpilih').html(is);
 
             var urlll = $('#gambar').val($('.image-crop > img').cropper('getCroppedCanvas')
-        .toDataURL());
+                .toDataURL());
 
             is.toBlob((blob) => {
                 const formData = new FormData();
 
                 formData.append('croppedImage', blob);
             });
-        })
+        });
+        $('#simpanprofile').on('click', function () {
+            $.ajax({
+                url: "{{ route('update.profile') }}",
+                type: "post",
+                data: $("#frmeditprofile").serialize(),
+            
+                success: function (data) {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Berhasil Memperbarui Profile',
+                    });
+                    setTimeout(function(){
+                        window.location.href="{{route('home')}}";
+                         }, 1000);
+                    
+                },
+                error: function (xhr, textStatus, errorThrowl) {
+                    iziToast.error({
+                        title: 'Peringatan!',
+                        message: 'gagal',
+                    });
+
+                }
+            });
+
+        });
 
     });
 </script>

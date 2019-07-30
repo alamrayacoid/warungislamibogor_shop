@@ -63,7 +63,19 @@
     height: 15px;
     z-index: 999;
 }
-
+.ui-autocomplete{
+    z-index:9999999;
+}
+.ui-menu .ui-menu-item a{
+    font-size:12px !important;
+    padding: 10px 5px;
+    border:0;
+    background: white;
+}
+.ui-menu .ui-menu-item a:hover{
+    background: #f2f2f2;
+    border:0;
+}
 .tooltip-custom:hover::after {
     display: block;
 }

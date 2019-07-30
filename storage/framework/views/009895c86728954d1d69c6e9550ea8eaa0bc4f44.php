@@ -25,7 +25,7 @@
                             <div class="image-preview"></div>
 
                             <label class="btn btn-primary btn-sm btn-block mt-3 mb-3" for="input-foto">
-                                <input type="file" accept="image/*" name="foto" id="input-foto" class="d-none">
+                                <input type="file" accept="image/*" name="gambar" id="input-foto" class="d-none">
                                 <span>Pilih foto</span>
                             </label>
                             

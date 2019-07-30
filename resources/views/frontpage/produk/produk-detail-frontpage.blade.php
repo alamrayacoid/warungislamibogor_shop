@@ -6,9 +6,16 @@
 
 @section('content')
 
-<section  style="margin-top:12em;">
-    <div class="container">
-        <div class="row">
+<section style="margin-top:5em;">
+    @foreach($data as $row)
+    <ol class="breadcrumb breadcumb-header">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Produk</a></li>
+        <li class="active">{{$row->i_name}}</li>
+        @endforeach
+    </ol>
+    <div class="container-fluid">
+        <div class="row mt-5">
             <div class="col-lg-12">
                 <div class="ibox product-detail">
                     <div class="ibox-content">
@@ -150,14 +157,16 @@
             </div>
         </div>
         <div class="row">
-        <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
+            <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
             <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
                     </div>
                     <div class="caption">
-                        <h2 class="title-product-item">Lorem Ipsum is simply dummy text of the printing</h2>
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
                         <div class="footer-product-item">
                             <div class="">
                                 <i class="fa fa-star f-14 c-gold"></i>
@@ -173,12 +182,14 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
                     </div>
                     <div class="caption">
-                        <h2 class="title-product-item">Lorem Ipsum is simply dummy text of the printing</h2>
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
                         <div class="footer-product-item">
                             <div class="">
                                 <i class="fa fa-star f-14 c-gold"></i>
@@ -194,12 +205,14 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
                     </div>
                     <div class="caption">
-                        <h2 class="title-product-item">Lorem Ipsum is simply dummy text of the printing</h2>
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
+                        </div>
                         <div class="footer-product-item">
                             <div class="">
                                 <i class="fa fa-star f-14 c-gold"></i>
@@ -215,12 +228,14 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <div class="image-product-box">
-                        <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" alt="...">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
                     </div>
                     <div class="caption">
-                        <h2 class="title-product-item">Lorem Ipsum is simply dummy text of the printing</h2>
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
                         <div class="footer-product-item">
                             <div class="">
                                 <i class="fa fa-star f-14 c-gold"></i>
@@ -236,7 +251,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 

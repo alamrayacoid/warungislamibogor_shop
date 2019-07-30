@@ -18,49 +18,33 @@ class ProfileController extends Controller
     	$wishlist = DB::table('d_wishlist')->where('wl_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
     	$transaksi = DB::table('d_seller')->where('sell_ccustomer',Auth::user()->cm_code)->where('status_data','true')->count();
     	$password = Auth::user()->password;
-
+        $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
         return view('frontpage.profile.profile',array(
         	'wishlist' => $wishlist,
-        	'transaksi' => $transaksi,
+            'transaksi' => $transaksi,
+            'kategori'=>$kategori,
         ));
     }
 
     public function update(Request $request)
     {	
-        $datagambar = DB::table('m_member')->where([
-            'cm_code' => Auth::user()->cm_code
-        ])->get();
-
-    	$this->validate($request,[
-            'password' => 'required',
+        if ($request->newpassword != null) {
+        DB::table('m_member')->where('cm_code',Auth::user()->cm_code)->update([
+            'cm_name' => $request->name,
+            'cm_code' => Auth::user()->cm_code,
+            'cm_email' => $request->email,
+            'cm_nphone' => $request->nphone,
+            'cm_address' => $request->address,
+            'cm_gender' => $request->gender,
+            'password' => bcrypt($request->newpassword),
+            'cm_bank' => $request->bank,
+            'cm_nbank' => $request->nbank,
+            'cm_update_at' => Carbon::now('Asia/Jakarta'),
         ]);
-       
-        $data = ([
-            'cm_username' => Auth::user()->cm_username,
-            'password' => $request->get('password') 
-        ]);
-
-
-        if (Auth::attempt($data)) {
-            if ($request->newpassword != null) {
-	    	DB::table('m_member')->where('cm_code',Auth::user()->cm_code)
-	    	->update([
-	    		'cm_name' => $request->name,
-	            'cm_email' => $request->email,
-	            'cm_nphone' => $request->nphone,
-	            'cm_address' => $request->address,
-	            'cm_gender' => $request->gender,
-	            'password' => bycript($request->newpassword),
-	            'cm_bank' => $request->bank,
-	            'cm_nbank' => $request->nbank,
-	            'cm_update_at' => Carbon::now('Asia/Jakarta'),
-	    	]);
-
-            
-            }else{
-                DB::table('m_member')->where('cm_code',Auth::user()->cm_code)
-            ->update([
+        }else{
+            DB::table('m_member')->where('cm_code',Auth::user()->cm_code)->update([
                 'cm_name' => $request->name,
+                'cm_code' => Auth::user()->cm_code,
                 'cm_email' => $request->email,
                 'cm_nphone' => $request->nphone,
                 'cm_address' => $request->address,
@@ -68,10 +52,16 @@ class ProfileController extends Controller
                 'cm_bank' => $request->bank,
                 'cm_nbank' => $request->nbank,
                 'cm_update_at' => Carbon::now('Asia/Jakarta'),
-            ]);
-            
-            }
+                ]);
+        }
 
+        $datagambar = DB::table('m_member')->where([
+            'cm_code' => Auth::user()->cm_code
+        ])->get();
+        $data = ([
+            'cm_username' => Auth::user()->cm_username,
+            'password' => $request->get('password') 
+        ]);
             if ($request->gambar != null) {
                if(Auth::user()->cm_path != null){
                     File::delete(storage_path(). '/image/member/profile/' . Auth::user()->cm_path);
@@ -108,6 +98,6 @@ class ProfileController extends Controller
                 
             }
         }
-        return redirect()->back()->with('error','error');
+        
     }
-}
+

@@ -31,6 +31,9 @@ Route::post('/logout', 'Frontpage\FrontpageController@logout')->name('logout');
 
 Route::get('/produk', 'Frontpage\ProdukController@produk')->name('produk-frontpage');
 Route::get('/produk-detail', 'Frontpage\ProdukController@produk_detail')->name('produk-detail-frontpage');
+Route::get('produk/kategori-produk/{id}','Frontpage\ProdukController@produk_kategori')->name('kategori-produk');
+
+Route::get('/cari-barang','Frontpage\ProdukController@caribarang')->name('cari-barang');
 // Group wib-cpanel
 //add cart 
 Route::post('/addcart', 'Frontpage\KeranjangController@addcart')->name('addcart');

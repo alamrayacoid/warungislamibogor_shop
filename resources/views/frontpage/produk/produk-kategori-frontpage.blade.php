@@ -6,14 +6,13 @@
 <section style="margin-top:5em">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Pencarian</a></li>
-        <li class="active">{{$namabarang}}</li>
+        <li><a href="#">Kategori</a></li>
     </ol>
     <div class="row header-search-filter-group">
         <div class="col-md-6">
         
             <div class="text-header-filter">
-                Hasil Pencarian Anda <span>"{{$namabarang}}"</span>
+               Kategori Barang
             </div>
             
         </div>
@@ -35,8 +34,8 @@
                 <h5 class="entry-v-nav__heading pt-5">Cari Lebih Detail</h5>
                 <div class="product-filter-field-group">
                 <h5 class="entry-v-nav__heading">Kategori</h5>
-                    <ul> 
-                    @foreach($kategori as $row)
+                    <ul>
+                        @foreach($kategori as $row)
                         <li><a href="{{route('kategori-produk',['id'=> $row->ity_name ])}}" style="color:#009a51 !important;">{{$row->ity_name}}</a></li>
                         @endforeach
                     </ul>
@@ -77,7 +76,7 @@
             <div class="col-sm-8 col-md-9 col-lg-10 column-product-filter">
                 <h5 class="header-product-item-filter">Produk Warung Islami Bogor</h5>
                 <div class="row">
-                    @foreach($data as $row)
+                    @foreach($test as $row)
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
                             @foreach($wish as $wis)
@@ -112,7 +111,6 @@
                             @foreach($gambar as $roww)
                             @if($row->i_code == $roww->ip_ciproduct)
                             <div class="image-product-box" style="background:url('/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
-                                <!-- <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}"> -->
                             </div>
                             @endif
                             @endforeach
