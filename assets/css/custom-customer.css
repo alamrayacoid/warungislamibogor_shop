@@ -538,6 +538,9 @@ transition: 0.5s;
         float: none;
         padding: 0 15px;
     }
+    .column-opsi-filter-group{
+        display: none !important;
+    }
     .navbar-right-user li{
         display: block;
     }
