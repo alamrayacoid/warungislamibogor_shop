@@ -10,7 +10,7 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/fontawesome-new/css/all.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
     
 
     <link href="{{asset('assets/css/plugins/jQueryUI/jquery-ui.css')}}" rel="stylesheet">

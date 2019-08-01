@@ -7,12 +7,75 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<section style="margin-top:9em;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
+<section style="margin-top:5em;">
+    <ol class="breadcrumb breadcumb-header">
+        <li><a href="#">Home</a></li>
+        <li><a href="">Keranjang Belanja</a></li>
+    </ol>
+    <div class="container-fluid">
+        <?php if($produk != '[]'): ?>
+        <div class="row mt-5">
 
-                <div class="ibox">
+            <div class="col-md-7">
+
+
+                <div class="thumbnail">
+                    <div class="thumbnail-header">Keranjang Belanja Anda
+                    </div>
+                    <div class="caption" style="padding:0;">
+                        
+                        <form id="keranjang_checkout">
+                            <?php echo csrf_field(); ?>
+                            <input type="hidden" id="count" name="count">
+                            <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <input type="hidden" class="count" value="<?php echo e($row->cart_id); ?>" name="id[]">
+                            <div class="row column-group-cart-item-product">
+                                <div class="col-lg-8 col-md-7 column-left-cart-item-product">
+                                    <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($row->i_code == $roww->ip_ciproduct): ?>
+                                    <div class="">
+                                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>"
+                                            class="img-item-product-cart">
+                                    </div>
+                                    <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="column-description-cart-product">
+                                        <h5 class="title-cart-product-item"><?php echo e($row->i_name); ?></h5>
+                                        <input type="hidden" value="<?php echo e($row->i_code); ?>" name="ciproduct[]">
+                                        <input type="hidden" value="<?php echo e($row->cart_label); ?>" name="label[]">
+                                        <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
+                                        <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>"
+                                            name="total[]">
+                                        <div class="input-group d-flex">
+                                            <button class="btn btn-default btn-sm btn-count-item border-right-0" type="button" disabled><i
+                                                    class="fa fa-minus"></i></button>
+                                            <input type="number" class="form-control text-center" value="<?php echo e($row->cart_qty); ?>"
+                                                aria-describedby="sizing-addon2">
+                                            <button class="btn btn-default btn-sm btn-count-item border-left-0" type="button" disabled><i
+                                                    class="fa fa-plus" ></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-5 column-right-cart-item-product">
+                                    <h5 class="">Rp. <?php echo e($row->ipr_sunitprice * $row->cart_qty); ?></h5>
+                                    <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>" class="total"
+                                        id="total<?php echo e($row->cart_id); ?>" name="">
+                                    <a data-id="<?php echo e($row->cart_id); ?>" data-ciproduct="<?php echo e($row->cart_ciproduct); ?>"
+                                        data-label="<?php echo e($row->cart_label); ?>" data-qty="<?php echo e($row->cart_qty); ?>"
+                                        class="remove"><button class="btn btn-default"><i
+                                                class="fa fa-times"></i></button></a>
+                                </div>
+                            </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </form>
+                    </div>
+
+                </div>
+
+
+
+
+                <!-- <div class="ibox">
                     <div class="ibox-title">
                         <span class="pull-right">(<strong id="itemt"></strong>) items</span>
                         <h5>Items in your cart</h5>
@@ -23,11 +86,8 @@
                         <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <input type="hidden" class="count" value="<?php echo e($row->cart_id); ?>" name="id[]">
                         <div class="ibox-content">
-
-
                             <div class="table-responsive">
                                 <table class="table shoping-cart-table">
-
                                     <tbody>
                                         <tr>
                                             <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -70,7 +130,6 @@
                                                         item</a>
                                                 </div>
                                             </td>
-
                                             <td>
                                                 Rp. <?php echo e($row->ipr_sunitprice); ?>
 
@@ -79,9 +138,6 @@
                                             <td width="65">
                                                 <input type="number" readonly="" value="<?php echo e($row->cart_qty); ?>"
                                                     class="form-control" placeholder="1">
-                                                <select class="form-control" name="">
-
-                                                </select>
                                             </td>
                                             <td>
                                                 <h4>
@@ -108,89 +164,184 @@
                                 class="fa fa-arrow-left"></i> Continue shopping</button>
 
                     </div>
-                </div>
+                </div> -->
 
             </div>
-            <div class="col-md-3">
-
-                <div class="ibox">
-                    <div class="ibox-title">
-                        <h5>Total Keranjang</h5>
+            <div class="col-md-5">
+                <div class="thumbnail">
+                    <div class="thumbnail-header">Bayar Semua Produk
                     </div>
-                    <div class="ibox-content">
-                        <span>
-                            Total
-                        </span>
-                        <h2 class="font-bold">
-                            <p id="totalview"></p>
-                        </h2>
-
-                        <hr>
+                    <div class="caption" style="padding:0 15px;">
+                        <div class="text-item-full-cart">
+                            2 Item dari 2 Produk
+                        </div>
+                        <div class="column-full-price-cart">
+                            <h5 class="">Total Belanja</h5><span class="text-price-cart-product" id="totalview"></span>
+                        </div>
                         <div class="m-t-sm">
-                            <div class="btn-group">
-                                <a class="btn btn-primary btn-sm checkouts"><i class="fa fa-shopping-cart"></i>
-                                    Checkout</a>
-                                <a href="#" class="btn btn-white btn-sm"> Cancel</a>
-                            </div>
+
+                            <a class="btn btn-primary btn-sm btn-checkout-cart checkouts">Bayar Sekaligus</a>
+
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="ibox">
-                    <div class="ibox-title">
-                        <h5>Support</h5>
+        </div>
+        <div class="row" style="margin:3em 0;">
+            <h3 class="title-product-opsi-same">Rekomendasi Produk</h3>
+            <div class="col-sm-6 col-md-2" style="padding:0 5px;">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
                     </div>
-                    <div class="ibox-content text-center">
-
-
-
-                        <h3><i class="fa fa-phone"></i> +43 100 783 001</h3>
-                        <span class="small">
-                            Please contact with us if you have any questions. We are avalible 24h.
-                        </span>
-
-
-                    </div>
-                </div>
-
-                <div class="ibox">
-                    <div class="ibox-content">
-
-                        <p class="font-bold">
-                            Other products you may be interested
-                        </p>
-
-                        <hr />
-                        <div>
-                            <a href="#" class="product-name"> Product 1</a>
-                            <div class="small m-t-xs">
-                                Many desktop publishing packages and web page editors now.
-                            </div>
-                            <div class="m-t text-righ">
-
-                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i
-                                        class="fa fa-long-arrow-right"></i> </a>
-                            </div>
+                    <div class="caption">
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
                         </div>
-                        <hr />
-                        <div>
-                            <a href="#" class="product-name"> Product 2</a>
-                            <div class="small m-t-xs">
-                                Many desktop publishing packages and web page editors now.
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
                             </div>
-                            <div class="m-t text-righ">
-
-                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i
-                                        class="fa fa-long-arrow-right"></i> </a>
-                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
                         </div>
-
                     </div>
-                </div>
 
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2" style="padding:0 5px;">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
+                    </div>
+                    <div class="caption">
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2" style="padding:0 5px;">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
+                    </div>
+                    <div class="caption">
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
+                        </div>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2" style="padding:0 5px;">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
+                    </div>
+                    <div class="caption">
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2" style="padding:0 5px;">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
+                    </div>
+                    <div class="caption">
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2" style="padding:0 5px;">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
+                    </div>
+                    <div class="caption">
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
+    </div>
+    <?php else: ?>
+    <div class="col-lg-12 column-empty-cart">
+        <img src="<?php echo e(asset('assets/img/img-product/empty-cart.png')); ?>">
+        <h5 class="">Belum Ada Barang di Keranjang Belanja Anda</h5>
+        <p class="">Nikmati kemudahan berbelanja Di Online Shop Warung Islami Bogor</p>
+        <a href="<?php echo e(url('/')); ?>"><button class="">Ayo Belanja Sekarang </button></a>
+        <div>
+        </div>
+    </div>
+
+    <?php endif; ?>
 </section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('extra_script'); ?>
@@ -225,8 +376,8 @@
                     'label': label,
                     'jumlah': jumlah,
                 },
-                success: function (get) {
-                    window.location.reload();
+                success: function (data) {
+                    location.reload();
                 }
             })
 

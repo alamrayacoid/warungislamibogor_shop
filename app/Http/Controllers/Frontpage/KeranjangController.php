@@ -72,7 +72,7 @@ class KeranjangController extends Controller
             DB::table('d_cart')
                 ->where('cart_id',$id)
                 ->delete();
-            return redirect()->with('done','produk dihapus');
+            return response()->json();
         }
     }
 
