@@ -35,7 +35,7 @@ class KeranjangController extends Controller
             $stock = DB::table('m_warehouse')->where('ware_ciproduct',$code)->where('ware_csupplier',$request->cart_label)->sum('ware_stock');
     	    $cek = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->where('cart_ciproduct',$code)->count();
             $update = $stock - $request->cart_qty;
-            if ($stock > $request->cart_qty) {
+            if ($stock >= $request->cart_qty) {
                 if ($cek == 0) {
                             
         	    	DB::table('d_cart')->insert([

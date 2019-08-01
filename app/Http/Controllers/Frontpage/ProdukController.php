@@ -101,6 +101,13 @@ class ProdukController extends Controller
             ->get();
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->where('i_code',$code)->get();
+        $satuan = [];
+        $satuan1 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit')->where('itp_ciproduct',$code)->get();
+        $satuan2 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit2')->where('itp_ciproduct',$code)->get();
+        $satuan3 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit3')->where('itp_ciproduct',$code)->get();
+        array_push($satuan,$satuan1);
+        array_push($satuan,$satuan2);
+        array_push($satuan,$satuan3);
     	$data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
             ->join('m_itemproduct','itp_ciproduct','i_code')
@@ -116,6 +123,8 @@ class ProdukController extends Controller
             'label' => $label,
             'cabang' => $cabang,
             'kategori' => $kategori,
+            'satuan' => $satuan
+
     	));
     }
     public function caribarang(Request $request){

@@ -64,7 +64,7 @@
                                         <select id="cabang" name="" class="form-control">
                                             <option value="" selected>~ pilih cabang ~</option>
                                             @foreach($cabang as $cbng)
-                                            <option value="{{$cbng->b_code}}">{{$cbng->c_name}}</option>
+                                            <option value="{{$cbng->b_code}}">{{$cbng->b_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -73,6 +73,16 @@
                                             <option value="" selected>~ pilih Merk ~</option>
                                             @foreach($label as $rows)
                                             <option value="{{$rows->s_code}}">{{$rows->s_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 p-detail-product-last">
+                                        <select class="form-control" id="label" name="">
+                                            <option value="" selected>~ pilih Satuan ~</option>
+                                            @foreach($satuan as $rows)
+                                                @foreach($rows as $rowss)
+                                                    <option value="{{$rowss->iu_code}}">{{$rowss->iu_name}}</option>
+                                                @endforeach
                                             @endforeach
                                         </select>
                                     </div>

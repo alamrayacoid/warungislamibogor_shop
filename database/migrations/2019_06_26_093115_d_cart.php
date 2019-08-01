@@ -17,7 +17,8 @@ class DCart extends Migration
             $table->bigIncrements('cart_id');
             $table->string('cart_ciproduct',50);
             $table->string('cart_cmember',50);
-            $table->string('cart_label');
+            $table->string('cart_label',20);
+            $table->string('cart_cunit',20);
             $table->integer('cart_qty');
             $table->string('cart_location',50)->nullable();
             $table->string('status_data',5);
