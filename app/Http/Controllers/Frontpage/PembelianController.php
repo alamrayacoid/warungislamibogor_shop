@@ -18,15 +18,15 @@ class PembelianController extends Controller
     {
         
             $group = DB::table('d_seller')->join('m_item','i_code','sell_ciproduct')
-    		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
-    		->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
+    		->leftJoin('m_itemproduct','itp_ciproduct','=','sell_ciproduct')
+    		->leftJoin('m_itemprice','ipr_ciproduct','=','sell_ciproduct')
     		->groupBy('sell_nota');
     		
 
     		$allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-    		->join('m_itemprice','ipr_ciproduct','sell_ciproduct');
+    		->leftJoin('m_item','i_code','=','sell_ciproduct')
+    		->leftJoin('m_itemproduct','itp_ciproduct','=','sell_ciproduct')
+    		->leftJoin('m_itemprice','ipr_ciproduct','=','sell_ciproduct');
     		
             if ($request->nama_produk != null) {
                 $group->where('i_name',$request->nama_produk);

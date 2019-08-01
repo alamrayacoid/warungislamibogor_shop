@@ -135,45 +135,48 @@
                                 </div>
 
 
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Provinsi</label>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="form-group">
-                                        <select class="form-control input-sm select2" name="province">
+                                        <select class="form-control input-sm select2" id="provinsi" name="province">
                                             <option hidden value="{{Auth::user()->cm_province}}">
                                                 {{Auth::user()->cm_province}}</option>
+                                                @foreach($provinsi as $row)
+                                                <option value="{{$row->p_id}}">{{$row->p_nama}}</option>
+                                                @endforeach
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
 
 
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Kabupaten/Kota</label>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="form-group">
-                                        <select class="form-control input-sm select2" name="{{Auth::user()->cm_city}}">
+                                        <select class="form-control input-sm select2" id="kota" name="city">
                                             <option value="{{Auth::user()->cm_city}}">{{Auth::user()->cm_city}}</option>
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
 
 
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Kecamatan</label>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="form-group">
-                                        <select class="form-control input-sm select2" name="district">
+                                        <select class="form-control input-sm select2" id="kecamatan" name="district">
                                             <option hidden value="{{Auth::user()->cm_district}}">
                                                 {{Auth::user()->cm_district}}</option>
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Alamat</label>
@@ -264,7 +267,39 @@
 @endsection
 @section('extra_script')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
+
+        $('#provinsi').change(function(){
+            $.ajax({
+                url : '{{route("kota")}}',
+                type : 'get',
+                data : { '_token' : '{{csrf_token()}}' , 'provinsi' : $('#provinsi').val() },
+                success : function(get){
+                    console.log(get['kota']);
+                    var html = '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
+                    for (var i =0; i < get['kota'].length; i++) {
+                        html += '<option value="'+get['kota'][i].c_id+'">'+get['kota'][i].c_nama+'</option>';
+                    }
+                        $('#kota').html(html);
+                }
+            });
+        })
+
+        $('#kota').change(function(){
+            $.ajax({
+                url : '{{route("desa")}}',
+                type : 'get',
+                data : { '_token' : '{{csrf_token()}}' , 'kota' : $('#kota').val() },
+                success : function(get){
+                    console.log(get);
+                    var htmll = '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
+                    for (var i =0; i < get['desa'].length; i++) {
+                        htmll += '<option value="'+get['desa'][i].d_cid+'">'+get['desa'][i].d_nama+'</option>';
+                    }
+                        $('#kecamatan').html(htmll);
+                }
+            });
+        })
 
 
         var $image = $(".image-crop > img");

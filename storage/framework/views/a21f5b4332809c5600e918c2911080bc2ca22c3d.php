@@ -132,45 +132,48 @@
                                 </div>
 
 
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Provinsi</label>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="form-group">
-                                        <select class="form-control input-sm select2" name="province">
+                                        <select class="form-control input-sm select2" id="provinsi" name="province">
                                             <option hidden value="<?php echo e(Auth::user()->cm_province); ?>">
                                                 <?php echo e(Auth::user()->cm_province); ?></option>
+                                                <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($row->p_id); ?>"><?php echo e($row->p_nama); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
 
 
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Kabupaten/Kota</label>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="form-group">
-                                        <select class="form-control input-sm select2" name="<?php echo e(Auth::user()->cm_city); ?>">
+                                        <select class="form-control input-sm select2" id="kota" name="city">
                                             <option value="<?php echo e(Auth::user()->cm_city); ?>"><?php echo e(Auth::user()->cm_city); ?></option>
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
 
 
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Kecamatan</label>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="form-group">
-                                        <select class="form-control input-sm select2" name="district">
+                                        <select class="form-control input-sm select2" id="kecamatan" name="district">
                                             <option hidden value="<?php echo e(Auth::user()->cm_district); ?>">
                                                 <?php echo e(Auth::user()->cm_district); ?></option>
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Alamat</label>
@@ -261,7 +264,39 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('extra_script'); ?>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
+
+        $('#provinsi').change(function(){
+            $.ajax({
+                url : '<?php echo e(route("kota")); ?>',
+                type : 'get',
+                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'provinsi' : $('#provinsi').val() },
+                success : function(get){
+                    console.log(get['kota']);
+                    var html = '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
+                    for (var i =0; i < get['kota'].length; i++) {
+                        html += '<option value="'+get['kota'][i].c_id+'">'+get['kota'][i].c_nama+'</option>';
+                    }
+                        $('#kota').html(html);
+                }
+            });
+        })
+
+        $('#kota').change(function(){
+            $.ajax({
+                url : '<?php echo e(route("desa")); ?>',
+                type : 'get',
+                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'kota' : $('#kota').val() },
+                success : function(get){
+                    console.log(get);
+                    var htmll = '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
+                    for (var i =0; i < get['desa'].length; i++) {
+                        htmll += '<option value="'+get['desa'][i].d_cid+'">'+get['desa'][i].d_nama+'</option>';
+                    }
+                        $('#kecamatan').html(htmll);
+                }
+            });
+        })
 
 
         var $image = $(".image-crop > img");
