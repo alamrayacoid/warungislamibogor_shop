@@ -4,6 +4,12 @@
       $menu = App\Http\Controllers\menuController::menu();
 ?>
 
+<?php $notifp = App\Http\Controllers\notifController::pembelian();
+      $notifpro = App\Http\Controllers\notifController::proses();
+      $notifpem = App\Http\Controllers\notifController::pembayaran();
+      $notifpen = App\Http\Controllers\notifController::pengiriman();
+ ?>
+
 @if(!Auth::check())
 
 <nav class="navbar navbar_custom not-login">
@@ -105,11 +111,11 @@
                             class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-user">
                         <li class="d-flex justify-content-between"><a href="{{route('pembelian-semua-frontpage' , ['status' => 1])}}">Daftar Pembelian </a><span
-                                    class="label label-primary" style="float:right;">1</span></li>
+                                    class="label label-primary" style="float:right;">{{$notifp}}</span></li>
                         <li class="d-flex justify-content-between"><a href="{{route('pembelian-diproses-frontpage', ['status' => 3])}}">Sedang diproses </a><span
-                                    class="label label-primary" style="float:right">0</span></li>
+                                    class="label label-primary" style="float:right">{{$notifpro}}</span></li>
                         <li class="d-flex justify-content-between"><a href="{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}">Pembayaran</a> <span
-                                    class="label label-primary" style="float:right">0</span></li>
+                                    class="label label-primary" style="float:right">{{$notifpem}}</span></li>
                     </ul>
                 </li>
                 <li class="nav-link nav-link-shopping-cart"><a href="{{route('keranjang-frontpage')}}"><i
@@ -123,7 +129,8 @@
                         <p class="text-person">{{Auth::user()->cm_name}}</p>
                         <div role="separator" class="divider"></div>
                         <li><a href="{{route('profile')}}">Profile</a></li>
-                        <li><a href="{{route('pembelian-dikirim-frontpage', ['status' => 4])}}">Status Pengiriman</a></li>
+                        <li><a href="{{route('pembelian-dikirim-frontpage', ['status' => 4])}}">Status Pengiriman <span
+                                    class="label label-primary ml-4">{{$notifpen}}</span> </a></li>
                         <li><a href="{{route('wishlist-frontpage')}}">Barang Favorit<span
                                     class="label label-primary ml-4">Baru</span></a></li>
                         <li>

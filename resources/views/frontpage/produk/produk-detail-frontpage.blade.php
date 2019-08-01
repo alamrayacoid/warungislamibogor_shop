@@ -40,7 +40,7 @@
                             </div>
                             @foreach($data as $row)
                             <div class="col-md-7">
-
+                                <div class="col-lg-12">
                                 <h2 class="title-detail-product">{{$row->i_name}}<span
                                         class="text-info-title-detail-product">Tersisa 13</span></h2>
                                 <div class="">
@@ -51,33 +51,37 @@
                                     <i class="fa fa-star c-grey"></i>
                                 </div>
                                 <hr>
+                                </div>
+                                <div class="col-lg-12">
                                 <p class=""><i class="fa fa-archive"></i>  Offiicial Store</p>
                                 <p class=""><i class="fa fa-clock-o"></i>  05 Januari 2019</p>
                                 <p class=""><i class="fa fa-map-marker"></i>  Pasuruan</p>
+
                                 <!-- <span>{{$row->itp_tagtitle}}</span> -->
                                 <div class="m-t-md">
                                     <h2 class="product-detail-price">Rp. {{$row->ipr_sunitprice}} <small
-                                            class="text-info-price">Termasuk Pajak</small> </h2>
+                                            class="text-info-price">Tidak Termasuk Pajak pengiriman</small> </h2>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6 p-detail-product-first">
-                                        <select id="cabang" name="" class="form-control">
+                                </div>
+                                
+                                    <div class="col-md-4 p-detail-product-first">
+                                        <select id="cabang" name="" class="form-control fs-12 c-pointer">
                                             <option value="" selected>~ pilih cabang ~</option>
                                             @foreach($cabang as $cbng)
                                             <option value="{{$cbng->b_code}}">{{$cbng->b_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-6 p-detail-product-last">
-                                        <select class="form-control" id="label" name="">
+                                    <div class="col-md-4">
+                                        <select class="form-control fs-12 c-pointer" id="label" name="">
                                             <option value="" selected>~ pilih Merk ~</option>
                                             @foreach($label as $rows)
                                             <option value="{{$rows->s_code}}">{{$rows->s_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-6 p-detail-product-last">
-                                        <select class="form-control" id="label" name="">
+                                    <div class="col-md-4 p-detail-product-last">
+                                        <select class="form-control fs-12 c-pointer" id="label" name="">
                                             <option value="" selected>~ pilih Satuan ~</option>
                                             @foreach($satuan as $rows)
                                                 @foreach($rows as $rowss)
@@ -93,7 +97,7 @@
                                             class="form-control">
                                         <button class="btn btn-count-product-stock"><i class="fa fa-plus"></i></button>
                                     </div>
-                                    <div class="col-md-12 mt-2 w-100">
+                                    <div class="col-md-12 column-add-cart mt-2 w-100">
                                         <div class="row">
                                             @if(Auth::check())
                                             <div class="col-md-12">
@@ -108,8 +112,8 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-6 p-detail-product-last">
-                                                <button class="btn btn-product-detail-wishlist">Lihat Produk Lainnya
-                                                </button>
+                                                <a href="{{url('/')}}" style="color:#676a6c;"><button class="btn btn-product-detail-wishlist">Lihat Produk Lainnya
+                                                </button></a>
                                             </div>
                                             @else
                                             <div class="col-md-12 ">
@@ -153,7 +157,8 @@
                 The generated Lorem Ipsum is therefore always free
             </div> -->
                 </div>
-            </div>
+    </div>
+<div class="row">
             <div class="col-lg-12">
                 <div class="ibox product-description">
                     <div class="ibox-title" style="background:#fafafa;">
@@ -166,10 +171,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+</div>
         <div class="row">
             <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-lg-product col-md-3 col-sm-6 ">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
@@ -192,7 +197,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class=" col-lg-product col-md-3 col-sm-6">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
@@ -215,7 +220,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-lg-product col-md-3 col-sm-6 ">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
@@ -238,7 +243,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-lg-product col-md-3 col-sm-6 ">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
@@ -246,6 +251,29 @@
                     <div class="caption">
                         <div class="title-product-group">
                             <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        </div>
+                        <div class="footer-product-item">
+                            <div class="">
+                                <i class="fa fa-star f-14 c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-gold"></i>
+                                <i class="fa fa-star c-grey"></i>
+                            </div>
+                            <div class="price-product-item">Rp. 10.000</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-product col-md-3 col-sm-6 ">
+                <div class="thumbnail product-box-item">
+                    <div class="image-product-box"
+                        style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
+                    </div>
+                    <div class="caption">
+                        <div class="title-product-group">
+                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
                         </div>
                         <div class="footer-product-item">
                             <div class="">

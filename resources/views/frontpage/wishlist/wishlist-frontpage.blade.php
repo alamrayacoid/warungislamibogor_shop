@@ -30,7 +30,7 @@
                             <div class="profile-progress-bar-status" style="width: 60%;"></div>
                         </div>
                         <div class="text-right">
-                            <a href="" class="c-primary-wib fs-12 semi-bold">Lengkapi Sekarang&ensp;<i
+                            <a href="{{route('profile')}}" class="c-primary-wib fs-12 semi-bold">Lengkapi Sekarang&ensp;<i
                                     class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
@@ -38,13 +38,13 @@
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Daftar Transaksi</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-semua-frontpage' , ['status' => 1])}}">
                                 <li>Daftar Pembelian</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}">
                                 <li class="">Pembayaran</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-diproses-frontpage', ['status' => 3])}}">
                                 <li>Sedang diproses</li>
                             </a>
                         </ul>
@@ -53,7 +53,7 @@
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Pengiriman</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-dikirim-frontpage', ['status' => 4])}}">
                                 <li>Proses Pengiriman</li>
                             </a>
                         </ul>
@@ -62,10 +62,10 @@
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Profile Saya</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('profile')}}">
                                 <li>Pengaturan</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('wishlist-frontpage')}}">
                                 <li>Barang Favorit</li>
                             </a>
                         </ul>
@@ -310,7 +310,7 @@
                                 </div>
                                 <div class="padding-0-15">
                                     <h5>Anda dapat melihat produk di daftar keinginan Anda di sini</h5>
-                                    <button class="btn btn-empty-wishlist">Mulai Mencari Produk</button>
+                                    <a href="{{url('/')}}"><button class="btn btn-empty-wishlist">Mulai Mencari Produk</button></a>
                                 </div>
                             </div>
                             @endif

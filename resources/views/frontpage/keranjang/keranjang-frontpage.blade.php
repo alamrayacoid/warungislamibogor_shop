@@ -19,8 +19,6 @@
         <div class="row mt-5">
 
             <div class="col-md-7">
-
-
                 <div class="thumbnail">
                     <div class="thumbnail-header">Keranjang Belanja Anda
                     </div>
@@ -71,99 +69,7 @@
                             @endforeach
                         </form>
                     </div>
-
                 </div>
-
-
-
-
-                <!-- <div class="ibox">
-                    <div class="ibox-title">
-                        <span class="pull-right">(<strong id="itemt"></strong>) items</span>
-                        <h5>Items in your cart</h5>
-                    </div>
-                    <form id="keranjang_checkout">
-                        @csrf
-                        <input type="hidden" id="count" name="count">
-                        @foreach($produk as $row)
-                        <input type="hidden" class="count" value="{{$row->cart_id}}" name="id[]">
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-                                    <tbody>
-                                        <tr>
-                                            @foreach($gambar as $roww)
-                                            @if($row->i_code == $roww->ip_ciproduct)
-                                            <td width="90">
-                                                <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}"
-                                                    width="100px">
-                                            </td>
-                                            @endif
-                                            @endforeach
-                                            <td class="desc">
-                                                <h3>
-                                                    <a href="#" class="text-navy">
-                                                        {{$row->i_name}}
-                                                        <input type="hidden" value="{{$row->i_code}}"
-                                                            name="ciproduct[]">
-                                                        <input type="hidden" value="{{$row->cart_label}}"
-                                                            name="label[]">
-                                                        <input type="hidden" value="{{$row->cart_qty}}" name="qty[]">
-                                                        <input type="hidden"
-                                                            value="{{$row->ipr_sunitprice * $row->cart_qty}}"
-                                                            name="total[]">
-                                                    </a>
-                                                </h3>
-                                                <p class="small">
-                                                    {!! html_entity_decode($row->itp_description) !!}
-                                                </p>
-                                                <dl class="small m-b-none">
-                                                    <dt>Description lists</dt>
-                                                    <dd>{{$row->itp_tagdesc}}</dd>
-                                                </dl>
-
-                                                <div class="m-t-sm">
-                                                    <a data-id="{{$row->cart_id}}"
-                                                        data-ciproduct="{{$row->cart_ciproduct}}"
-                                                        data-label="{{$row->cart_label}}" data-qty="{{$row->cart_qty}}"
-                                                        class="text-danger remove"><i class="fa fa-trash"></i> Remove
-                                                        item</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                Rp. {{$row->ipr_sunitprice}}
-
-                                            </td>
-                                            <td width="65">
-                                                <input type="number" readonly="" value="{{$row->cart_qty}}"
-                                                    class="form-control" placeholder="1">
-                                            </td>
-                                            <td>
-                                                <h4>
-                                                    Rp. {{$row->ipr_sunitprice * $row->cart_qty}}
-                                                    <input type="hidden"
-                                                        value="{{$row->ipr_sunitprice * $row->cart_qty}}" class="total"
-                                                        id="total{{$row->cart_id}}" name="">
-                                                </h4>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        @endforeach
-                    </form>
-                    <div class="ibox-content">
-
-                        <button class="btn btn-primary pull-right checkouts"><i
-                                class="fa fa fa-shopping-cart checkouts"></i> Checkout</button>
-                        <button class="btn btn-white" onclick="javascript: window.history.back();"><i
-                                class="fa fa-arrow-left"></i> Continue shopping</button>
-
-                    </div>
-                </div> -->
-
             </div>
             <div class="col-md-5">
                 <div class="thumbnail">
@@ -171,7 +77,7 @@
                     </div>
                     <div class="caption" style="padding:0 15px;">
                         <div class="text-item-full-cart">
-                            2 Item dari 2 Produk
+                            -
                         </div>
                         <div class="column-full-price-cart">
                             <h5 class="">Total Belanja</h5><span class="text-price-cart-product" id="totalview"></span>
@@ -188,7 +94,7 @@
         </div>
         <div class="row" style="margin:3em 0;">
             <h3 class="title-product-opsi-same">Rekomendasi Produk</h3>
-            <div class="col-sm-6 col-md-2" style="padding:0 5px;">
+            <div class="col-lg-product col-md-4 col-sm-6">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
@@ -211,7 +117,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-2" style="padding:0 5px;">
+            <div class="col-lg-product col-md-4 col-sm-6">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
@@ -234,7 +140,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-2" style="padding:0 5px;">
+            <div class="col-lg-product col-md-4 col-sm-6">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
@@ -257,7 +163,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-2 col-lg-2" style="padding:0 5px;">
+            <div class="col-lg-product col-md-4 col-sm-6">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
@@ -280,7 +186,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-2 col-lg-2" style="padding:0 5px;">
+            <div class="col-lg-product col-md-4 col-sm-6">
                 <div class="thumbnail product-box-item">
                     <div class="image-product-box"
                         style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
@@ -303,31 +209,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-6 col-md-2 col-lg-2" style="padding:0 5px;">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
-    </div>
     </div>
     @else
     <div class="col-lg-12 column-empty-cart">

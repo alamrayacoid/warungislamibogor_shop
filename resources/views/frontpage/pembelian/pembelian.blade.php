@@ -82,12 +82,12 @@
     </ol>
     <div class="container-fluid mt-5">
         <div class="row">
-            <div class="col-lg-2" style="padding:0;">
+            <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                 <div class="thumbnail profile-frame--sidebar">
                     <div class="d-flex align-items-center padding-0-15">
-                        <img src="/warungislamibogor_shop/storage/image/member/profile/0GxvBYkDNk.png" width="50px"
-                            height="50px">
-                        <h5 class="title-profile-sidebar">Muhammad Bakhrul Bila Sakhil</h5>
+                        <img src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}"
+                            width="50px" height="50px">
+                        <h5 class="title-profile-sidebar">{{Auth::user()->cm_name}}</h5>
                     </div>
                     <div class="mt-4 padding-0-15">
                         <div class="">
@@ -98,21 +98,24 @@
                             <div class="profile-progress-bar-status" style="width: 60%;"></div>
                         </div>
                         <div class="text-right">
-                            <a href="" class="c-primary-wib fs-12 semi-bold">Lengkapi Sekarang&ensp;<i
-                                    class="fa fa-chevron-right"></i></a>
+                            <a href="{{route('profile')}}" class="c-primary-wib fs-12 semi-bold">Lengkapi
+                                Sekarang&ensp;<i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <hr>
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Daftar Transaksi</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-semua-frontpage' , ['status' => 1])}}">
                                 <li>Daftar Pembelian</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}">
                                 <li class="">Pembayaran</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-diproses-frontpage', ['status' => 3])}}">
                                 <li>Sedang diproses</li>
                             </a>
                         </ul>
@@ -121,7 +124,8 @@
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Pengiriman</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-dikirim-frontpage', ['status' => 4])}}">
                                 <li>Proses Pengiriman</li>
                             </a>
                         </ul>
@@ -130,19 +134,17 @@
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Profile Saya</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('profile')}}">
                                 <li>Pengaturan</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="">
+                            <a class="c-primary-wib semi-bold" href="{{route('wishlist-frontpage')}}">
                                 <li>Barang Favorit</li>
                             </a>
                         </ul>
                     </div>
-
-
                 </div>
             </div>
-            <div class="col-lg-10" sty;e="padding:5px;">
+            <div class="col-lg-10 col-md-9" style="padding:5px;">
                 <div class="thumbnail">
                     <div class="caption p-0">
                         <div class="tabs-container">
@@ -197,6 +199,7 @@
                                             </div>
                                         </div>
                                     </form>
+                                    @if($group != '[]')
                                     @foreach($group as $row)
                                     @if($row->sell_ccustomer == Auth::user()->cm_code)
                                     <div class="column-group-item-product mt-5">
@@ -246,7 +249,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 text-center">
-                                                <label class="label label-primary bg-primary-wib fs-12">
+                                                <label class="label label-primary bg-primary-wib">
                                                     {{$row->sell_status}}</label>
                                             </div>
                                             <div class="col-lg-4">
@@ -259,6 +262,15 @@
                                     </div>
                                     @endif
                                     @endforeach
+                                    @else
+                                    <div class="column-empty-transaction">
+                                        <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
+                                        <h5>Oops, Anda Belum Transaksi Sama Sekali.</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{url('/')}}"><button>Cari Produk Sekarang</button></a>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div id="tab-2" class="tab-pane animated fadeIn">
                                     <form id="">
@@ -294,8 +306,9 @@
                                             </div>
                                         </div>
                                     </form>
+                                    @if($groupp !='[]')
                                     @foreach($groupp as $row)
-                                    @if($row->sell_ccustomer == Auth::user()->cm_code)
+                                    
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
@@ -346,7 +359,7 @@
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                {{$roww->sell_status}}</label>
+                                                    {{$roww->sell_status}}</label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <a href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
@@ -356,11 +369,18 @@
                                         @endif
                                         @endforeach
                                     </div>
-                                    @endif
                                     @endforeach
+                                    @else
+                                    <div class="column-empty-transaction">
+                                        <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
+                                        <h5>Oops, Daftar Transaksi Status Pembayaran Anda Kosong.</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{url('/')}}"><button>Cari Produk Sekarang</button></a>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div id="tab-3" class="tab-pane animated fadeIn">
-                                
                                     <form id="">
                                         <div class="row ">
                                             <div class="col-lg-5 mt-4">
@@ -394,9 +414,10 @@
                                             </div>
                                         </div>
                                     </form>
-                                    
+                                   <h5></h5>
+                                    @if($groupprostat > 0)
                                     @foreach($group as $row)
-                                    @if($row->sell_status == 'Sedang Proses' && $row->sell_ccustomer == Auth::user()->cm_code)
+                                    @if($row->sell_status == 'Sedang Proses')
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
@@ -404,7 +425,7 @@
                                                     class="text-full-payment-transaction">Total
                                                     Semua
                                                     Barang : <span class="text-full-price-transaction">Rp.
-                                                    {{$row->totalbayar}}</span></span>
+                                                        {{$row->totalbayar}}</span></span>
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
@@ -416,9 +437,6 @@
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
                                                         Detail
                                                         Transaksi</button></a>
-                                                <button class="btn btn-payment-transaction bayar"
-                                                    data-nota="{{$row->sell_nota}}" type="button" data-toggle="modal"
-                                                    data-target="#modal-bayar">Bayar Sekarang</button>
                                             </div>
                                         </div>
                                         @foreach($allstatus as $roww)
@@ -433,19 +451,21 @@
                                                     @endif
                                                     @endforeach
                                                     <div class="padding-0-15">
-                                                        <div class="fs-14 semi-bold">  {{$roww->i_name}}</div>
+                                                        <div class="fs-14 semi-bold"> {{$roww->i_name}}</div>
                                                         <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
                                                         </div>
-                                                        <div class="fs-14 semi-bold pt-3">{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
+                                                        <div class="fs-14 semi-bold pt-3">
+                                                            {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
                                                                 class="text-full-payment-transaction">Total
                                                                 Pembayaran :
-                                                                <span class="text-full-price-transaction">Rp. {{$roww->sell_total}}</span></span></div>
+                                                                <span class="text-full-price-transaction">Rp.
+                                                                    {{$roww->sell_total}}</span></span></div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                {{$roww->sell_status}}</label>
+                                                    {{$roww->sell_status}}</label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <button class="btn btn-buy-more-product">Beli Lagi</button>
@@ -456,8 +476,15 @@
                                     </div>
                                     @endif
                                     @endforeach
-
-
+                                    @else
+                                    <div class="column-empty-transaction">
+                                        <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
+                                        <h5>Oops, Daftar Transaksi Status Sedang diproses Anda Kosong.</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{url('/')}}"><button>Cari Produk Sekarang</button></a>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div id="tab-4" class="tab-pane animated fadeIn">
                                     <form id="">
@@ -493,8 +520,10 @@
                                             </div>
                                         </div>
                                     </form>
+                                    
+                                    @if($groupppengstat > 0)
                                     @foreach($group as $row)
-                                    @if($row->sell_status == 'Sedang Dikirim' && $row->sell_ccustomer == Auth::user()->cm_code)
+                                    @if($row->sell_status == 'Sedang Dikirim')
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
@@ -502,7 +531,7 @@
                                                     class="text-full-payment-transaction">Total
                                                     Semua
                                                     Barang : <span class="text-full-price-transaction">Rp.
-                                                    {{$row->totalbayar}}</span></span>
+                                                        {{$row->totalbayar}}</span></span>
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
@@ -524,26 +553,28 @@
                                         <div class="row column-item-product">
                                             <div class="col-lg-7">
                                                 <div class="d-flex">
-                                                @foreach($gambar as $image)
-                                                @if($image->sell_nota == $row->sell_nota)
+                                                    @foreach($gambar as $image)
+                                                    @if($image->sell_nota == $row->sell_nota)
                                                     <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
                                                         width="100px" height="100px">
-                                                @endif
-                                                @endforeach
+                                                    @endif
+                                                    @endforeach
                                                     <div class="padding-0-15">
                                                         <div class="fs-14 semi-bold"> {{$roww->i_name}}</div>
                                                         <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
                                                         </div>
-                                                        <div class="fs-14 semi-bold pt-3">{{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
+                                                        <div class="fs-14 semi-bold pt-3">
+                                                            {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
                                                                 class="text-full-payment-transaction">Total
                                                                 Pembayaran :
-                                                                <span class="text-full-price-transaction">Rp.  {{$roww->sell_total}}</span></span></div>
+                                                                <span class="text-full-price-transaction">Rp.
+                                                                    {{$roww->sell_total}}</span></span></div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                {{$roww->sell_status}}</label>
+                                                    {{$roww->sell_status}}</label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <button class="btn btn-buy-more-product">Beli Lagi</button>
@@ -554,7 +585,15 @@
                                     </div>
                                     @endif
                                     @endforeach
-                                    
+                                    @else
+                                    <div class="column-empty-transaction">
+                                        <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
+                                        <h5>Oops, Daftar Transaksi Status Proses Pengiriman Anda Kosong.</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{url('/')}}"><button>Cari Produk Sekarang</button></a>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
