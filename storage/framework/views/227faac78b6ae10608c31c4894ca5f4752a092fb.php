@@ -4,6 +4,12 @@
       $menu = App\Http\Controllers\menuController::menu();
 ?>
 
+<?php $notifp = App\Http\Controllers\notifController::pembelian();
+      $notifpro = App\Http\Controllers\notifController::proses();
+      $notifpem = App\Http\Controllers\notifController::pembayaran();
+      $notifpen = App\Http\Controllers\notifController::pengiriman();
+ ?>
+
 <?php if(!Auth::check()): ?>
 
 <nav class="navbar navbar_custom not-login">
@@ -105,11 +111,11 @@
                             class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-user">
                         <li class="d-flex justify-content-between"><a href="<?php echo e(route('pembelian-semua-frontpage' , ['status' => 1])); ?>">Daftar Pembelian </a><span
-                                    class="label label-primary" style="float:right;">1</span></li>
+                                    class="label label-primary" style="float:right;"><?php echo e($notifp); ?></span></li>
                         <li class="d-flex justify-content-between"><a href="<?php echo e(route('pembelian-diproses-frontpage', ['status' => 3])); ?>">Sedang diproses </a><span
-                                    class="label label-primary" style="float:right">0</span></li>
+                                    class="label label-primary" style="float:right"><?php echo e($notifpro); ?></span></li>
                         <li class="d-flex justify-content-between"><a href="<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>">Pembayaran</a> <span
-                                    class="label label-primary" style="float:right">0</span></li>
+                                    class="label label-primary" style="float:right"><?php echo e($notifpem); ?></span></li>
                     </ul>
                 </li>
                 <li class="nav-link nav-link-shopping-cart"><a href="<?php echo e(route('keranjang-frontpage')); ?>"><i
@@ -123,7 +129,8 @@
                         <p class="text-person"><?php echo e(Auth::user()->cm_name); ?></p>
                         <div role="separator" class="divider"></div>
                         <li><a href="<?php echo e(route('profile')); ?>">Profile</a></li>
-                        <li><a href="<?php echo e(route('pembelian-dikirim-frontpage', ['status' => 4])); ?>">Status Pengiriman</a></li>
+                        <li><a href="<?php echo e(route('pembelian-dikirim-frontpage', ['status' => 4])); ?>">Status Pengiriman <span
+                                    class="label label-primary ml-4"><?php echo e($notifpen); ?></span> </a></li>
                         <li><a href="<?php echo e(route('wishlist-frontpage')); ?>">Barang Favorit<span
                                     class="label label-primary ml-4">Baru</span></a></li>
                         <li>
@@ -204,7 +211,26 @@
                         <ul class="dropdown-menu dropdown-messages">
                             <?php $__currentLoopData = $cek; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if($row->cart_cmember == Auth::user()->cm_code): ?>
-
+                            
+                                <li class="ncart">
+                                    <div class="dropdown-messages-box">
+                                            <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>">
+                                                <?php $__currentLoopData = $img; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gambar): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="pull-left dropdown-img">
+                                                    <img alt="image" class="img-circle" src="/warungislamibogor/storage/image/master/produk/<?php echo e($gambar->ip_path); ?>">
+                                                </div>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-7">
+                                                            <strong><?php echo e($row->i_name); ?></strong>
+                                                        </div>
+                                                        <div class="col-xs-5">
+                                                            <small class="pull-right text-warning">Rp. <?php echo e($row->ipr_sunitprice); ?></small>
+                                                            <br>
+                                                            <small class="pull-right text-muted"><?php echo e($row->cart_qty); ?></small>
+                                                        </div>
+                                                    </div>
                             <li class="ncart">
                                 <div class="dropdown-messages-box">
                                     <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>">

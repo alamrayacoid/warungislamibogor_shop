@@ -18,15 +18,16 @@ class PembelianController extends Controller
     {
         
             $group = DB::table('d_seller')->join('m_item','i_code','sell_ciproduct')
-    		->leftJoin('m_itemproduct','itp_ciproduct','=','sell_ciproduct')
-    		->leftJoin('m_itemprice','ipr_ciproduct','=','sell_ciproduct')
-    		->groupBy('sell_nota');
-    		
+    		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
+    		->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
+    		->groupBy('sell_nota')
+    		->where('sell_ccustomer',Auth::user()->cm_code);
 
     		$allstatus = DB::table('d_seller')
-    		->leftJoin('m_item','i_code','=','sell_ciproduct')
-    		->leftJoin('m_itemproduct','itp_ciproduct','=','sell_ciproduct')
-    		->leftJoin('m_itemprice','ipr_ciproduct','=','sell_ciproduct');
+    		->join('m_item','i_code','sell_ciproduct')
+    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
+            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
+            ->where('sell_ccustomer',Auth::user()->cm_code);
     		
             if ($request->nama_produk != null) {
                 $group->where('i_name',$request->nama_produk);
@@ -51,15 +52,18 @@ class PembelianController extends Controller
 
             $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota');
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-
+            $countproses = DB::table('d_seller')->where('sell_status','Sedang Proses')->where('sell_ccustomer',Auth::user()->cm_code)->count();
+            $countkirim = DB::table('d_seller')->where('sell_status','Sedang Dikirim')->where('sell_ccustomer',Auth::user()->cm_code)->count();
     	return view('frontpage.pembelian.pembelian',array(
     		'allstatus' => $allstatus->get(),
     		'pembayaran' => $allstatus->where('sell_status','Pembayaran')->groupBy('sell_nota')->get(),
     		'proses' => $allstatus->where('sell_status','Sedang Proses')->get(),
     		'pengiriman' => $allstatus->where('sell_status','Sedang Dikirim')->get(),
-    		'group' => $group->select('d_seller.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
+            'group' => $group->select('d_seller.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
     		'groupp' => $group->where('sell_status','Pembayaran')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
-    		'grouppro' => $group->where('sell_status','Sedang Proses')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+            'grouppro' => $group->where('sell_status','Sedang Proses')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+            'groupprostat' => $countproses,
+            'groupppengstat' => $countkirim,
     		'groupppeng' => $group->where('sell_status','Sedang Dikirim')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'gambar' => $gambar->get(),
             'kategori'=>$kategori,
