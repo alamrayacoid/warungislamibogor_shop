@@ -1,4 +1,5 @@
 <?php $cek = App\Http\Controllers\cartController::cart();
+      $img = App\Http\Controllers\cartController::img();
       $notifp = App\Http\Controllers\notifController::pembelian();
       $menu = App\Http\Controllers\menuController::menu();
 ?>
@@ -203,6 +204,7 @@
                         <ul class="dropdown-menu dropdown-messages">
                             <?php $__currentLoopData = $cek; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if($row->cart_cmember == Auth::user()->cm_code): ?>
+
                             <li class="ncart">
                                 <div class="dropdown-messages-box">
                                     <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>">

@@ -404,7 +404,7 @@
                                                     class="text-full-payment-transaction">Total
                                                     Semua
                                                     Barang : <span class="text-full-price-transaction">Rp.
-                                                        {{$row->sell_total}}</span></span>
+                                                    {{$row->totalbayar}}</span></span>
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
@@ -456,6 +456,8 @@
                                     </div>
                                     @endif
                                     @endforeach
+
+
                                 </div>
                                 <div id="tab-4" class="tab-pane animated fadeIn">
                                     <form id="">
@@ -500,7 +502,7 @@
                                                     class="text-full-payment-transaction">Total
                                                     Semua
                                                     Barang : <span class="text-full-price-transaction">Rp.
-                                                        {{$row->sell_total}}</span></span>
+                                                    {{$row->totalbayar}}</span></span>
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"

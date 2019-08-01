@@ -296,6 +296,7 @@
                     },
                     error: function (xhr, textStatus, errorThrowl) {
                         swal({
+
                                 title: "Error",
                                 text: "Coba Cek Barang Anda, atau stock kosong",
                                 type: "error",

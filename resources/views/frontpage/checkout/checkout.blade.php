@@ -292,18 +292,18 @@
                     },
                     error: function (xhr, textStatus, errorThrowl) {
                         swal({
-                                title: "Error",
-                                text: "Coba Cek Barang Anda, atau stock kosong",
-                                type: "error",
-                                confirmButtonColor: "#DD6B55",
-                                closeOnConfirm: true,
-                                closeOnCancel: true
-                            },
-                            function (isConfirm) {
-                                if (isConfirm) {} else {
-
-                                }
-                            });
+                    title: "Error",
+                    text: "Coba Cek Barang Anda, atau stock kosong",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                    closeOnConfirm: true,
+                    closeOnCancel: true },
+                function (isConfirm) {
+                    if (isConfirm) {
+                    } else {
+                        
+                       }
+                         });
                     }
                 })
             }

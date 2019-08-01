@@ -1,4 +1,5 @@
 <?php $cek = App\Http\Controllers\cartController::cart();
+      $img = App\Http\Controllers\cartController::img();
       $notifp = App\Http\Controllers\notifController::pembelian();
       $menu = App\Http\Controllers\menuController::menu();
 ?>
@@ -202,6 +203,26 @@
                         <ul class="dropdown-menu dropdown-messages">
                             @foreach($cek as $row)
                             @if($row->cart_cmember == Auth::user()->cm_code)
+                            
+                                <li class="ncart">
+                                    <div class="dropdown-messages-box">
+                                            <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}">
+                                                @foreach($img as $gambar)
+                                                <div class="pull-left dropdown-img">
+                                                    <img alt="image" class="img-circle" src="/warungislamibogor/storage/image/master/produk/{{$gambar->ip_path}}">
+                                                </div>
+                                                @endforeach
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-7">
+                                                            <strong>{{$row->i_name}}</strong>
+                                                        </div>
+                                                        <div class="col-xs-5">
+                                                            <small class="pull-right text-warning">Rp. {{$row->ipr_sunitprice}}</small>
+                                                            <br>
+                                                            <small class="pull-right text-muted">{{$row->cart_qty}}</small>
+                                                        </div>
+                                                    </div>
                             <li class="ncart">
                                 <div class="dropdown-messages-box">
                                     <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}">

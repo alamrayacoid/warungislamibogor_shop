@@ -402,7 +402,7 @@
                                                     class="text-full-payment-transaction">Total
                                                     Semua
                                                     Barang : <span class="text-full-price-transaction">Rp.
-                                                        <?php echo e($row->sell_total); ?></span></span>
+                                                    <?php echo e($row->totalbayar); ?></span></span>
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
@@ -454,6 +454,8 @@
                                     </div>
                                     <?php endif; ?>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
                                 </div>
                                 <div id="tab-4" class="tab-pane animated fadeIn">
                                     <form id="">
@@ -498,7 +500,7 @@
                                                     class="text-full-payment-transaction">Total
                                                     Semua
                                                     Barang : <span class="text-full-price-transaction">Rp.
-                                                        <?php echo e($row->sell_total); ?></span></span>
+                                                    <?php echo e($row->totalbayar); ?></span></span>
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
