@@ -18,6 +18,7 @@ class ProdukController extends Controller
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->groupBy('i_name')
+                ->where('m_item.status_data','true')
                 ->get();
 
             
@@ -155,6 +156,7 @@ class ProdukController extends Controller
                 $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
         return view('frontpage.produk.produk-kategori-frontpage',array(
             'test'=>$data,
+            'namakategori'=>$datas,
             'kategori'=>$kategori,
             'tipe'=>$type,
             'wish'=>$wish,

@@ -18,248 +18,296 @@
         box-shadow: 0 0 3px 1px gray;
         border-radius: 50%;
     }
+
+    .select2 {
+        z-index: 99999999;
+    }
 </style>
 @endsection
 @section('content')
-<section style="margin-top:10em;">
-    <div class="container">
-        <div class="row animated fadeInRight">
-            <div class="col-md-4">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Detail Profil</h5>
-                    </div>
-                    <div>
-                        <div class="ibox-content" align="center">
-                            <img alt="image" width="200" class="img-responsive rounded"
-                                src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}">
+@include('frontpage.profile.modal-email')
+@include('frontpage.profile.modal-jeniskelamin')
+@include('frontpage.profile.modal-ponsel')
+@include('frontpage.profile.modal-password')
+@include('frontpage.profile.modal-rekening')
+@include('frontpage.profile.modal-alamat')
+<section style="margin-top:5em;">
+
+    <form id="frmeditprofile" method="post" action="{{route('update.profile')}}" enctype="multipart/form-data"
+        class="form-update-profile">
+        {{csrf_field()}}
+        <input type="text" id="inputemail" value="{{Auth::user()->cm_email}}" name="email" hidden>
+        <input type="text" id="inputponsel" value="{{Auth::user()->cm_nphone}}" name="nphone" hidden>
+        <input type="text" id="inputpassword" name="newpassword" hidden>
+        <input type="text" id="inputrekening" name="bank" hidden>
+        <input type="text" id="inputnomorrekening" name="nbank" hidden>
+        <input type="text" id="inputjkel" name="gender" hidden>
+        <input type="hidden" id="gambar" name="gambar">
+        <ol class="breadcrumb breadcumb-header">
+            <li><a href="#">Home</a></li>
+            <li><a href="">Semua Transaksi</a></li>
+        </ol>
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
+                    <div class="thumbnail profile-frame--sidebar">
+                        <div class="d-flex align-items-center padding-0-15">
+                            <img src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}"
+                                width="50px" height="50px">
+                            <h5 class="title-profile-sidebar">{{Auth::user()->cm_name}}</h5>
                         </div>
-                        <div class="ibox-content profile-content">
-                            <h4><strong>{{Auth::user()->cm_name}}</strong></h4>
-                            <p><i class="fa fa-map-marker"> </i> &nbsp;{{Auth::user()->cm_address}}</p>
-                            <p><i class="fa fa-envelope"> </i> &nbsp;{{Auth::user()->cm_email}}</p>
-                            <p><i class="fa fa-phone"> </i> &nbsp;{{Auth::user()->cm_nphone}}</p>
-                            <div class="row m-t-lg">
-                                <div class="col-md-6">
-
-                                    <h5><i class="fa fa-star"></i> <strong>{{$wishlist}}</strong> Barang</h5>
-                                </div>
-                                <div class="col-md-6">
-
-                                    <h5><i class="fa fa-shopping-cart"></i> <strong>{{$transaksi}}</strong> Transaksi
-                                    </h5>
-                                </div>
-                                {{-- <div class="col-md-4">
-                                
-                                <h5><strong>240</strong> Followers</h5>
-                            </div> --}}
+                        <div class="mt-4 padding-0-15">
+                            <div class="">
+                                <span class="fs-12 text-black-54">Kelengkapan Profil</span>
+                                <span class="fs-11 text-black-7 bold pull-right">60%</span>
                             </div>
-                            <div class="user-button">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <button type="button" class="btn btn-warning btn-sm btn-block"><i
-                                                class="fa fa-pencil-alt"></i> Ubah Profile</button>
-                                    </div>
-                                </div>
+                            <div class="profile-progress-bar mt-2">
+                                <div class="profile-progress-bar-status" style="width: 60%;"></div>
                             </div>
+                            <div class="text-right">
+                                <a href="{{route('profile')}}" class="c-primary-wib fs-12 semi-bold">Lengkapi
+                                    Sekarang&ensp;<i class="fa fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="">
+                            <h5 class="heading-section-profile-frame padding-0-15">Daftar Transaksi</h5>
+                            <ul class="list-item-profile-sidebar">
+                                <a class="c-primary-wib semi-bold"
+                                    href="{{route('pembelian-semua-frontpage' , ['status' => 1])}}">
+                                    <li>Daftar Pembelian</li>
+                                </a>
+                                <a class="c-primary-wib semi-bold"
+                                    href="{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}">
+                                    <li class="">Pembayaran</li>
+                                </a>
+                                <a class="c-primary-wib semi-bold"
+                                    href="{{route('pembelian-diproses-frontpage', ['status' => 3])}}">
+                                    <li>Sedang diproses</li>
+                                </a>
+                            </ul>
+                        </div>
+                        <hr>
+                        <div class="">
+                            <h5 class="heading-section-profile-frame padding-0-15">Pengiriman</h5>
+                            <ul class="list-item-profile-sidebar">
+                                <a class="c-primary-wib semi-bold"
+                                    href="{{route('pembelian-dikirim-frontpage', ['status' => 4])}}">
+                                    <li>Proses Pengiriman</li>
+                                </a>
+                            </ul>
+                        </div>
+                        <hr>
+                        <div class="">
+                            <h5 class="heading-section-profile-frame padding-0-15">Profile Saya</h5>
+                            <ul class="list-item-profile-sidebar">
+                                <a class="c-primary-wib semi-bold" href="{{route('profile')}}">
+                                    <li>Pengaturan</li>
+                                </a>
+                                <a class="c-primary-wib semi-bold" href="{{route('wishlist-frontpage')}}">
+                                    <li>Barang Favorit</li>
+                                </a>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Profil</h5>
-                        <div class="ibox-tools">
-                            <a href="#" title="Ubah Profile">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <form  id="frmeditprofile" method="post" action="{{route('update.profile')}}" enctype="multipart/form-data" >
-                        {{csrf_field()}}
-                        <input type="hidden" id="gambar" name="gambar">
-                        <div class="ibox-content">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Foto</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group text-center">
-                                        <div class="foto-terpilih m-auto">
-
+                <div class="col-md-10">
+                    <div class="thumbnail p-0">
+                        <div class="caption p-0">
+                            <div class="tabs-container">
+                                <ul class="nav nav-tabs nav-tabs-custom">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab-1"><span class="tab-title">Biodata
+                                                Diri</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#tab-2"><span class="tab-title">Alamat</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#tab-3"><span class="tab-title">Rekening
+                                                Bank</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content tab-content-profile padding-15">
+                                <div id="tab-1" class="tab-pane animated fadeIn active">
+                                    <div class="row">
+                                        <div class="col-lg-4 padding-15">
+                                            <div class="profile-image-group padding-15">
+                                                <img src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}"
+                                                    class="image-profile-setting">
+                                                @include('frontpage.profile.modal-editfoto')
+                                                <button class="btn btn-upload-image-profile btn-block mt-5"
+                                                    type="button" data-toggle="modal" data-target="#modal-foto">Upload
+                                                    Foto </button>
+                                                <p class="text-terms-upload-foto">Maksimal Ukuran File Foto 3
+                                                    Megabytes<br>Format File
+                                                    yang diperbolehkan: .JPG .JPEG .PNG</p>
+                                            </div>
+                                            <button class="btn btn-new-password-profile" type="button"
+                                                data-toggle="modal" data-target="#mdl-password"><i
+                                                    class="fa fa-lock"></i>&ensp;Buat
+                                                Password Baru</button>
                                         </div>
+                                        <div class="col-lg-8">
+                                            <div class="ibox-content">
+                                                <h5 class="title-section-form-profile padding-top-0">Ubah Biodata
+                                                    Diri
+                                                </h5>
+                                                <div class="row column-group-basic-profile">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                        <label>Nama</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        <div id="">{{Auth::user()->cm_name}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row column-group-basic-profile">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                        <label>Jenis Kelamin</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        @if(Auth::user()->cm_gender === null || Auth::user()->cm_gender === '')
+                                                        <button class="btn btn-update-basic-profile" type="button"
+                                                            data-toggle="modal" data-target="#mdl-jkel">Tambahkan Jenis
+                                                            Kelamin</button>
+                                                        @elseif(Auth::user()->cm_gender === 'L')
+                                                        <span id="" class="mr-3">Laki - Laki</span>
+                                                        <button class="btn btn-update-basic-profile" type="button"
+                                                            data-toggle="modal" data-target="#mdl-jkel">Ubah Jenis
+                                                            Kelamin</button>
+                                                        @elseif(Auth::user()->cm_gender === 'P') <span id="" class="mr-3">Perempuan</span>
+                                                        <button class="btn btn-update-basic-profile" type="button"
+                                                            data-toggle="modal" data-target="#mdl-jkel">Ubah Jenis
+                                                            Kelamin</button>
+                                                        @endif
+                                                    </div>
 
-                                        @include('frontpage.profile.modal-editfoto')
+                                                </div>
+                                                <h5 class="title-section-form-profile">Ubah Daftar Kontak</h5>
+                                                <div class="row column-group-basic-profile">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                        <label>E-mail</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        <span id="" class="mr-3">{{Auth::user()->cm_email}}</span>
+                                                        <button class="btn btn-update-basic-profile" type="button"
+                                                            data-toggle="modal" data-target="#mdl-email">Ubah
+                                                            Email</button>
+                                                    </div>
+                                                </div>
+                                                <div class="row column-group-basic-profile">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                        <label>No. Handphone</label>
+                                                    </div>
 
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        @if(Auth::user()->cm_nphone === null || Auth::user()->cm_nphone === '')
+                                                        <button class="btn btn-update-basic-profile" type="button"
+                                                            data-toggle="modal" data-target="#mdl-ponsel">Tambahkan
+                                                            Nomor
+                                                            Ponsel</button>
+                                                        @else
+                                                        <span id="" class="mr-3">{{Auth::user()->cm_nphone}}</span>
+                                                        <button class="btn btn-update-basic-profile" type="button"
+                                                            data-toggle="modal" data-target="#mdl-ponsel">Ubah Nomor
+                                                            Ponsel</button>
 
-                                        <button class="btn btn-info btn-block mt-5" type="button" data-toggle="modal"
-                                            data-target="#modal-foto"> <i class="fa fa-picture-o"></i> Edit Foto</button>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Nama</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control input-sm"
-                                            value="{{Auth::user()->cm_name}}" name="name">
+                                <div id="tab-2" class="tab-pane animated fadeIn" style="padding:15px 5px 30px 5px">
+                                    @if(Auth::user()->cm_address === null || Auth::user()->cm_address === '')
+                                    <div class="column-empty-profile-advanced">
+                                        <img src="{{asset('assets/img/img-product/location-icon.png')}}">
+                                        <h5 class="">Oops, Alamat Lengkap Anda Masih Kosong</h5>
+                                        <p>Tambahkan Alamat Lengkap Anda untuk mempermudah proses transaksi di WIB shop
+                                        </p>
+                                        <button type="button" data-toggle="modal" data-target="#mdl-alamat">Tambahkan Alamat </button>
                                     </div>
-                                </div>
-
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>E-mail</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control input-sm"
-                                            value="{{Auth::user()->cm_email}}" name="email">
+                                    @else
+                                    <div class="table-responsive">
+                                        <table class="table-address-profile w-100">
+                                            <thead>
+                                                <tr class="c-primary-wib">
+                                                    <th></th>
+                                                    <th>Provinsi</th>
+                                                    <th>Kabupaten</th>
+                                                    <th>Kecamatan</th>
+                                                    <th width="40%">Alamat Pengiriman</th>
+                                                    <th>Aksi</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="tbody-address-profile">
+                                                    <th style="vertical-align:initial;padding-top:0.2em;"><input
+                                                            type="radio" id="address" name='address' checked><label
+                                                            for="address" checked>
+                                                        </label></th>
+                                                    <td>Jawa Timur</td>
+                                                    <td>Jawa Timur</td>
+                                                    <td>Jawa Timur</td>
+                                                    <td>Jl. Raya Surabaya - Malang, RT.02/RW.10, Lemahbang, Kec.
+                                                        Sukorejo, Pasuruan, Jawa Timur 67161</td>
+                                                    <td>
+                                                        <button class="btn btn-update-profile-advanced"><i
+                                                                class="fa fa-edit"></i>&ensp;Edit</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
+                                    @endif
                                 </div>
-
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>No. Handphone</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control input-sm"
-                                            value="{{Auth::user()->cm_nphone}}" name="nphone">
+                                <div id="tab-3" class="tab-pane animated fadeIn">
+                                    @if(Auth::user()->cm_bank === null || Auth::user()->cm_bank === '')
+                                    <div class="column-empty-profile-advanced">
+                                        <img src="{{asset('assets/img/img-product/account-bank-icon.png')}}">
+                                        <h5 class="">Oops, Rekening Bank Anda Masih Kosong</h5>
+                                        <p>Tambahkan Rekening Bank Anda untuk mempermudah proses transaksi di WIB shop
+                                        </p>
+                                        <button type="button" data-toggle="modal" data-target="#mdl-rekening">Tambahkan
+                                            Rekening Bank </button>
                                     </div>
-                                </div>
-
-
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Provinsi</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <select class="form-control input-sm select2" name="province">
-                                            <option hidden value="{{Auth::user()->cm_province}}">
-                                                {{Auth::user()->cm_province}}</option>
-                                        </select>
+                                    @else
+                                    <div class="table-responsive">
+                                        <table class="table-address-profile w-100">
+                                            <thead>
+                                                <tr class="c-primary-wib">
+                                                    <th></th>
+                                                    <th>Nama Bank</th>
+                                                    <th>Nomor Rekening</th>
+                                                    <th>Aksi</th>
+                                            </thead>
+                                            <tbody class="">
+                                                <tr class="tbody-address-profile">
+                                                    <th style="vertical-align:initial;padding-top:0.2em;"><input
+                                                            type="radio" id="rekening" name='rekening' checked><label
+                                                            for="rekening" checked>
+                                                        </label></th>
+                                                    <td>{{Auth::user()->cm_bank}}</td>
+                                                    <td>{{Auth::user()->cm_nbank}}</td>
+                                                    <td>
+                                                        <button class="btn btn-update-profile-advanced" type="button"
+                                                            data-toggle="modal" data-target="#mdl-rekening"><i
+                                                                class="fa fa-edit"></i>&ensp;Edit</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div> -->
-
-
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Kabupaten/Kota</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <select class="form-control input-sm select2" name="{{Auth::user()->cm_city}}">
-                                            <option value="{{Auth::user()->cm_city}}">{{Auth::user()->cm_city}}</option>
-                                        </select>
-                                    </div>
-                                </div> -->
-
-
-                                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Kecamatan</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <select class="form-control input-sm select2" name="district">
-                                            <option hidden value="{{Auth::user()->cm_district}}">
-                                                {{Auth::user()->cm_district}}</option>
-                                        </select>
-                                    </div>
-                                </div> -->
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Alamat</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control"
-                                            name="address">{{Auth::user()->cm_address}}</textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Jenis Kelamin</label>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        @if(Auth::user()->cm_gender === 'L')
-                                        <label class="mr-5"><input type="radio" name="gender" value="L" checked="">
-                                            Laki-laki</label>
-                                        <label><input type="radio" name="gender" value="P"> Perempuan</label>
-                                        @elseif(Auth::user()->cm_gender === 'P')
-                                        <label class="mr-5"><input type="radio" name="gender" value="L">
-                                            Laki-laki</label>
-                                        <label><input type="radio" name="gender" value="P" checked=""> Perempuan</label>
-                                        @else
-                                        <label class="mr-5"><input type="radio" name="gender" value="L">
-                                            Laki-laki</label>
-                                        <label><input type="radio" name="gender" value="P"> Perempuan</label>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Bank</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <select class="form-control input-sm" name="bank">
-                                            <option value="" selected>~ Pilih Bank ~</option>
-                                            <option value="BCA" {{ (Auth::user()->cm_bank == 'BCA') ? 'selected' : '' }}>BCA</option>
-                                            <option value="BRI" {{ (Auth::user()->cm_bank == 'BRI') ? 'selected' : '' }}>BRI</option>
-                                            <option value="BNI" {{ (Auth::user()->cm_bank == 'BNI') ? 'selected' : '' }}>BNI</option>
-                                            <option value="BTN" {{ (Auth::user()->cm_bank == 'BTN') ? 'selected' : '' }}>BTN</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>No. Rekening</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control  input-sm"
-                                            value="{{ Auth::user()->cm_nbank}}" name="nbank">
-                                    </div>
-                                </div>
-
-
-
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <label>Password baru</label>
-                                </div>
-
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    <div class="form-group">
-                                        <input type="password" class="form-control  input-sm" name="newpassword">
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
-
                         </div>
-                        </form>
-                        <div class="ibox-footer text-right">
-                            <button class="btn btn-primary" type="button" id="simpanprofile">Simpan</button>
-                            <input type="submit" id="submit" name="" hidden="hidden">
-                            <button class="btn btn-warning" type="button">Batal</button>
-                        </div>
-                    
+                    </div>
                 </div>
-
             </div>
-        </div>
-    </div>
+    </form>
+    <button type="button" class="simpanprofile">
 </section>
 @endsection
 @section('extra_script')
@@ -349,21 +397,66 @@
                 formData.append('croppedImage', blob);
             });
         });
-        $('#simpanprofile').on('click', function () {
+        $('#update-alamat').on('click', function () {
+            var emailtest = $('#emailtest').val();
+            $('#inputemail').val(emailtest);
+            $('#mdl-email').modal('hide');
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 100)
+        });
+        $('#update-ponsel').on('click', function () {
+            var ponsel = $('#mdlponsel').val();
+            $('#inputponsel').val(ponsel);
+            $('#mdl-ponsel').modal('hide');
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 100)
+        });
+        $('#update-password').on('click', function () {
+            var passwordbaru = $('#mdlpassword').val();
+            $('#inputpassword').val(passwordbaru);
+            $('#mdl-password').modal('hide');
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 100)
+        });
+        $('#update-rekening').on('click', function () {
+            var namarekeing = $('.nama-bank').val();
+            var nomorrekening = $('.nomor-bank').val();
+            $('#inputrekening').val(namarekeing);
+            $('#inputnomorrekening').val(nomorrekening);
+            $('#mdl-rekening').modal('hide');
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 100)
+        });
+        $('.simpan-foto').on('click', function () {
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 50)
+        });
+        $('.update-jeniskelamin').on('click', function () {
+            $('#inputjkel').val(($("input[name='gender']:checked").val()));
+            $('#mdl-jkel').modal('hide');
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 100)
+        });
+        $('.simpanprofile').on('click', function () {
             $.ajax({
                 url: "{{ route('update.profile') }}",
                 type: "post",
                 data: $("#frmeditprofile").serialize(),
-            
                 success: function (data) {
                     iziToast.success({
                         title: 'Berhasil!',
                         message: 'Berhasil Memperbarui Profile',
                     });
-                    setTimeout(function(){
-                        window.location.href="{{route('home')}}";
-                         }, 1000);
-                    
+                    // setTimeout(function () {
+                    //     window.location.href = "{{route('home')}}";
+                    // }, 1000);
+
                 },
                 error: function (xhr, textStatus, errorThrowl) {
                     iziToast.error({

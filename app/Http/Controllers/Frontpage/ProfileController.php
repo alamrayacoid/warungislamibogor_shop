@@ -30,7 +30,7 @@ class ProfileController extends Controller
     {	
         if ($request->newpassword != null) {
         DB::table('m_member')->where('cm_code',Auth::user()->cm_code)->update([
-            'cm_name' => $request->name,
+            'cm_name' => Auth::user()->cm_name,
             'cm_code' => Auth::user()->cm_code,
             'cm_email' => $request->email,
             'cm_nphone' => $request->nphone,
@@ -43,7 +43,7 @@ class ProfileController extends Controller
         ]);
         }else{
             DB::table('m_member')->where('cm_code',Auth::user()->cm_code)->update([
-                'cm_name' => $request->name,
+                'cm_name' => Auth::user()->cm_name,
                 'cm_code' => Auth::user()->cm_code,
                 'cm_email' => $request->email,
                 'cm_nphone' => $request->nphone,

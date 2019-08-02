@@ -7,12 +7,13 @@
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
         <li><a href="#">Kategori Produk</a></li>
+        <li class="active">{{$namakategori->ity_name}}</a></li>
     </ol>
     <div class="row header-search-filter-group">
         <div class="col-md-6">
 
             <div class="text-header-filter">
-                Kategori Produk
+                Kategori Produk {{$namakategori->ity_name}}
             </div>
 
         </div>

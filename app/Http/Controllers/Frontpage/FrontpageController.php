@@ -17,9 +17,10 @@ class FrontpageController extends Controller
     {
             $data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
-            ->join('m_itemproduct','itp_ciproduct','i_code')
+            ->join('m_itemproduct as p','itp_ciproduct','i_code')
             ->join('m_itemtype','ity_code','itp_citype')
             ->groupBy('i_name')
+            ->where('p.status_data','true')
             ->get();
 
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
