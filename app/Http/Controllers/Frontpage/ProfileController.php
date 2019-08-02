@@ -19,10 +19,12 @@ class ProfileController extends Controller
     	$transaksi = DB::table('d_seller')->where('sell_ccustomer',Auth::user()->cm_code)->where('status_data','true')->count();
     	$password = Auth::user()->password;
         $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+        $provinsi = DB::table('d_province')->get();
         return view('frontpage.profile.profile',array(
         	'wishlist' => $wishlist,
             'transaksi' => $transaksi,
             'kategori'=>$kategori,
+            'provinsi' => $provinsi,
         ));
     }
 

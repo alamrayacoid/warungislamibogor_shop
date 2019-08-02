@@ -18,6 +18,8 @@
 // });
 
 Route::get('/', 'Frontpage\FrontpageController@frontpage')->name('home');
+Route::get('data/lokasi/kota', 'indonesia@kota')->name('kota');
+Route::get('data/lokasi/desa', 'indonesia@desa')->name('desa');
 
 
 

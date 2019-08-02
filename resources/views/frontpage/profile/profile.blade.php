@@ -167,7 +167,8 @@
                                                         <label>Jenis Kelamin</label>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                        @if(Auth::user()->cm_gender === null || Auth::user()->cm_gender === '')
+                                                        @if(Auth::user()->cm_gender === null || Auth::user()->cm_gender
+                                                        === '')
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-jkel">Tambahkan Jenis
                                                             Kelamin</button>
@@ -176,7 +177,8 @@
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-jkel">Ubah Jenis
                                                             Kelamin</button>
-                                                        @elseif(Auth::user()->cm_gender === 'P') <span id="" class="mr-3">Perempuan</span>
+                                                        @elseif(Auth::user()->cm_gender === 'P') <span id=""
+                                                            class="mr-3">Perempuan</span>
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-jkel">Ubah Jenis
                                                             Kelamin</button>
@@ -202,7 +204,8 @@
                                                     </div>
 
                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                        @if(Auth::user()->cm_nphone === null || Auth::user()->cm_nphone === '')
+                                                        @if(Auth::user()->cm_nphone === null || Auth::user()->cm_nphone
+                                                        === '')
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-ponsel">Tambahkan
                                                             Nomor
@@ -225,9 +228,11 @@
                                     <div class="column-empty-profile-advanced">
                                         <img src="{{asset('assets/img/img-product/location-icon.png')}}">
                                         <h5 class="">Oops, Alamat Lengkap Anda Masih Kosong</h5>
-                                        <p>Tambahkan Alamat Lengkap Anda untuk mempermudah proses transaksi di WIB shop
+                                        <p>Tambahkan Alamat Lengkap Anda untuk mempermudah proses transaksi di
+                                            WIB shop
                                         </p>
-                                        <button type="button" data-toggle="modal" data-target="#mdl-alamat">Tambahkan Alamat </button>
+                                        <button type="button" data-toggle="modal" data-target="#mdl-alamat">Tambahkan
+                                            Alamat </button>
                                     </div>
                                     @else
                                     <div class="table-responsive">
@@ -259,53 +264,54 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+
+                                        <div id="tab-3" class="tab-pane animated fadeIn">
+                                            @if(Auth::user()->cm_bank === null || Auth::user()->cm_bank === '')
+                                            <div class="column-empty-profile-advanced">
+                                                <img src="{{asset('assets/img/img-product/account-bank-icon.png')}}">
+                                                <h5 class="">Oops, Rekening Bank Anda Masih Kosong</h5>
+                                                <p>Tambahkan Rekening Bank Anda untuk mempermudah proses
+                                                    transaksi di WIB shop
+                                                </p>
+                                                <button type="button" data-toggle="modal"
+                                                    data-target="#mdl-rekening">Tambahkan
+                                                    Rekening Bank </button>
+                                            </div>
+                                            @else
+                                            <div class="table-responsive">
+                                                <table class="table-address-profile w-100">
+                                                    <thead>
+                                                        <tr class="c-primary-wib">
+                                                            <th></th>
+                                                            <th>Nama Bank</th>
+                                                            <th>Nomor Rekening</th>
+                                                            <th>Aksi</th>
+                                                    </thead>
+                                                    <tbody class="">
+                                                        <tr class="tbody-address-profile">
+                                                            <th style="vertical-align:initial;padding-top:0.2em;">
+                                                                <input type="radio" id="rekening" name='rekening'
+                                                                    checked><label for="rekening" checked>
+                                                                </label></th>
+                                                            <td>{{Auth::user()->cm_bank}}</td>
+                                                            <td>{{Auth::user()->cm_nbank}}</td>
+                                                            <td>
+                                                                <button class="btn btn-update-profile-advanced"
+                                                                    type="button" data-toggle="modal"
+                                                                    data-target="#mdl-rekening"><i
+                                                                        class="fa fa-edit"></i>&ensp;Edit</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                    @endif
-                                </div>
-                                <div id="tab-3" class="tab-pane animated fadeIn">
-                                    @if(Auth::user()->cm_bank === null || Auth::user()->cm_bank === '')
-                                    <div class="column-empty-profile-advanced">
-                                        <img src="{{asset('assets/img/img-product/account-bank-icon.png')}}">
-                                        <h5 class="">Oops, Rekening Bank Anda Masih Kosong</h5>
-                                        <p>Tambahkan Rekening Bank Anda untuk mempermudah proses transaksi di WIB shop
-                                        </p>
-                                        <button type="button" data-toggle="modal" data-target="#mdl-rekening">Tambahkan
-                                            Rekening Bank </button>
-                                    </div>
-                                    @else
-                                    <div class="table-responsive">
-                                        <table class="table-address-profile w-100">
-                                            <thead>
-                                                <tr class="c-primary-wib">
-                                                    <th></th>
-                                                    <th>Nama Bank</th>
-                                                    <th>Nomor Rekening</th>
-                                                    <th>Aksi</th>
-                                            </thead>
-                                            <tbody class="">
-                                                <tr class="tbody-address-profile">
-                                                    <th style="vertical-align:initial;padding-top:0.2em;"><input
-                                                            type="radio" id="rekening" name='rekening' checked><label
-                                                            for="rekening" checked>
-                                                        </label></th>
-                                                    <td>{{Auth::user()->cm_bank}}</td>
-                                                    <td>{{Auth::user()->cm_nbank}}</td>
-                                                    <td>
-                                                        <button class="btn btn-update-profile-advanced" type="button"
-                                                            data-toggle="modal" data-target="#mdl-rekening"><i
-                                                                class="fa fa-edit"></i>&ensp;Edit</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
     </form>
     <button type="button" class="simpanprofile">
 </section>
@@ -313,6 +319,48 @@
 @section('extra_script')
 <script>
     $(document).ready(function () {
+
+        $('#provinsi').change(function () {
+            $.ajax({
+                url: '{{route("kota")}}',
+                type: 'get',
+                data: {
+                    '_token': '{{csrf_token()}}',
+                    'provinsi': $('#provinsi').val()
+                },
+                success: function (get) {
+                    console.log(get['kota']);
+                    var html =
+                        '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
+                    for (var i = 0; i < get['kota'].length; i++) {
+                        html += '<option value="' + get['kota'][i].c_id + '">' + get['kota']
+                            [i].c_nama + '</option>';
+                    }
+                    $('#kota').html(html);
+                }
+            });
+        })
+
+        $('#kota').change(function () {
+            $.ajax({
+                url: '{{route("desa")}}',
+                type: 'get',
+                data: {
+                    '_token': '{{csrf_token()}}',
+                    'kota': $('#kota').val()
+                },
+                success: function (get) {
+                    console.log(get);
+                    var htmll =
+                        '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
+                    for (var i = 0; i < get['desa'].length; i++) {
+                        htmll += '<option value="' + get['desa'][i].d_cid + '">' + get[
+                            'desa'][i].d_nama + '</option>';
+                    }
+                    $('#kecamatan').html(htmll);
+                }
+            });
+        })
 
 
         var $image = $(".image-crop > img");

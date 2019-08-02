@@ -218,6 +218,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div id="tab-2" class="tab-pane animated fadeIn" style="padding:15px 5px 30px 5px">
@@ -312,7 +313,39 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('extra_script'); ?>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
+
+        $('#provinsi').change(function(){
+            $.ajax({
+                url : '<?php echo e(route("kota")); ?>',
+                type : 'get',
+                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'provinsi' : $('#provinsi').val() },
+                success : function(get){
+                    console.log(get['kota']);
+                    var html = '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
+                    for (var i =0; i < get['kota'].length; i++) {
+                        html += '<option value="'+get['kota'][i].c_id+'">'+get['kota'][i].c_nama+'</option>';
+                    }
+                        $('#kota').html(html);
+                }
+            });
+        })
+
+        $('#kota').change(function(){
+            $.ajax({
+                url : '<?php echo e(route("desa")); ?>',
+                type : 'get',
+                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'kota' : $('#kota').val() },
+                success : function(get){
+                    console.log(get);
+                    var htmll = '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
+                    for (var i =0; i < get['desa'].length; i++) {
+                        htmll += '<option value="'+get['desa'][i].d_cid+'">'+get['desa'][i].d_nama+'</option>';
+                    }
+                        $('#kecamatan').html(htmll);
+                }
+            });
+        })
 
 
         var $image = $(".image-crop > img");
