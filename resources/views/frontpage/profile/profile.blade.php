@@ -43,9 +43,9 @@
         <input type="text" id="inputrekening" value="{{Auth::user()->cm_bank}}" name="bank" hidden>
         <input type="text" id="inputnomorrekening" value="{{Auth::user()->cm_nbank}}" name="nbank" hidden>
         <input type="text" id="inputjkel" value="{{Auth::user()->cm_gender}}" name="gender" hidden>
-        <input type="text" id="inputprovinsi" value="" hidden>
-        <input type="text" id="inputkabupaten" value="" hidden>
-        <input type="text" id="inputkecamatan" value="" hidden>
+        <input type="text" id="inputprovinsi" name="provinsi" value="{{Auth::user()->cm_province}}" hidden>
+        <input type="text" id="inputkabupaten" name="kabupaten" value="{{Auth::user()->cm_city}}" hidden>
+        <input type="text" id="inputkecamatan" name="kecamatan" value="{{Auth::user()->cm_district}}" hidden>
         <input type="text" id="inputalamat" name="address" value="{{Auth::user()->cm_address}}" hidden>
         <input type="hidden" id="gambar" name="gambar">
         <ol class="breadcrumb breadcumb-header">
@@ -254,15 +254,16 @@
                                             <tbody>
                                                 <tr class="tbody-address-profile">
                                                     <th style="vertical-align:initial;padding-top:0.2em;"><input
-                                                            type="radio" id="addressradio" name='addressradio' checked><label
-                                                            for="addressradio" checked>
+                                                            type="radio" id="addressradio" name='addressradio'
+                                                            checked><label for="addressradio" checked>
                                                         </label></th>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{Auth::user()->cm_province}}</td>
+                                                    <td>{{Auth::user()->cm_city}}</td>
+                                                    <td>{{Auth::user()->cm_district}}</td>
                                                     <td>{{Auth::user()->cm_address}}</td>
                                                     <td>
-                                                        <button class="btn btn-update-profile-advanced" type="button" data-toggle="modal" data-target="#mdl-alamat"><i
+                                                        <button class="btn btn-update-profile-advanced" type="button"
+                                                            data-toggle="modal" data-target="#mdl-alamat"><i
                                                                 class="fa fa-edit"></i>&ensp;Edit</button>
                                                     </td>
                                                 </tr>
@@ -458,20 +459,34 @@
             }, 100)
         });
         $('#update-ponsel').on('click', function () {
-            var ponsel = $('#mdlponsel').val();
-            $('#inputponsel').val(ponsel);
-            $('#mdl-ponsel').modal('hide');
-            setTimeout(function () {
-                $('.simpanprofile').click();
-            }, 100)
+            if ($('#mdlponsel').val() === '') {
+                iziToast.error({
+                    title: 'Peringatan!',
+                    message: 'Nomor Handphone Wajib Diisi',
+                });
+            } else {
+                var ponsel = $('#mdlponsel').val();
+                $('#inputponsel').val(ponsel);
+                $('#mdl-ponsel').modal('hide');
+                setTimeout(function () {
+                    $('.simpanprofile').click();
+                }, 100)
+            }
         });
         $('#update-password').on('click', function () {
-            var passwordbaru = $('#mdlpassword').val();
-            $('#inputpassword').val(passwordbaru);
-            $('#mdl-password').modal('hide');
-            setTimeout(function () {
-                $('.simpanprofile').click();
-            }, 100)
+            if ($('#mdlpassword').val() === '') {
+                iziToast.error({
+                    title: 'Peringatan!',
+                    message: 'Password Baru Wajib Diisi',
+                });
+            } else {
+                var passwordbaru = $('#mdlpassword').val();
+                $('#inputpassword').val(passwordbaru);
+                $('#mdl-password').modal('hide');
+                setTimeout(function () {
+                    $('.simpanprofile').click();
+                }, 100)
+            }
         });
         $('#update-rekening').on('click', function () {
             var namarekeing = $('.nama-bank').val();
@@ -497,7 +512,13 @@
         });
         $('.update-alamat').on('click', function () {
             $('#mdl-alamat').modal('hide');
+            var provinsi = $('.mdlprovinsi option:selected').text();
+            var kabupaten = $('.mdlkabupaten option:selected').text();
+            var kecamatan = $('.mdlkecamatan option:selected').text();
             var alamat = $('.mdlalamat').val();
+            $('#inputprovinsi').val(provinsi);
+            $('#inputkabupaten').val(kabupaten);
+            $('#inputkecamatan').val(kecamatan);
             $('#inputalamat').val(alamat);
             setTimeout(function () {
                 $('.simpanprofile').click();
@@ -514,7 +535,7 @@
                         message: 'Berhasil Memperbarui Profile',
                     });
                     setTimeout(function () {
-                   location.reload();
+                        location.reload();
                     }, 1000);
 
                 },

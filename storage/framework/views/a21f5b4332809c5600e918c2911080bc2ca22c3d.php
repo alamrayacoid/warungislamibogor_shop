@@ -18,8 +18,9 @@
         border-radius: 50%;
     }
 
-    .select2 {
-        z-index: 99999999;
+    .select2-container {
+        width: 200px !important padding: 0;
+        z-index: 999999;
     }
 </style>
 <?php $__env->stopSection(); ?>
@@ -39,9 +40,13 @@
         <input type="text" id="inputemail" value="<?php echo e(Auth::user()->cm_email); ?>" name="email" hidden>
         <input type="text" id="inputponsel" value="<?php echo e(Auth::user()->cm_nphone); ?>" name="nphone" hidden>
         <input type="text" id="inputpassword" name="newpassword" hidden>
-        <input type="text" id="inputrekening" name="bank" hidden>
-        <input type="text" id="inputnomorrekening" name="nbank" hidden>
-        <input type="text" id="inputjkel" name="gender" hidden>
+        <input type="text" id="inputrekening" value="<?php echo e(Auth::user()->cm_bank); ?>" name="bank" hidden>
+        <input type="text" id="inputnomorrekening" value="<?php echo e(Auth::user()->cm_nbank); ?>" name="nbank" hidden>
+        <input type="text" id="inputjkel" value="<?php echo e(Auth::user()->cm_gender); ?>" name="gender" hidden>
+        <input type="text" id="inputprovinsi" name="provinsi" value="<?php echo e(Auth::user()->cm_province); ?>" hidden>
+        <input type="text" id="inputkabupaten" name="kabupaten" value="<?php echo e(Auth::user()->cm_city); ?>" hidden>
+        <input type="text" id="inputkecamatan" name="kecamatan" value="<?php echo e(Auth::user()->cm_district); ?>" hidden>
+        <input type="text" id="inputalamat" name="address" value="<?php echo e(Auth::user()->cm_address); ?>" hidden>
         <input type="hidden" id="gambar" name="gambar">
         <ol class="breadcrumb breadcumb-header">
             <li><a href="#">Home</a></li>
@@ -167,7 +172,8 @@
                                                         <label>Jenis Kelamin</label>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                        <?php if(Auth::user()->cm_gender === null || Auth::user()->cm_gender === ''): ?>
+                                                        <?php if(Auth::user()->cm_gender === null || Auth::user()->cm_gender
+                                                        === ''): ?>
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-jkel">Tambahkan Jenis
                                                             Kelamin</button>
@@ -176,7 +182,8 @@
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-jkel">Ubah Jenis
                                                             Kelamin</button>
-                                                        <?php elseif(Auth::user()->cm_gender === 'P'): ?> <span id="" class="mr-3">Perempuan</span>
+                                                        <?php elseif(Auth::user()->cm_gender === 'P'): ?> <span id=""
+                                                            class="mr-3">Perempuan</span>
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-jkel">Ubah Jenis
                                                             Kelamin</button>
@@ -202,7 +209,8 @@
                                                     </div>
 
                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                        <?php if(Auth::user()->cm_nphone === null || Auth::user()->cm_nphone === ''): ?>
+                                                        <?php if(Auth::user()->cm_nphone === null || Auth::user()->cm_nphone
+                                                        === ''): ?>
                                                         <button class="btn btn-update-basic-profile" type="button"
                                                             data-toggle="modal" data-target="#mdl-ponsel">Tambahkan
                                                             Nomor
@@ -218,7 +226,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div id="tab-2" class="tab-pane animated fadeIn" style="padding:15px 5px 30px 5px">
@@ -226,9 +233,11 @@
                                     <div class="column-empty-profile-advanced">
                                         <img src="<?php echo e(asset('assets/img/img-product/location-icon.png')); ?>">
                                         <h5 class="">Oops, Alamat Lengkap Anda Masih Kosong</h5>
-                                        <p>Tambahkan Alamat Lengkap Anda untuk mempermudah proses transaksi di WIB shop
+                                        <p>Tambahkan Alamat Lengkap Anda untuk mempermudah proses transaksi di
+                                            WIB shop
                                         </p>
-                                        <button type="button" data-toggle="modal" data-target="#mdl-alamat">Tambahkan Alamat </button>
+                                        <button type="button" data-toggle="modal" data-target="#mdl-alamat">Tambahkan
+                                            Alamat </button>
                                     </div>
                                     <?php else: ?>
                                     <div class="table-responsive">
@@ -245,16 +254,16 @@
                                             <tbody>
                                                 <tr class="tbody-address-profile">
                                                     <th style="vertical-align:initial;padding-top:0.2em;"><input
-                                                            type="radio" id="address" name='address' checked><label
-                                                            for="address" checked>
+                                                            type="radio" id="addressradio" name='addressradio'
+                                                            checked><label for="addressradio" checked>
                                                         </label></th>
-                                                    <td>Jawa Timur</td>
-                                                    <td>Jawa Timur</td>
-                                                    <td>Jawa Timur</td>
-                                                    <td>Jl. Raya Surabaya - Malang, RT.02/RW.10, Lemahbang, Kec.
-                                                        Sukorejo, Pasuruan, Jawa Timur 67161</td>
+                                                    <td><?php echo e(Auth::user()->cm_province); ?></td>
+                                                    <td><?php echo e(Auth::user()->cm_city); ?></td>
+                                                    <td><?php echo e(Auth::user()->cm_district); ?></td>
+                                                    <td><?php echo e(Auth::user()->cm_address); ?></td>
                                                     <td>
-                                                        <button class="btn btn-update-profile-advanced"><i
+                                                        <button class="btn btn-update-profile-advanced" type="button"
+                                                            data-toggle="modal" data-target="#mdl-alamat"><i
                                                                 class="fa fa-edit"></i>&ensp;Edit</button>
                                                     </td>
                                                 </tr>
@@ -268,7 +277,8 @@
                                     <div class="column-empty-profile-advanced">
                                         <img src="<?php echo e(asset('assets/img/img-product/account-bank-icon.png')); ?>">
                                         <h5 class="">Oops, Rekening Bank Anda Masih Kosong</h5>
-                                        <p>Tambahkan Rekening Bank Anda untuk mempermudah proses transaksi di WIB shop
+                                        <p>Tambahkan Rekening Bank Anda untuk mempermudah proses
+                                            transaksi di WIB shop
                                         </p>
                                         <button type="button" data-toggle="modal" data-target="#mdl-rekening">Tambahkan
                                             Rekening Bank </button>
@@ -285,8 +295,8 @@
                                             </thead>
                                             <tbody class="">
                                                 <tr class="tbody-address-profile">
-                                                    <th style="vertical-align:initial;padding-top:0.2em;"><input
-                                                            type="radio" id="rekening" name='rekening' checked><label
+                                                    <th style="vertical-align:initial;padding-top:0.2em;">
+                                                        <input type="radio" id="rekening" name='rekening' checked><label
                                                             for="rekening" checked>
                                                         </label></th>
                                                     <td><?php echo e(Auth::user()->cm_bank); ?></td>
@@ -313,36 +323,46 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('extra_script'); ?>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $('#provinsi').change(function(){
+        $('#provinsi').change(function () {
             $.ajax({
-                url : '<?php echo e(route("kota")); ?>',
-                type : 'get',
-                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'provinsi' : $('#provinsi').val() },
-                success : function(get){
+                url: '<?php echo e(route("kota")); ?>',
+                type: 'get',
+                data: {
+                    '_token': '<?php echo e(csrf_token()); ?>',
+                    'provinsi': $('#provinsi').val()
+                },
+                success: function (get) {
                     console.log(get['kota']);
-                    var html = '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
-                    for (var i =0; i < get['kota'].length; i++) {
-                        html += '<option value="'+get['kota'][i].c_id+'">'+get['kota'][i].c_nama+'</option>';
+                    var html =
+                        '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
+                    for (var i = 0; i < get['kota'].length; i++) {
+                        html += '<option value="' + get['kota'][i].c_id + '">' + get['kota']
+                            [i].c_nama + '</option>';
                     }
-                        $('#kota').html(html);
+                    $('#kota').html(html);
                 }
             });
         })
 
-        $('#kota').change(function(){
+        $('#kota').change(function () {
             $.ajax({
-                url : '<?php echo e(route("desa")); ?>',
-                type : 'get',
-                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'kota' : $('#kota').val() },
-                success : function(get){
+                url: '<?php echo e(route("desa")); ?>',
+                type: 'get',
+                data: {
+                    '_token': '<?php echo e(csrf_token()); ?>',
+                    'kota': $('#kota').val()
+                },
+                success: function (get) {
                     console.log(get);
-                    var htmll = '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
-                    for (var i =0; i < get['desa'].length; i++) {
-                        htmll += '<option value="'+get['desa'][i].d_cid+'">'+get['desa'][i].d_nama+'</option>';
+                    var htmll =
+                        '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
+                    for (var i = 0; i < get['desa'].length; i++) {
+                        htmll += '<option value="' + get['desa'][i].d_cid + '">' + get[
+                            'desa'][i].d_nama + '</option>';
                     }
-                        $('#kecamatan').html(htmll);
+                    $('#kecamatan').html(htmll);
                 }
             });
         })
@@ -439,20 +459,34 @@
             }, 100)
         });
         $('#update-ponsel').on('click', function () {
-            var ponsel = $('#mdlponsel').val();
-            $('#inputponsel').val(ponsel);
-            $('#mdl-ponsel').modal('hide');
-            setTimeout(function () {
-                $('.simpanprofile').click();
-            }, 100)
+            if ($('#mdlponsel').val() === '') {
+                iziToast.error({
+                    title: 'Peringatan!',
+                    message: 'Nomor Handphone Wajib Diisi',
+                });
+            } else {
+                var ponsel = $('#mdlponsel').val();
+                $('#inputponsel').val(ponsel);
+                $('#mdl-ponsel').modal('hide');
+                setTimeout(function () {
+                    $('.simpanprofile').click();
+                }, 100)
+            }
         });
         $('#update-password').on('click', function () {
-            var passwordbaru = $('#mdlpassword').val();
-            $('#inputpassword').val(passwordbaru);
-            $('#mdl-password').modal('hide');
-            setTimeout(function () {
-                $('.simpanprofile').click();
-            }, 100)
+            if ($('#mdlpassword').val() === '') {
+                iziToast.error({
+                    title: 'Peringatan!',
+                    message: 'Password Baru Wajib Diisi',
+                });
+            } else {
+                var passwordbaru = $('#mdlpassword').val();
+                $('#inputpassword').val(passwordbaru);
+                $('#mdl-password').modal('hide');
+                setTimeout(function () {
+                    $('.simpanprofile').click();
+                }, 100)
+            }
         });
         $('#update-rekening').on('click', function () {
             var namarekeing = $('.nama-bank').val();
@@ -476,6 +510,20 @@
                 $('.simpanprofile').click();
             }, 100)
         });
+        $('.update-alamat').on('click', function () {
+            $('#mdl-alamat').modal('hide');
+            var provinsi = $('.mdlprovinsi option:selected').text();
+            var kabupaten = $('.mdlkabupaten option:selected').text();
+            var kecamatan = $('.mdlkecamatan option:selected').text();
+            var alamat = $('.mdlalamat').val();
+            $('#inputprovinsi').val(provinsi);
+            $('#inputkabupaten').val(kabupaten);
+            $('#inputkecamatan').val(kecamatan);
+            $('#inputalamat').val(alamat);
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 100)
+        });
         $('.simpanprofile').on('click', function () {
             $.ajax({
                 url: "<?php echo e(route('update.profile')); ?>",
@@ -486,9 +534,9 @@
                         title: 'Berhasil!',
                         message: 'Berhasil Memperbarui Profile',
                     });
-                    // setTimeout(function () {
-                    //     window.location.href = "<?php echo e(route('home')); ?>";
-                    // }, 1000);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
 
                 },
                 error: function (xhr, textStatus, errorThrowl) {
@@ -501,8 +549,8 @@
             });
 
         });
-
     });
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/profile/profile.blade.php ENDPATH**/ ?>

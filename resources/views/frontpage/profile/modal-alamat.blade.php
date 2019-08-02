@@ -13,23 +13,23 @@
                 <div class="form-group padding-15-0">
                     <label class="label-profile">Provinsi</label>
                     <select class="form-control input-sm select2 mdlprovinsi" id="provinsi" name="province">
-                        <!-- <option hidden value="{{Auth::user()->cm_province}}">
-                            {{Auth::user()->cm_province}}</option>
+                        <option hidden value="{{Auth::user()->cm_province}}">
+                        {{Auth::user()->cm_province}}</option>
                         @foreach($provinsi as $row)
                         <option value="{{$row->p_id}}">{{$row->p_nama}}</option>
-                        @endforeach -->
-                        <option value="Jawa Timur">Jawa Timur</option>
+                        @endforeach
+                        
                     </select>
                     <label class="label-profile">Kabupaten/Kota</label>
                     <select class="form-control input-sm select2 mdlkabupaten" id="kota" name="city">
-                        <!-- <option value="{{Auth::user()->cm_city}}">{{Auth::user()->cm_city}}</option> -->
-                        <option value="Surabaya">Surabaya</option>
+                        <option value="{{Auth::user()->cm_city}}">{{Auth::user()->cm_city}}</option>
+                        
                     </select>
                     <label class="label-profile">Kecamatan</label>
                     <select class="form-control input-sm select2 mdlkecamatan" id="kecamatan" name="district">
-                        <!-- <option hidden value="{{Auth::user()->cm_district}}">
-                            {{Auth::user()->cm_district}}</option> -->
-                            <option value="gunung anyar">Gunung Anyar</option>
+                        <option hidden value="{{Auth::user()->cm_district}}">
+                            {{Auth::user()->cm_district}}</option>
+                            
                     </select>
 
                     <label class="label-profile">Alamat</label>
