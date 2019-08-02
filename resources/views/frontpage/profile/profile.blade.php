@@ -19,8 +19,9 @@
         border-radius: 50%;
     }
 
-    .select2 {
-        z-index: 99999999;
+    .select2-container {
+        width: 200px !important padding: 0;
+        z-index: 999999;
     }
 </style>
 @endsection
@@ -39,9 +40,13 @@
         <input type="text" id="inputemail" value="{{Auth::user()->cm_email}}" name="email" hidden>
         <input type="text" id="inputponsel" value="{{Auth::user()->cm_nphone}}" name="nphone" hidden>
         <input type="text" id="inputpassword" name="newpassword" hidden>
-        <input type="text" id="inputrekening" name="bank" hidden>
-        <input type="text" id="inputnomorrekening" name="nbank" hidden>
-        <input type="text" id="inputjkel" name="gender" hidden>
+        <input type="text" id="inputrekening" value="{{Auth::user()->cm_bank}}" name="bank" hidden>
+        <input type="text" id="inputnomorrekening" value="{{Auth::user()->cm_nbank}}" name="nbank" hidden>
+        <input type="text" id="inputjkel" value="{{Auth::user()->cm_gender}}" name="gender" hidden>
+        <input type="text" id="inputprovinsi" value="" hidden>
+        <input type="text" id="inputkabupaten" value="" hidden>
+        <input type="text" id="inputkecamatan" value="" hidden>
+        <input type="text" id="inputalamat" name="address" value="{{Auth::user()->cm_address}}" hidden>
         <input type="hidden" id="gambar" name="gambar">
         <ol class="breadcrumb breadcumb-header">
             <li><a href="#">Home</a></li>
@@ -249,69 +254,68 @@
                                             <tbody>
                                                 <tr class="tbody-address-profile">
                                                     <th style="vertical-align:initial;padding-top:0.2em;"><input
-                                                            type="radio" id="address" name='address' checked><label
-                                                            for="address" checked>
+                                                            type="radio" id="addressradio" name='addressradio' checked><label
+                                                            for="addressradio" checked>
                                                         </label></th>
-                                                    <td>Jawa Timur</td>
-                                                    <td>Jawa Timur</td>
-                                                    <td>Jawa Timur</td>
-                                                    <td>Jl. Raya Surabaya - Malang, RT.02/RW.10, Lemahbang, Kec.
-                                                        Sukorejo, Pasuruan, Jawa Timur 67161</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>{{Auth::user()->cm_address}}</td>
                                                     <td>
-                                                        <button class="btn btn-update-profile-advanced"><i
+                                                        <button class="btn btn-update-profile-advanced" type="button" data-toggle="modal" data-target="#mdl-alamat"><i
                                                                 class="fa fa-edit"></i>&ensp;Edit</button>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-
-                                        <div id="tab-3" class="tab-pane animated fadeIn">
-                                            @if(Auth::user()->cm_bank === null || Auth::user()->cm_bank === '')
-                                            <div class="column-empty-profile-advanced">
-                                                <img src="{{asset('assets/img/img-product/account-bank-icon.png')}}">
-                                                <h5 class="">Oops, Rekening Bank Anda Masih Kosong</h5>
-                                                <p>Tambahkan Rekening Bank Anda untuk mempermudah proses
-                                                    transaksi di WIB shop
-                                                </p>
-                                                <button type="button" data-toggle="modal"
-                                                    data-target="#mdl-rekening">Tambahkan
-                                                    Rekening Bank </button>
-                                            </div>
-                                            @else
-                                            <div class="table-responsive">
-                                                <table class="table-address-profile w-100">
-                                                    <thead>
-                                                        <tr class="c-primary-wib">
-                                                            <th></th>
-                                                            <th>Nama Bank</th>
-                                                            <th>Nomor Rekening</th>
-                                                            <th>Aksi</th>
-                                                    </thead>
-                                                    <tbody class="">
-                                                        <tr class="tbody-address-profile">
-                                                            <th style="vertical-align:initial;padding-top:0.2em;">
-                                                                <input type="radio" id="rekening" name='rekening'
-                                                                    checked><label for="rekening" checked>
-                                                                </label></th>
-                                                            <td>{{Auth::user()->cm_bank}}</td>
-                                                            <td>{{Auth::user()->cm_nbank}}</td>
-                                                            <td>
-                                                                <button class="btn btn-update-profile-advanced"
-                                                                    type="button" data-toggle="modal"
-                                                                    data-target="#mdl-rekening"><i
-                                                                        class="fa fa-edit"></i>&ensp;Edit</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            @endif
-                                        </div>
                                     </div>
+                                    @endif
+                                </div>
+                                <div id="tab-3" class="tab-pane animated fadeIn">
+                                    @if(Auth::user()->cm_bank === null || Auth::user()->cm_bank === '')
+                                    <div class="column-empty-profile-advanced">
+                                        <img src="{{asset('assets/img/img-product/account-bank-icon.png')}}">
+                                        <h5 class="">Oops, Rekening Bank Anda Masih Kosong</h5>
+                                        <p>Tambahkan Rekening Bank Anda untuk mempermudah proses
+                                            transaksi di WIB shop
+                                        </p>
+                                        <button type="button" data-toggle="modal" data-target="#mdl-rekening">Tambahkan
+                                            Rekening Bank </button>
+                                    </div>
+                                    @else
+                                    <div class="table-responsive">
+                                        <table class="table-address-profile w-100">
+                                            <thead>
+                                                <tr class="c-primary-wib">
+                                                    <th></th>
+                                                    <th>Nama Bank</th>
+                                                    <th>Nomor Rekening</th>
+                                                    <th>Aksi</th>
+                                            </thead>
+                                            <tbody class="">
+                                                <tr class="tbody-address-profile">
+                                                    <th style="vertical-align:initial;padding-top:0.2em;">
+                                                        <input type="radio" id="rekening" name='rekening' checked><label
+                                                            for="rekening" checked>
+                                                        </label></th>
+                                                    <td>{{Auth::user()->cm_bank}}</td>
+                                                    <td>{{Auth::user()->cm_nbank}}</td>
+                                                    <td>
+                                                        <button class="btn btn-update-profile-advanced" type="button"
+                                                            data-toggle="modal" data-target="#mdl-rekening"><i
+                                                                class="fa fa-edit"></i>&ensp;Edit</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
     </form>
     <button type="button" class="simpanprofile">
 </section>
@@ -491,6 +495,14 @@
                 $('.simpanprofile').click();
             }, 100)
         });
+        $('.update-alamat').on('click', function () {
+            $('#mdl-alamat').modal('hide');
+            var alamat = $('.mdlalamat').val();
+            $('#inputalamat').val(alamat);
+            setTimeout(function () {
+                $('.simpanprofile').click();
+            }, 100)
+        });
         $('.simpanprofile').on('click', function () {
             $.ajax({
                 url: "{{ route('update.profile') }}",
@@ -501,9 +513,9 @@
                         title: 'Berhasil!',
                         message: 'Berhasil Memperbarui Profile',
                     });
-                    // setTimeout(function () {
-                    //     window.location.href = "{{route('home')}}";
-                    // }, 1000);
+                    setTimeout(function () {
+                   location.reload();
+                    }, 1000);
 
                 },
                 error: function (xhr, textStatus, errorThrowl) {
@@ -516,7 +528,7 @@
             });
 
         });
-
     });
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 </script>
 @endsection
