@@ -82,15 +82,15 @@ class CheckoutController extends Controller
         }
 
         
-        $datastock = DB::table('m_warehouse')->where('ware_ciproduct',$request->ciproduct[$run])->where('ware_csupplier',$request->label[$run])->SUM('ware_stock');
+        $datastock = DB::table('d_stock')->where('st_ciproduct',$request->ciproduct[$run])->where('st_csupplier',$request->label[$run])->SUM('st_qty');
 
 
         $update = $datastock - $request->qty[$run];
-            DB::table('m_warehouse')
-            ->where('ware_csupplier',$request->label[$run])
-            ->where('ware_ciproduct',$request->ciproduct[$run])
+            DB::table('d_stock')
+            ->where('st_csupplier',$request->label[$run])
+            ->where('st_ciproduct',$request->ciproduct[$run])
             ->update([
-                'ware_stock' => $update,
+                'st_qty' => $update,
             ]);
            
         array_push($data, $arr);

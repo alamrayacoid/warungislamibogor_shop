@@ -90,15 +90,16 @@ class ProdukController extends Controller
     public function produk_detail(Request $request)
     {
     	$code = $request->code;
-        $cabang = DB::table('m_warehouse')
-            ->join('m_branch','b_code','ware_cbranch')
-            ->groupBy('ware_cbranch')
+        $cabang = DB::table('d_stock')
+        ->leftJoin('m_whouse','w_code','st_cwhouse')
+            ->join('m_branch','b_code','w_cbranch')
+            ->groupBy('w_cbranch')
             ->get();
 
-        $label = DB::table('m_warehouse')
-            ->join('m_supplier','s_code','ware_csupplier')
-            ->where('ware_ciproduct',$code)
-            ->groupBy('ware_csupplier')
+        $label = DB::table('d_stock')
+            ->join('m_supplier','s_code','st_csupplier')
+            ->where('st_ciproduct',$code)
+            ->groupBy('st_csupplier')
             ->get();
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->where('i_code',$code)->get();
