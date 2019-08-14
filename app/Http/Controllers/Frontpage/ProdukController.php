@@ -142,6 +142,25 @@ class ProdukController extends Controller
         }
     return response()->json($results);
     }
+
+
+    public function stock_check(Request $request)
+    {
+        $stock = DB::table('d_stock')
+                ->leftJoin('m_whouse','w_code','st_cwhouse')
+                ->where('w_cbranch',$request->cabang)
+                ->where('st_ciproduct',$request->produk)
+                ->where('st_csupplier',$request->suplier)
+                ->get();
+        $total_stock = 0;
+
+        foreach ($stock as $row) {
+            $total_stock += $row->st_qty;
+        }
+
+        return response()->json(['stock' => $total_stock]);
+    }
+
     public function produk_kategori($id){
         $datas = DB::table('m_itemtype')->where('ity_name',$id)->first();
         $data = DB::table('m_item')

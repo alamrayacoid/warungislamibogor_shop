@@ -42,7 +42,8 @@ class KeranjangController extends Controller
         	    		'cart_ciproduct' => $request->code,
         	    		'cart_cmember' => Auth::user()->cm_code,
         	    		'cart_label' => $request->cart_label,
-        	    		'cart_qty' => $request->cart_qty,
+                        'cart_qty' => $request->cart_qty,
+        	    		'cart_cunit' => $request->satuan,
         	    		'cart_location' =>$request->cart_location,
         	    		'status_data' => 'true',
         	    	]);

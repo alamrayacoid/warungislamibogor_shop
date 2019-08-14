@@ -39,8 +39,9 @@
                             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col-md-7">
                                 <div class="col-lg-12">
-                                <h2 class="title-detail-product"><?php echo e($row->i_name); ?><span
-                                        class="text-info-title-detail-product">Tersisa 13</span></h2>
+                                <h2 class="title-detail-product"><?php echo e($row->i_name); ?>
+
+                                    <span class="text-info-title-detail-product" id="stocknya">Tersisa 13</span></h2>
                                 <div class="">
                                     <i class="fa fa-star f-14 c-gold"></i>
                                     <i class="fa fa-star c-gold"></i>
@@ -79,7 +80,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4 p-detail-product-last">
-                                        <select class="form-control fs-12 c-pointer" id="label" name="">
+                                        <select class="form-control fs-12 c-pointer" id="satuan" name="">
                                             <option value="" selected>~ pilih Satuan ~</option>
                                             <?php $__currentLoopData = $satuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $__currentLoopData = $rows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowss): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -297,6 +298,39 @@
 <?php $__env->startSection('extra_script'); ?>
 <script>
     $(document).ready(function () {
+        $('#cabang').on('change',function(){
+            setInterval(function(){
+                ajax_helper('<?php echo e(route("stock_check")); ?>','POST',{'_token' : '<?php echo e(csrf_token()); ?>' , 'cabang' : $('#cabang').val() , 'produk' : '<?php echo e($code); ?>' , 'suplier' : $('#label').val()});
+            },1000);
+        })
+
+        function ajax_helper(url,type,data,success,error,modal)
+        {
+            $.ajax({
+                url : url,
+                type : type,
+                data : data,
+                success : function(get){
+                    if (get['stock'] >= 21) {
+                        $('#stocknya').text('stock '+ get['stock']);
+
+                    }else{
+                        $('#stocknya').text('Tersisa '+ get['stock']);
+                    }
+                    // swal("Informasi!", success, "success");
+                    modal;
+                    success;
+                    // table.ajax.reload();
+                    // $(':input').val('');
+                },
+                error:function(xhr,textStatus,errorThrowl){
+                            // swal("Gagal!", error, "error");
+                            // $(':input').val('');
+                        } 
+
+            })
+        }
+
         $('#ncart').html($('.ncart').length);
 
 
@@ -314,6 +348,7 @@
                     'user': 'user',
                     'cart_label': label,
                     'cart_qty': qty,
+                    'satuan': $('#satuan').val(),
                     'cart_location': cabang,
                 },
                 success: function (get) {

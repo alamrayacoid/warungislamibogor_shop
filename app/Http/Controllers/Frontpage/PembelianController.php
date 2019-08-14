@@ -56,15 +56,15 @@ class PembelianController extends Controller
             $countkirim = DB::table('d_seller')->where('sell_status','Sedang Dikirim')->where('sell_ccustomer',Auth::user()->cm_code)->count();
     	return view('frontpage.pembelian.pembelian',array(
     		'allstatus' => $allstatus->get(),
-    		'pembayaran' => $allstatus->where('sell_status','Pembayaran')->groupBy('sell_nota')->get(),
-    		'proses' => $allstatus->where('sell_status','Sedang Proses')->get(),
+    		'pembayaran' => $allstatus->whereIn('sell_status',['P','SB'])->groupBy('sell_nota')->get(),
+    		'proses' => $allstatus->whereIn('sell_status',['SP','PS','PP'])->get(),
     		'pengiriman' => $allstatus->where('sell_status','Sedang Dikirim')->get(),
             'group' => $group->select('d_seller.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
-    		'groupp' => $group->where('sell_status','Pembayaran')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'groupp' => $group->where('sell_status','P')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'grouppro' => $group->where('sell_status','Sedang Proses')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'groupprostat' => $countproses,
             'groupppengstat' => $countkirim,
-    		'groupppeng' => $group->where('sell_status','Sedang Dikirim')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'groupppeng' => $group->where('sell_status','SD')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'gambar' => $gambar->get(),
             'kategori'=>$kategori,
     	));

@@ -32,6 +32,7 @@ Route::post('/logout', 'Frontpage\FrontpageController@logout')->name('logout');
 
 
 Route::get('/produk', 'Frontpage\ProdukController@produk')->name('produk-frontpage');
+Route::post('/stock_check', 'Frontpage\ProdukController@stock_check')->name('stock_check');
 Route::get('/produk-detail', 'Frontpage\ProdukController@produk_detail')->name('produk-detail-frontpage');
 Route::get('produk/kategori-produk/{id}','Frontpage\ProdukController@produk_kategori')->name('kategori-produk');
 
