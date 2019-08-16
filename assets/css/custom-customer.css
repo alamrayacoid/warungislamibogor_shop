@@ -1319,6 +1319,7 @@ input.form-control:focus {
 .column-item-product{
     margin: 2em 0;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 .bg-primary-wib{
     background: #009a51 !important;
