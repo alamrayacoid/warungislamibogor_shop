@@ -252,21 +252,23 @@
                                                     <th>Aksi</th>
                                             </thead>
                                             <tbody>
+                                                @foreach($alamat as $row)
                                                 <tr class="tbody-address-profile">
                                                     <th style="vertical-align:initial;padding-top:0.2em;"><input
                                                             type="radio" id="addressradio" name='addressradio'
                                                             checked><label for="addressradio" checked>
                                                         </label></th>
-                                                    <td>{{Auth::user()->cm_province}}</td>
-                                                    <td>{{Auth::user()->cm_city}}</td>
-                                                    <td>{{Auth::user()->cm_district}}</td>
+                                                    <td>{{ $row->p_nama }}</td>
+                                                    <td>{{ $row->c_nama }}</td>
+                                                    <td>{{ $row->d_nama }}</td>
                                                     <td>{{Auth::user()->cm_address}}</td>
                                                     <td>
-                                                        <button class="btn btn-update-profile-advanced" type="button"
+                                                        <button class="btn btn-update-profile-advanced alamat" type="button"
                                                             data-toggle="modal" data-target="#mdl-alamat"><i
                                                                 class="fa fa-edit"></i>&ensp;Edit</button>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -359,12 +361,27 @@
                     var htmll =
                         '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
                     for (var i = 0; i < get['desa'].length; i++) {
-                        htmll += '<option value="' + get['desa'][i].d_cid + '">' + get[
+                        htmll += '<option value="' + get['desa'][i].d_id + '">' + get[
                             'desa'][i].d_nama + '</option>';
                     }
                     $('#kecamatan').html(htmll);
                 }
             });
+        })
+
+        $('.alamat').click(function(){
+            var provinsi_trigger = '{{Auth::user()->cm_province}}';
+            var kota_trigger = '{{Auth::user()->cm_city}}';
+            var desa_trigger = '{{Auth::user()->cm_district}}';
+            console.log(provinsi_trigger);
+            console.log(kota_trigger);
+            $('#provinsi').val(provinsi_trigger).trigger('change');
+            setTimeout(function(){
+                $('#kota').val(kota_trigger).trigger('change');
+                setTimeout(function(){
+                    $('#kecamatan').val(desa_trigger).trigger('change');
+                },800)
+            },800)
         })
 
 
@@ -512,18 +529,28 @@
         });
         $('.update-alamat').on('click', function () {
             $('#mdl-alamat').modal('hide');
-            var provinsi = $('.mdlprovinsi option:selected').text();
-            var kabupaten = $('.mdlkabupaten option:selected').text();
-            var kecamatan = $('.mdlkecamatan option:selected').text();
+            var provinsi = $('#provinsi').val();
+            var kabupaten = $('#kota').val();
+            var kecamatan = $('[name=district]').val();
             var alamat = $('.mdlalamat').val();
-            $('#inputprovinsi').val(provinsi);
-            $('#inputkabupaten').val(kabupaten);
-            $('#inputkecamatan').val(kecamatan);
             $('#inputalamat').val(alamat);
             setTimeout(function () {
                 $('.simpanprofile').click();
             }, 100)
         });
+
+        $('#provinsi').change(function(){
+            $('#inputprovinsi').val($('#provinsi').val());
+            })
+
+            $('#kota').change(function(){
+            $('#inputkabupaten').val($('#kota').val());
+            })
+
+            $('#kecamatan').change(function(){
+            $('#inputkecamatan').val($('#kecamatan').val());
+            })
+            
         $('.simpanprofile').on('click', function () {
             $.ajax({
                 url: "{{ route('update.profile') }}",

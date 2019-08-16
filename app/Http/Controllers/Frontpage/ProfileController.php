@@ -20,11 +20,19 @@ class ProfileController extends Controller
     	$password = Auth::user()->password;
         $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
         $provinsi = DB::table('d_province')->get();
+        $alamat = DB::table('m_member')
+            ->where('cm_id',Auth::user()->cm_id)
+            ->leftJoin('d_province','p_id','cm_province')
+            ->leftJoin('d_city','c_id','cm_city')
+            ->leftJoin('d_district','d_id','cm_district')
+            ->get();
+
         return view('frontpage.profile.profile',array(
         	'wishlist' => $wishlist,
             'transaksi' => $transaksi,
             'kategori'=>$kategori,
             'provinsi' => $provinsi,
+            'alamat' => $alamat,
         ));
     }
 

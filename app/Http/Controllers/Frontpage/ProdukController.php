@@ -152,13 +152,28 @@ class ProdukController extends Controller
                 ->where('st_ciproduct',$request->produk)
                 ->where('st_csupplier',$request->suplier)
                 ->get();
+
         $total_stock = 0;
+        $stock_sementara = 0;
 
         foreach ($stock as $row) {
+            $stocks = DB::table('d_seller')
+                ->where('sell_ciproduct',$request->produk)
+                ->where('sell_cwhouse',$row->st_cwhouse)
+                ->where('sell_label',$request->suplier)
+                ->where('sell_status','P')
+                ->get();
+
+            foreach ($stocks as $rows) {
+                $stock_sementara += $rows->sell_quantity;    
+            }
+
             $total_stock += $row->st_qty;
         }
 
-        return response()->json(['stock' => $total_stock]);
+        $stocknow = $total_stock - $stock_sementara;
+
+        return response()->json(['stock' => $stocknow]);
     }
 
     public function produk_kategori($id){
