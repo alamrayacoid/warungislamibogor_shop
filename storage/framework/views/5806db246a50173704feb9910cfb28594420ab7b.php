@@ -50,23 +50,23 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Pilih Provinsi</label>
-                                                <select class="form-control fs-12 select2" name="provinsi">
+                                                <select class="form-control fs-12 select2" id="provinsi" name="provinsi">
                                                     <option value="">Pilih Provinsi</option>
-                                                    <option value="Jawa Timur">Jawa Timur</option>
+                                                    <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($row->p_id); ?>"><?php echo e($row->p_nama); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Pilih Kabupaten</label>
-                                                <select class="form-control fs-12 select2" name="kabupaten">
+                                                <select class="form-control fs-12 select2" id="kota" name="kota">
                                                     <option value="">Pilih Kabupaten/Kota</option>
-                                                    <option value="Surabaya">Surabaya</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Pilih Kecamatan</label>
-                                                <select class="form-control fs-12 select2" name="kecamatan">
+                                                <select class="form-control fs-12 select2" id="kecamatan" name="kecamatan">
                                                     <option value="">Pilih Kecamatan</option>
-                                                    <option value="Jawa Timur">Jawa Timur</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -128,6 +128,8 @@
                                                 <input type="hidden" value="<?php echo e($row->i_code); ?>" name="ciproduct[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_label); ?>" name="label[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
+                                                <input type="hidden" value="<?php echo e($row->cart_cunit); ?>" name="satuan[]">
+                                                <input type="hidden" value="<?php echo e($row->cart_location); ?>" name="gudang[]">
                                                 <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>"
                                                     name="total[]">
                                                 <div class="input-group d-flex">
@@ -293,6 +295,50 @@
 <?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
+        var total_produk = $('.column-group-cart-item-product').length;
+        $('.text-item-full-cart').html('Total Barang : ' + total_produk);
+
+        $('#provinsi').change(function(){
+            $.ajax({
+                url : '<?php echo e(route("kota")); ?>',
+                type : 'get',
+                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'provinsi' : $('#provinsi').val() },
+                success : function(get){
+                    console.log(get['kota']);
+                    var html = '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
+                    for (var i =0; i < get['kota'].length; i++) {
+                        html += '<option value="'+get['kota'][i].c_id+'">'+get['kota'][i].c_nama+'</option>';
+                    }
+                        $('#kota').html(html);
+                }
+            });
+        })
+
+        $('#kota').change(function(){
+            $.ajax({
+                url : '<?php echo e(route("desa")); ?>',
+                type : 'get',
+                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'kota' : $('#kota').val() },
+                success : function(get){
+                    console.log(get);
+                    var htmll = '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
+                    for (var i =0; i < get['desa'].length; i++) {
+                        htmll += '<option value="'+get['desa'][i].d_id+'">'+get['desa'][i].d_nama+'</option>';
+                    }
+                        $('#kecamatan').html(htmll);
+                }
+            });
+        })
+
+        setTimeout(function(){
+            $('#provinsi').val('<?php echo e(Auth::user()->cm_province); ?>').trigger('change');
+            setTimeout(function(){
+                $('#kota').val('<?php echo e(Auth::user()->cm_city); ?>').trigger('change');
+                    setTimeout(function(){                
+                        $('#kecamatan').val('<?php echo e(Auth::user()->cm_district); ?>').trigger('change');
+                },800)
+            },800)
+        },200)
 
         $('#update-alamat').on('click', function () {
             var provinsi = $('#modalp').val();

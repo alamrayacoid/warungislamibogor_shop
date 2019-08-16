@@ -250,7 +250,22 @@
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                    {{$row->sell_status}}</label>
+                                                    @if($row->sell_status == 'P') Pembayaran 
+                                                    @elseif($row->sell_status == 'PP') Proses Packing
+                                                    @elseif($row->sell_status == 'PS') Packing Selesai
+                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                    @else Unkown
+                                                    @endif
+                                                </label>
+                                                    
+
+
+
+
+
                                             </div>
                                             <div class="col-lg-4">
                                                 <a href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
@@ -359,7 +374,16 @@
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                    {{$roww->sell_status}}</label>
+                                                    @if($row->sell_status == 'P') Pembayaran 
+                                                    @elseif($row->sell_status == 'PP') Proses Packing
+                                                    @elseif($row->sell_status == 'PS') Packing Selesai
+                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                    @else Unkown
+                                                    @endif
+                                                </label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <a href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
@@ -465,7 +489,16 @@
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                    {{$roww->sell_status}}</label>
+                                                    @if($row->sell_status == 'P') Pembayaran 
+                                                    @elseif($row->sell_status == 'PP') Proses Packing
+                                                    @elseif($row->sell_status == 'PS') Packing Selesai
+                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                    @else Unkown
+                                                    @endif
+                                                </label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <button class="btn btn-buy-more-product">Beli Lagi</button>
@@ -574,7 +607,16 @@
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                    {{$roww->sell_status}}</label>
+                                                    @if($row->sell_status == 'P') Pembayaran 
+                                                    @elseif($row->sell_status == 'PP') Proses Packing
+                                                    @elseif($row->sell_status == 'PS') Packing Selesai
+                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                    @else Unkown
+                                                    @endif
+                                                </label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <button class="btn btn-buy-more-product">Beli Lagi</button>
@@ -622,16 +664,22 @@
             $('#total_barang').html($(this).data('totalb'));
             $('#harga_total').html($(this).data('hargat'));
             console.log(stat);
-            if (stat == 'Pembayaran') {
+            if ( stat == 'P') {
                 $('#status').html('<span class="label label-warning">Pembayaran</span>');
-            } else if (stat == 'Sedang Dikirim') {
+            }else if(stat == 'PP'){
+                $('#status').html('<label class="label label-info">Proses Packing</label>');
+            }else if(stat == 'PS'){
+                $('#status').html('<label class="label label-info">Packing Selesai</label>');
+            }else if(stat == 'SD'){
                 $('#status').html('<span class="label label-info">Sedang Dikirim</span>');
-            } else if (stat == 'Sedang Proses') {
+            }else if(stat == 'SB'){
+                $('#status').html('<label class="label label-info">Sudah Bayar</label>');
+            }else if (stat == 'SP') {
                 $('#status').html('<span class="label label-primary">Sedang Diproses</span>');
-            } else if (stat == 'Transaksi Selesai') {
+            }else if(stat == 'TS'){
                 $('#status').html('<span class="label label-success">Transaksi Selesai</span>');
-            } else {
-                $('#status').html('<span class="label label-success">Transaksi Selesai</span>');
+            }else{
+                 $('#status').html('<span class="label label-success">Unknown</span>');
             }
             var table2 = $('#table_detail').DataTable({
                 responsive: true,

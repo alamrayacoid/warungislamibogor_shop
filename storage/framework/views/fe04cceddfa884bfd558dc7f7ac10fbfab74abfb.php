@@ -86,7 +86,6 @@
     <script src="<?php echo e(asset('assets/js/plugins/iCheck/icheck.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/iziToast/iziToast.min.js')); ?>"></script>
     <script>
-
         $(document).ready(function () {
             console.log()
             <?php if(Session::get('registerc') != ''): ?>
@@ -124,7 +123,6 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
-
             $("body").on('click', '.toggle-password', function () {
                 var input = $("#pass_log_id");
                 if (input.attr("type") === "password") {
@@ -137,6 +135,5 @@
         });
     </script>
 </body>
-
 
 </html><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/auth/register-frontpage.blade.php ENDPATH**/ ?>

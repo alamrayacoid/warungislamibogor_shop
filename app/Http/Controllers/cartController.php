@@ -25,3 +25,4 @@ class cartController extends Controller
     	return $gambar;
     }
 }
+            
