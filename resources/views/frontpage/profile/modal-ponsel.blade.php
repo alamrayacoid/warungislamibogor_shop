@@ -11,7 +11,7 @@
                 <p>Anda dapat mengubah pengaturan akun Nomor Handphone anda sesuai keinginan.</p>
                 <div class="form-group padding-15-0">
                 <label class="label-profile">Nomor Handphone</label>
-                    <input type="number" class="form-control fs-12" id="mdlponsel" value="{{Auth::user()->cm_nphone}}">
+                    <input type="number" class="form-control fs-12" id="mdlponsel" placeholder="Masukkan Nomor Handphone" value="{{Auth::user()->cm_nphone}}">
                 </div>
                 <div class="d-flex justify-content-center">
                     <button type="button" class="btn btn-save-profile-modal" id="update-ponsel">Simpan Sekarang</button>

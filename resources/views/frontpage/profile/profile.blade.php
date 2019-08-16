@@ -50,7 +50,7 @@
         <input type="hidden" id="gambar" name="gambar">
         <ol class="breadcrumb breadcumb-header">
             <li><a href="#">Home</a></li>
-            <li><a href="">Semua Transaksi</a></li>
+            <li><a href="">Profile</a></li>
         </ol>
         <div class="container-fluid mt-5">
             <div class="row">
@@ -318,7 +318,7 @@
                 </div>
             </div>
     </form>
-    <button type="button" class="simpanprofile">
+    <button type="button" class="simpanprofile" hidden>
 </section>
 @endsection
 @section('extra_script')

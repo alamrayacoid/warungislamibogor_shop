@@ -45,6 +45,7 @@ class ProdukController extends Controller
                 ->join('m_itemprice','ipr_ciproduct','i_code')
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
+                ->where('m_item.status_data','true')
                 ->groupBy('i_name');
                 
 
@@ -133,6 +134,7 @@ class ProdukController extends Controller
         $results = array();
         $queries = DB::table('m_item')
             ->where('i_name', 'LIKE', '%'.$term.'%')
+            ->where('status_data','true')
             ->take(10)->get();
         
         foreach ($queries as $query)
