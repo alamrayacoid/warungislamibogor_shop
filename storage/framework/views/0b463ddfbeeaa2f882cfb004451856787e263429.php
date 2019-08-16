@@ -90,11 +90,11 @@
                                         </select>
                                     </div>
                                     <div class="col-md-12 mt-2 d-flex">
-                                        <button class="btn btn-count-product-stock"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-count-product-stock border-right-0"><i class="fa fa-minus"></i></button>
                                         <input type="number" id="qty" value="1" min="1"
                                             class="form-control border-radius-0 text-center" name=""
                                             class="form-control">
-                                        <button class="btn btn-count-product-stock"><i class="fa fa-plus"></i></button>
+                                        <button class="btn btn-count-product-stock border-left-0"><i class="fa fa-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 column-add-cart mt-2 w-100">
                                         <div class="row">

@@ -1319,6 +1319,7 @@ input.form-control:focus {
 .column-item-product{
     margin: 2em 0;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 .bg-primary-wib{
     background: #009a51 !important;
@@ -1800,6 +1801,7 @@ align-items: center;
 justify-content: center;
 display: flex;
 height: 30px;
+outline: none !important;
 border-radius: 100px;
 width: 30px;
 /* padding: 2.5px 7.5px; */
@@ -1816,5 +1818,19 @@ font-size: 24px !important;
     border-radius: 10px;
     font-size: 12px;
     font-weight: bold;
+}
+.border-left-0{
+    border-left:0 !important;
+}
+.border-right-0{
+    border-right: 0 !important;
+}
+@media(max-width:480px){
+    .product-detail .ibox-content{
+        padding: 15px 5px !important;
+    }
+    .breadcumb-header{
+        padding:1em 15px !important;
+    }
 }
 /* //end */

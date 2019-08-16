@@ -56,4 +56,3 @@
         Copyright © 2019 Warungislamibogor
     </div>
 </section>
-<!-- <button class="btn btn-scrollTop" id="scrolltop"><i class="fa fa-angle-up"></i></button> -->

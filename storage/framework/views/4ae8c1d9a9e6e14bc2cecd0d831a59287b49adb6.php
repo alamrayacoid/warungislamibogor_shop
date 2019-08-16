@@ -55,5 +55,4 @@
     <div class="text-center">
         Copyright © 2019 Warungislamibogor
     </div>
-</section>
-<!-- <button class="btn btn-scrollTop" id="scrolltop"><i class="fa fa-angle-up"></i></button> --><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/layouts/_footer.blade.php ENDPATH**/ ?>
+</section><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/layouts/_footer.blade.php ENDPATH**/ ?>

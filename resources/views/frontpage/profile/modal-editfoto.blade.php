@@ -24,7 +24,7 @@
                             <label>Preview Foto</label>
                             <div class="image-preview"></div>
 
-                            <label class="btn btn-primary btn-sm btn-block mt-3 mb-3" for="input-foto" style="height:50px">
+                            <label class="btn btn-primary d-flex align-items-center btn-sm btn-block mt-3 mb-3" for="input-foto" style="height:50px">
                                 <input type="file" accept="image/*" name="gambar" id="input-foto" class="d-none">
                             </label>
                             

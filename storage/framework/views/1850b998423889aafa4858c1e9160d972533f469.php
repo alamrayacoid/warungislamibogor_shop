@@ -167,6 +167,30 @@
         });
     </script>
     <script type="text/javascript">
+    (function ($) {
+
+let appended = '<div id="overlay-loading">' +
+    '<div class="content-loader">' +
+        '<img src="<?php echo e(asset("assets/img/img-product/Ellipsis-2s-140px.svg")); ?>">' +
+    '</div>' +
+    '</div>';
+
+$("body").prepend(appended);
+
+$.fn.wait = function (action) {
+    if (action == 'show') {
+    $('#overlay-loading').fadeIn(200);
+    }
+    if (action == 'close') {
+
+    }
+    }
+
+    $(document).ready(function () {
+    $("#overlay-loading").fadeOut(2000);
+    })
+
+}(jQuery))
         $(document).ready(function(){
             
             $('[data-target="#navbar"]').click(function(){

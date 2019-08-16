@@ -43,7 +43,22 @@
 
 </head>
 <style>
-    
+    #overlay-loading {
+    position: fixed;
+    /*display: none;*/
+    width: 100%;
+    height: 100vh !important;
+    overflow:hidden;
+    top: 0;
+    left: 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    right: 0;
+    z-index: 999999;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
 .tooltip-custom::after {
     background-color: #333;
     color: #fff;
@@ -89,10 +104,9 @@
     left: 50%;
     transform: translate(-50%, calc(100% + 10px));
 }
-
 .tooltip-custom.bottom::before {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, calc(100% + 5px)) rotate(45deg);
-}
+}      
     </style>
