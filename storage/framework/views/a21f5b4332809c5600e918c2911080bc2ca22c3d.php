@@ -320,7 +320,7 @@
                 </div>
             </div>
     </form>
-    <button type="button" class="simpanprofile" hidden>
+    <button type="button" class="simpanprofile" hidden></button>
 </section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('extra_script'); ?>

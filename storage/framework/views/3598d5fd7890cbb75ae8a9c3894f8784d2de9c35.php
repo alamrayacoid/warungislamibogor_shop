@@ -109,4 +109,7 @@
     left: 50%;
     transform: translate(-50%, calc(100% + 5px)) rotate(45deg);
 }      
+.overflow-hidden{
+    overflow:hidden !important;
+}
     </style><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_head-frontpage.blade.php ENDPATH**/ ?>

@@ -109,4 +109,7 @@
     left: 50%;
     transform: translate(-50%, calc(100% + 5px)) rotate(45deg);
 }      
+.overflow-hidden{
+    overflow:hidden !important;
+}
     </style>

@@ -167,30 +167,21 @@
         });
     </script>
     <script type="text/javascript">
-    (function ($) {
-
-let appended = '<div id="overlay-loading">' +
+    let appendloader = '<div id="overlay-loading">' +
     '<div class="content-loader">' +
         '<img src="<?php echo e(asset("assets/img/img-product/Ellipsis-2s-140px.svg")); ?>">' +
     '</div>' +
     '</div>';
-
-$("body").prepend(appended);
-
-$.fn.wait = function (action) {
-    if (action == 'show') {
-    $('#overlay-loading').fadeIn(200);
+    $("body").prepend(appendloader).addClass('overflow-hidden');
+    $(window).on('load', function () {
+    setTimeout(removeLoaderweb, 1000); //wait for page load PLUS two seconds.
+    });
+    function removeLoaderweb() {
+     $("#overlay-loading").fadeOut(500, function () {
+        $("#overlay-loading").remove();
+        $('body').removeClass('overflow-hidden');
+    });
     }
-    if (action == 'close') {
-
-    }
-    }
-
-    $(document).ready(function () {
-    $("#overlay-loading").fadeOut(2000);
-    })
-
-}(jQuery))
         $(document).ready(function(){
             
             $('[data-target="#navbar"]').click(function(){
