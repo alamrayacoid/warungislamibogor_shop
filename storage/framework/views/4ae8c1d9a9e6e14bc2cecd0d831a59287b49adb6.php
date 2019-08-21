@@ -55,4 +55,25 @@
     <div class="text-center">
         Copyright © 2019 Warungislamibogor
     </div>
-</section><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/layouts/_footer.blade.php ENDPATH**/ ?>
+</section>
+<div class="smallchat-box">
+    <div class="header-smallchat-box">
+        <div class="header-avatar-group-chat">
+            <img src="<?php echo e(asset('assets/img/a4.jpg')); ?>" class="avatar-smallchat-header">
+            <div class="text-header-avatar-group">
+                <h5>Warung Islami Bogor<span>Penjual</span></h5>
+                <p>Customer Services</p>
+            </div>
+        </div>
+        <span class="hidechat-widget"><i class="fa fa-chevron-down"></i></span>
+    </div>
+    <div class="body-smallchat-box">
+        <div class="chat-text-person">Selamat datang di Warung Islami Bogor Online Shop. Ada yang bisa kami bantu guna
+            memudahkan belanja anda ?</div>
+        <div class="footer-smallchat-box">
+            <a href="https://api.whatsapp.com/send?phone=6281285270793&text=Saya%20tertarik%20dengan%20Produk%20Anda"  target="_blank"><button class=""> <i class="fa fa-paper-plane"></i>&ensp;Chat Sekarang</button></a>
+        </div>
+    </div>
+</div>
+<button class="btn btn-smallchat" id="smallchat-show" type="button"><span class="icon-chat"></span><span
+        class="text-chat">Whatsapp</span></button><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/layouts/_footer.blade.php ENDPATH**/ ?>

@@ -112,4 +112,7 @@
 .overflow-hidden{
     overflow:hidden !important;
 }
+.d-none{
+    display:none;
+}
     </style>

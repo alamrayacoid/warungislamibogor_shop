@@ -112,4 +112,7 @@
 .overflow-hidden{
     overflow:hidden !important;
 }
+.d-none{
+    display:none;
+}
     </style><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_head-frontpage.blade.php ENDPATH**/ ?>

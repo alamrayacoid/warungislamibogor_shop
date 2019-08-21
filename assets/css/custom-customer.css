@@ -201,7 +201,7 @@
     color: #fff !important;
 }
 .navbar_custom .dropdown-menu-user{
-    top: 5.1em;
+    top: 5em;
     padding: 1em 0;
 }
 .navbar_custom .dropdown-menu-user li{
@@ -296,6 +296,9 @@ transition: 0.5s;
     display:flex;
     justify-content: space-between;
     padding: 0.5em 0 0.5em 0;
+}
+.footer-product-item i{
+    font-size: 12px;
 }
 .price-product-item{
     font-size: 13px;
@@ -550,9 +553,15 @@ transition: 0.5s;
     width:200px;
 }
 @media (max-width: 992px) {
+    .navbar_custom .navbar-header a{
+        font-size: 16px !important;
+    }
+    .breadcumb-header{
+        padding: 1em 15px !important;
+    }
     .navbar-header {
         float: none;
-        padding: 0 15px;
+        padding: 0 15px 0 0;
     }
     .column-opsi-filter-group{
         display: none !important;
@@ -752,6 +761,12 @@ transition: 0.5s;
         background: white !important;
         color:black !important;
     }
+    .breadcumb-header{
+        padding: 1em 15px !important;
+    }
+    .column-profile-frame--sidebar{
+        padding: 0 5px !important;
+    }
 }
 @media(max-width:1199px) and (min-width:993px){
     .form-header-notlogin{
@@ -784,6 +799,18 @@ transition: 0.5s;
     .column-footer-logo img{
         width:100%;
     }
+}
+@media(max-width:360px){
+    .column-empty-transaction img{
+        width: 100% !important;
+        height: auto !important;
+    }
+    .column-empty-transaction button{
+        width: auto !important;
+        padding: 15px !important;
+    }
+    
+
 }
 
 /* important */
@@ -1061,6 +1088,11 @@ input.form-control:focus {
 @media(max-width:992px){
     .header-search-filter-group{
         display: block;
+        padding: 1em 15px !important;
+        
+    }
+    .header-search-filter-group .text-header-filter{
+        font-size: 14px !important;
     }
 }
 .btn-submit-filter-item{
@@ -1831,6 +1863,150 @@ font-size: 24px !important;
     }
     .breadcumb-header{
         padding:1em 15px !important;
+    }
+}
+.btn-smallchat .icon-chat{
+    background-image: url('../img/img-product/icon-chat.png');
+    width: 28px;
+    height: 28px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.btn-smallchat{
+    background: #fff !important;
+    position: fixed;
+    right: 40px;
+    bottom: 30px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.12) !important;
+    background-color: #fff;
+    display: flex;
+    z-index: 88;
+    align-items: center;
+}
+.btn-smallchat .text-chat{
+    color: #4dc95b;
+    padding-left: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+.smallchat-box{
+    box-shadow : 0 2px 30px 0 rgba(0,0,0,.2);
+    width:350px;
+    position: fixed;
+    display: none;
+    bottom: 30px;
+    border-radius: 20px;
+    background: #fff;
+    right: 40px;
+}
+.header-smallchat-box{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.05);
+    display: flex;
+    justify-content: space-between;
+    z-index:2 !important;
+    padding: 0.5em 15px !important;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: #fff;
+}
+.avatar-smallchat-header{
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+}
+.header-smallchat-box{
+    padding: 5px;
+}
+.header-avatar-group-chat{
+    display: flex;
+}
+.header-avatar-group-chat h5{
+    font-size: 12px;
+    color: black;
+    line-height: 1.5;
+    margin-block-end: 0;
+}
+.header-avatar-group-chat h5 span{
+    background: #daf5db;
+    color: #42b549;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 2px 8px;
+    margin-left: 5px;
+}
+.header-avatar-group-chat p{
+    margin-block-start: 0;
+}
+.text-header-avatar-group{
+    padding: 0 5px;
+}
+.text-header-avatar-group p{
+    color: rgba(0,0,0,.38);
+    font-size: 10px !important;
+    font-weight: 600;
+}
+.body-smallchat-box .chatroom-timemachine{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    z-index: 1;
+}
+.body-smallchat-box .chatroom-timemachine img{
+    margin: 5px;
+}
+.body-smallchat-box .chatroom-timemachine span{
+    padding: 5px;
+    font-size: 11px;
+    line-height: 2;
+}
+.body-smallchat-box .chat-text-person{
+    margin: 2em 15px 5em 15px;
+    padding: 10px;
+    line-height: 2;
+    font-size: 12px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,.05);
+}
+.footer-smallchat-box{
+    border-top: 1px solid #e0e0e0;
+    height: 3em;
+}
+.footer-smallchat-box button{
+    position: relative;
+    right: 1em;
+    float: right;
+    bottom: 1.5em;
+    background: #4dc95b;
+    color: #fff;
+    border:0;
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: 600;
+    outline: none !important;
+    font-size: 12px;
+}
+.btn-hidechat-box{
+    height: 40px;
+    padding: 0;
+
+}
+.hidechat-widget i{
+    color: #4dc95b;
+}
+.hidechat-widget{
+    cursor: pointer;
+}
+@media(max-width:480px){
+.smallchat-box{
+    right: 10px;
+    width: 90% !important;
+    }
+    .btn-smallchat{
+        right: 15px;
     }
 }
 /* //end */

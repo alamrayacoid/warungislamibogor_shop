@@ -238,5 +238,29 @@
         });
         $(document).ready(function(){
             $('.select2').select2();
-        })
+        });
+        var ls = document.getElementById('ls');
+var bttn = document.getElementById('smallchat-button');
+
+
+
+function toggleSwitchLang(){
+  ls.classList.toggle('active-chat')
+}
+$(document).ready(function(){
+    
+    $("#smallchat-show").click(function(){
+    $("#smallchat-show").slideUp();
+    setTimeout(function(){
+        $(".smallchat-box").slideDown("slow");
+        }, 300);
+  });
+  $(".hidechat-widget").click(function(){
+    $(".smallchat-box").slideUp("slow");
+    setTimeout(function(){
+        $("#smallchat-show").slideDown("slow");
+        }, 300);
+  });
+});
+
     </script><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_script-frontpage.blade.php ENDPATH**/ ?>
