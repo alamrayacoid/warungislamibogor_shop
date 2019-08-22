@@ -130,6 +130,7 @@
                                                 <input type="hidden" value="{{$row->cart_qty}}" name="qty[]">
                                                 <input type="hidden" value="{{$row->cart_cunit}}" name="satuan[]">
                                                 <input type="hidden" value="{{$row->cart_location}}" name="gudang[]">
+                                                <input type="text" value="{{$row->ipr_sunitprice}}"name="hargabarang[]">
                                                 <input type="hidden" value="{{$row->ipr_sunitprice * $row->cart_qty}}"
                                                     name="total[]">
                                                 <div class="input-group d-flex">
@@ -147,10 +148,10 @@
                                             <h5 class="">Rp. {{$row->ipr_sunitprice * $row->cart_qty}}</h5>
                                             <input type="hidden" value="{{$row->ipr_sunitprice * $row->cart_qty}}"
                                                 class="total" id="total{{$row->cart_id}}" name="">
-                                            <a data-id="{{$row->cart_id}}" data-ciproduct="{{$row->cart_ciproduct}}"
+                                            <!-- <a data-id="{{$row->cart_id}}" data-ciproduct="{{$row->cart_ciproduct}}"
                                                 data-label="{{$row->cart_label}}" data-qty="{{$row->cart_qty}}"
                                                 class="remove"><button class="btn btn-default"><i
-                                                        class="fa fa-times"></i></button></a>
+                                                        class="fa fa-times"></i></button></a> -->
                                         </div>
                                     </div>
                                     @endforeach

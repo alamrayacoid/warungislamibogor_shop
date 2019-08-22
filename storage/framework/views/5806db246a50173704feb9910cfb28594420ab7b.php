@@ -130,6 +130,7 @@
                                                 <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_cunit); ?>" name="satuan[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_location); ?>" name="gudang[]">
+                                                <input type="text" value="<?php echo e($row->ipr_sunitprice); ?>"name="hargabarang[]">
                                                 <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>"
                                                     name="total[]">
                                                 <div class="input-group d-flex">
@@ -147,10 +148,10 @@
                                             <h5 class="">Rp. <?php echo e($row->ipr_sunitprice * $row->cart_qty); ?></h5>
                                             <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>"
                                                 class="total" id="total<?php echo e($row->cart_id); ?>" name="">
-                                            <a data-id="<?php echo e($row->cart_id); ?>" data-ciproduct="<?php echo e($row->cart_ciproduct); ?>"
+                                            <!-- <a data-id="<?php echo e($row->cart_id); ?>" data-ciproduct="<?php echo e($row->cart_ciproduct); ?>"
                                                 data-label="<?php echo e($row->cart_label); ?>" data-qty="<?php echo e($row->cart_qty); ?>"
                                                 class="remove"><button class="btn btn-default"><i
-                                                        class="fa fa-times"></i></button></a>
+                                                        class="fa fa-times"></i></button></a> -->
                                         </div>
                                     </div>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

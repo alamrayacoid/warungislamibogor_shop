@@ -210,7 +210,7 @@
     $(document).ready(function () {
         $('#cabang').on('change',function(){
             setInterval(function(){
-                ajax_helper('<?php echo e(route("stock_check")); ?>','POST',{'_token' : '<?php echo e(csrf_token()); ?>' , 'cabang' : $('#cabang').val() , 'produk' : '<?php echo e($code); ?>' , 'suplier' : $('#label').val()});
+                ajax_helper('<?php echo e(route("stock_check")); ?>','POST',{'_token' : '<?php echo e(csrf_token()); ?>' , 'cabang' : $('#cabang').val() , 'produk' : '<?php echo e($code); ?>'});
             },1000);
         })
 
@@ -246,7 +246,6 @@
 
         $('#addcart').on('click', function () {
             var cproduct = $(this).data('product');
-            var label = $('#label').val();
             var qty = $('#qty').val();
             var cabang = $('#cabang').val();
             $.ajax({
@@ -256,7 +255,6 @@
                     '_token': '<?php echo e(csrf_token()); ?>',
                     'code': cproduct,
                     'user': 'user',
-                    'cart_label': label,
                     'cart_qty': qty,
                     'satuan': $('#satuan').val(),
                     'cart_location': cabang,

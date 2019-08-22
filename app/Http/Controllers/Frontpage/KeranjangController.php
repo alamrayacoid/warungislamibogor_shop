@@ -32,7 +32,7 @@ class KeranjangController extends Controller
     public function addcart(Request $request)
     {
     		$code = $request->code;
-            $stock = DB::table('d_stock')->where('st_ciproduct',$code)->where('st_csupplier',$request->cart_label)->sum('st_qty');
+            $stock = DB::table('d_stock')->where('st_ciproduct',$code)->sum('st_qty');
     	    $cek = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->where('cart_ciproduct',$code)->count();
             $update = $stock - $request->cart_qty;
             if ($stock >= $request->cart_qty) {
@@ -41,7 +41,6 @@ class KeranjangController extends Controller
         	    	DB::table('d_cart')->insert([
         	    		'cart_ciproduct' => $request->code,
         	    		'cart_cmember' => Auth::user()->cm_code,
-        	    		'cart_label' => $request->cart_label,
                         'cart_qty' => $request->cart_qty,
         	    		'cart_cunit' => $request->satuan,
         	    		'cart_location' =>$request->cart_location,
@@ -66,7 +65,7 @@ class KeranjangController extends Controller
     public function removecart(Request $request){
         $id = $request->id;
         $code = $request->code;
-        $stock = DB::table('d_stock')->where('st_ciproduct',$code)->where('st_csupplier',$request->label)->sum('st_qty');
+        $stock = DB::table('d_stock')->where('st_ciproduct',$code)->sum('st_qty');
         $cek = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->where('cart_ciproduct',$code)->count();
         $update = $stock + $request->qty;
         if ($id != '') {
