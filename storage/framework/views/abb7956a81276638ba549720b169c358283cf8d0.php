@@ -40,7 +40,7 @@
                                     <div class="column-description-cart-product">
                                         <h5 class="title-cart-product-item"><?php echo e($row->i_name); ?></h5>
                                         <input type="hidden" value="<?php echo e($row->i_code); ?>" name="ciproduct[]">
-                                        <input type="hidden" value="<?php echo e($row->cart_label); ?>" name="label[]">
+                                        
                                         <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
                                         <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>"
                                             name="total[]">
@@ -58,8 +58,7 @@
                                     <h5 class="">Rp. <?php echo e($row->ipr_sunitprice * $row->cart_qty); ?></h5>
                                     <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>" class="total"
                                         id="total<?php echo e($row->cart_id); ?>" name="">
-                                    <a data-id="<?php echo e($row->cart_id); ?>" data-ciproduct="<?php echo e($row->cart_ciproduct); ?>"
-                                        data-label="<?php echo e($row->cart_label); ?>" data-qty="<?php echo e($row->cart_qty); ?>"
+                                    <a data-id="<?php echo e($row->cart_id); ?>" data-ciproduct="<?php echo e($row->cart_ciproduct); ?>" data-qty="<?php echo e($row->cart_qty); ?>"
                                         class="remove"><button class="btn btn-default"><i
                                                 class="fa fa-times"></i></button></a>
                                 </div>
