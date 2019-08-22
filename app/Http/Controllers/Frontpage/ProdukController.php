@@ -97,13 +97,14 @@ class ProdukController extends Controller
             ->groupBy('w_cbranch')
             ->get();
 
-        $label = DB::table('d_stock')
-            ->join('m_supplier','s_code','st_csupplier')
-            ->where('st_ciproduct',$code)
-            ->groupBy('st_csupplier')
-            ->get();
+        // $label = DB::table('d_stock')
+        //     ->join('m_supplier','s_code','st_csupplier')
+        //     ->where('st_ciproduct',$code)
+        //     ->groupBy('st_csupplier')
+        //     ->get();
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->where('i_code',$code)->get();
+        $gambarsejenis = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
         $satuan = [];
         $satuan1 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit')->where('itp_ciproduct',$code)->get();
         $satuan2 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit2')->where('itp_ciproduct',$code)->get();
@@ -118,15 +119,36 @@ class ProdukController extends Controller
             ->where('i_code',$code)
             ->groupBy('i_name')
             ->get();
+        $datas = DB::table('m_item')
+            ->join('m_itemprice','ipr_ciproduct','i_code')
+            ->join('m_itemproduct','itp_ciproduct','i_code')
+            ->join('m_itemtype','ity_code','itp_citype')
+            ->where('i_code',$code)
+            ->groupBy('i_name')
+            ->first();
+        $produksejenis = DB::table('m_item')
+            ->join('m_itemprice','ipr_ciproduct','i_code')
+            ->join('m_itemproduct','itp_ciproduct','i_code')
+            ->join('m_itemtype','ity_code','itp_citype')
+            ->groupBy('i_name')
+            ->where('m_item.status_data','true')
+            ->where('itp_citype',$datas->itp_citype)
+            ->where('i_code','!=',$code)
+            ->take(5)
+            ->get();
+            
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
     	return view('frontpage.produk.produk-detail-frontpage',array(
-    		'data' => $data,
+            'data' => $data,
+            'typeproduk'=>$datas,
             'gambar' => $gambar,
+            'gambarsejenis'=>$gambarsejenis,
             'code' => $code,
-            'label' => $label,
+            // 'label' => $label,
             'cabang' => $cabang,
             'kategori' => $kategori,
-            'satuan' => $satuan
+            'satuan' => $satuan,
+            'produksejenis'=> $produksejenis,
 
     	));
     }
@@ -185,6 +207,7 @@ class ProdukController extends Controller
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->where('itp_citype',$datas->ity_code)
+                ->where('m_item.status_data','true')
                 ->get();
 
                 $kategori = DB::table('m_itemtype')->where('status_data','true')->get();

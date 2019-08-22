@@ -245,6 +245,10 @@
 }
 .img-header-second:last-child img{
     height:143px;
+    
+}
+.img-header-second:last-child{
+    margin-top: 1em !important;
 }
 
 .btn-count-product-stock{
@@ -1421,6 +1425,21 @@ input.form-control:focus {
 }
 .product-box-item-slider{
     margin: 0 5px;
+    outline: none !important;
+}
+.product-box-item-slider:focus{
+    outline: none !important;
+}
+.slick{
+    outline: none !important;
+}
+@media(max-width:992px){
+    .p-detail-product-last{
+        padding: 5px 0;
+    }
+    .p-detail-product-first{
+        padding: 5px 0;
+    }
 }
 .product-box-item{
     transition: 0.5s;

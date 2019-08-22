@@ -63,25 +63,17 @@
                                 </div>
                                 </div>
                                 
-                                    <div class="col-md-4 p-detail-product-first">
-                                        <select id="cabang" name="" class="form-control fs-12 c-pointer">
-                                            <option value="" selected>~ pilih cabang ~</option>
+                                    <div class="col-md-6 p-detail-product-first">
+                                        <select id="cabang" name="" class="form-control select2 c-pointer">
+                                            <option value="" selected>pilih cabang</option>
                                             <?php $__currentLoopData = $cabang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cbng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($cbng->b_code); ?>"><?php echo e($cbng->b_name); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <select class="form-control fs-12 c-pointer" id="label" name="">
-                                            <option value="" selected>~ pilih Merk ~</option>
-                                            <?php $__currentLoopData = $label; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($rows->s_code); ?>"><?php echo e($rows->s_name); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 p-detail-product-last">
-                                        <select class="form-control fs-12 c-pointer" id="satuan" name="">
-                                            <option value="" selected>~ pilih Satuan ~</option>
+                                    <div class="col-md-6 p-detail-product-last">
+                                        <select class="form-control c-pointer select2" id="satuan" name="">
+                                            <option value="" selected>pilih Satuan</option>
                                             <?php $__currentLoopData = $satuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $__currentLoopData = $rows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowss): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($rowss->iu_code); ?>"><?php echo e($rowss->iu_name); ?></option>
@@ -90,11 +82,10 @@
                                         </select>
                                     </div>
                                     <div class="col-md-12 mt-2 d-flex">
-                                        <button class="btn btn-count-product-stock border-right-0"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i class="fa fa-minus"></i></button>
                                         <input type="number" id="qty" value="1" min="1"
-                                            class="form-control border-radius-0 text-center" name=""
-                                            class="form-control">
-                                        <button class="btn btn-count-product-stock border-left-0"><i class="fa fa-plus"></i></button>
+                                            class="form-control border-radius-0 text-center jumlahbelibarang" name="">
+                                        <button class="btn btn-count-product-stock border-left-0" onclick="plus()"><i class="fa fa-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 column-add-cart mt-2 w-100">
                                         <div class="row">
@@ -157,7 +148,7 @@
             </div> -->
                 </div>
     </div>
-<div class="row">
+    <div class="row">
             <div class="col-lg-12">
                 <div class="ibox product-description">
                     <div class="ibox-title" style="background:#fafafa;">
@@ -171,17 +162,25 @@
                     </div>
                 </div>
             </div>
-</div>
+    </div>
         <div class="row">
+        <?php if($produksejenis == '[]'): ?>
+        <?php else: ?>
             <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
+            <?php $__currentLoopData = $produksejenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <!-- <?php if($rows->itp_citype == $typeproduk->itp_citype && $rows->i_code != $typeproduk->i_code): ?> -->
             <div class="col-lg-product col-md-3 col-sm-6 ">
                 <div class="thumbnail product-box-item">
+                    <?php $__currentLoopData = $gambarsejenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($rows->i_code == $roww->ip_ciproduct): ?>
                     <div class="image-product-box"
-                        style="background:url('<?php echo e(asset('assets/img/img-product/product-4.png')); ?>')">
+                        style="background:url('/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                     </div>
+                    <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <div class="caption">
                         <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($rows->i_code); ?>" class="title-product-item"><?php echo e($rows->i_name); ?></a>
                         </div>
                         <div class="footer-product-item">
                             <div class="">
@@ -191,104 +190,15 @@
                                 <i class="fa fa-star c-gold"></i>
                                 <i class="fa fa-star c-grey"></i>
                             </div>
-                            <div class="price-product-item">Rp. 10.000</div>
+                            <div class="price-product-item">Rp. <?php echo e($rows->ipr_sunitprice); ?></div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class=" col-lg-product col-md-3 col-sm-6">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-3 col-sm-6 ">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('<?php echo e(asset('assets/img/img-product/product-4.png')); ?>')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-3 col-sm-6 ">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-3 col-sm-6 ">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('<?php echo e(asset('assets/img/img-product/product-4.png')); ?>')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <!-- <?php endif; ?> -->
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
         </div>
 </section>
 
@@ -393,8 +303,22 @@
             dots: false,
             infinite: true,
         });
-
     });
+      
+var count = 1;
+var countEl = document.getElementById("qty");
+
+function plus() {
+  count++;
+  countEl.value = count;
+}
+
+function minus() {
+  if (count > 1) {
+    count--;
+    countEl.value = count;
+  }
+}
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/produk/produk-detail-frontpage.blade.php ENDPATH**/ ?>

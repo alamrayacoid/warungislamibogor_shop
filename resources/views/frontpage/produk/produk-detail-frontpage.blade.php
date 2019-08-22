@@ -64,25 +64,17 @@
                                 </div>
                                 </div>
                                 
-                                    <div class="col-md-4 p-detail-product-first">
-                                        <select id="cabang" name="" class="form-control fs-12 c-pointer">
-                                            <option value="" selected>~ pilih cabang ~</option>
+                                    <div class="col-md-6 p-detail-product-first">
+                                        <select id="cabang" name="" class="form-control select2 c-pointer">
+                                            <option value="" selected>pilih cabang</option>
                                             @foreach($cabang as $cbng)
                                             <option value="{{$cbng->b_code}}">{{$cbng->b_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <select class="form-control fs-12 c-pointer" id="label" name="">
-                                            <option value="" selected>~ pilih Merk ~</option>
-                                            @foreach($label as $rows)
-                                            <option value="{{$rows->s_code}}">{{$rows->s_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 p-detail-product-last">
-                                        <select class="form-control fs-12 c-pointer" id="satuan" name="">
-                                            <option value="" selected>~ pilih Satuan ~</option>
+                                    <div class="col-md-6 p-detail-product-last">
+                                        <select class="form-control c-pointer select2" id="satuan" name="">
+                                            <option value="" selected>pilih Satuan</option>
                                             @foreach($satuan as $rows)
                                                 @foreach($rows as $rowss)
                                                     <option value="{{$rowss->iu_code}}">{{$rowss->iu_name}}</option>
@@ -91,11 +83,10 @@
                                         </select>
                                     </div>
                                     <div class="col-md-12 mt-2 d-flex">
-                                        <button class="btn btn-count-product-stock border-right-0"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i class="fa fa-minus"></i></button>
                                         <input type="number" id="qty" value="1" min="1"
-                                            class="form-control border-radius-0 text-center" name=""
-                                            class="form-control">
-                                        <button class="btn btn-count-product-stock border-left-0"><i class="fa fa-plus"></i></button>
+                                            class="form-control border-radius-0 text-center jumlahbelibarang" name="">
+                                        <button class="btn btn-count-product-stock border-left-0" onclick="plus()"><i class="fa fa-plus"></i></button>
                                     </div>
                                     <div class="col-md-12 column-add-cart mt-2 w-100">
                                         <div class="row">
@@ -158,7 +149,7 @@
             </div> -->
                 </div>
     </div>
-<div class="row">
+    <div class="row">
             <div class="col-lg-12">
                 <div class="ibox product-description">
                     <div class="ibox-title" style="background:#fafafa;">
@@ -171,17 +162,25 @@
                     </div>
                 </div>
             </div>
-</div>
+    </div>
         <div class="row">
+        @if($produksejenis == '[]')
+        @else
             <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
+            @foreach($produksejenis as $rows)
+            <!-- @if($rows->itp_citype == $typeproduk->itp_citype && $rows->i_code != $typeproduk->i_code) -->
             <div class="col-lg-product col-md-3 col-sm-6 ">
                 <div class="thumbnail product-box-item">
+                    @foreach($gambarsejenis as $roww)
+                    @if($rows->i_code == $roww->ip_ciproduct)
                     <div class="image-product-box"
-                        style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
+                        style="background:url('/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
                     </div>
+                    @endif
+                    @endforeach
                     <div class="caption">
                         <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
+                        <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}" class="title-product-item">{{$rows->i_name}}</a>
                         </div>
                         <div class="footer-product-item">
                             <div class="">
@@ -191,104 +190,15 @@
                                 <i class="fa fa-star c-gold"></i>
                                 <i class="fa fa-star c-grey"></i>
                             </div>
-                            <div class="price-product-item">Rp. 10.000</div>
+                            <div class="price-product-item">Rp. {{$rows->ipr_sunitprice}}</div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class=" col-lg-product col-md-3 col-sm-6">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-3 col-sm-6 ">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-3 col-sm-6 ">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-3 col-sm-6 ">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <!-- @endif -->
+            @endforeach
+            @endif
         </div>
 </section>
 
@@ -393,7 +303,21 @@
             dots: false,
             infinite: true,
         });
-
     });
+      
+var count = 1;
+var countEl = document.getElementById("qty");
+
+function plus() {
+  count++;
+  countEl.value = count;
+}
+
+function minus() {
+  if (count > 1) {
+    count--;
+    countEl.value = count;
+  }
+}
 </script>
 @endsection
