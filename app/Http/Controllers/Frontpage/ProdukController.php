@@ -174,7 +174,6 @@ class ProdukController extends Controller
                 ->leftJoin('m_whouse','w_code','st_cwhouse')
                 ->where('w_cbranch',$request->cabang)
                 ->where('st_ciproduct',$request->produk)
-                ->where('st_csupplier',$request->suplier)
                 ->get();
 
         $total_stock = 0;
@@ -184,7 +183,6 @@ class ProdukController extends Controller
             $stocks = DB::table('d_seller')
                 ->where('sell_ciproduct',$request->produk)
                 ->where('sell_cwhouse',$row->st_cwhouse)
-                ->where('sell_label',$request->suplier)
                 ->where('sell_status','P')
                 ->get();
 
