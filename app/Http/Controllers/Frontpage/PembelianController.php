@@ -19,14 +19,19 @@ class PembelianController extends Controller
         
             $group = DB::table('d_seller')->join('m_item','i_code','sell_ciproduct')
     		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
-    		->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
+            ->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
+            ->leftJoin('d_province','p_id','sell_province')
+            ->leftJoin('d_district','d_id','sell_district')
+            ->leftJoin('d_city','c_id','sell_city')
     		->groupBy('sell_nota')
     		->where('sell_ccustomer',Auth::user()->cm_code);
-
     		$allstatus = DB::table('d_seller')
     		->join('m_item','i_code','sell_ciproduct')
     		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
             ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
+            ->leftJoin('d_province','p_id','sell_province')
+            ->leftJoin('d_district','d_id','sell_district')
+            ->leftJoin('d_city','c_id','sell_city')
             ->where('sell_ccustomer',Auth::user()->cm_code);
     		
             if ($request->nama_produk != null) {
@@ -52,16 +57,16 @@ class PembelianController extends Controller
 
             $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota');
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-            $countproses = DB::table('d_seller')->where('sell_status','Sedang Proses')->where('sell_ccustomer',Auth::user()->cm_code)->count();
-            $countkirim = DB::table('d_seller')->where('sell_status','Sedang Dikirim')->where('sell_ccustomer',Auth::user()->cm_code)->count();
+            $countproses = DB::table('d_seller')->whereIn('sell_status',['SP','PS','PP','TS'])->where('sell_ccustomer',Auth::user()->cm_code)->count();
+            $countkirim = DB::table('d_seller')->where('sell_status','SD')->where('sell_ccustomer',Auth::user()->cm_code)->count();
     	return view('frontpage.pembelian.pembelian',array(
     		'allstatus' => $allstatus->get(),
     		'pembayaran' => $allstatus->whereIn('sell_status',['P','SB'])->groupBy('sell_nota')->get(),
-    		'proses' => $allstatus->whereIn('sell_status',['SP','PS','PP'])->get(),
-    		'pengiriman' => $allstatus->where('sell_status','Sedang Dikirim')->get(),
-            'group' => $group->select('d_seller.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
-    		'groupp' => $group->where('sell_status','P')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
-            'grouppro' => $group->where('sell_status','Sedang Proses')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'proses' => $allstatus->whereIn('sell_status',['SP','PS','PP','TS'])->get(),
+    		'pengiriman' => $allstatus->where('sell_status','SD')->get(),
+            'group' => $group->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
+    		'groupp' => $group->where('sell_status','P')->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+            'grouppro' => $group->where('sell_status','SP')->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'groupprostat' => $countproses,
             'groupppengstat' => $countkirim,
     		'groupppeng' => $group->where('sell_status','SD')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
@@ -107,6 +112,7 @@ class PembelianController extends Controller
         $data = DB::table('d_seller')
                 ->join('m_member','cm_code','sell_ccustomer')
                 ->join('m_imgproduct','ip_ciproduct','sell_ciproduct')
+                ->leftJoin('m_itemunit','iu_code','d_seller.sell_cunit')
                 ->join('m_item','i_code','sell_ciproduct')
                 ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
                 ->where('sell_nota',$request->nota)
@@ -117,30 +123,37 @@ class PembelianController extends Controller
         ->addColumn('daftar',function($data){
             return '
                         <td>
-                            <img src="/warungislamibogor/storage/image/master/produk/'.$data->ip_path.'" width="250">
+                            <img src="/warungislamibogor/storage/image/master/produk/'.$data->ip_path.'" width="60">
                                 </td>
                                     <td>
                                         <h3>
-                                            <a href="#" class="text-navy">
+                                            <a href="#" class="text-navy d-none">
                                                 '.$data->i_name.'
                                             </a>
                                         </h3>
                                         <div class="m-t-sm">
-                                            <span class="text-warning">Rp. '.$data->ipr_sunitprice.'</span>
-                                            |
-                                            <span class="text-muted">'.$data->sell_quantity.' Produk</span>
+                                            <span class="text-warning d-none">Rp. '.$data->ipr_sunitprice.'</span>
+                                            <span class="text-muted d-none">'.$data->sell_quantity.' Produk</span>
                                         </div>
                                     </td>
                         
             ';
         })
+        ->addColumn('namabarang',function($data){
+            return $data->i_name;
+        })
+        ->addColumn('satuanbarang',function($data){
+            return $data->iu_name;
+        })
+        ->addColumn('jumlahbeli',function($data){
+            return $data->sell_quantity;
+        })
         ->addColumn('harga',function($data){
             return '
-                    <label class="d-block">Total Harga Produk</label>
-                    <span class="text-info">Rp. '.$data->ipr_sunitprice.'</span>
+                    <div class="text-right">Rp. '.$data->ipr_sunitprice.'</div>
             ';
         })
-        ->rawColumns(['daftar','harga'])
+        ->rawColumns(['daftar','harga','namabarang','satuanbarang','jumlahbeli'])
         ->make(true);
     }
 

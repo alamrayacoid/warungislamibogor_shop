@@ -30,21 +30,24 @@
                             <div class="profile-progress-bar-status" style="width: 60%;"></div>
                         </div>
                         <div class="text-right">
-                            <a href="{{route('profile')}}" class="c-primary-wib fs-12 semi-bold">Lengkapi Sekarang&ensp;<i
-                                    class="fa fa-chevron-right"></i></a>
+                            <a href="{{route('profile')}}" class="c-primary-wib fs-12 semi-bold">Lengkapi
+                                Sekarang&ensp;<i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <hr>
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Daftar Transaksi</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-semua-frontpage' , ['status' => 1])}}">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-semua-frontpage' , ['status' => 1])}}">
                                 <li>Daftar Pembelian</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}">
                                 <li class="">Pembayaran</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-diproses-frontpage', ['status' => 3])}}">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-diproses-frontpage', ['status' => 3])}}">
                                 <li>Sedang diproses</li>
                             </a>
                         </ul>
@@ -53,7 +56,8 @@
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Pengiriman</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="{{route('pembelian-dikirim-frontpage', ['status' => 4])}}">
+                            <a class="c-primary-wib semi-bold"
+                                href="{{route('pembelian-dikirim-frontpage', ['status' => 4])}}">
                                 <li>Proses Pengiriman</li>
                             </a>
                         </ul>
@@ -87,15 +91,20 @@
                     <div class="tab-content padding-15-0">
                         <div id="tab-12" class="tab-pane animated fadeIn active">
                             <div class="row mt-5">
+                                @foreach($lastseen as $row)
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail product-box-item">
+                                        @foreach($gambar as $roww)
+                                        @if($row->i_code == $roww->ip_ciproduct)
                                         <div class="image-product-box"
-                                            style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
+                                            style="background:url('/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
                                         </div>
+                                        @endif
+                                        @endforeach
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
+                                                <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                                                    class="title-product-item">{{$row->i_name}}</a>
                                             </div>
                                             <div class="footer-product-item">
                                                 <div class="">
@@ -105,48 +114,32 @@
                                                     <i class="fa fa-star c-gold"></i>
                                                     <i class="fa fa-star c-grey"></i>
                                                 </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
+                                                <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="row mt-5">
+                            @if($produkseen == '[]')
+                            @else
                                 <h3 class="title-product-opsi-same">Inspirasi dari minat anda</h3>
+                                @foreach($produkseen as $rows)
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail product-box-item">
+                                        @foreach($gambar as $roww)
+                                        @if($row->i_code == $roww->ip_ciproduct)
                                         <div class="image-product-box"
-                                            style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
+                                            style="background:url('/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
                                         </div>
+                                        @endif
+                                        @endforeach
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
+                                                <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}"
+                                                    class="title-product-item">{{$rows->i_name}}</a>
                                             </div>
                                             <div class="footer-product-item">
                                                 <div class="">
@@ -156,88 +149,18 @@
                                                     <i class="fa fa-star c-gold"></i>
                                                     <i class="fa fa-star c-grey"></i>
                                                 </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
+                                                <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('{{asset('assets/img/img-product/product-4.png')}}')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 ML</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('{{asset('assets/img/img-product/product-3.jpg')}}')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                @endforeach
+                                @endif
                             </div>
                         </div>
                         <div id="tab-22" class="tab-pane animated fadeIn">
-                            
+
                             <div class="d-flex">
                                 <input placeholder="Cari Barang Favorit Anda" type="text" name="" id="filter-wishlist"
                                     class="form-control input-wishlist-filter">
@@ -310,7 +233,8 @@
                                 </div>
                                 <div class="padding-0-15">
                                     <h5>Anda dapat melihat produk di daftar keinginan Anda di sini</h5>
-                                    <a href="{{url('/')}}"><button class="btn btn-empty-wishlist">Mulai Mencari Produk</button></a>
+                                    <a href="{{url('/')}}"><button class="btn btn-empty-wishlist">Mulai Mencari
+                                            Produk</button></a>
                                 </div>
                             </div>
                             @endif

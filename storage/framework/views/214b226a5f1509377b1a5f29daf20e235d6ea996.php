@@ -4,7 +4,10 @@
         padding: 0px;
         position: relative;
     }
-
+    .btn-send-payment{
+        color: #fff !important;
+        font-size:12px;
+    }
     .ibox-produk img {
 
         height: 160px;
@@ -12,7 +15,34 @@
         /*max-width: 240px;*/
         object-fit: cover;
     }
-
+    .btn-proof-payment{
+        height:40px;
+        font-weight:600;
+        font-size:12px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .table-wib thead{
+        background : #009a51 !important;
+        z-index:2;
+        color:#fff;
+        font-size:12px !important;
+    }
+    .table-second-wib thead tr th{
+        background : #009a51 !important;
+        z-index:2;
+        color:#fff;
+        font-size:12px !important;
+        text-align:center;
+    }
+    .table-wib thead tr th{
+        background : #009a51 !important;
+        font-size:12px !important;
+    }
+    .dataTables_info{
+        display:none;
+    }
     @media(max-width: 768px) {
         .ibox-produk img {
 
@@ -214,8 +244,12 @@
                                                 <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
                                                     data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>"
                                                     data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                    data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>"
+                                                    data-alamat="<?php echo e($row->sell_address); ?>"
                                                     data-totalb="<?php echo e($row->totalbeli); ?>"
+                                                    data-provinsi="<?php echo e($row->p_nama); ?>"
+                                                    data-kecamatan="<?php echo e($row->c_nama); ?>"
+                                                    data-district="<?php echo e($row->d_nama); ?>"
+                                                    data-metode="<?php echo e($row->sell_method); ?>"
                                                     data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
                                                     class="detail"><button
                                                         class="btn btn-view-more-all-transaction">Lihat Detail
@@ -258,12 +292,6 @@
                                                     <?php else: ?> Unkown
                                                     <?php endif; ?>
                                                 </label>
-                                                    
-
-
-
-
-
                                             </div>
                                             <div class="col-lg-4">
                                                 <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($roww->i_code); ?>"><button
@@ -335,8 +363,12 @@
                                                 <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
                                                     data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>"
                                                     data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                    data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>"
+                                                    data-alamat="<?php echo e($row->sell_address); ?>"
                                                     data-totalb="<?php echo e($row->totalbeli); ?>"
+                                                    data-provinsi="<?php echo e($row->p_nama); ?>"
+                                                    data-kecamatan="<?php echo e($row->c_nama); ?>"
+                                                    data-district="<?php echo e($row->d_nama); ?>"
+                                                    data-metode="<?php echo e($row->sell_method); ?>"
                                                     data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
                                                         Detail
@@ -439,7 +471,7 @@
                                    <h5></h5>
                                     <?php if($groupprostat > 0): ?>
                                     <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($row->sell_status == 'Sedang Proses'): ?>
+                                    <?php if($row->sell_status == 'SP' || $row->sell_status == 'PS' || $row->sell_status == 'PP' || $row->sell_status == 'TS'): ?>
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
@@ -453,7 +485,7 @@
                                                 <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
                                                     data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>"
                                                     data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                    data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>"
+                                                    data-alamat="<?php echo e($row->sell_address); ?>"
                                                     data-totalb="<?php echo e($row->totalbeli); ?>"
                                                     data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
@@ -554,7 +586,7 @@
                                     
                                     <?php if($groupppengstat > 0): ?>
                                     <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($row->sell_status == 'Sedang Dikirim'): ?>
+                                    <?php if($row->sell_status == 'SD'): ?>
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
@@ -570,6 +602,10 @@
                                                     data-customer="<?php echo e(Auth::user()->cm_name); ?>"
                                                     data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>"
                                                     data-totalb="<?php echo e($row->totalbeli); ?>"
+                                                    data-provinsi="<?php echo e($row->p_nama); ?>"
+                                                    data-kecamatan="<?php echo e($row->c_nama); ?>"
+                                                    data-district="<?php echo e($row->d_nama); ?>"
+                                                    data-metode="<?php echo e($row->sell_method); ?>"
                                                     data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
                                                         Detail
@@ -659,6 +695,11 @@
             $('#date').html($(this).data('date'));
             $('#customer').html($(this).data('customer'));
             $('#alamat').html($(this).data('alamat'));
+            $('#provinsi').html($(this).data('provinsi'));
+            $('#kecamatan').html($(this).data('kecamatan'))
+            $('#district').html($(this).data('district'));
+            $('#metodepambayaran').html($(this).data('metode'));
+            console.log($(this).data('metode'));
             $('#total_barang').html($(this).data('totalb'));
             $('#harga_total').html($(this).data('hargat'));
             console.log(stat);
@@ -693,15 +734,13 @@
                         'nota': nota,
                     }
                 },
-                columns: [{
-                        data: 'daftar',
-                        name: 'daftar'
-                    },
-                    {
-                        data: 'harga',
-                        name: 'harga'
-                    },
-                ],
+                columns: [
+                    {data: 'daftar', name: 'daftar'},
+                    {data: 'namabarang', name:'namabarang'},
+                    {data: 'satuanbarang', name:'satuanbarang'},
+                    {data: 'jumlahbeli',name:'jumlahbeli'},
+                    {data: 'harga', name: 'harga'}, 
+                    ],
             })
 
         })
@@ -721,7 +760,7 @@
         <?php if(Session::get('many')): ?>
         iziToast.warning({
             title: 'Peringatan!',
-            message: 'sudah ada Bukti Bayar',
+            message: 'Sudah Mengirim Bukti Pembayaran',
         });
         <?php endif; ?>
 
@@ -766,7 +805,21 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        $('.tambahbanner').change(function () {
+            readURLtambah(this);
+        });
 
+        function readURLtambah(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.img-preview-tambah').find('img').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     });
 </script>
 <?php $__env->stopSection(); ?>

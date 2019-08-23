@@ -50,7 +50,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Pilih Provinsi</label>
-                                                <select class="form-control fs-12 select2" id="provinsi" name="provinsi">
+                                                <select class="form-control fs-12 select2" id="provinsi"
+                                                    name="provinsi">
                                                     <option value="">Pilih Provinsi</option>
                                                     <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($row->p_id); ?>"><?php echo e($row->p_nama); ?></option>
@@ -65,7 +66,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Pilih Kecamatan</label>
-                                                <select class="form-control fs-12 select2" id="kecamatan" name="kecamatan">
+                                                <select class="form-control fs-12 select2" id="kecamatan"
+                                                    name="kecamatan">
                                                     <option value="">Pilih Kecamatan</option>
                                                 </select>
                                             </div>
@@ -104,7 +106,7 @@
 
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mb-5">
                         <div class="col-md-12">
                             <div class="thumbnail">
                                 <div class="thumbnail-header">Daftar Barang Checkout
@@ -129,7 +131,8 @@
                                                 <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_cunit); ?>" name="satuan[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_location); ?>" name="gudang[]">
-                                                <input type="text" value="<?php echo e($row->ipr_sunitprice); ?>"name="hargabarang[]" hidden>
+                                                <input type="text" value="<?php echo e($row->ipr_sunitprice); ?>" name="hargabarang[]"
+                                                    hidden>
                                                 <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>"
                                                     name="total[]">
                                                 <div class="input-group d-flex">
@@ -159,134 +162,11 @@
                         </div>
                 </form>
             </div>
-            <div class="row" style="margin:3em 0;">
-                <h3 class="title-product-opsi-same">Rekomendasi Produk</h3>
-                <div class="col-lg-product col-md-4 col-sm-6">
-                    <div class="thumbnail product-box-item">
-                        <div class="image-product-box"
-                            style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
-                        </div>
-                        <div class="caption">
-                            <div class="title-product-group">
-                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250
-                                    mil</a>
-                            </div>
-                            <div class="footer-product-item">
-                                <div class="">
-                                    <i class="fa fa-star f-14 c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-grey"></i>
-                                </div>
-                                <div class="price-product-item">Rp. 10.000</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-product col-md-4 col-sm-6">
-                    <div class="thumbnail product-box-item">
-                        <div class="image-product-box"
-                            style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
-                        </div>
-                        <div class="caption">
-                            <div class="title-product-group">
-                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250
-                                    mil</a>
-                            </div>
-                            <div class="footer-product-item">
-                                <div class="">
-                                    <i class="fa fa-star f-14 c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-grey"></i>
-                                </div>
-                                <div class="price-product-item">Rp. 10.000</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-product col-md-4 col-sm-6">
-                    <div class="thumbnail product-box-item">
-                        <div class="image-product-box"
-                            style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
-                        </div>
-                        <div class="caption">
-                            <div class="title-product-group">
-                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250
-                                    ML</a>
-                            </div>
-                            <div class="footer-product-item">
-                                <div class="">
-                                    <i class="fa fa-star f-14 c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-grey"></i>
-                                </div>
-                                <div class="price-product-item">Rp. 10.000</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-product col-md-4 col-sm-6">
-                    <div class="thumbnail product-box-item">
-                        <div class="image-product-box"
-                            style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
-                        </div>
-                        <div class="caption">
-                            <div class="title-product-group">
-                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250
-                                    mil</a>
-                            </div>
-                            <div class="footer-product-item">
-                                <div class="">
-                                    <i class="fa fa-star f-14 c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-grey"></i>
-                                </div>
-                                <div class="price-product-item">Rp. 10.000</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-product col-md-4 col-sm-6">
-                    <div class="thumbnail product-box-item">
-                        <div class="image-product-box"
-                            style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
-                        </div>
-                        <div class="caption">
-                            <div class="title-product-group">
-                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250
-                                    mil</a>
-                            </div>
-                            <div class="footer-product-item">
-                                <div class="">
-                                    <i class="fa fa-star f-14 c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-grey"></i>
-                                </div>
-                                <div class="price-product-item">Rp. 10.000</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
 
-    </div>
+
     </div>
 </section>
 <?php $__env->stopSection(); ?>
@@ -297,47 +177,58 @@
         var total_produk = $('.column-group-cart-item-product').length;
         $('.text-item-full-cart').html('Total Barang : ' + total_produk);
 
-        $('#provinsi').change(function(){
+        $('#provinsi').change(function () {
             $.ajax({
-                url : '<?php echo e(route("kota")); ?>',
-                type : 'get',
-                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'provinsi' : $('#provinsi').val() },
-                success : function(get){
+                url: '<?php echo e(route("kota")); ?>',
+                type: 'get',
+                data: {
+                    '_token': '<?php echo e(csrf_token()); ?>',
+                    'provinsi': $('#provinsi').val()
+                },
+                success: function (get) {
                     console.log(get['kota']);
-                    var html = '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
-                    for (var i =0; i < get['kota'].length; i++) {
-                        html += '<option value="'+get['kota'][i].c_id+'">'+get['kota'][i].c_nama+'</option>';
+                    var html =
+                        '<option value="-" selected="" disabled="">~ Pilih Kabupaten/Kota ~</option>';
+                    for (var i = 0; i < get['kota'].length; i++) {
+                        html += '<option value="' + get['kota'][i].c_id + '">' + get['kota']
+                            [i].c_nama + '</option>';
                     }
-                        $('#kota').html(html);
+                    $('#kota').html(html);
                 }
             });
         })
 
-        $('#kota').change(function(){
+        $('#kota').change(function () {
             $.ajax({
-                url : '<?php echo e(route("desa")); ?>',
-                type : 'get',
-                data : { '_token' : '<?php echo e(csrf_token()); ?>' , 'kota' : $('#kota').val() },
-                success : function(get){
+                url: '<?php echo e(route("desa")); ?>',
+                type: 'get',
+                data: {
+                    '_token': '<?php echo e(csrf_token()); ?>',
+                    'kota': $('#kota').val()
+                },
+                success: function (get) {
                     console.log(get);
-                    var htmll = '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
-                    for (var i =0; i < get['desa'].length; i++) {
-                        htmll += '<option value="'+get['desa'][i].d_id+'">'+get['desa'][i].d_nama+'</option>';
+                    var htmll =
+                        '<option value="-" selected="" disabled="">~ Pilih Kecamatan ~</option>';
+                    for (var i = 0; i < get['desa'].length; i++) {
+                        htmll += '<option value="' + get['desa'][i].d_id + '">' + get[
+                            'desa'][i].d_nama + '</option>';
                     }
-                        $('#kecamatan').html(htmll);
+                    $('#kecamatan').html(htmll);
                 }
             });
         })
 
-        setTimeout(function(){
+        setTimeout(function () {
             $('#provinsi').val('<?php echo e(Auth::user()->cm_province); ?>').trigger('change');
-            setTimeout(function(){
+            setTimeout(function () {
                 $('#kota').val('<?php echo e(Auth::user()->cm_city); ?>').trigger('change');
-                    setTimeout(function(){                
-                        $('#kecamatan').val('<?php echo e(Auth::user()->cm_district); ?>').trigger('change');
-                },800)
-            },800)
-        },200)
+                setTimeout(function () {
+                    $('#kecamatan').val('<?php echo e(Auth::user()->cm_district); ?>').trigger(
+                        'change');
+                }, 800)
+            }, 800)
+        }, 200)
 
         $('#update-alamat').on('click', function () {
             var provinsi = $('#modalp').val();
@@ -402,7 +293,8 @@
                             "Transfer ke Rekening WIB dan kirim bukti transfer di menu pembayaran.",
                             "success");
                         setTimeout(function () {
-                            window.location.href = "<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>";
+                            window.location.href =
+                                "<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>";
                         }, 500)
                     },
                     error: function (xhr, textStatus, errorThrowl) {

@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <table class="table table-bordered table-hover" id="table_modal_detailtracking">
+                    <table class="table table-bordered table-second-wib table-hover" id="table_modal_detailtracking">
                         <thead>
                             <tr>
                                 <th colspan="2">History</th>
