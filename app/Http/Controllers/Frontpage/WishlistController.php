@@ -19,14 +19,43 @@ class WishlistController extends Controller
             ->where('wl_cmember',Auth::user()->cm_code)
             ->where('d_wishlist.status_data','true')
             ->groupBy('i_name')
+			->get();
+			
+			$datas = DB::table('d_lastseen')
+			->join('m_item','i_code','ls_cproduct')
+			->join('m_itemprice','ipr_ciproduct','i_code')
+            ->join('m_itemproduct','itp_ciproduct','i_code')
+            ->join('m_itemtype','ity_code','itp_citype')
+			->where('d_lastseen.ls_ccustomer',Auth::user()->cm_code)
+			->where('m_item.status_data','true')
+			->get();
+			$getlast = DB::table('d_lastseen')
+					->join('m_item','i_code','ls_cproduct')
+					->join('m_itemproduct','itp_ciproduct','i_code')
+					->join('m_itemtype','ity_code','itp_citype')
+					->where('d_lastseen.ls_ccustomer',Auth::user()->cm_code)
+					->first();
+			$lastseen = DB::table('m_item')
+			->join('m_itemprice','ipr_ciproduct','i_code')
+            ->join('m_itemproduct','itp_ciproduct','i_code')
+            ->join('m_itemtype','ity_code','itp_citype')
+            ->where('m_item.status_data','true')
+            ->where('itp_citype',$getlast->itp_citype)
+			->where('i_code','!=',$getlast->ls_cproduct)
+			->groupBy('i_name')
+            ->take(4)
             ->get();
+
+			
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
 			$wish = DB::table('d_wishlist')->where('status_data','true')->get();
 			$kategori = DB::table('m_itemtype')->where('status_data','true')->get();
             return view('frontpage.wishlist.wishlist-frontpage',array(
                 'data' => $data,
-                'gambar' => $gambar,
+				'gambar' => $gambar,
+				'lastseen' => $datas,
 				'wish' => $wish,
+				'produkseen' => $lastseen,
 				'kategori'=>$kategori,
             ));
     }

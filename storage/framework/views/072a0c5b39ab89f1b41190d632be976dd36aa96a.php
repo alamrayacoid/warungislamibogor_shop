@@ -1,45 +1,41 @@
-    
-<form id="salin_form" action="#" method="get">
-    <?php echo csrf_field(); ?>
-    <input type="hidden" id="notaa" name="nota">
+
     <div class="modal" id="modal-detail" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-        <div class="modal-content animated bounceInRight">
+            <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
                     <h4 class="modal-title text-center">Detail Transaksi</h4>
-                    
+
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                       <div class="col-sm-8">
+                        <div class="col-sm-8">
+                        <div class="form-group">
+                                <label class="d-block">Tanggal Pembelian</label>
+                                <span id="date"></span>
+                            </div>
                             <div class="form-group">
                                 <label class="d-block">Nomor Nota</label>
                                 <span id="nota"></span>
-                            </div>  
-
+                            </div>
                             <div class="form-group">
                                 <label class="d-block">Status Transaksi</label>
                                 <span id="status"></span>
-                            </div>  
+                            </div>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="d-block">Tanggal Pembelian</label>
-                                <span id="date"></span>
-                            </div> 
-                       </div>
-                       <div  class="col-sm-4 text-right">
-                            <button id="salin" type="button" class="btn btn-warning btn-outline"><i class="fa fa-copy"></i> Salin Transaksi ke Nota Baru</button>
-                       </div>
-                   </div>
-
-                   <div class="table-responsive mb-4">
-                        <table class="table shoping-cart-table" id="table_detail" style="width: 100%">
+                    <div class="table-responsive mb-4">
+                        <table class="table table-wib table-bordered" id="table_detail" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th >Daftar Produk</th>
-                                    <th  width="50%">Harga Produk</th>
+                                    <th>Image</th>
+                                    <th>Nama Produk</th>
+                                    <th>Satuan</th>
+                                    <th>Jumlah Dibeli</th>
+                                    <th>Harga Per Satuan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,49 +44,55 @@
                     </div>
 
                     <div class="table-responsive mb-4">
-                        <table class="table shoping-cart-table">
+                        <table class="table table-bordered table-second-wib table-hover">
                             <thead>
                                 <tr>
-                                    <th>Pengiriman</th>
+                                    <th colspan="6">Pengiriman</th>
                                 </tr>
+                                <tr>
+                                    <th>Nama Customer</th>
+                                    <th>Provinsi</th>
+                                    <th>Kabupaten</th>
+                                    <th>Kecamatan</th>
+                                    <th width="30%">Alamat Lengkap</th>
+                                    <th>Kode Pos</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="desc">
-                                        Dikirim kepada <strong id="customer"></strong>
-                                        <p id="alamat"></p>
-                                    </td>
+                                <tr style="text-align:left;">
+                                    <td id="customer"></td>
+                                    <td id="provinsi"></td>
+                                    <td id="kecamatan"></td>
+                                    <td id="district"></td>
+                                    <td id="alamat"></td>
+                                    <td id="kode_pos"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="table-responsive mb-4">
-                        <table class="table shoping-cart-table">
+                        <table class="table table-bordered table-second-wib table-hover">
                             <thead>
                                 <tr>
-                                    <th colspan="2">Pembayaran</th>
+                                    <th colspan="4">Pembayaran</th>
+                                </tr>
+                                <tr>
+                                    <th>Jumlah Barang</th>
+                                    <th>Total belanja</th>
+                                    <th>Metode Pembayaran</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="desc">Jumlah Barang</td>
-                                    <td class="desc" id="total_barang"></td>
-                                </tr>
-                                <tr>
-                                    <td class="desc">Total Belanja</td>
-                                    <td class="desc" id="harga_total"></td>
-                                </tr>
-                                <tr>
-                                    <td class="desc">Metode Pembayaran</td>
-                                    <td class="desc">Cash</td>
+                                    <td id="total_barang"></td>
+                                    <td id="harga_total" class="text-right"></td>
+                                    <td id="metodepambayaran"></td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
     <?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/pembelian/modal-detailpembelian.blade.php ENDPATH**/ ?>

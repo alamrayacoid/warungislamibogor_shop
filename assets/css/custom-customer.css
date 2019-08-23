@@ -1915,6 +1915,7 @@ font-size: 24px !important;
     box-shadow : 0 2px 30px 0 rgba(0,0,0,.2);
     width:350px;
     position: fixed;
+    z-index: 99 !important;
     display: none;
     bottom: 30px;
     border-radius: 20px;
@@ -2027,5 +2028,18 @@ font-size: 24px !important;
     .btn-smallchat{
         right: 15px;
     }
+}
+.dropdown-categories-menu{
+    background: #fff !important;
+}
+.dropdown-categories-menu li a{
+    font-weight: 600;
+}
+.dropdown-categories-menu li{
+    padding: 5px 5px;
+    
+}
+.dropdown-categories-menu li:hover{
+    /* background-color: #f3f4f5 !important; */
 }
 /* //end */

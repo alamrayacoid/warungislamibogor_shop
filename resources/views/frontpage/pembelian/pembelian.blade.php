@@ -6,7 +6,10 @@
         padding: 0px;
         position: relative;
     }
-
+    .btn-send-payment{
+        color: #fff !important;
+        font-size:12px;
+    }
     .ibox-produk img {
 
         height: 160px;
@@ -14,7 +17,34 @@
         /*max-width: 240px;*/
         object-fit: cover;
     }
-
+    .btn-proof-payment{
+        height:40px;
+        font-weight:600;
+        font-size:12px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .table-wib thead{
+        background : #009a51 !important;
+        z-index:2;
+        color:#fff;
+        font-size:12px !important;
+    }
+    .table-second-wib thead tr th{
+        background : #009a51 !important;
+        z-index:2;
+        color:#fff;
+        font-size:12px !important;
+        text-align:center;
+    }
+    .table-wib thead tr th{
+        background : #009a51 !important;
+        font-size:12px !important;
+    }
+    .dataTables_info{
+        display:none;
+    }
     @media(max-width: 768px) {
         .ibox-produk img {
 
@@ -216,8 +246,12 @@
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
                                                     data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
                                                     data-customer="{{Auth::user()->cm_name}}"
-                                                    data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}"
+                                                    data-alamat="{{$row->sell_address}}"
                                                     data-totalb="{{$row->totalbeli}}"
+                                                    data-provinsi="{{$row->p_nama}}"
+                                                    data-kecamatan="{{$row->c_nama}}"
+                                                    data-district="{{$row->d_nama}}"
+                                                    data-metode="{{$row->sell_method}}"
                                                     data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
                                                     class="detail"><button
                                                         class="btn btn-view-more-all-transaction">Lihat Detail
@@ -260,12 +294,6 @@
                                                     @else Unkown
                                                     @endif
                                                 </label>
-                                                    
-
-
-
-
-
                                             </div>
                                             <div class="col-lg-4">
                                                 <a href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
@@ -337,8 +365,12 @@
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
                                                     data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
                                                     data-customer="{{Auth::user()->cm_name}}"
-                                                    data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}"
+                                                    data-alamat="{{$row->sell_address}}"
                                                     data-totalb="{{$row->totalbeli}}"
+                                                    data-provinsi="{{$row->p_nama}}"
+                                                    data-kecamatan="{{$row->c_nama}}"
+                                                    data-district="{{$row->d_nama}}"
+                                                    data-metode="{{$row->sell_method}}"
                                                     data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
                                                         Detail
@@ -441,7 +473,7 @@
                                    <h5></h5>
                                     @if($groupprostat > 0)
                                     @foreach($group as $row)
-                                    @if($row->sell_status == 'Sedang Proses')
+                                    @if($row->sell_status == 'SP' || $row->sell_status == 'PS' || $row->sell_status == 'PP' || $row->sell_status == 'TS')
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
@@ -455,7 +487,7 @@
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
                                                     data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
                                                     data-customer="{{Auth::user()->cm_name}}"
-                                                    data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}"
+                                                    data-alamat="{{$row->sell_address}}"
                                                     data-totalb="{{$row->totalbeli}}"
                                                     data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
@@ -556,7 +588,7 @@
                                     
                                     @if($groupppengstat > 0)
                                     @foreach($group as $row)
-                                    @if($row->sell_status == 'Sedang Dikirim')
+                                    @if($row->sell_status == 'SD')
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
@@ -572,6 +604,10 @@
                                                     data-customer="{{Auth::user()->cm_name}}"
                                                     data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}"
                                                     data-totalb="{{$row->totalbeli}}"
+                                                    data-provinsi="{{$row->p_nama}}"
+                                                    data-kecamatan="{{$row->c_nama}}"
+                                                    data-district="{{$row->d_nama}}"
+                                                    data-metode="{{$row->sell_method}}"
                                                     data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
                                                         Detail
@@ -661,6 +697,11 @@
             $('#date').html($(this).data('date'));
             $('#customer').html($(this).data('customer'));
             $('#alamat').html($(this).data('alamat'));
+            $('#provinsi').html($(this).data('provinsi'));
+            $('#kecamatan').html($(this).data('kecamatan'))
+            $('#district').html($(this).data('district'));
+            $('#metodepambayaran').html($(this).data('metode'));
+            console.log($(this).data('metode'));
             $('#total_barang').html($(this).data('totalb'));
             $('#harga_total').html($(this).data('hargat'));
             console.log(stat);
@@ -695,15 +736,13 @@
                         'nota': nota,
                     }
                 },
-                columns: [{
-                        data: 'daftar',
-                        name: 'daftar'
-                    },
-                    {
-                        data: 'harga',
-                        name: 'harga'
-                    },
-                ],
+                columns: [
+                    {data: 'daftar', name: 'daftar'},
+                    {data: 'namabarang', name:'namabarang'},
+                    {data: 'satuanbarang', name:'satuanbarang'},
+                    {data: 'jumlahbeli',name:'jumlahbeli'},
+                    {data: 'harga', name: 'harga'}, 
+                    ],
             })
 
         })
@@ -723,7 +762,7 @@
         @if(Session::get('many'))
         iziToast.warning({
             title: 'Peringatan!',
-            message: 'sudah ada Bukti Bayar',
+            message: 'Sudah Mengirim Bukti Pembayaran',
         });
         @endif
 
@@ -768,7 +807,21 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        $('.tambahbanner').change(function () {
+            readURLtambah(this);
+        });
 
+        function readURLtambah(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.img-preview-tambah').find('img').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     });
 </script>
 @endsection

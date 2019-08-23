@@ -28,21 +28,24 @@
                             <div class="profile-progress-bar-status" style="width: 60%;"></div>
                         </div>
                         <div class="text-right">
-                            <a href="<?php echo e(route('profile')); ?>" class="c-primary-wib fs-12 semi-bold">Lengkapi Sekarang&ensp;<i
-                                    class="fa fa-chevron-right"></i></a>
+                            <a href="<?php echo e(route('profile')); ?>" class="c-primary-wib fs-12 semi-bold">Lengkapi
+                                Sekarang&ensp;<i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <hr>
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Daftar Transaksi</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="<?php echo e(route('pembelian-semua-frontpage' , ['status' => 1])); ?>">
+                            <a class="c-primary-wib semi-bold"
+                                href="<?php echo e(route('pembelian-semua-frontpage' , ['status' => 1])); ?>">
                                 <li>Daftar Pembelian</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>">
+                            <a class="c-primary-wib semi-bold"
+                                href="<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>">
                                 <li class="">Pembayaran</li>
                             </a>
-                            <a class="c-primary-wib semi-bold" href="<?php echo e(route('pembelian-diproses-frontpage', ['status' => 3])); ?>">
+                            <a class="c-primary-wib semi-bold"
+                                href="<?php echo e(route('pembelian-diproses-frontpage', ['status' => 3])); ?>">
                                 <li>Sedang diproses</li>
                             </a>
                         </ul>
@@ -51,7 +54,8 @@
                     <div class="">
                         <h5 class="heading-section-profile-frame padding-0-15">Pengiriman</h5>
                         <ul class="list-item-profile-sidebar">
-                            <a class="c-primary-wib semi-bold" href="<?php echo e(route('pembelian-dikirim-frontpage', ['status' => 4])); ?>">
+                            <a class="c-primary-wib semi-bold"
+                                href="<?php echo e(route('pembelian-dikirim-frontpage', ['status' => 4])); ?>">
                                 <li>Proses Pengiriman</li>
                             </a>
                         </ul>
@@ -85,15 +89,20 @@
                     <div class="tab-content padding-15-0">
                         <div id="tab-12" class="tab-pane animated fadeIn active">
                             <div class="row mt-5">
+                                <?php $__currentLoopData = $lastseen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail product-box-item">
+                                        <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                         <div class="image-product-box"
-                                            style="background:url('<?php echo e(asset('assets/img/img-product/product-4.png')); ?>')">
+                                            style="background:url('/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                                         </div>
+                                        <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
+                                                <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                                                    class="title-product-item"><?php echo e($row->i_name); ?></a>
                                             </div>
                                             <div class="footer-product-item">
                                                 <div class="">
@@ -103,48 +112,32 @@
                                                     <i class="fa fa-star c-gold"></i>
                                                     <i class="fa fa-star c-grey"></i>
                                                 </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
+                                                <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <div class="row mt-5">
+                            <?php if($produkseen == '[]'): ?>
+                            <?php else: ?>
                                 <h3 class="title-product-opsi-same">Inspirasi dari minat anda</h3>
+                                <?php $__currentLoopData = $produkseen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail product-box-item">
+                                        <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                         <div class="image-product-box"
-                                            style="background:url('<?php echo e(asset('assets/img/img-product/product-4.png')); ?>')">
+                                            style="background:url('/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                                         </div>
+                                        <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
+                                                <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($rows->i_code); ?>"
+                                                    class="title-product-item"><?php echo e($rows->i_name); ?></a>
                                             </div>
                                             <div class="footer-product-item">
                                                 <div class="">
@@ -154,88 +147,18 @@
                                                     <i class="fa fa-star c-gold"></i>
                                                     <i class="fa fa-star c-grey"></i>
                                                 </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
+                                                <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('<?php echo e(asset('assets/img/img-product/product-4.png')); ?>')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 ML</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="thumbnail product-box-item">
-                                        <div class="image-product-box"
-                                            style="background:url('<?php echo e(asset('assets/img/img-product/product-3.jpg')); ?>')">
-                                        </div>
-                                        <div class="caption">
-                                            <div class="title-product-group">
-                                                <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas
-                                                    250 mil</a>
-                                            </div>
-                                            <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
-                                                <div class="price-product-item">Rp. 10.000</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div id="tab-22" class="tab-pane animated fadeIn">
-                            
+
                             <div class="d-flex">
                                 <input placeholder="Cari Barang Favorit Anda" type="text" name="" id="filter-wishlist"
                                     class="form-control input-wishlist-filter">
@@ -309,7 +232,8 @@
                                 </div>
                                 <div class="padding-0-15">
                                     <h5>Anda dapat melihat produk di daftar keinginan Anda di sini</h5>
-                                    <a href="<?php echo e(url('/')); ?>"><button class="btn btn-empty-wishlist">Mulai Mencari Produk</button></a>
+                                    <a href="<?php echo e(url('/')); ?>"><button class="btn btn-empty-wishlist">Mulai Mencari
+                                            Produk</button></a>
                                 </div>
                             </div>
                             <?php endif; ?>

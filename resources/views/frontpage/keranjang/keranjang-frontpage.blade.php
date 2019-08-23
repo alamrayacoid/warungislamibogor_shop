@@ -16,8 +16,7 @@
     </ol>
     <div class="container-fluid">
         @if($produk != '[]')
-        <div class="row mt-5">
-
+        <div class="row mt-5 mb-5">
             <div class="col-md-7">
                 <div class="thumbnail">
                     <div class="thumbnail-header">Keranjang Belanja Anda
@@ -90,124 +89,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row" style="margin:3em 0;">
-            <h3 class="title-product-opsi-same">Rekomendasi Produk</h3>
-            <div class="col-lg-product col-md-4 col-sm-6">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-4 col-sm-6">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-4 col-sm-6">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 ML</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-4 col-sm-6">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-3.jpg')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-product col-md-4 col-sm-6">
-                <div class="thumbnail product-box-item">
-                    <div class="image-product-box"
-                        style="background:url('http://localhost/warungislamibogor_shop/assets/img/img-product/product-4.png')">
-                    </div>
-                    <div class="caption">
-                        <div class="title-product-group">
-                            <a href="javascript:void(0)" class="title-product-item">Botol Aqua Gelas 250 mil</a>
-                        </div>
-                        <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
-                            <div class="price-product-item">Rp. 10.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
     @else

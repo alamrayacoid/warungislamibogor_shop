@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontpage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Auth;
 
 class ProdukController extends Controller
 {
@@ -90,6 +91,25 @@ class ProdukController extends Controller
 
     public function produk_detail(Request $request)
     {
+        if(\Auth::check()){
+            $dataseen = DB::table('d_lastseen')
+                    ->where('ls_ccustomer',Auth::user()->cm_code)            
+                    ->first();
+        if (is_null($dataseen)) {
+            DB::table('d_lastseen')->insert([
+                'ls_cproduct'=>$request->code,
+                'ls_ccustomer'=>Auth::user()->cm_code,
+                'status_data'=>'true',
+            ]);
+        } else {
+            DB::table('d_lastseen')->where('ls_ccustomer',Auth::user()->cm_code)->update([
+                'ls_cproduct'=>$request->code,
+                'status_data'=>'true',
+            ]);
+        }
+        }else{
+
+        }
     	$code = $request->code;
         $cabang = DB::table('d_stock')
         ->leftJoin('m_whouse','w_code','st_cwhouse')
