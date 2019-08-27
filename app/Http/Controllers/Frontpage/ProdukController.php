@@ -226,7 +226,7 @@ class ProdukController extends Controller
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
-                ->get();
+                ->paginate(12);
 
                 $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
                 $type = DB::table('m_itemtype')->get();

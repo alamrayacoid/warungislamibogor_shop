@@ -47,6 +47,7 @@
         <input type="text" id="inputkabupaten" name="kabupaten" value="{{Auth::user()->cm_city}}" hidden>
         <input type="text" id="inputkecamatan" name="kecamatan" value="{{Auth::user()->cm_district}}" hidden>
         <input type="text" id="inputalamat" name="address" value="{{Auth::user()->cm_address}}" hidden>
+        <input type="text" id="inputkodepos" name="kodepos" value="{{Auth::user()->cm_postalcode}}" hidden>
         <input type="hidden" id="gambar" name="gambar">
         <ol class="breadcrumb breadcumb-header">
             <li><a href="#">Home</a></li>
@@ -248,6 +249,7 @@
                                                     <th>Provinsi</th>
                                                     <th>Kabupaten</th>
                                                     <th>Kecamatan</th>
+                                                    <th>Kode Pos</th>   
                                                     <th width="40%">Alamat Pengiriman</th>
                                                     <th>Aksi</th>
                                             </thead>
@@ -261,6 +263,7 @@
                                                     <td>{{ $row->p_nama }}</td>
                                                     <td>{{ $row->c_nama }}</td>
                                                     <td>{{ $row->d_nama }}</td>
+                                                    <td>{{$row->cm_postalcode}}</td>
                                                     <td>{{Auth::user()->cm_address}}</td>
                                                     <td>
                                                         <button class="btn btn-update-profile-advanced alamat" type="button"
@@ -533,6 +536,9 @@
             var kabupaten = $('#kota').val();
             var kecamatan = $('[name=district]').val();
             var alamat = $('.mdlalamat').val();
+            var kodepos = $('.mdlkodepos').val();
+
+            $('#inputkodepos').val(kodepos);
             $('#inputalamat').val(alamat);
             setTimeout(function () {
                 $('.simpanprofile').click();

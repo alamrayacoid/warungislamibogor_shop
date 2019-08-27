@@ -16,7 +16,8 @@
                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}"
                     data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}"
                     data-alamat="{{$row->sell_address}}" data-totalb="{{$row->totalbeli}}"
-                    data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal" class="detail"><button
+                    data-pos="{{$row->sell_postalcode}}"
+                    data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal" class="detail"><button
                         class="btn btn-view-more-transaction">Lihat
                         Detail
                         Transaksi</button></a>

@@ -1,6 +1,9 @@
 <?php $__env->startSection('content'); ?>
 <style>
-
+.pagination{
+    float:right;
+    margin:2em 15px 1em 15px;
+}
 </style>
 <section style="margin-top:5em">
     <ol class="breadcrumb breadcumb-header">
@@ -140,6 +143,7 @@
                         </div>
                     </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <!--  -->
                     <?php else: ?>
                     <div class="column-empty-transaction">
                         <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">

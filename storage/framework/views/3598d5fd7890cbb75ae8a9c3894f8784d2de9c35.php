@@ -16,7 +16,7 @@
     <link href="<?php echo e(asset('assets/css/plugins/jQueryUI/jquery-ui.css')); ?>" rel="stylesheet">
 
     <!-- Toastr style -->
-    <link href="<?php echo e(asset('assets/css/plugins/toastr/toastr.min.css')); ?>" rel="stylesheet">
+    <!-- <link href="<?php echo e(asset('assets/css/plugins/toastr/toastr.min.css')); ?>" rel="stylesheet"> -->
 
     <!-- Gritter -->
     <link href="<?php echo e(asset('assets/js/plugins/gritter/jquery.gritter.css')); ?>" rel="stylesheet">

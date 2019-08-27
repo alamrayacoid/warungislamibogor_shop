@@ -14,9 +14,10 @@
             <div class="col-lg-4 col-md-4">
                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}" data-status="{{$row->sell_status}}"
                     data-date="{{$row->sell_date}}" data-customer="{{Auth::user()->cm_name}}"
+                    data-pos="{{$row->sell_postalcode}}"
                     data-alamat="{{$row->sell_address}}" data-totalb="{{$row->totalbeli}}"
                     data-provinsi="{{$row->p_nama}}" data-kecamatan="{{$row->c_nama}}" data-district="{{$row->d_nama}}"
-                    data-metode="{{$row->sell_method}}" data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
+                    data-metode="{{$row->sell_method}}" data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
                     class="detail"><button class="btn btn-view-more-all-transaction">Lihat Detail
                         Transaksi</button></a>
             </div>

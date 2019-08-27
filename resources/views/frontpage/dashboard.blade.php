@@ -119,7 +119,6 @@
         <div class="row">
             <div class="product-opsi-group">
                 <h3 class="title-product-opsi">Produk Paling Banyak Dicari</h3>
-                <!-- <button class="btn view-more-product">Lihat Semua</button> -->
             </div>
             <div class="slick">
                 @foreach($popular as $row)
@@ -161,9 +160,9 @@
                 <h3 class="title-product-opsi">Semua Produk</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row testingbox">
             @foreach($data as $row)
-            <div class="col-lg-product col-md-4">
+            <div class="col-lg-product col-md-4 testing">
                 <div class="thumbnail product-box-item">
                     <div class="product-box">
                         @foreach($wish as $wis)

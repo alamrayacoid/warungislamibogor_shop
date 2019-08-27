@@ -1,7 +1,10 @@
 @extends('frontpage.main-frontpage')
 @section('content')
 <style>
-
+.pagination{
+    float:right;
+    margin:2em 15px 1em 15px;
+}
 </style>
 <section style="margin-top:5em">
     <ol class="breadcrumb breadcumb-header">
@@ -138,8 +141,10 @@
                             </div>
                         </div>
                     </div>
-
                     @endforeach
+                    <div class="col-lg-12">
+                    {{$test->Links()}}
+                    </div>
                     @else
                 <div class="column-empty-transaction">
                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -148,7 +153,7 @@
                     <a href="{{url('/')}}"><button>Cari Produk Sekarang</button></a>
                     </div>
                 </div>
-                                        @endif
+                    @endif
                 </div>
             </div>
         </div>

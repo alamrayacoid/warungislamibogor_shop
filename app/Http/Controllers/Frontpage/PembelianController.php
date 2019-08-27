@@ -65,7 +65,7 @@ class PembelianController extends Controller
     		'proses' => $allstatus->whereIn('sell_status',['SP','PS','PP','TS'])->get(),
     		'pengiriman' => $allstatus->where('sell_status','SD')->get(),
             'group' => $group->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
-    		'groupp' => $group->where('sell_status','P')->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'groupp' => $group->whereIn('sell_status',['P','SB'])->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->orderBy('sell_status','asc')->get(),
             'grouppro' => $group->where('sell_status','SP')->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
             'groupprostat' => $countproses,
             'groupppengstat' => $countkirim,
@@ -97,6 +97,10 @@ class PembelianController extends Controller
                         'mp_cmember' => Auth::user()->cm_code,
                         'status_data' => 'true',
                     ]);
+                    DB::table('d_seller')->where('sell_nota',$request->nota)->update([
+                        'sell_status'=>'SB',
+                        'sell_method'=>'transfer',
+                    ]);
 
                 return redirect()->back()->with('success','success');
                 }else{
@@ -111,10 +115,10 @@ class PembelianController extends Controller
     public function detail(Request $request){
         $data = DB::table('d_seller')
                 ->join('m_member','cm_code','sell_ccustomer')
-                ->join('m_imgproduct','ip_ciproduct','sell_ciproduct')
+                ->leftjoin('m_imgproduct','ip_ciproduct','sell_ciproduct')
                 ->leftJoin('m_itemunit','iu_code','d_seller.sell_cunit')
-                ->join('m_item','i_code','sell_ciproduct')
-                ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
+                ->leftjoin('m_item','i_code','sell_ciproduct')
+                ->leftjoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
                 ->where('sell_nota',$request->nota)
                 ->groupBy('sell_ciproduct')
                 ->get();
@@ -318,7 +322,7 @@ class PembelianController extends Controller
             ->leftJoin('d_district','d_id','sell_district')
             ->leftJoin('d_city','c_id','sell_city')
             ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->where('sell_status','P')
+            ->whereIn('sell_status',['P','SB'])
             ->groupBy('sell_nota');
 
             $item = DB::table('d_seller')
@@ -329,7 +333,7 @@ class PembelianController extends Controller
             ->leftJoin('d_district','d_id','sell_district')
             ->leftJoin('d_city','c_id','sell_city')
             ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->where('sell_status','P')
+            ->whereIn('sell_status',['P','SB'])
             ->get();
 
             $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
@@ -377,7 +381,7 @@ class PembelianController extends Controller
             ->leftJoin('d_district','d_id','sell_district')
             ->leftJoin('d_city','c_id','sell_city')
             ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->where('sell_status','P')
+            ->whereIn('sell_status',['P','SB'])
             ->groupBy('sell_nota');
 
         $item = DB::table('d_seller')
@@ -387,7 +391,7 @@ class PembelianController extends Controller
             ->leftJoin('d_province','p_id','sell_province')
             ->leftJoin('d_district','d_id','sell_district')
             ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_status','P')
+            ->whereIn('sell_status',['P','SB'])
             ->where('sell_ccustomer',Auth::user()->cm_code)
             ->get();
         
@@ -430,7 +434,7 @@ class PembelianController extends Controller
             ->leftJoin('d_district','d_id','sell_district')
             ->leftJoin('d_city','c_id','sell_city')
             ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->where('sell_status','P')
+            ->whereIn('sell_status',['P','SB'])
             ->groupBy('sell_nota')
             ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
             ->orderBy('sell_date','desc')
@@ -444,7 +448,7 @@ class PembelianController extends Controller
             ->leftJoin('d_district','d_id','sell_district')
             ->leftJoin('d_city','c_id','sell_city')
             ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->where('sell_status','P')
+            ->whereIn('sell_status',['P','SB'])
             ->get();
         $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
             

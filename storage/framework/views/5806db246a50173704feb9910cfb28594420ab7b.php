@@ -71,12 +71,16 @@
                                                     <option value="">Pilih Kecamatan</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group">
+                                                <label>Kode Pos</label>
+                                                <input type="number" value="<?php echo e(Auth::user()->cm_postalcode); ?>"
+                                                    class="form-control" name="kodepos">
+                                            </div>
                                         </div>
-
                                         <div class="col-lg-6">
                                             <label>Alamat Lengkap</label>
                                             <textarea class="form-control fs-12" name="alamat"
-                                                rows="9"><?php echo e(Auth::user()->cm_address); ?></textarea>
+                                                rows="10"><?php echo e(Auth::user()->cm_address); ?></textarea>
                                         </div>
                                     </div>
                                 </div>

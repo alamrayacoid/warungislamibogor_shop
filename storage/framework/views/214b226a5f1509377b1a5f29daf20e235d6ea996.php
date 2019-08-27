@@ -263,7 +263,8 @@
                                                         data-kecamatan="<?php echo e($row->c_nama); ?>"
                                                         data-district="<?php echo e($row->d_nama); ?>"
                                                         data-metode="<?php echo e($row->sell_method); ?>"
-                                                        data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
+                                                        data-pos="<?php echo e($row->sell_postalcode); ?>"
+                                                        data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
                                                         class="detail"><button
                                                             class="btn btn-view-more-all-transaction">Lihat Detail
                                                             Transaksi</button></a>
@@ -391,8 +392,9 @@
                                                         data-provinsi="<?php echo e($row->p_nama); ?>"
                                                         data-kecamatan="<?php echo e($row->c_nama); ?>"
                                                         data-district="<?php echo e($row->d_nama); ?>"
+                                                        data-pos="<?php echo e($row->sell_postalcode); ?>"
                                                         data-metode="<?php echo e($row->sell_method); ?>"
-                                                        data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
+                                                        data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
                                                         class="detail"><button
                                                             class="btn btn-view-more-transaction">Lihat
                                                             Detail
@@ -521,7 +523,8 @@
                                                         data-customer="<?php echo e(Auth::user()->cm_name); ?>"
                                                         data-alamat="<?php echo e($row->sell_address); ?>"
                                                         data-totalb="<?php echo e($row->totalbeli); ?>"
-                                                        data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
+                                                        data-pos="<?php echo e($row->sell_postalcode); ?>"
+                                                        data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
                                                         class="detail"><button
                                                             class="btn btn-view-more-transaction">Lihat
                                                             Detail
@@ -640,11 +643,12 @@
                                                 <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
                                                     data-status="<?php echo e($row->sell_status); ?>" data-date="<?php echo e($row->sell_date); ?>"
                                                     data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                    data-alamat="<?php echo e(Auth::user()->cm_address); ?>,  <?php echo e($row->sell_address); ?>"
+                                                    data-pos="<?php echo e($row->sell_postalcode); ?>"
+                                                    data-alamat="<?php echo e($row->sell_address); ?>"
                                                     data-totalb="<?php echo e($row->totalbeli); ?>" data-provinsi="<?php echo e($row->p_nama); ?>"
                                                     data-kecamatan="<?php echo e($row->c_nama); ?>" data-district="<?php echo e($row->d_nama); ?>"
                                                     data-metode="<?php echo e($row->sell_method); ?>"
-                                                    data-hargat="Rp. <?php echo e($row->sell_total); ?>" data-toggle="modal"
+                                                    data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
                                                         Detail
                                                         Transaksi</button></a>
@@ -737,6 +741,7 @@
             $('#provinsi').html($(this).data('provinsi'));
             $('#kecamatan').html($(this).data('kecamatan'))
             $('#district').html($(this).data('district'));
+            $('#kodepos').html($(this).data('pos'));
             $('#metodepambayaran').html($(this).data('metode'));
             console.log($(this).data('metode'));
             $('#total_barang').html($(this).data('totalb'));
@@ -759,7 +764,9 @@
             } else {
                 $('#status').html('<span class="label label-success">Unknown</span>');
             }
+            console.log(nota);
             var table2 = $('#table_detail').DataTable({
+                
                 responsive: true,
                 serverSide: true,
                 destroy: true,
@@ -794,9 +801,8 @@
                         name: 'harga'
                     },
                 ],
-            })
-
-        })
+            });
+        });
 
         <?php if(Session::get('success')): ?>
         iziToast.success({

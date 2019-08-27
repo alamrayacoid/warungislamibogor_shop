@@ -22,7 +22,6 @@ Route::get('data/lokasi/kota', 'indonesia@kota')->name('kota');
 Route::get('data/lokasi/desa', 'indonesia@desa')->name('desa');
 
 
-
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/signup', 'Frontpage\FrontpageController@register_frontpage')->name('register_frontpage-frontpage');
 Route::get('/signin', 'Frontpage\FrontpageController@login_frontpage')->name('login-frontpage');

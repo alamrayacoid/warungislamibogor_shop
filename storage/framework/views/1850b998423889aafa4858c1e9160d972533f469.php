@@ -54,6 +54,7 @@
     <script src="<?php echo e(asset('assets/js/plugins/sweetalert/sweetalert.min.js')); ?>"></script>
 
     <script src="<?php echo e(asset('assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/infinite-scroll/dist/infinite-scroll.pkgd.js')); ?>"></script>
 
 
     <script>
