@@ -269,7 +269,6 @@
 @section('extra_script')
 <script>
     $(document).ready(function () {
-
         $('#ncart').html($('.ncart').length);
 
         $(".variable").slick({
@@ -280,7 +279,6 @@
             infinite: true,
             variableWidth: true
         });
-
         $('.btn-wishlist').click(function () {
             var code = $(this).data('ciproduct');
             $(this).find('i').toggleClass('fa far');

@@ -59,6 +59,22 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
 }
+.loading-filter {
+    position: fixed;
+    /*display: none;*/
+    width: 100%;
+    height: 100vh !important;
+    overflow:hidden;
+    top: 0;
+    left: 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    right: 0;
+    z-index: 999999;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
 .tooltip-custom::after {
     background-color: #333;
     color: #fff;
@@ -113,6 +129,6 @@
     overflow:hidden !important;
 }
 .d-none{
-    display:none;
+    display:none !important;
 }
     </style><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_head-frontpage.blade.php ENDPATH**/ ?>

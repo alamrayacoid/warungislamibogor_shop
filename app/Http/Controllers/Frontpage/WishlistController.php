@@ -84,5 +84,46 @@ class WishlistController extends Controller
     		}
 
     	}
-    }
+	}
+	public function cari_wishlist(Request $request){
+		if($request->ajax()){
+			// $output = '';
+			$query = $request->get('query');
+			if($query != ''){
+				$cariwishlist = DB::table('d_wishlist')
+								->join('m_item','i_code','wl_ciproduct')
+								->where('i_name', 'like', '%'.$query.'%')
+								->where('d_wishlist.wl_cmember',Auth::user()->cm_code)
+								->where('d_wishlist.status_data','true')
+								->where('m_item.status_data','true')
+								->get();
+			}else{
+				$cariwishlist = DB::table('d_wishlist')
+								->join('m_item','i_code','wl_ciproduct')
+								->where('d_wishlist.wl_cmember',Auth::user()->cm_code)
+								->where('d_wishlist.status_data','true')
+								->where('m_item.status_data','true')
+								->get();
+			}
+			$totalwishlist = $cariwishlist->count();
+			// if($totalwishlist > 0){
+			// 	foreach($cariwishlist as $row){
+			// 	$output = '<tr>
+			// 	<td>'.$row->i_name.'</td>
+			// 	</tr>
+			// 	';
+			// 	}
+			// }
+			// else{
+			// 	$output = 'Tidak Ada Data Yang DItemukan';
+			// }
+			// dd($cariwishlist);
+			// $cariwishlist = array(
+			// 	'output' => $output,
+			// );
+			return response()->json(array(
+				'output' => $cariwishlist,
+			));
+		}
+	}
 }

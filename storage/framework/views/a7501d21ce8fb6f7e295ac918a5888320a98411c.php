@@ -121,8 +121,8 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <div class="row mt-5">
-                            <?php if($produkseen == '[]'): ?>
-                            <?php else: ?>
+                                <?php if($produkseen == '[]'): ?>
+                                <?php else: ?>
                                 <h3 class="title-product-opsi-same">Inspirasi dari minat anda</h3>
                                 <?php $__currentLoopData = $produkseen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-sm-6 col-md-3">
@@ -160,15 +160,15 @@
                         <div id="tab-22" class="tab-pane animated fadeIn">
 
                             <div class="d-flex">
-                                <input placeholder="Cari Barang Favorit Anda" type="text" name="" id="filter-wishlist"
-                                    class="form-control input-wishlist-filter">
+                                <input placeholder="Cari Barang Favorit Anda" type="text" name=""
+                                    class="form-control input-wishlist-filter searchwishlist">
                                 <button class="btn btn-wishlist-filter" type="button"><img
                                         src="http://localhost/warungislamibogor_shop/assets/img/img-product/img-search.svg"></button>
                             </div>
                             <?php if($data != '[]'): ?>
                             <div class="row mt-5">
                                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="col-md-3">
+                                <div class="col-md-3 wishlist-content">
                                     <div class="thumbnail product-box-item">
                                         <div class="product-box">
                                             <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -180,7 +180,8 @@
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <div class="caption">
                                                 <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct ==
+                                                <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct
+                                                ==
                                                 $row->i_code): ?>
                                                 <div class="product-wishlist onproduk-page onwishlist">
                                                     <button data-ciproduct="<?php echo e($wis->wl_ciproduct); ?>"
@@ -212,7 +213,8 @@
                                                             <i class="fa fa-star c-gold"></i>
                                                             <i class="fa fa-star c-grey"></i>
                                                         </div>
-                                                        <div class="price-product-item">Rp. Rp. <?php echo e($row->ipr_sunitprice); ?>
+                                                        <div class="price-product-item">Rp. Rp.
+                                                            <?php echo e($row->ipr_sunitprice); ?>
 
                                                         </div>
                                                     </div>
@@ -282,7 +284,43 @@
 
             })
         })
+        // $('.searchwishlist').keyup(function () {
+        //     var query = $(this).val();
+        //     $.ajax({
+        //         url: "<?php echo e(route('cari_wishlist')); ?>",
+        //         method: 'GET',
+        //         data: {
+        //             query: query
+        //         },
+        //         dataType: 'json',
+        //         success: function (data) {
+        //             var datatimework = data.output;
+        //             var trHTML = '';
+        //             $.each(datatimework, function (i, item) {
+        //                 trHTML += '<tr><td>' + item.i_name + '</td></tr>';
+        //         });
+        //         $('#tbldetailtimework tbody').html(trHTML);
+        //         }
+        //     });
+        // });
     });
+    $(document).ready(function () {
+            $('.searchwishlist').keyup(function () {
+
+                // Search text
+                var text = $(this).val().toLowerCase();
+
+                // Hide all content class element
+                $('.wishlist-content').hide();
+
+                // Search 
+                $('.wishlist-content .title-product-item').each(function () {
+                    if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                        $(this).closest('.wishlist-content').fadeIn('slow');
+                    }
+                });
+            });
+        });
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/wishlist/wishlist-frontpage.blade.php ENDPATH**/ ?>

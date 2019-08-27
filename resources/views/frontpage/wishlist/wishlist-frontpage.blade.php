@@ -123,8 +123,8 @@
                                 @endforeach
                             </div>
                             <div class="row mt-5">
-                            @if($produkseen == '[]')
-                            @else
+                                @if($produkseen == '[]')
+                                @else
                                 <h3 class="title-product-opsi-same">Inspirasi dari minat anda</h3>
                                 @foreach($produkseen as $rows)
                                 <div class="col-sm-6 col-md-3">
@@ -162,15 +162,15 @@
                         <div id="tab-22" class="tab-pane animated fadeIn">
 
                             <div class="d-flex">
-                                <input placeholder="Cari Barang Favorit Anda" type="text" name="" id="filter-wishlist"
-                                    class="form-control input-wishlist-filter">
+                                <input placeholder="Cari Barang Favorit Anda" type="text" name=""
+                                    class="form-control input-wishlist-filter searchwishlist">
                                 <button class="btn btn-wishlist-filter" type="button"><img
                                         src="http://localhost/warungislamibogor_shop/assets/img/img-product/img-search.svg"></button>
                             </div>
                             @if($data != '[]')
                             <div class="row mt-5">
                                 @foreach($data as $row)
-                                <div class="col-md-3">
+                                <div class="col-md-3 wishlist-content">
                                     <div class="thumbnail product-box-item">
                                         <div class="product-box">
                                             @foreach($gambar as $roww)
@@ -182,7 +182,8 @@
                                             @endforeach
                                             <div class="caption">
                                                 @foreach($wish as $wis)
-                                                @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct ==
+                                                @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct
+                                                ==
                                                 $row->i_code)
                                                 <div class="product-wishlist onproduk-page onwishlist">
                                                     <button data-ciproduct="{{$wis->wl_ciproduct}}"
@@ -214,7 +215,8 @@
                                                             <i class="fa fa-star c-gold"></i>
                                                             <i class="fa fa-star c-grey"></i>
                                                         </div>
-                                                        <div class="price-product-item">Rp. Rp. {{$row->ipr_sunitprice}}
+                                                        <div class="price-product-item">Rp. Rp.
+                                                            {{$row->ipr_sunitprice}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -283,6 +285,42 @@
 
             })
         })
+        // $('.searchwishlist').keyup(function () {
+        //     var query = $(this).val();
+        //     $.ajax({
+        //         url: "{{ route('cari_wishlist') }}",
+        //         method: 'GET',
+        //         data: {
+        //             query: query
+        //         },
+        //         dataType: 'json',
+        //         success: function (data) {
+        //             var datatimework = data.output;
+        //             var trHTML = '';
+        //             $.each(datatimework, function (i, item) {
+        //                 trHTML += '<tr><td>' + item.i_name + '</td></tr>';
+        //         });
+        //         $('#tbldetailtimework tbody').html(trHTML);
+        //         }
+        //     });
+        // });
     });
+    $(document).ready(function () {
+            $('.searchwishlist').keyup(function () {
+
+                // Search text
+                var text = $(this).val().toLowerCase();
+
+                // Hide all content class element
+                $('.wishlist-content').hide();
+
+                // Search 
+                $('.wishlist-content .title-product-item').each(function () {
+                    if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                        $(this).closest('.wishlist-content').fadeIn('slow');
+                    }
+                });
+            });
+        });
 </script>
 @endsection
