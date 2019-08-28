@@ -64,7 +64,7 @@
                                     <td id="kecamatan"></td>
                                     <td id="district"></td>
                                     <td id="alamat"></td>
-                                    <td id="kode_pos"></td>
+                                    <td id="kodepos"></td>
                                 </tr>
                             </tbody>
                         </table>

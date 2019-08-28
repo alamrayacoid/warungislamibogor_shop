@@ -22,7 +22,6 @@ Route::get('data/lokasi/kota', 'indonesia@kota')->name('kota');
 Route::get('data/lokasi/desa', 'indonesia@desa')->name('desa');
 
 
-
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/signup', 'Frontpage\FrontpageController@register_frontpage')->name('register_frontpage-frontpage');
 Route::get('/signin', 'Frontpage\FrontpageController@login_frontpage')->name('login-frontpage');
@@ -60,6 +59,7 @@ Route::get('pembelian/dikirim', 'Frontpage\PembelianController@pembelian')->name
 
 // Wishlist
 Route::get('/wishlist', 'Frontpage\WishlistController@wishlist')->name('wishlist-frontpage');
+Route::get('cari-wishlist','Frontpage\WishlistController@cari_wishlist')->name('cari_wishlist');
 // system wishlist
 Route::post('/addwishlist', 'Frontpage\WishlistController@addwishlist')->name('addwishlist');
 
@@ -74,5 +74,20 @@ Route::post('/profile/update', 'Frontpage\ProfileController@update')->name('upda
 Route::get('/checkout', 'Frontpage\CheckoutController@checkout')->name('checkout');
 Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.checkout');
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
-	
+    
+Route::get('/filterstatusall','Frontpage\PembelianController@filterallstatus')->name('filterallstatus');
+Route::get('/filterdateallstatus','Frontpage\PembelianController@filtertanggalall')->name('filterdateallstatus');
+Route::get('/resetallstatus','Frontpage\PembelianController@resetallstatus')->name('resetallstatus');
+
+Route::get('/filterstatuspembayaran','Frontpage\PembelianController@filter_paymentstatus')->name('filter_paymentstatus');
+Route::get('/filterdatestatuspembayaran','Frontpage\PembelianController@filterdate_paymentstatus')->name('filterdate_paymentstatus');
+Route::get('/resetstatuspembayaran','Frontpage\PembelianController@reset_paymentstatus')->name('reset_paymentstatus');
+
+Route::get('/filterstatusprosess','Frontpage\PembelianController@filter_prosesstatus')->name('filter_prosesstatus');
+Route::get('/filterdatestatusproses','Frontpage\PembelianController@filterdate_prosesstatus')->name('filterdate_prosesstatus');
+Route::get('/resetstatusproses','Frontpage\PembelianController@reset_prosesstatus')->name('reset_prosesstatus');
+
+Route::get('/filterstatuspengiriman','Frontpage\PembelianController@filter_pengirimanstatus')->name('filter_pengirimanstatus');
+Route::get('/filterdatestatuspengiriman','Frontpage\PembelianController@filterdate_pengirimanstatus')->name('filterdate_pengirimanstatus');
+Route::get('/resetstatuspengiriman','Frontpage\PembelianController@reset_pengirimanstatus')->name('reset_pengirimanstatus');
 }); //End Route::Group wib-cpanel

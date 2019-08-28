@@ -498,7 +498,7 @@ transition: 0.5s;
     margin: 15px;
     margin-bottom: 1.5em;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom:1px solid #efeff4 !important;
 }
 .view-more-product{
     background: #f9f9f9;

@@ -6,10 +6,12 @@
         padding: 0px;
         position: relative;
     }
-    .btn-send-payment{
+
+    .btn-send-payment {
         color: #fff !important;
-        font-size:12px;
+        font-size: 12px;
     }
+
     .ibox-produk img {
 
         height: 160px;
@@ -17,34 +19,40 @@
         /*max-width: 240px;*/
         object-fit: cover;
     }
-    .btn-proof-payment{
-        height:40px;
-        font-weight:600;
-        font-size:12px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
+
+    .btn-proof-payment {
+        height: 40px;
+        font-weight: 600;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    .table-wib thead{
-        background : #009a51 !important;
-        z-index:2;
-        color:#fff;
-        font-size:12px !important;
+
+    .table-wib thead {
+        background: #009a51 !important;
+        z-index: 2;
+        color: #fff;
+        font-size: 12px !important;
     }
-    .table-second-wib thead tr th{
-        background : #009a51 !important;
-        z-index:2;
-        color:#fff;
-        font-size:12px !important;
-        text-align:center;
+
+    .table-second-wib thead tr th {
+        background: #009a51 !important;
+        z-index: 2;
+        color: #fff;
+        font-size: 12px !important;
+        text-align: center;
     }
-    .table-wib thead tr th{
-        background : #009a51 !important;
-        font-size:12px !important;
+
+    .table-wib thead tr th {
+        background: #009a51 !important;
+        font-size: 12px !important;
     }
-    .dataTables_info{
-        display:none;
+
+    .dataTables_info {
+        display: none;
     }
+
     @media(max-width: 768px) {
         .ibox-produk img {
 
@@ -195,116 +203,125 @@
                                 </li>
                             </ul>
                             <div class="tab-content padding-15">
-                                <div id="tab-1" class="tab-pane animated fadeIn active">
+                                <div id="tab-1" class="tab-pane animated fadeIn tabe-allstatus active">
                                     <form id="">
                                         <div class="row ">
                                             <div class="col-lg-5 mt-4">
                                                 <div class="input-group input-daterange">
-                                                    <input type="text" name="tanggal_transaksi_awal" value=""
+                                                    <input type="text" id="tanggalawalallstatus"
+                                                        name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
                                                         class="form-control datepicker c-cart-filter c-pointer fs-12">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
-                                                    <input type="text" name="tanggal_transaksi_akhir" value=""
+                                                    <input type="text" id="tanggalakhirallstatus"
+                                                        name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
                                                         class="form-control datepicker c-cart-filter c-pointer fs-12">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
                                                 <select name="orderby" id="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12">
-                                                    <option value="1" selected="">Terbaru</option>
-                                                    <option value="2">Total Belanja</option>
+                                                    class="form-control c-cart-filter c-pointer filterbuyallstatus fs-12">
+                                                    <option value="-" selected="" disabled="">Urutkan</option>
+                                                    <option value="Terbaru">Terbaru</option>
+                                                    <option value="Total Belanja">Total Belanja</option>
                                                 </select>
                                                 <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
-                                                    type="button">Reset
+                                                    type="button" id="resetallstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12">
+                                                    class="form-control c-cart-filter fs-12 searchbuyallstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
                                             </div>
                                         </div>
                                     </form>
                                     @if($group != '[]')
-                                    @foreach($group as $row)
-                                    @if($row->sell_ccustomer == Auth::user()->cm_code)
-                                    <div class="column-group-item-product mt-5">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8">
-                                                <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
-                                                    class="text-full-payment-transaction">Total
-                                                    Semua
-                                                    Barang : <span class="text-full-price-transaction semi-bold"
-                                                        id="count">Rp.
-                                                        {{$row->totalbayar}}</span></span>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
-                                                    data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
-                                                    data-customer="{{Auth::user()->cm_name}}"
-                                                    data-alamat="{{$row->sell_address}}"
-                                                    data-totalb="{{$row->totalbeli}}"
-                                                    data-provinsi="{{$row->p_nama}}"
-                                                    data-kecamatan="{{$row->c_nama}}"
-                                                    data-district="{{$row->d_nama}}"
-                                                    data-metode="{{$row->sell_method}}"
-                                                    data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
-                                                    class="detail"><button
-                                                        class="btn btn-view-more-all-transaction">Lihat Detail
-                                                        Transaksi</button></a>
-                                            </div>
-                                        </div>
-                                        @foreach($allstatus as $roww)
-                                        @if($roww->sell_nota == $row->sell_nota)
-                                        <div class="row column-item-product">
-                                            <div class="col-lg-6">
-                                                <div class="d-flex">
-                                                    @foreach($gambar as $image)
-                                                    @if($image->sell_nota == $row->sell_nota)
-                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
-                                                        width="100px" height="100px">
-                                                    @endif
-                                                    @endforeach
-                                                    <div class="padding-0-15">
-                                                        <div class="fs-14 semi-bold">{{$roww->i_name}}</div>
-                                                        <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
-                                                        </div>
-                                                        <div class="fs-14 semi-bold pt-3">
-                                                            {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
-                                                                class="text-full-payment-transaction">Total
-                                                                Pembayaran :
-                                                                <span class="text-full-price-transaction">Rp.
-                                                                    {{$roww->sell_total}}</span></span></div>
-                                                    </div>
+                                    <div id="itemproduct-group-allstatus">
+                                        @foreach($group as $row)
+                                        @if($row->sell_ccustomer == Auth::user()->cm_code)
+                                        <div class="column-group-item-product mt-5">
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-8">
+                                                    <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
+                                                        class="text-full-payment-transaction">Total
+                                                        Semua
+                                                        Barang : <span class="text-full-price-transaction semi-bold"
+                                                            id="count">Rp.
+                                                            {{$row->totalbayar}}</span></span>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
+                                                        data-status="{{$row->sell_status}}"
+                                                        data-date="{{$row->sell_date}}"
+                                                        data-customer="{{Auth::user()->cm_name}}"
+                                                        data-alamat="{{$row->sell_address}}"
+                                                        data-totalb="{{$row->totalbeli}}"
+                                                        data-provinsi="{{$row->p_nama}}"
+                                                        data-kecamatan="{{$row->c_nama}}"
+                                                        data-district="{{$row->d_nama}}"
+                                                        data-metode="{{$row->sell_method}}"
+                                                        data-pos="{{$row->sell_postalcode}}"
+                                                        data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
+                                                        class="detail"><button
+                                                            class="btn btn-view-more-all-transaction">Lihat Detail
+                                                            Transaksi</button></a>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2 text-center">
-                                                <label class="label label-primary bg-primary-wib">
-                                                    @if($row->sell_status == 'P') Pembayaran 
-                                                    @elseif($row->sell_status == 'PP') Proses Packing
-                                                    @elseif($row->sell_status == 'PS') Packing Selesai
-                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
-                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
-                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
-                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
-                                                    @else Unkown
-                                                    @endif
-                                                </label>
+                                            @foreach($allstatus as $roww)
+                                            @if($roww->sell_nota == $row->sell_nota)
+                                            <div class="row column-item-product item-product-allstatus">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        @foreach($gambar as $image)
+                                                        @if($image->sell_nota == $row->sell_nota)
+                                                        <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
+                                                            width="100px" height="100px">
+                                                        @endif
+                                                        @endforeach
+                                                        <div class="padding-0-15">
+                                                            <div class="fs-14 semi-bold nameproduct">{{$roww->i_name}}
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">
+                                                                {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
+                                                                    class="text-full-payment-transaction">Total
+                                                                    Pembayaran :
+                                                                    <span class="text-full-price-transaction">Rp.
+                                                                        {{$roww->sell_total}}</span></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 text-center">
+                                                    <label class="label label-primary bg-primary-wib">
+                                                        @if($row->sell_status == 'P') Pembayaran
+                                                        @elseif($row->sell_status == 'PP') Proses Packing
+                                                        @elseif($row->sell_status == 'PS') Packing Selesai
+                                                        @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                        @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                        @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                        @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                        @else Unkown
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <a
+                                                        href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
+                                                            class="btn btn-buy-more-product">Beli Lagi</button></a>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <a href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
-                                                        class="btn btn-buy-more-product">Beli Lagi</button></a>
-                                            </div>
+                                            @endif
+                                            @endforeach
                                         </div>
                                         @endif
                                         @endforeach
                                     </div>
-                                    @endif
-                                    @endforeach
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -322,110 +339,122 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        id="tanggalawalpaymentstatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        id="tanggalakhirpaymentstatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
-                                                <select name="orderby" id="orderby"
+                                                <select name="orderby" id="filterbuypaymentstatus"
                                                     class="form-control c-cart-filter c-pointer fs-12">
-                                                    <option value="1" selected="">Terbaru</option>
-                                                    <option value="2">Total Belanja</option>
+                                                    <option value="-" selected="" disabled="">Urutkan</option>
+                                                    <option value="Terbaru">Terbaru</option>
+                                                    <option value="Total Belanja">Total Belanja</option>
                                                 </select>
                                                 <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
-                                                    type="button">Reset
+                                                    type="button" id="resetpaymentstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12">
+                                                    class="form-control c-cart-filter fs-12"
+                                                    id="searchbuypaymentstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
                                             </div>
                                         </div>
                                     </form>
                                     @if($groupp !='[]')
-                                    @foreach($groupp as $row)
-                                    
-                                    <div class="column-group-item-product mt-5">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8">
-                                                <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
-                                                    class="text-full-payment-transaction">Total
-                                                    Semua
-                                                    Barang : <span class="text-full-price-transaction">Rp.
-                                                        {{$row->sell_total}}</span></span>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
-                                                    data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
-                                                    data-customer="{{Auth::user()->cm_name}}"
-                                                    data-alamat="{{$row->sell_address}}"
-                                                    data-totalb="{{$row->totalbeli}}"
-                                                    data-provinsi="{{$row->p_nama}}"
-                                                    data-kecamatan="{{$row->c_nama}}"
-                                                    data-district="{{$row->d_nama}}"
-                                                    data-metode="{{$row->sell_method}}"
-                                                    data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
-                                                    class="detail"><button class="btn btn-view-more-transaction">Lihat
-                                                        Detail
-                                                        Transaksi</button></a>
-                                                <button class="btn btn-payment-transaction bayar"
-                                                    data-nota="{{$row->sell_nota}}" type="button" data-toggle="modal"
-                                                    data-target="#modal-bayar">Bayar Sekarang</button>
-                                            </div>
-                                        </div>
-                                        @foreach($allstatus as $roww)
-                                        @if($roww->sell_nota == $row->sell_nota)
-                                        <div class="row column-item-product">
-                                            <div class="col-lg-7">
-                                                <div class="d-flex">
-                                                    @foreach($gambar as $image)
-                                                    @if($image->sell_nota == $row->sell_nota)
-                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
-                                                        width="100px" height="100px">
-                                                    @endif
-                                                    @endforeach
-                                                    <div class="padding-0-15">
-                                                        <div class="fs-14 semi-bold">{{$roww->i_name}}</div>
-                                                        <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
-                                                        </div>
-                                                        <div class="fs-14 semi-bold pt-3">
-                                                            {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
-                                                                class="text-full-payment-transaction">Total
-                                                                Pembayaran :
-                                                                <span class="text-full-price-transaction">Rp.
-                                                                    {{$row->sell_total}}</span></span></div>
-                                                    </div>
+                                    <div id="itemproduct-group-paymentstatus">
+                                        @foreach($groupp as $row)
+                                        <div class="column-group-item-product mt-5">
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-8">
+                                                    <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
+                                                        class="text-full-payment-transaction">Total
+                                                        Semua
+                                                        Barang : <span class="text-full-price-transaction semi-bold"
+                                                            id="count">Rp.
+                                                            {{$row->totalbayar}}</span></span>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
+                                                        data-status="{{$row->sell_status}}"
+                                                        data-date="{{$row->sell_date}}"
+                                                        data-customer="{{Auth::user()->cm_name}}"
+                                                        data-alamat="{{$row->sell_address}}"
+                                                        data-totalb="{{$row->totalbeli}}"
+                                                        data-provinsi="{{$row->p_nama}}"
+                                                        data-kecamatan="{{$row->c_nama}}"
+                                                        data-district="{{$row->d_nama}}"
+                                                        data-pos="{{$row->sell_postalcode}}"
+                                                        data-metode="{{$row->sell_method}}"
+                                                        data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
+                                                        class="detail"><button
+                                                            class="btn btn-view-more-transaction">Lihat
+                                                            Detail
+                                                            Transaksi</button></a>
+                                                    <button class="btn btn-payment-transaction bayar"
+                                                        data-nota="{{$row->sell_nota}}" type="button"
+                                                        data-toggle="modal" data-target="#modal-bayar">Bayar
+                                                        Sekarang</button>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2 text-center">
-                                                <label class="label label-primary bg-primary-wib">
-                                                    @if($row->sell_status == 'P') Pembayaran 
-                                                    @elseif($row->sell_status == 'PP') Proses Packing
-                                                    @elseif($row->sell_status == 'PS') Packing Selesai
-                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
-                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
-                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
-                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
-                                                    @else Unkown
-                                                    @endif
-                                                </label>
+                                            @foreach($allstatus as $roww)
+                                            @if($roww->sell_nota == $row->sell_nota)
+                                            <div class="row column-item-product item-product-paymentstatus">
+                                                <div class="col-lg-7">
+                                                    <div class="d-flex">
+                                                        @foreach($gambar as $image)
+                                                        @if($image->sell_nota == $row->sell_nota)
+                                                        <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
+                                                            width="100px" height="100px">
+                                                        @endif
+                                                        @endforeach
+                                                        <div class="padding-0-15">
+                                                            <div class="fs-14 semi-bold nameproduct">{{$roww->i_name}}
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">{{$roww->sell_nota}}<span>
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">
+                                                                {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
+                                                                    class="text-full-payment-transaction">Total
+                                                                    Pembayaran :
+                                                                    <span class="text-full-price-transaction">Rp.
+                                                                        {{$roww->sell_total}}</span></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 text-center">
+                                                    <label class="label label-primary bg-primary-wib">
+                                                        @if($row->sell_status == 'P') Pembayaran
+                                                        @elseif($row->sell_status == 'PP') Proses Packing
+                                                        @elseif($row->sell_status == 'PS') Packing Selesai
+                                                        @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                        @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                        @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                        @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                        @else Unkown
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <a
+                                                        href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
+                                                            class="btn btn-buy-more-product">Beli Lagi</button></a>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <a href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
-                                                        class="btn btn-buy-more-product">Beli Lagi</button></a>
-                                            </div>
+                                            @endif
+                                            @endforeach
                                         </div>
-                                        @endif
                                         @endforeach
                                     </div>
-                                    @endforeach
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -443,104 +472,113 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalawalprosesstatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalakhirprosesstatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
-                                                <select name="orderby" id="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12">
-                                                    <option value="1" selected="">Terbaru</option>
-                                                    <option value="2">Total Belanja</option>
+                                                <select name="orderby"
+                                                    class="form-control c-cart-filter c-pointer fs-12"
+                                                    id="filterbuyprosesstatus">
+                                                    <option value="-" selected="" disabled="">Urutkan</option>
+                                                    <option value="Terbaru">Terbaru</option>
+                                                    <option value="Total Belanja">Total Belanja</option>
                                                 </select>
                                                 <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
-                                                    type="button">Reset
+                                                    type="button" id="resetprosesstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12">
+                                                    class="form-control c-cart-filter fs-12" id="searchbuyprosesstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
                                             </div>
                                         </div>
                                     </form>
-                                   <h5></h5>
+                                    <h5></h5>
                                     @if($groupprostat > 0)
-                                    @foreach($group as $row)
-                                    @if($row->sell_status == 'SP' || $row->sell_status == 'PS' || $row->sell_status == 'PP' || $row->sell_status == 'TS')
-                                    <div class="column-group-item-product mt-5">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8">
+                                    <div id="itemproduct-group-prosesstatus">
+                                        @foreach($group as $row)
+                                        @if($row->sell_status == 'SP' || $row->sell_status == 'PS' || $row->sell_status == 'PP' || $row->sell_status == 'TS')
+                                        <div class="column-group-item-product mt-5">
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-8">
                                                 <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
-                                                    class="text-full-payment-transaction">Total
-                                                    Semua
-                                                    Barang : <span class="text-full-price-transaction">Rp.
-                                                        {{$row->totalbayar}}</span></span>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
-                                                    data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
-                                                    data-customer="{{Auth::user()->cm_name}}"
-                                                    data-alamat="{{$row->sell_address}}"
-                                                    data-totalb="{{$row->totalbeli}}"
-                                                    data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
-                                                    class="detail"><button class="btn btn-view-more-transaction">Lihat
-                                                        Detail
-                                                        Transaksi</button></a>
-                                            </div>
-                                        </div>
-                                        @foreach($allstatus as $roww)
-                                        @if($roww->sell_nota == $row->sell_nota)
-                                        <div class="row column-item-product">
-                                            <div class="col-lg-7">
-                                                <div class="d-flex">
-                                                    @foreach($gambar as $image)
-                                                    @if($image->sell_nota == $row->sell_nota)
-                                                    <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
-                                                        width="100px" height="100px">
-                                                    @endif
-                                                    @endforeach
-                                                    <div class="padding-0-15">
-                                                        <div class="fs-14 semi-bold"> {{$roww->i_name}}</div>
-                                                        <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
-                                                        </div>
-                                                        <div class="fs-14 semi-bold pt-3">
-                                                            {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
-                                                                class="text-full-payment-transaction">Total
-                                                                Pembayaran :
-                                                                <span class="text-full-price-transaction">Rp.
-                                                                    {{$roww->sell_total}}</span></span></div>
-                                                    </div>
+                                                        class="text-full-payment-transaction">Total
+                                                        Semua
+                                                        Barang : <span class="text-full-price-transaction semi-bold"
+                                                            id="count">Rp.
+                                                            {{$row->totalbayar}}</span></span>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
+                                                        data-status="{{$row->sell_status}}"
+                                                        data-date="{{$row->sell_date}}"
+                                                        data-customer="{{Auth::user()->cm_name}}"
+                                                        data-alamat="{{$row->sell_address}}"
+                                                        data-totalb="{{$row->totalbeli}}"
+                                                        data-pos="{{$row->sell_postalcode}}"
+                                                        data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
+                                                        class="detail"><button
+                                                            class="btn btn-view-more-transaction">Lihat
+                                                            Detail
+                                                            Transaksi</button></a>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2 text-center">
-                                                <label class="label label-primary bg-primary-wib">
-                                                    @if($row->sell_status == 'P') Pembayaran 
-                                                    @elseif($row->sell_status == 'PP') Proses Packing
-                                                    @elseif($row->sell_status == 'PS') Packing Selesai
-                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
-                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
-                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
-                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
-                                                    @else Unkown
-                                                    @endif
-                                                </label>
+                                            @foreach($allstatus as $roww)
+                                            @if($roww->sell_nota == $row->sell_nota)
+                                            <div class="row column-item-product item-product-prosesstatus">
+                                                <div class="col-lg-7">
+                                                    <div class="d-flex">
+                                                        @foreach($gambar as $image)
+                                                        @if($image->sell_nota == $row->sell_nota)
+                                                        <img src="/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
+                                                            width="100px" height="100px">
+                                                        @endif
+                                                        @endforeach
+                                                        <div class="padding-0-15">
+                                                            <div class="fs-14 semi-bold nameproduct"> {{$roww->i_name}}
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">
+                                                                {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
+                                                                    class="text-full-payment-transaction">Total
+                                                                    Pembayaran :
+                                                                    <span class="text-full-price-transaction">Rp.
+                                                                        {{$roww->sell_total}}</span></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 text-center">
+                                                    <label class="label label-primary bg-primary-wib">
+                                                        @if($row->sell_status == 'P') Pembayaran
+                                                        @elseif($row->sell_status == 'PP') Proses Packing
+                                                        @elseif($row->sell_status == 'PS') Packing Selesai
+                                                        @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                        @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                        @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                        @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                        @else Unkown
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <button class="btn btn-buy-more-product">Beli Lagi</button>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <button class="btn btn-buy-more-product">Beli Lagi</button>
-                                            </div>
+                                            @endif
+                                            @endforeach
                                         </div>
                                         @endif
                                         @endforeach
                                     </div>
-                                    @endif
-                                    @endforeach
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -558,57 +596,58 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalawalpengirimantatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalakhirpengirimantatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
-                                                <select name="orderby" id="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12">
-                                                    <option value="1" selected="">Terbaru</option>
-                                                    <option value="2">Total Belanja</option>
+                                                <select name="orderby"
+                                                    class="form-control c-cart-filter c-pointer fs-12" id="filterbuypengirimanstatus">
+                                                    <option value="-" selected="" disabled="">Urutkan</option>
+                                                    <option value="Terbaru">Terbaru</option>
+                                                    <option value="Total Belanja">Total Belanja</option>
                                                 </select>
                                                 <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
-                                                    type="button">Reset
+                                                    type="button" id="resetpengirimanstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12">
+                                                    class="form-control c-cart-filter fs-12" id="searchbuypengirimanstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
                                             </div>
                                         </div>
                                     </form>
-                                    
                                     @if($groupppengstat > 0)
+                                    <div id="itemproduct-group-pengirimanstatus">
                                     @foreach($group as $row)
                                     @if($row->sell_status == 'SD')
                                     <div class="column-group-item-product mt-5">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8">
-                                                <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
-                                                    class="text-full-payment-transaction">Total
-                                                    Semua
-                                                    Barang : <span class="text-full-price-transaction">Rp.
-                                                        {{$row->totalbayar}}</span></span>
+                                            <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
+                                                        class="text-full-payment-transaction">Total
+                                                        Semua
+                                                        Barang : <span class="text-full-price-transaction semi-bold"
+                                                            id="count">Rp.
+                                                            {{$row->totalbayar}}</span></span>
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
                                                     data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
                                                     data-customer="{{Auth::user()->cm_name}}"
-                                                    data-alamat="{{Auth::user()->cm_address}},  {{$row->sell_address}}"
-                                                    data-totalb="{{$row->totalbeli}}"
-                                                    data-provinsi="{{$row->p_nama}}"
-                                                    data-kecamatan="{{$row->c_nama}}"
-                                                    data-district="{{$row->d_nama}}"
+                                                    data-pos="{{$row->sell_postalcode}}"
+                                                    data-alamat="{{$row->sell_address}}"
+                                                    data-totalb="{{$row->totalbeli}}" data-provinsi="{{$row->p_nama}}"
+                                                    data-kecamatan="{{$row->c_nama}}" data-district="{{$row->d_nama}}"
                                                     data-metode="{{$row->sell_method}}"
-                                                    data-hargat="Rp. {{$row->sell_total}}" data-toggle="modal"
+                                                    data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
                                                     class="detail"><button class="btn btn-view-more-transaction">Lihat
                                                         Detail
                                                         Transaksi</button></a>
@@ -619,7 +658,7 @@
                                         </div>
                                         @foreach($allstatus as $roww)
                                         @if($roww->sell_nota == $row->sell_nota)
-                                        <div class="row column-item-product">
+                                        <div class="row column-item-product item-product-pengirimanstatus">
                                             <div class="col-lg-7">
                                                 <div class="d-flex">
                                                     @foreach($gambar as $image)
@@ -629,7 +668,7 @@
                                                     @endif
                                                     @endforeach
                                                     <div class="padding-0-15">
-                                                        <div class="fs-14 semi-bold"> {{$roww->i_name}}</div>
+                                                        <div class="fs-14 semi-bold nameproduct"> {{$roww->i_name}}</div>
                                                         <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
                                                         </div>
                                                         <div class="fs-14 semi-bold pt-3">
@@ -643,7 +682,7 @@
                                             </div>
                                             <div class="col-lg-2 text-center">
                                                 <label class="label label-primary bg-primary-wib">
-                                                    @if($row->sell_status == 'P') Pembayaran 
+                                                    @if($row->sell_status == 'P') Pembayaran
                                                     @elseif($row->sell_status == 'PP') Proses Packing
                                                     @elseif($row->sell_status == 'PS') Packing Selesai
                                                     @elseif($row->sell_status == 'SD') Sedang Dikirim
@@ -663,6 +702,7 @@
                                     </div>
                                     @endif
                                     @endforeach
+                                    </div>
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -700,29 +740,32 @@
             $('#provinsi').html($(this).data('provinsi'));
             $('#kecamatan').html($(this).data('kecamatan'))
             $('#district').html($(this).data('district'));
+            $('#kodepos').html($(this).data('pos'));
             $('#metodepambayaran').html($(this).data('metode'));
             console.log($(this).data('metode'));
             $('#total_barang').html($(this).data('totalb'));
             $('#harga_total').html($(this).data('hargat'));
             console.log(stat);
-            if ( stat == 'P') {
+            if (stat == 'P') {
                 $('#status').html('<span class="label label-warning">Pembayaran</span>');
-            }else if(stat == 'PP'){
+            } else if (stat == 'PP') {
                 $('#status').html('<label class="label label-info">Proses Packing</label>');
-            }else if(stat == 'PS'){
+            } else if (stat == 'PS') {
                 $('#status').html('<label class="label label-info">Packing Selesai</label>');
-            }else if(stat == 'SD'){
+            } else if (stat == 'SD') {
                 $('#status').html('<span class="label label-info">Sedang Dikirim</span>');
-            }else if(stat == 'SB'){
+            } else if (stat == 'SB') {
                 $('#status').html('<label class="label label-info">Sudah Bayar</label>');
-            }else if (stat == 'SP') {
+            } else if (stat == 'SP') {
                 $('#status').html('<span class="label label-primary">Sedang Diproses</span>');
-            }else if(stat == 'TS'){
+            } else if (stat == 'TS') {
                 $('#status').html('<span class="label label-success">Transaksi Selesai</span>');
-            }else{
-                 $('#status').html('<span class="label label-success">Unknown</span>');
+            } else {
+                $('#status').html('<span class="label label-success">Unknown</span>');
             }
+            console.log(nota);
             var table2 = $('#table_detail').DataTable({
+                
                 responsive: true,
                 serverSide: true,
                 destroy: true,
@@ -736,16 +779,29 @@
                         'nota': nota,
                     }
                 },
-                columns: [
-                    {data: 'daftar', name: 'daftar'},
-                    {data: 'namabarang', name:'namabarang'},
-                    {data: 'satuanbarang', name:'satuanbarang'},
-                    {data: 'jumlahbeli',name:'jumlahbeli'},
-                    {data: 'harga', name: 'harga'}, 
-                    ],
-            })
-
-        })
+                columns: [{
+                        data: 'daftar',
+                        name: 'daftar'
+                    },
+                    {
+                        data: 'namabarang',
+                        name: 'namabarang'
+                    },
+                    {
+                        data: 'satuanbarang',
+                        name: 'satuanbarang'
+                    },
+                    {
+                        data: 'jumlahbeli',
+                        name: 'jumlahbeli'
+                    },
+                    {
+                        data: 'harga',
+                        name: 'harga'
+                    },
+                ],
+            });
+        });
 
         @if(Session::get('success'))
         iziToast.success({
@@ -822,6 +878,258 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    });
+    $(document).ready(function () {
+        $('.searchbuyallstatus').keyup(function () {
+            // Search text
+            var text = $(this).val().toLowerCase();
+
+            // Hide all content class element
+            $('.item-product-allstatus').hide();
+            // $('.item-product-allstatus .itemproduct-group-allstatus').hide();
+
+            // Search 
+            $('.item-product-allstatus .nameproduct').each(function () {
+                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                    $(this).closest('.item-product-allstatus').fadeIn();
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('.filterbuyallstatus').change(function () {
+            var filterstatus = this.value;
+            $.ajax({
+                url: "{{route('filterallstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalallstatus').val(),
+                    'tanggalakhir': $('#tanggalakhirallstatus').val(),
+                    'sell_date': $('.filterbuyallstatus').val(),
+                },
+                success: function (data) {
+                    console.log(data);
+                    document.getElementById('itemproduct-group-allstatus').innerHTML = data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#tanggalakhirallstatus').change(function () {
+            $.ajax({
+                url: "{{route('filterdateallstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalallstatus').val(),
+                    'tanggalakhir': $('#tanggalakhirallstatus').val(),
+                    'sell_date': $('.filterbuyallstatus').val(),
+                },
+                success: function (data) {
+                    document.getElementById('itemproduct-group-allstatus').innerHTML = data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#resetallstatus').click(function () {
+            $.ajax({
+                url: "{{route('resetallstatus')}}",
+                success: function (data) {
+                    $('#tanggalawalallstatus').val('');
+                    $('#tanggalakhirallstatus').val('');
+                    $('.filterbuyallstatus').val('-').trigger('change');
+                    document.getElementById('itemproduct-group-allstatus').innerHTML = data;
+                }
+            })
+        });
+    });
+
+
+    $(document).ready(function () {
+        $('#searchbuypaymentstatus').keyup(function () {
+            // Search text
+            var text = $(this).val().toLowerCase();
+
+            // Hide all content class element
+            $('.item-product-paymentstatus').hide();
+
+            // Search 
+            $('.item-product-paymentstatus .nameproduct').each(function () {
+                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                    $(this).closest('.item-product-paymentstatus').fadeIn();
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#filterbuypaymentstatus').change(function () {
+            var filterstatus = this.value;
+            $.ajax({
+                url: "{{route('filter_paymentstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalpaymentstatus').val(),
+                    'tanggalakhir': $('#tanggalakhirpaymentstatus').val(),
+                    'sell_date': $('#filterbuypaymentstatus').val(),
+                },
+                success: function (data) {
+                    console.log(data);
+                    document.getElementById('itemproduct-group-paymentstatus').innerHTML =
+                        data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#tanggalakhirpaymentstatus').change(function () {
+            $.ajax({
+                url: "{{route('filterdate_paymentstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalpaymentstatus').val(),
+                    'tanggalakhir': $('#tanggalakhirpaymentstatus').val(),
+                    'sell_date': $('#filterbuypaymentstatus').val(),
+                },
+                success: function (data) {
+                    document.getElementById('itemproduct-group-paymentstatus').innerHTML =
+                        data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#resetpaymentstatus').click(function () {
+            $.ajax({
+                url: "{{route('reset_paymentstatus')}}",
+                success: function (data) {
+                    $('#tanggalawalpaymentstatus').val('');
+                    $('#tanggalakhirpaymentstatus').val('');
+                    $('#filterbuypaymentstatus').val('-').trigger('change');
+                    document.getElementById('itemproduct-group-paymentstatus').innerHTML =
+                        data;
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $('#searchbuyprosesstatus').keyup(function () {
+            // Search text
+            var text = $(this).val().toLowerCase();
+
+            // Hide all content class element
+            $('.item-product-prosesstatus').hide();
+
+            // Search 
+            $('.item-product-prosesstatus .nameproduct').each(function () {
+                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                    $(this).closest('.item-product-prosesstatus').fadeIn();
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#filterbuyprosesstatus').change(function () {
+            var filterstatus = this.value;
+            $.ajax({
+                url: "{{route('filter_prosesstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalprosesstatus').val(),
+                    'tanggalakhir': $('#tanggalakhirprosesstatus').val(),
+                    'sell_date': $('#filterbuyprosesstatus').val(),
+                },
+                success: function (data) {
+                    console.log(data);
+                    document.getElementById('itemproduct-group-prosesstatus').innerHTML = data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#tanggalakhirprosesstatus').change(function () {
+            $.ajax({
+                url: "{{route('filterdate_prosesstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalprosesstatus').val(),
+                    'tanggalakhir': $('#tanggalakhirprosesstatus').val(),
+                    'sell_date': $('#filterbuyprosesstatus').val(),
+                },
+                success: function (data) {
+                    document.getElementById('itemproduct-group-prosesstatus').innerHTML = data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#resetprosesstatus').click(function () {
+            $.ajax({
+                url: "{{route('reset_prosesstatus')}}",
+                success: function (data) {
+                    $('#tanggalawalprosesstatus').val('');
+                    $('#tanggalakhirprosesstatus').val('');
+                    $('#filterbuyprosesstatus').val('-').trigger('change');
+                    document.getElementById('itemproduct-group-prosesstatus').innerHTML =
+                        data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#searchbuypengirimanstatus').keyup(function () {
+            // Search text
+            var text = $(this).val().toLowerCase();
+
+            // Hide all content class element
+            $('.item-product-pengirimanstatus').hide();
+
+            // Search 
+            $('.item-product-pengirimanstatus .nameproduct').each(function () {
+                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                    $(this).closest('.item-product-pengirimanstatus').fadeIn();
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#filterbuypengirimanstatus').change(function () {
+            var filterstatus = this.value;
+            $.ajax({
+                url: "{{route('filter_pengirimanstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalpengirimantatus').val(),
+                    'tanggalakhir': $('#tanggalakhirpengirimantatus').val(),
+                    'sell_date': $('#filterbuypengirimanstatus').val(),
+                },
+                success: function (data) {
+                    console.log(data);
+                    document.getElementById('itemproduct-group-pengirimanstatus').innerHTML = data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#tanggalakhirpengirimantatus').change(function () {
+            $.ajax({
+                url: "{{route('filterdate_pengirimanstatus')}}",
+                data: {
+                    'tanggalawal': $('#tanggalawalpengirimantatus').val(),
+                    'tanggalakhir': $('#tanggalakhirpengirimantatus').val(),
+                    'sell_date': $('#filterbuypengirimanstatus').val(),
+                },
+                success: function (data) {
+                    document.getElementById('itemproduct-group-pengirimanstatus').innerHTML = data;
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#resetpengirimanstatus').click(function () {
+            $.ajax({
+                url: "{{route('reset_pengirimanstatus')}}",
+                success: function (data) {
+                    $('#tanggalawalpengirimantatus').val('');
+                    $('#tanggalakhirpengirimantatus').val('');
+                    $('#filterbuypengirimanstatus').val('-').trigger('change');
+                    document.getElementById('itemproduct-group-pengirimanstatus').innerHTML = data;
+                }
+            });
+        });
     });
 </script>
 @endsection

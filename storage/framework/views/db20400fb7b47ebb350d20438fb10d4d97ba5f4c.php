@@ -39,7 +39,6 @@
             </div>
             <div class="slick">
                 <?php $__currentLoopData = $rekomendasiproduk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if($row->itp_citype == $rekomendasi->itp_citype): ?>
                 <div class="thumbnail product-box-item-slider">
                     <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if($row->i_code == $roww->ip_ciproduct): ?>
@@ -64,7 +63,6 @@
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
@@ -75,7 +73,6 @@
         <div class="row">
             <div class="product-opsi-group">
                 <h3 class="title-product-opsi">Produk Paling Banyak Dicari</h3>
-                <!-- <button class="btn view-more-product">Lihat Semua</button> -->
             </div>
             <div class="slick">
                 <?php $__currentLoopData = $popular; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -117,9 +114,9 @@
                 <h3 class="title-product-opsi">Semua Produk</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row testingbox">
             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-lg-product col-md-4">
+            <div class="col-lg-product col-md-4 testing">
                 <div class="thumbnail product-box-item">
                     <div class="product-box">
                         <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -226,7 +223,6 @@
 <?php $__env->startSection('extra_script'); ?>
 <script>
     $(document).ready(function () {
-
         $('#ncart').html($('.ncart').length);
 
         $(".variable").slick({
@@ -237,7 +233,6 @@
             infinite: true,
             variableWidth: true
         });
-
         $('.btn-wishlist').click(function () {
             var code = $(this).data('ciproduct');
             $(this).find('i').toggleClass('fa far');

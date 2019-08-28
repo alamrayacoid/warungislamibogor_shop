@@ -54,6 +54,7 @@
     <script src="<?php echo e(asset('assets/js/plugins/sweetalert/sweetalert.min.js')); ?>"></script>
 
     <script src="<?php echo e(asset('assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/infinite-scroll/dist/infinite-scroll.pkgd.js')); ?>"></script>
 
 
     <script>
@@ -226,20 +227,15 @@
         });
 
         });
-        // $(document).ready(function(){
-        //     $("#dropdown-categories").click(function(){
-        //         $(".Sidenav-backdoor").toggleClass("w-100");
-        //     });
-        // });
         $(document).ready(function(){
-            // $(".Sidenav-backdoor").click(function(){
-            //     $(".Sidenav-backdoor").removeClass("w-100");
-            // });
-            if ($(".dropdown-categories-navbar").hasClass("open")) {
-                alert('test')
-                $(".Sidenav-backdoor").addClass("w-100");
-            
-            }
+            $("#dropdown-categories").click(function(){
+                $(".Sidenav-backdoor").toggleClass("w-100");
+            });
+        });
+        $(document).ready(function(){
+            $(".Sidenav-backdoor").click(function(){
+                $(".Sidenav-backdoor").removeClass("w-100");
+            });
         });
         $(document).ready(function(){
             $('.select2').select2();

@@ -16,7 +16,7 @@
     <link href="{{asset('assets/css/plugins/jQueryUI/jquery-ui.css')}}" rel="stylesheet">
 
     <!-- Toastr style -->
-    <link href="{{asset('assets/css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
+    <!-- <link href="{{asset('assets/css/plugins/toastr/toastr.min.css')}}" rel="stylesheet"> -->
 
     <!-- Gritter -->
     <link href="{{asset('assets/js/plugins/gritter/jquery.gritter.css')}}" rel="stylesheet">
@@ -44,6 +44,22 @@
 </head>
 <style>
     #overlay-loading {
+    position: fixed;
+    /*display: none;*/
+    width: 100%;
+    height: 100vh !important;
+    overflow:hidden;
+    top: 0;
+    left: 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    right: 0;
+    z-index: 999999;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.loading-filter {
     position: fixed;
     /*display: none;*/
     width: 100%;
@@ -113,6 +129,6 @@
     overflow:hidden !important;
 }
 .d-none{
-    display:none;
+    display:none !important;
 }
     </style>

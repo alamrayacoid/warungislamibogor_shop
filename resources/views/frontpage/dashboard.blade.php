@@ -83,7 +83,6 @@
             </div>
             <div class="slick">
                 @foreach($rekomendasiproduk as $row)
-                @if($row->itp_citype == $rekomendasi->itp_citype)
                 <div class="thumbnail product-box-item-slider">
                     @foreach($gambar as $roww)
                     @if($row->i_code == $roww->ip_ciproduct)
@@ -108,7 +107,6 @@
                         </div>
                     </div>
                 </div>
-                @endif
                 @endforeach
             </div>
         </div>
@@ -119,7 +117,6 @@
         <div class="row">
             <div class="product-opsi-group">
                 <h3 class="title-product-opsi">Produk Paling Banyak Dicari</h3>
-                <!-- <button class="btn view-more-product">Lihat Semua</button> -->
             </div>
             <div class="slick">
                 @foreach($popular as $row)
@@ -161,9 +158,9 @@
                 <h3 class="title-product-opsi">Semua Produk</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row testingbox">
             @foreach($data as $row)
-            <div class="col-lg-product col-md-4">
+            <div class="col-lg-product col-md-4 testing">
                 <div class="thumbnail product-box-item">
                     <div class="product-box">
                         @foreach($wish as $wis)
@@ -269,7 +266,6 @@
 @section('extra_script')
 <script>
     $(document).ready(function () {
-
         $('#ncart').html($('.ncart').length);
 
         $(".variable").slick({
@@ -280,7 +276,6 @@
             infinite: true,
             variableWidth: true
         });
-
         $('.btn-wishlist').click(function () {
             var code = $(this).data('ciproduct');
             $(this).find('i').toggleClass('fa far');
