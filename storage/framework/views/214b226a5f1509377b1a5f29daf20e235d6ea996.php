@@ -121,7 +121,7 @@
             <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                 <div class="thumbnail profile-frame--sidebar">
                     <div class="d-flex align-items-center padding-0-15">
-                        <img src="/warungislamibogor_shop/storage/image/member/profile/<?php echo e(Auth::user()->cm_path); ?>"
+                        <img src="alamraya.site/warungislamibogor_shop/storage/image/member/profile/<?php echo e(Auth::user()->cm_path); ?>"
                             width="50px" height="50px">
                         <h5 class="title-profile-sidebar"><?php echo e(Auth::user()->cm_name); ?></h5>
                     </div>
@@ -277,7 +277,7 @@
                                                     <div class="d-flex">
                                                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                             width="100px" height="100px">
                                                         <?php endif; ?>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -412,7 +412,7 @@
                                                     <div class="d-flex">
                                                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                             width="100px" height="100px">
                                                         <?php endif; ?>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -538,7 +538,7 @@
                                                     <div class="d-flex">
                                                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                             width="100px" height="100px">
                                                         <?php endif; ?>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -664,7 +664,7 @@
                                                 <div class="d-flex">
                                                     <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                    <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                    <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                         width="100px" height="100px">
                                                     <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

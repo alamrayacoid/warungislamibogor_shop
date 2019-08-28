@@ -23,11 +23,11 @@
                                     <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($roww->ip_ciproduct): ?>
                                     <div>
-                                        <a href="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" sty
+                                        <a href="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>" sty
                                             data-gallery="">
 
                                             <img
-                                                src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
+                                                src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
                                         </a>
                                     </div>
                                     <?php endif; ?>
@@ -177,7 +177,7 @@
                     <?php $__currentLoopData = $gambarsejenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if($rows->i_code == $roww->ip_ciproduct): ?>
                     <div class="image-product-box"
-                        style="background:url('/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
+                        style="background:url('alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                     </div>
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

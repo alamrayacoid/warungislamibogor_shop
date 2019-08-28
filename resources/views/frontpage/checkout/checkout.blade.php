@@ -124,7 +124,7 @@
                                             @foreach($gambar as $roww)
                                             @if($row->i_code == $roww->ip_ciproduct)
                                             <div class="">
-                                                <img src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}"
+                                                <img src="alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}"
                                                     class="img-item-product-cart">
                                             </div>
                                             @endif

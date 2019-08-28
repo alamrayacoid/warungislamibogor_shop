@@ -118,7 +118,7 @@
                                 @foreach($gambar as $roww)
                                 @if($row->i_code == $roww->ip_ciproduct)
                                 <div class="image-product-box"
-                                    style="background:url('/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
+                                    style="background:url('alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
                                 </div>
                                 @endif
                                 @endforeach

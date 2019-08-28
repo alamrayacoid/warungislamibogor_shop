@@ -26,11 +26,11 @@ class ProdukController extends Controller
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->where('itp_citype',$kategory)->get();
 
             if ($request->search != null) {
-                $data->orWhere('i_name','LIKE', $request->search.'%')->get();
+                $data->where('i_name','LIKE', $request->search.'%')->get();
             }
 
             if ($request->nama_produk != null) {
-                $data->orWhere('i_name','LIKE', $request->nama_produk.'%')->get();
+                $data->where('i_name','LIKE', $request->nama_produk.'%')->get();
             }
 
             if ($request->harga_min != null && $request->harga_max != null) {
@@ -58,11 +58,11 @@ class ProdukController extends Controller
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
 
             if ($request->search != null) {
-                $data->orWhere('i_name','LIKE', $request->search.'%')->get();
+                $data->where('i_name','LIKE', $request->search.'%')->get();
             }
 
             if ($request->nama_produk != null) {
-                $data->orWhere('i_name','LIKE', $request->nama_produk.'%')->get();
+                $data->where('i_name','LIKE', $request->nama_produk.'%')->get();
             }
 
             if ($request->harga_min != null && $request->harga_max != null) {
