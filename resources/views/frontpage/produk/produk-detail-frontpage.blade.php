@@ -282,9 +282,9 @@
                             title: 'Berhasil!',
                             message: 'Memasukkan Barang ke Keranjang',
                         });
-                        setTimeout(function () {
-                            window.location.href = "{{route('home')}}";
-                        }, 1000);
+                        // setTimeout(function () {
+                        //     window.location.href = "{{route('home')}}";
+                        // }, 1000);
                     } else if (get['error'] == 'stock') {
                         iziToast.error({
                             title: 'Gagal!',

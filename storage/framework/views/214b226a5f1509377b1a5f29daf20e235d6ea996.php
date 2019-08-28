@@ -277,7 +277,7 @@
                                                     <div class="d-flex">
                                                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                        <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                             width="100px" height="100px">
                                                         <?php endif; ?>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -311,7 +311,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <a
-                                                        href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($roww->i_code); ?>"><button
+                                                        href="<?php echo e(route('produk-detail-frontpage', ['code'=>$roww->i_code])); ?>"><button
                                                             class="btn btn-buy-more-product">Beli Lagi</button></a>
                                                 </div>
                                             </div>
@@ -412,7 +412,7 @@
                                                     <div class="d-flex">
                                                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                        <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                             width="100px" height="100px">
                                                         <?php endif; ?>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -446,7 +446,7 @@
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <a
-                                                        href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($roww->i_code); ?>"><button
+                                                        href="<?php echo e(route('produk-detail-frontpage', ['code'=>$roww->i_code])); ?>"><button
                                                             class="btn btn-buy-more-product">Beli Lagi</button></a>
                                                 </div>
                                             </div>
@@ -538,7 +538,7 @@
                                                     <div class="d-flex">
                                                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                        <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                             width="100px" height="100px">
                                                         <?php endif; ?>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -664,7 +664,7 @@
                                                 <div class="d-flex">
                                                     <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                    <img src="alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($image->ip_path); ?>"
+                                                    <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
                                                         width="100px" height="100px">
                                                     <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
