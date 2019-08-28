@@ -27,11 +27,11 @@
                                     @foreach($gambar as $roww)
                                     @if($roww->ip_ciproduct)
                                     <div>
-                                        <a href="alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" sty
+                                        <a href="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}" sty
                                             data-gallery="">
 
                                             <img
-                                                src="alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}">
+                                                src="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}">
                                         </a>
                                     </div>
                                     @endif
@@ -179,7 +179,7 @@
                     @foreach($gambarsejenis as $roww)
                     @if($rows->i_code == $roww->ip_ciproduct)
                     <div class="image-product-box"
-                        style="background:url('alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
+                        style="background:url('env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
                     </div>
                     @endif
                     @endforeach

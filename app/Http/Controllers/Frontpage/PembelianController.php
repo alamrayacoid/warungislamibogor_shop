@@ -127,7 +127,7 @@ class PembelianController extends Controller
         ->addColumn('daftar',function($data){
             return '
                         <td>
-                            <img src="alamraya.site/warungislamibogor/storage/image/master/produk/'.$data->ip_path.'" width="60">
+                            <img src="{{env("APP_WIB")}}storage/image/master/produk/'.$data->ip_path.'" width="60">
                                 </td>
                                     <td>
                                         <h3>

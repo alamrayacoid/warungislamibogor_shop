@@ -279,7 +279,7 @@
                                                     <div class="d-flex">
                                                         @foreach($gambar as $image)
                                                         @if($image->sell_nota == $row->sell_nota)
-                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
+                                                        <img src="env('APP_WIB')}}storage/image/master/produk/{{$image->ip_path}}"
                                                             width="100px" height="100px">
                                                         @endif
                                                         @endforeach
@@ -413,7 +413,7 @@
                                                     <div class="d-flex">
                                                         @foreach($gambar as $image)
                                                         @if($image->sell_nota == $row->sell_nota)
-                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
+                                                        <img src="env('APP_WIB')}}storage/image/master/produk/{{$image->ip_path}}"
                                                             width="100px" height="100px">
                                                         @endif
                                                         @endforeach
@@ -538,7 +538,7 @@
                                                     <div class="d-flex">
                                                         @foreach($gambar as $image)
                                                         @if($image->sell_nota == $row->sell_nota)
-                                                        <img src="alamraya.site/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
+                                                        <img src="env('APP_WIB')}}storage/image/master/produk/{{$image->ip_path}}"
                                                             width="100px" height="100px">
                                                         @endif
                                                         @endforeach
@@ -663,7 +663,7 @@
                                                 <div class="d-flex">
                                                     @foreach($gambar as $image)
                                                     @if($image->sell_nota == $row->sell_nota)
-                                                    <img src="alamraya.site/warungislamibogor/storage/image/master/produk/{{$image->ip_path}}"
+                                                    <img src="env('APP_WIB')}}storage/image/master/produk/{{$image->ip_path}}"
                                                         width="100px" height="100px">
                                                     @endif
                                                     @endforeach

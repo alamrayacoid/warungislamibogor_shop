@@ -59,14 +59,14 @@
             <div class="col-md-7">
                 <div class="your-class">
                     @foreach($imgslider as $row)
-                    <div><img src="alamraya.site/warungislamibogor/storage/image/master/banner/{{$row->b_image}}"></div>
+                    <div><img src="{{env('APP_WIB')}}storage/image/master/banner/{{$row->b_image}}"></div>
                     @endforeach
                 </div>
             </div>
             <div class="col-md-5 img-header-column" style="padding-left:0;">
                 @foreach($imgbasic as $row)
                 <div class="img-header-second">
-                    <img src="alamraya.site/warungislamibogor/storage/image/master/banner/{{$row->b_image}}" style="width:100%;">
+                    <img src="{{env('APP_WIB')}}storage/image/master/banner/{{$row->b_image}}" style="width:100%;">
                 </div>
                 @endforeach
             </div>
@@ -87,7 +87,7 @@
                     @foreach($gambar as $roww)
                     @if($row->i_code == $roww->ip_ciproduct)
                     <div class="image-product-box"
-                        style="background:url('alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
+                        style="background:url('{{env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
                     </div>
                     @endif
                     @endforeach
@@ -126,7 +126,7 @@
                     @foreach($gambar as $roww)
                     @if($rows->i_code == $roww->ip_ciproduct)
                     <div class="image-product-box"
-                        style="background:url('alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
+                        style="background:url('{{env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
                     </div>
                     @endif
                     @endforeach
@@ -195,7 +195,7 @@
                         @foreach($gambar as $roww)
                         @if($row->i_code == $roww->ip_ciproduct)
                         <div class="image-product-box"
-                            style="background:url('alamraya.site/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
+                            style="background:url('{{env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
                         </div>
                         @endif
                         @endforeach
