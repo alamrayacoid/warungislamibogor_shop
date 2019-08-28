@@ -312,7 +312,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <a
-                                                        href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
+                                                        href="{{route('produk-detail-frontpage', ['code'=>$roww->i_code])}}"><button
                                                             class="btn btn-buy-more-product">Beli Lagi</button></a>
                                                 </div>
                                             </div>
@@ -446,7 +446,7 @@
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <a
-                                                        href="{{route('produk-detail-frontpage')}}?code={{$roww->i_code}}"><button
+                                                        href="{{route('produk-detail-frontpage', ['code'=>$roww->i_code])}}"><button
                                                             class="btn btn-buy-more-product">Beli Lagi</button></a>
                                                 </div>
                                             </div>
