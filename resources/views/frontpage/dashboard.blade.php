@@ -83,7 +83,6 @@
             </div>
             <div class="slick">
                 @foreach($rekomendasiproduk as $row)
-                @if($row->itp_citype == $rekomendasi->itp_citype)
                 <div class="thumbnail product-box-item-slider">
                     @foreach($gambar as $roww)
                     @if($row->i_code == $roww->ip_ciproduct)
@@ -108,7 +107,6 @@
                         </div>
                     </div>
                 </div>
-                @endif
                 @endforeach
             </div>
         </div>

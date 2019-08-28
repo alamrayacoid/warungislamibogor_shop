@@ -39,7 +39,6 @@
             </div>
             <div class="slick">
                 <?php $__currentLoopData = $rekomendasiproduk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if($row->itp_citype == $rekomendasi->itp_citype): ?>
                 <div class="thumbnail product-box-item-slider">
                     <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if($row->i_code == $roww->ip_ciproduct): ?>
@@ -64,7 +63,6 @@
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>

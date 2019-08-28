@@ -50,6 +50,9 @@ class FrontpageController extends Controller
             ->join('m_itemtype','ity_code','itp_citype')
             ->groupBy('i_name')
             ->where('m_item.status_data','true')
+            ->where('itp_citype',$rekomendasi->itp_citype)
+            ->where('i_code','!=',$rekomendasi->i_code)
+            ->take(10)
             ->get();
             
              $popularproduk = DB::table('d_wishlist')->where('status_data','true')->get();
