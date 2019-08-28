@@ -1,7 +1,9 @@
 @extends('frontpage.main-frontpage')
 
 @section('extra_style')
-
+<style type="text/css">
+    
+</style>
 @endsection
 
 @section('content')
@@ -42,7 +44,7 @@
                             <div class="col-md-7">
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product">{{$row->i_name}}
-                                        <span class="text-info-title-detail-product" id="stocknya">Tersisa 13</span>
+                                        <span class="text-info-title-detail-product" id="stocknya"></span>
                                     </h2>
                                     <div class="">
                                         <i class="fa fa-star f-14 c-gold"></i>
@@ -234,6 +236,7 @@
                     } else {
                         $('#stocknya').text('Tersisa ' + get['stock']);
                     }
+                    $('#stocknya').addClass('selected');
                     // swal("Informasi!", success, "success");
                     modal;
                     success;
