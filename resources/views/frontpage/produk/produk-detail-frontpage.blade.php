@@ -221,7 +221,7 @@
                     'cabang': $('#cabang').val(),
                     'produk': '{{$code}}'
                 });
-            }, 10000);
+            }, 3000);
         })
 
         function ajax_helper(url, type, data, success, error, modal) {
