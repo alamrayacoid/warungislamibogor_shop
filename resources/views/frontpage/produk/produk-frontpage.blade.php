@@ -125,7 +125,7 @@
                                 @endforeach
                                 <div class="caption">
                                     <div class="title-product-group">
-                                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                                        <a href="{{route('produk-detail-frontpage', ['code'=>$row->i_code])}}"
                                             class="title-product-item">{{$row->i_name}}</a>
                                     </div>
                                     <div class="footer-product-item">

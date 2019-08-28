@@ -276,6 +276,27 @@
     font-weight: 600;
     padding-left: 5px;
 }
+.text-info-title-detail-product.selected{
+    animation-name: animasiCabangTerpilih;
+    animation-duration: 2s;
+}
+@keyframes animasiCabangTerpilih {
+    0% {
+        color: #15499a;
+    }
+    25% {
+        color:lightgray;
+    }
+    50%{
+        color: green;
+    }
+    75%{
+        color: lightgray;
+    }
+    100%{
+        color: #15499a;
+    }
+}
 .image-product-box{
     background-size: cover !important;
     background-position: center !important;
