@@ -270,7 +270,6 @@
                     'cart_location': cabang,
                 },
                 success: function (get) {
-                    console.log(get);
                     console.log(get['error']);
                     if (get['error'] == 'error') {
                         iziToast.error({
@@ -313,18 +312,18 @@
         });
     });
 
-    var count = 1;
-    var countEl = document.getElementById("qty");
 
     function plus() {
-        count++;
-        countEl.value = count;
+        var countEl = parseInt($("#qty").val());
+        count = countEl + 1;
+        $('#qty').val(count);
     }
 
     function minus() {
+        var countEl = parseInt($("#qty").val());
         if (count > 1) {
-            count--;
-            countEl.value = count;
+            count = countEl - 1;
+            $('#qty').val(count);
         }
     }
 </script>

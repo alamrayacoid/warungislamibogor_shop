@@ -282,9 +282,9 @@
                             title: 'Berhasil!',
                             message: 'Memasukkan Barang ke Keranjang',
                         });
-                        setTimeout(function () {
-                            window.location.href = "<?php echo e(route('home')); ?>";
-                        }, 1000);
+                        // setTimeout(function () {
+                        //     window.location.href = "<?php echo e(route('home')); ?>";
+                        // }, 1000);
                     } else if (get['error'] == 'stock') {
                         iziToast.error({
                             title: 'Gagal!',
@@ -313,18 +313,18 @@
         });
     });
 
-    var count = 1;
-    var countEl = document.getElementById("qty");
 
     function plus() {
-        count++;
-        countEl.value = count;
+        var countEl = parseInt($("#qty").val());
+        count = countEl + 1;
+        $('#qty').val(count);
     }
 
     function minus() {
+        var countEl = parseInt($("#qty").val());
         if (count > 1) {
-            count--;
-            countEl.value = count;
+            count = countEl - 1;
+            $('#qty').val(count);
         }
     }
 </script>

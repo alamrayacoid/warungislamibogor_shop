@@ -44,6 +44,8 @@ Route::group(['middleware' => ['auth.custom']], function(){
 Route::get('/keranjang', 'Frontpage\KeranjangController@keranjang')->name('keranjang-frontpage');
 Route::post('/keranjang/remove', 'Frontpage\KeranjangController@removecart')->name('remove.keranjang');
 Route::post('/keranjang/check', 'Frontpage\KeranjangController@gocheck')->name('check.keranjang');
+Route::post('/keranjang/detail_keranjang', 'Frontpage\KeranjangController@detail_keranjang')->name('detail.keranjang');
+Route::post('/keranjang/updatecart', 'Frontpage\KeranjangController@updatecart')->name('updatecart.keranjang');
 // Status semua
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
 // Status pembayaran
