@@ -278,6 +278,7 @@
 }
 .text-info-title-detail-product.selected{
     animation-name: animasiCabangTerpilih;
+    animation-duration: 2s;
 }
 @keyframes animasiCabangTerpilih {
     0% {
