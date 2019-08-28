@@ -15,23 +15,22 @@ class ProdukController extends Controller
         $kategory = $request->ctr;
             if ($kategory != null) {
             $data = DB::table('m_item')
-                ->join('m_itemprice','ipr_ciproduct','i_code')
-                ->join('m_itemproduct','itp_ciproduct','i_code')
-                ->join('m_itemtype','ity_code','itp_citype')
-                ->groupBy('i_name')
+                ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+                ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                ->leftJoin('m_itemtype','ity_code','itp_citype')
                 ->where('m_item.status_data','true')
-                ->get();
+                ->groupBy('i_name');
 
             
 
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->where('itp_citype',$kategory)->get();
 
             if ($request->search != null) {
-                $data->where('i_name',$request->search)->get();
+                $data->orWhere('i_name','LIKE', $request->search.'%')->get();
             }
 
             if ($request->nama_produk != null) {
-                $data->where('i_name',$request->nama_produk)->get();
+                $data->orWhere('i_name','LIKE', $request->nama_produk.'%')->get();
             }
 
             if ($request->harga_min != null && $request->harga_max != null) {
@@ -43,9 +42,9 @@ class ProdukController extends Controller
             }
         }else{
             $data = DB::table('m_item')
-                ->join('m_itemprice','ipr_ciproduct','i_code')
-                ->join('m_itemproduct','itp_ciproduct','i_code')
-                ->join('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+                ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                ->leftJoin('m_itemtype','ity_code','itp_citype')
                 ->where('m_item.status_data','true')
                 ->groupBy('i_name');
                 
@@ -59,11 +58,11 @@ class ProdukController extends Controller
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
 
             if ($request->search != null) {
-                $data->where('i_name',$request->search)->get();
+                $data->orWhere('i_name','LIKE', $request->search.'%')->get();
             }
 
             if ($request->nama_produk != null) {
-                $data->where('i_name',$request->nama_produk)->get();
+                $data->orWhere('i_name','LIKE', $request->nama_produk.'%')->get();
             }
 
             if ($request->harga_min != null && $request->harga_max != null) {
@@ -79,6 +78,7 @@ class ProdukController extends Controller
             }
             $namabarang = $request->search;
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+
     	return view('frontpage.produk.produk-frontpage',array(
                 'data' => $data->get(),
                 'gambar' => $gambar,
@@ -176,7 +176,7 @@ class ProdukController extends Controller
         $term = $request->get('term');
         $results = array();
         $queries = DB::table('m_item')
-            ->where('i_name', 'LIKE', '%'.$term.'%')
+            ->orWhere('i_name','LIKE', '%'.$term.'%')
             ->where('status_data','true')
             ->take(10)->get();
         
