@@ -215,13 +215,13 @@
 <script>
     $(document).ready(function () {
         $('#cabang').on('change', function () {
-            // setInterval(function () {
+            setInterval(function () {
                 ajax_helper('{{route("stock_check")}}', 'POST', {
                     '_token': '{{csrf_token()}}',
                     'cabang': $('#cabang').val(),
                     'produk': '{{$code}}'
                 });
-            // }, 1000);
+            }, 10000);
         })
 
         function ajax_helper(url, type, data, success, error, modal) {
