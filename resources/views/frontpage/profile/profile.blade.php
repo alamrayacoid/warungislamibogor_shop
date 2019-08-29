@@ -58,7 +58,7 @@
                 <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                     <div class="thumbnail profile-frame--sidebar">
                         <div class="d-flex align-items-center padding-0-15">
-                            <img src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}"
+                            <img src="env('APP_WIB')}}storage/image/member/profile/{{Auth::user()->cm_path}}"
                                 width="50px" height="50px">
                             <h5 class="title-profile-sidebar">{{Auth::user()->cm_name}}</h5>
                         </div>
@@ -140,7 +140,7 @@
                                     <div class="row">
                                         <div class="col-lg-4 padding-15">
                                             <div class="profile-image-group padding-15">
-                                                <img src="/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}"
+                                                <img src="env('APP_WIB')}}storage/image/member/profile/{{Auth::user()->cm_path}}"
                                                     class="image-profile-setting">
                                                 @include('frontpage.profile.modal-editfoto')
                                                 <button class="btn btn-upload-image-profile btn-block mt-5"

@@ -17,53 +17,14 @@
         <div class="row mt-5 mb-5">
             <div class="col-md-7">
                 <div class="thumbnail">
-                    <div class="thumbnail-header">Keranjang Belanja Anda
-                    </div>
+                        <table class="w-100" id="detail_keranjang">
+                            <thead>
+                                <tr>
+                                    <th class="thumbnail-header">Keranjang Belanja Anda</th>
+                                </tr>
+                            </thead>
+                        </table>
                     <div class="caption" style="padding:0;">
-                        
-                        <form id="keranjang_checkout">
-                            <?php echo csrf_field(); ?>
-                            <input type="hidden" id="count" name="count">
-                            <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <input type="hidden" class="count" value="<?php echo e($row->cart_id); ?>" name="id[]">
-                            <div class="row column-group-cart-item-product">
-                                <div class="col-lg-8 col-md-7 column-left-cart-item-product">
-                                    <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($row->i_code == $roww->ip_ciproduct): ?>
-                                    <div class="">
-                                        <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>"
-                                            class="img-item-product-cart">
-                                    </div>
-                                    <?php endif; ?>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <div class="column-description-cart-product">
-                                        <h5 class="title-cart-product-item"><?php echo e($row->i_name); ?></h5>
-                                        <input type="hidden" value="<?php echo e($row->i_code); ?>" name="ciproduct[]">
-                                        
-                                        <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
-                                        <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>"
-                                            name="total[]">
-                                        <div class="input-group d-flex">
-                                            <button class="btn btn-default btn-sm btn-count-item border-right-0" type="button" disabled><i
-                                                    class="fa fa-minus"></i></button>
-                                            <input type="number" class="form-control text-center" value="<?php echo e($row->cart_qty); ?>"
-                                                aria-describedby="sizing-addon2">
-                                            <button class="btn btn-default btn-sm btn-count-item border-left-0" type="button" disabled><i
-                                                    class="fa fa-plus" ></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-5 column-right-cart-item-product">
-                                    <h5 class="">Rp. <?php echo e($row->ipr_sunitprice * $row->cart_qty); ?></h5>
-                                    <input type="hidden" value="<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>" class="total"
-                                        id="total<?php echo e($row->cart_id); ?>" name="">
-                                    <a data-id="<?php echo e($row->cart_id); ?>" data-ciproduct="<?php echo e($row->cart_ciproduct); ?>" data-qty="<?php echo e($row->cart_qty); ?>"
-                                        class="remove"><button class="btn btn-default"><i
-                                                class="fa fa-times"></i></button></a>
-                                </div>
-                            </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -106,6 +67,45 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('#detail_keranjang').on('click','.tambah',function(){
+            ajax_helper('<?php echo e(route("updatecart.keranjang")); ?>', 'POST', {
+                    '_token': '<?php echo e(csrf_token()); ?>',
+                    'produk': $(this).parents('tr').find('.id_produk').val(),
+                    'tambah': 'T'
+                });
+        })
+
+        $('#detail_keranjang').on('click','.kurang',function(){
+            ajax_helper('<?php echo e(route("updatecart.keranjang")); ?>', 'POST', {
+                    '_token': '<?php echo e(csrf_token()); ?>',
+                    'produk': $(this).parents('tr').find('.id_produk').val(),
+                    'kurang': 'T'
+                });
+        })
+
+        $('#cart').on('change',function(){
+            stocknya = $(this).val();
+
+        })
+
+        function ajax_helper(url, type, data) {
+            $.ajax({
+                url: url,
+                type: type,
+                data: data,
+                success: function (get) {
+                    // swal("Informasi!", success, "success");
+                    table.ajax.reload();
+                    // $(':input').val('');
+                },
+                error: function (xhr, textStatus, errorThrowl) {
+                    // swal("Gagal!", error, "error");
+                    // $(':input').val('');
+                }
+
+            })
+        }
+
         setInterval(function () {
             $('#itemt').html($('.count').length);
         }, 500);
@@ -140,6 +140,28 @@
             })
 
         })
+
+        var table = $('#detail_keranjang').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('detail.keranjang')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>"
+                }
+            },
+            columns: [
+                {data: 'detail'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+        });
 
         $(document).on('click', '.checkouts', function () {
             ;

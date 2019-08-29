@@ -117,7 +117,7 @@
                                 <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                 <div class="image-product-box"
-                                    style="background:url('/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
+                                    style="background:url('alamraya.site/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                                     <!-- <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>"> -->
                                 </div>
                                 <?php endif; ?>

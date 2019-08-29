@@ -1,7 +1,9 @@
 @extends('frontpage.main-frontpage')
 
 @section('extra_style')
-
+<style type="text/css">
+    
+</style>
 @endsection
 
 @section('content')
@@ -25,11 +27,11 @@
                                     @foreach($gambar as $roww)
                                     @if($roww->ip_ciproduct)
                                     <div>
-                                        <a href="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}" sty
+                                        <a href="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}" sty
                                             data-gallery="">
 
                                             <img
-                                                src="/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}">
+                                                src="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}">
                                         </a>
                                     </div>
                                     @endif
@@ -42,7 +44,7 @@
                             <div class="col-md-7">
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product">{{$row->i_name}}
-                                        <span class="text-info-title-detail-product" id="stocknya">Tersisa 13</span>
+                                        <span class="text-info-title-detail-product" id="stocknya"></span>
                                     </h2>
                                     <div class="">
                                         <i class="fa fa-star f-14 c-gold"></i>
@@ -177,7 +179,7 @@
                     @foreach($gambarsejenis as $roww)
                     @if($rows->i_code == $roww->ip_ciproduct)
                     <div class="image-product-box"
-                        style="background:url('/warungislamibogor/storage/image/master/produk/{{$roww->ip_path}}')">
+                        style="background:url('env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
                     </div>
                     @endif
                     @endforeach
@@ -219,7 +221,7 @@
                     'cabang': $('#cabang').val(),
                     'produk': '{{$code}}'
                 });
-            }, 1000);
+            }, 3000);
         })
 
         function ajax_helper(url, type, data, success, error, modal) {
@@ -234,6 +236,7 @@
                     } else {
                         $('#stocknya').text('Tersisa ' + get['stock']);
                     }
+                    $('#stocknya').addClass('selected');
                     // swal("Informasi!", success, "success");
                     modal;
                     success;
@@ -267,7 +270,6 @@
                     'cart_location': cabang,
                 },
                 success: function (get) {
-                    console.log(get);
                     console.log(get['error']);
                     if (get['error'] == 'error') {
                         iziToast.error({
@@ -279,9 +281,9 @@
                             title: 'Berhasil!',
                             message: 'Memasukkan Barang ke Keranjang',
                         });
-                        setTimeout(function () {
-                            window.location.href = "{{route('home')}}";
-                        }, 1000);
+                        // setTimeout(function () {
+                        //     window.location.href = "{{route('home')}}";
+                        // }, 1000);
                     } else if (get['error'] == 'stock') {
                         iziToast.error({
                             title: 'Gagal!',
@@ -310,18 +312,18 @@
         });
     });
 
-    var count = 1;
-    var countEl = document.getElementById("qty");
 
     function plus() {
-        count++;
-        countEl.value = count;
+        var countEl = parseInt($("#qty").val());
+        count = countEl + 1;
+        $('#qty').val(count);
     }
 
     function minus() {
+        var countEl = parseInt($("#qty").val());
         if (count > 1) {
-            count--;
-            countEl.value = count;
+            count = countEl - 1;
+            $('#qty').val(count);
         }
     }
 </script>
