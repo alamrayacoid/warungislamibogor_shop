@@ -270,7 +270,6 @@
                     'cart_location': cabang,
                 },
                 success: function (get) {
-                    console.log(get);
                     console.log(get['error']);
                     if (get['error'] == 'error') {
                         iziToast.error({

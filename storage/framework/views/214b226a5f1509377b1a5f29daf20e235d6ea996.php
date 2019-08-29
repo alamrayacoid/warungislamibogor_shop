@@ -5,6 +5,10 @@
         position: relative;
     }
 
+    .dataTables_wrapper table thead{
+    display:none;
+}
+
     .btn-send-payment {
         color: #fff !important;
         font-size: 12px;
@@ -238,89 +242,23 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <?php if($group != '[]'): ?>
-                                    <div id="itemproduct-group-allstatus">
-                                        <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($row->sell_ccustomer == Auth::user()->cm_code): ?>
-                                        <div class="column-group-item-product mt-5">
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8">
-                                                    <span class="fs-14 semi-bold"><?php echo e($row->sell_nota); ?></span><span
-                                                        class="text-full-payment-transaction">Total
-                                                        Semua
-                                                        Barang : <span class="text-full-price-transaction semi-bold"
-                                                            id="count">Rp.
-                                                            <?php echo e($row->totalbayar); ?></span></span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
-                                                        data-status="<?php echo e($row->sell_status); ?>"
-                                                        data-date="<?php echo e($row->sell_date); ?>"
-                                                        data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                        data-alamat="<?php echo e($row->sell_address); ?>"
-                                                        data-totalb="<?php echo e($row->totalbeli); ?>"
-                                                        data-provinsi="<?php echo e($row->p_nama); ?>"
-                                                        data-kecamatan="<?php echo e($row->c_nama); ?>"
-                                                        data-district="<?php echo e($row->d_nama); ?>"
-                                                        data-metode="<?php echo e($row->sell_method); ?>"
-                                                        data-pos="<?php echo e($row->sell_postalcode); ?>"
-                                                        data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
-                                                        class="detail"><button
-                                                            class="btn btn-view-more-all-transaction">Lihat Detail
-                                                            Transaksi</button></a>
-                                                </div>
-                                            </div>
-                                            <?php $__currentLoopData = $allstatus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($roww->sell_nota == $row->sell_nota): ?>
-                                            <div class="row column-item-product item-product-allstatus">
-                                                <div class="col-lg-6">
-                                                    <div class="d-flex">
-                                                        <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
-                                                            width="100px" height="100px">
-                                                        <?php endif; ?>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        <div class="padding-0-15">
-                                                            <div class="fs-14 semi-bold nameproduct"><?php echo e($roww->i_name); ?>
-
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3"><?php echo e($row->sell_nota); ?><span>
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">
-                                                                <?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?><span
-                                                                    class="text-full-payment-transaction">Total
-                                                                    Pembayaran :
-                                                                    <span class="text-full-price-transaction">Rp.
-                                                                        <?php echo e($roww->sell_total); ?></span></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 text-center">
-                                                    <label class="label label-primary bg-primary-wib">
-                                                        <?php if($row->sell_status == 'P'): ?> Pembayaran
-                                                        <?php elseif($row->sell_status == 'PP'): ?> Proses Packing
-                                                        <?php elseif($row->sell_status == 'PS'): ?> Packing Selesai
-                                                        <?php elseif($row->sell_status == 'SD'): ?> Sedang Dikirim
-                                                        <?php elseif($row->sell_status == 'SB'): ?> Sudah Bayar
-                                                        <?php elseif($row->sell_status == 'SP'): ?> Sedang Diproses
-                                                        <?php elseif($row->sell_status == 'TS'): ?> Sedang Diproses
-                                                        <?php else: ?> Unkown
-                                                        <?php endif; ?>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <a
-                                                        href="<?php echo e(route('produk-detail-frontpage', ['code'=>$roww->i_code])); ?>"><button
-                                                            class="btn btn-buy-more-product">Beli Lagi</button></a>
-                                                </div>
-                                            </div>
-                                            <?php endif; ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </div>
-                                        <?php endif; ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </div>
+                                    <?php if($groupp !='[]'): ?>
+                                        <table class="table table-striped table-bordered table-hover" style="width: 100%" id="detail_1">
+                                            <thead style="opacity: 0;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
                                     <?php else: ?>
                                     <div class="column-empty-transaction">
                                         <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
@@ -764,9 +702,8 @@
             } else {
                 $('#status').html('<span class="label label-success">Unknown</span>');
             }
-            console.log(nota);
+
             var table2 = $('#table_detail').DataTable({
-                
                 responsive: true,
                 serverSide: true,
                 destroy: true,
@@ -777,7 +714,6 @@
                     type: "post",
                     data: {
                         "_token": "<?php echo e(csrf_token()); ?>",
-                        'nota': nota,
                     }
                 },
                 columns: [{
@@ -823,6 +759,27 @@
         });
         <?php endif; ?>
 
+        var table = $('#detail_1').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_allstatus')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>"
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+        });
 
         $('.bayar').on('click', function () {
             var nota = $(this).data('nota');

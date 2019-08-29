@@ -17,6 +17,8 @@
         <div class="row mt-5 mb-5">
             <div class="col-md-7">
                 <div class="thumbnail">
+                    <form id="keranjang_checkout">
+                        <?php echo csrf_field(); ?>
                         <table class="w-100" id="detail_keranjang">
                             <thead>
                                 <tr>
@@ -24,6 +26,7 @@
                                 </tr>
                             </thead>
                         </table>
+                    </form>
                     <div class="caption" style="padding:0;">
                     </div>
                 </div>
@@ -109,17 +112,20 @@
         setInterval(function () {
             $('#itemt').html($('.count').length);
         }, 500);
-        var totall = $('.total').length;
-        $('#count').val(totall);
-        console.log(totall);
-        var total = 0;
-        $('.total').each(function () {
-            total += parseInt(this.value);
-        });
+
+            var totall = $('.total_harga').length;
+            $('#count').val(totall);
+            console.log(totall);
+            var total = 0;
+            console.log($('.total_harga').length);
+            $('.total_harga').each(function() {
+                var ini = $(this).val();
+                total += parseFloat(ini);
+            });
 
         $('#totalview').html('Rp. ' + total);
 
-        $('.remove').on('click', function () {
+        $('#detail_keranjang').on('click','.remove',function () {
             var id = $(this).data('id');
             var code = $(this).data('ciproduct');
             var label = $(this).data('label');
@@ -135,7 +141,7 @@
                     'jumlah': jumlah,
                 },
                 success: function (data) {
-                    location.reload();
+                    table.ajax.reload();
                 }
             })
 

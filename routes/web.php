@@ -92,4 +92,5 @@ Route::get('/resetstatusproses','Frontpage\PembelianController@reset_prosesstatu
 Route::get('/filterstatuspengiriman','Frontpage\PembelianController@filter_pengirimanstatus')->name('filter_pengirimanstatus');
 Route::get('/filterdatestatuspengiriman','Frontpage\PembelianController@filterdate_pengirimanstatus')->name('filterdate_pengirimanstatus');
 Route::get('/resetstatuspengiriman','Frontpage\PembelianController@reset_pengirimanstatus')->name('reset_pengirimanstatus');
+Route::post('/table_allstatus','Frontpage\PembelianController@table_allstatus')->name('table_allstatus');
 }); //End Route::Group wib-cpanel

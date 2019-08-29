@@ -37,6 +37,7 @@ class CheckoutController extends Controller
     public function sell(Request $request){
         DB::beginTransaction();
         try {
+        $ppn = 10/100;
     	$date = Carbon::now()->format('Y,m,d');
         $urutan = DB::table('d_seller')->count() +1;
         $nota = 'NOTA/WIB'. Carbon::parse($request->tanggal_penjualan)->format('Y') . Carbon::parse($request->jatuh_tempo)->format('md').'/'.$urutan;
@@ -53,12 +54,16 @@ class CheckoutController extends Controller
                 ->update([
                 	'status_data' => 'false',
                 ]);
+            $total_ppn = $request->hargabarang[$run] + ($request->hargabarang[$run] * $ppn);
+            $priced = $total_ppn; 
+            $total_beli = $priced * $request->qty[$run];
 
         if ($request->alamat != null ) {
                 $arr = array(
                     'sell_nota' => $nota,
                     'sell_ccustomer' => Auth::user()->cm_code,
                     'sell_date' => $date,
+                    'sell_deadline' => Carbon::now('Asia/Jakarta')->addDays(4)->format('y,m,d'),
                     'sell_address' => $request->alamat,
                     'sell_province' => $request->provinsi,
                     'sell_postalcode'=> $request->kodepos,
@@ -67,11 +72,12 @@ class CheckoutController extends Controller
                     'sell_ciproduct' => $request->ciproduct[$run],
                     'sell_quantity' => $request->qty[$run],
                     'sell_cunit' => $request->satuan[$run],
-                    'sell_total' => $request->total[$run],
+                    'sell_total' => $total_beli,
                     'sell_price'=> $request->hargabarang[$run],
-                    'sell_priced'=> $request->hargabarang[$run],
+                    'sell_priced'=> $priced,
                     'sell_cwhouse' => $pilih_gudang[0]->st_cwhouse,
                     'sell_status' => 'P',
+                    'sell_ppn' => '10',
                     'status_data' => 'true',
                 );
         }else{
@@ -79,6 +85,7 @@ class CheckoutController extends Controller
                     'sell_nota' => $nota,
                     'sell_ccustomer' => Auth::user()->cm_code,
                     'sell_date' => $date,
+                    'sell_deadline' => Carbon::now('Asia/Jakarta')->addDays(4)->format('y,m,d'),
                     'sell_address' => Auth::user()->cm_address,
                     'sell_province' => $request->provinsi,
                     'sell_postalcode'=> $request->kodepos,
@@ -87,11 +94,12 @@ class CheckoutController extends Controller
                     'sell_ciproduct' => $request->ciproduct[$run],
                     'sell_quantity' => $request->qty[$run],
                     'sell_cunit' => $request->satuan[$run],
-                    'sell_total' => $request->total[$run],
+                    'sell_total' => $total_beli,
                     'sell_price'=> $request->hargabarang[$run],
-                    'sell_priced'=> $request->hargabarang[$run],
+                    'sell_priced'=> $priced,
                     'sell_cwhouse' => $pilih_gudang[0]->st_cwhouse,
                     'sell_status' => 'P',
+                    'sell_ppn' => '10',
                     'status_data' => 'true',
                 );
         
@@ -116,8 +124,6 @@ class CheckoutController extends Controller
 
         array_push($data, $arr);
         };
-
-
 
         orderpenjualan::insert($data);
        }else{
