@@ -124,7 +124,7 @@
                                             <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                             <div class="">
-                                                <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>"
+                                                <img src="<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>"
                                                     class="img-item-product-cart">
                                             </div>
                                             <?php endif; ?>
@@ -179,7 +179,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var total_produk = $('.column-group-cart-item-product').length;
-        $('.text-item-full-cart').html('Total Barang : ' + total_produk);
+        $('.text-item-full-cart').html('Total Barang : ' + total_produk + '<br><br> PPN : 10 %');
 
         $('#provinsi').change(function () {
             $.ajax({
@@ -260,7 +260,9 @@
             total += parseInt(this.value);
         });
 
-        $('#totalview').html('Rp. ' + total);
+        var ppn = total + (total * 10 / 100);
+
+        $('#totalview').html('Rp. ' + accounting.formatNumber(ppn));
 
         $('#ncart').html($('.ncart').length);
 

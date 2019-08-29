@@ -179,7 +179,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var total_produk = $('.column-group-cart-item-product').length;
-        $('.text-item-full-cart').html('Total Barang : ' + total_produk);
+        $('.text-item-full-cart').html('Total Barang : ' + total_produk + '<br><br> PPN : 10 %');
 
         $('#provinsi').change(function () {
             $.ajax({
@@ -260,7 +260,9 @@
             total += parseInt(this.value);
         });
 
-        $('#totalview').html('Rp. ' + total);
+        var ppn = total + (total * 10 / 100);
+
+        $('#totalview').html('Rp. ' + accounting.formatNumber(ppn));
 
         $('#ncart').html($('.ncart').length);
 

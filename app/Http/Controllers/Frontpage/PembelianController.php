@@ -16,7 +16,7 @@ class PembelianController extends Controller
 
     public function pembelian(Request $request)
     {
-        
+            $totalbayar = 0;   
             $group = DB::table('d_seller')->join('m_item','i_code','sell_ciproduct')
     		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
             ->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
@@ -26,17 +26,19 @@ class PembelianController extends Controller
     		->groupBy('sell_nota')
     		->where('sell_ccustomer',Auth::user()->cm_code);
     		$allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
+    		->leftJoin('m_item','i_code','sell_ciproduct')
+    		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
+            ->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
             ->leftJoin('d_province','p_id','sell_province')
             ->leftJoin('d_district','d_id','sell_district')
             ->leftJoin('d_city','c_id','sell_city')
+            ->groupBy('sell_id')
             ->where('sell_ccustomer',Auth::user()->cm_code);
     		
+
             if ($request->nama_produk != null) {
                 $group->where('i_name',$request->nama_produk);
-                $allstatus>where('i_name',$request->nama_produk);
+                $allstatus->where('i_name',$request->nama_produk);
             }
             
             if($request->tanggal_transaksi_awal != null && $request->tanggal_transaksi_akhir != null){
@@ -60,8 +62,9 @@ class PembelianController extends Controller
             $countproses = DB::table('d_seller')->whereIn('sell_status',['SP','PS','PP','TS'])->where('sell_ccustomer',Auth::user()->cm_code)->count();
             $countkirim = DB::table('d_seller')->where('sell_status','SD')->where('sell_ccustomer',Auth::user()->cm_code)->count();
     	return view('frontpage.pembelian.pembelian',array(
+            'totalbayar' => $totalbayar,
     		'allstatus' => $allstatus->get(),
-    		'pembayaran' => $allstatus->whereIn('sell_status',['P','SB'])->groupBy('sell_nota')->get(),
+    		'pembayaran' => $allstatus->whereIn('sell_status',['P','SB'])->get(),
     		'proses' => $allstatus->whereIn('sell_status',['SP','PS','PP','TS'])->get(),
     		'pengiriman' => $allstatus->where('sell_status','SD')->get(),
             'group' => $group->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
@@ -73,6 +76,102 @@ class PembelianController extends Controller
             'gambar' => $gambar->get(),
             'kategori'=>$kategori,
     	));
+    }
+
+    public function table_allstatus()
+    {
+        $data = DB::table('d_seller')
+            ->leftJoin('m_item','i_code','sell_ciproduct')
+            ->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
+            ->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
+            ->leftJoin('d_province','p_id','sell_province')
+            ->leftJoin('d_district','d_id','sell_district')
+            ->leftJoin('d_city','c_id','sell_city')
+            ->groupBy('sell_id')
+            ->where('sell_ccustomer',Auth::user()->cm_code)
+            ->get();
+
+        return Datatables::of($data)
+        ->addColumn('all',function($data){
+            $image = 0 ;
+            $totalbayar = 0 ;
+            if($data->sell_status == 'P'){
+                    $stat = 'Pembayaran';
+                }else if($data->sell_status == 'PP'){
+                    $stat = 'Proses Packing';
+                }else if($data->sell_status == 'PS'){
+                    $stat = 'Packing Selesai';
+                }else if($data->sell_status == 'SD'){
+                    $stat = 'Sedang Dikirim';
+                }else if($data->sell_status == 'SB'){
+                    $stat = 'Sudah Bayar';
+                }else if($data->sell_status == 'SP'){
+                    $stat = 'Sedang Diproses';
+                }else if($data->sell_status == 'TS'){
+                    $stat = 'Sedang Diproses';
+                }else if($data->sell_status == 'T'){
+                    $stat = 'Pengiriman Terhambat';
+                }else {
+                    $stat = 'Unkown';
+                }
+
+            return '<div id="itemproduct-group-allstatus">
+                        <div class="row">
+                        <div class="col-lg-8 col-md-8">
+                        <span class="fs-14 semi-bold">'.$data->sell_nota.'</span><span class="text-full-payment-transaction">Total Semua Barang : <span class="text-full-price-transaction semi-bold" id="count">Rp. '. number_format($totalbayar,2).'</span></span>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <a data-target="#modal-detail" data-id="'.$data->sell_nota.'"
+                                                        data-status="'.$data->sell_status.'"
+                                                        data-date="'.$data->sell_date.'"
+                                                        data-customer="'.Auth::user()->cm_name.'"
+                                                        data-alamat="'.$data->sell_address.'"
+                                                        data-totalb="'.$data->sell_total.'"
+                                                        data-provinsi="'.$data->p_nama.'"
+                                                        data-kecamatan="'.$data->c_nama.'"
+                                                        data-district="'.$data->d_nama.'"
+                                                        data-metode="'.$data->sell_method.'"
+                                                        data-pos="'.$data->sell_postalcode.'"
+                                                        data-hargat="Rp. '.$totalbayar.'" data-toggle="modal"
+                                                        class="detail"><button
+                                                            class="btn btn-view-more-all-transaction">Lihat Detail
+                                                            Transaksi</button></a>
+                                                </div>
+                                            </div>
+                                            <div class="row column-item-product item-product-allstatus">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <img src="'.env("APP_WIB").'storage/image/master/produk/'.$image.'"
+                                                            width="100px" height="100px">
+                                                        <div class="padding-0-15">
+                                                            <div class="fs-14 semi-bold nameproduct">'.$data->i_name.'
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">'.$data->sell_nota.'<span>
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">
+                                                                '.Carbon::parse($data->sell_date)->formatLocalized('%d %B %Y').'<span
+                                                                    class="text-full-payment-transaction">Total
+                                                                    Pembayaran :
+                                                                    <span class="text-full-price-transaction">Rp.
+                                                                        '.$data->sell_total.'</span></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 text-center">
+                                                    <label class="label label-primary bg-primary-wib">'.
+                                                        $stat
+                                                    .'</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <a
+                                                        href="'.route('produk-detail-frontpage', ['code'=>$data->i_code]).'"><button
+                                                            class="btn btn-buy-more-product">Beli Lagi</button></a>
+                                                </div>
+                                            </div>
+                                        </div>';
+        })
+        ->rawColumns(['all'])
+        ->make(true);
     }
 
     public function bayar(Request $request)
@@ -154,7 +253,7 @@ class PembelianController extends Controller
         })
         ->addColumn('harga',function($data){
             return '
-                    <div class="text-right">Rp. '.$data->ipr_sunitprice.'</div>
+                    <div class="text-right">Rp. '.$data->sell_priced.'</div>
             ';
         })
         ->rawColumns(['daftar','harga','namabarang','satuanbarang','jumlahbeli'])

@@ -33,9 +33,9 @@ class KeranjangController extends Controller
     public function detail_keranjang()
     {
         $data = DB::table('d_cart')
-                    ->join('m_item','i_code','cart_ciproduct')
-                    ->join('m_itemproduct','itp_ciproduct','i_code')
-                    ->join('m_itemprice','ipr_ciproduct','i_code')
+                    ->leftJoin('m_item','i_code','cart_ciproduct')
+                    ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                    ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
                     ->where('cart_cmember',Auth::user()->cm_code)
                     ->where('d_cart.status_data','true')
                     ->groupBy('cart_ciproduct')
@@ -66,8 +66,7 @@ class KeranjangController extends Controller
                                         <div class="input-group d-flex">
                                             <button class="btn btn-default btn-sm btn-count-item border-right-0 kurang" type="button" ><i
                                                     class="fa fa-minus"></i></button>
-                                            <input type="number" class="form-control text-center" id="cart" value="'.$data->cart_qty.'"
-                                                aria-describedby="sizing-addon2">
+                                            <input type="text" class="form-control text-center" value="'.$data->cart_qty.'" aria-describedby="sizing-addon2">
                                             <button class="btn btn-default btn-sm btn-count-item border-left-0 tambah" type="button" ><i
                                                     class="fa fa-plus" ></i></button>
                                         </div>
@@ -75,7 +74,7 @@ class KeranjangController extends Controller
                                 </div>
                                 <div class="col-lg-4 col-md-5 column-right-cart-item-product">
                                     <h5 class="">Rp. '.$data->ipr_sunitprice * $data->cart_qty.'</h5>
-                                    <input type="hidden" value="'.$data->ipr_sunitprice * $data->cart_qty.'" class="total">
+                                    <input type="hidden" value="'.$data->ipr_sunitprice * $data->cart_qty.'" class="total_harga">
                                     <a data-id="'.$data->cart_id.'" data-ciproduct="'.$data->cart_ciproduct.'" data-qty="'.$data->cart_qty.'"
                                         class="remove"><button class="btn btn-default"><i
                                                 class="fa fa-times"></i></button></a>
@@ -160,8 +159,8 @@ class KeranjangController extends Controller
 
     public function gocheck(Request $request){
         $id = $request->id;
-        for ($i=0; $i < $request->count ; $i++) { 
-            if ($request->count != '') {
+        for ($i=0; $i < count($request->id) ; $i++) { 
+            if ($request->id != '') {
                 DB::table('d_cart')
                     ->where('cart_id',$id[$i])
                     ->update([

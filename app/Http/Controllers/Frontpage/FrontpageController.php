@@ -44,16 +44,19 @@ class FrontpageController extends Controller
              ->join('m_itemproduct','itp_ciproduct','wl_ciproduct')
              ->join('m_itemtype','ity_code','itp_citype')
              ->first();
-             $rekomendasiproduk = DB::table('m_item')
-            ->join('m_itemprice','ipr_ciproduct','i_code')
-            ->join('m_itemproduct as p','itp_ciproduct','i_code')
-            ->join('m_itemtype','ity_code','itp_citype')
-            ->groupBy('i_name')
-            ->where('m_item.status_data','true')
-            ->where('itp_citype',$rekomendasi->itp_citype)
-            ->where('i_code','!=',$rekomendasi->i_code)
-            ->take(10)
-            ->get();
+             
+             if($rekomendasi != null){
+                 $rekomendasiproduk = DB::table('m_item')
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->join('m_itemproduct as p','itp_ciproduct','i_code')
+                ->join('m_itemtype','ity_code','itp_citype')
+                ->groupBy('i_name')
+                ->where('m_item.status_data','true')
+                ->where('itp_citype',$rekomendasi->itp_citype)
+                ->where('i_code','!=',$rekomendasi->i_code)
+                ->take(10)
+                ->get();
+             }
             
              $popularproduk = DB::table('d_wishlist')->where('status_data','true')->get();
             //  dd($user_info)

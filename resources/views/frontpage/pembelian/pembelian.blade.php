@@ -7,6 +7,10 @@
         position: relative;
     }
 
+    .dataTables_wrapper table thead{
+    display:none;
+}
+
     .btn-send-payment {
         color: #fff !important;
         font-size: 12px;
@@ -240,88 +244,23 @@
                                             </div>
                                         </div>
                                     </form>
-                                    @if($group != '[]')
-                                    <div id="itemproduct-group-allstatus">
-                                        @foreach($group as $row)
-                                        @if($row->sell_ccustomer == Auth::user()->cm_code)
-                                        <div class="column-group-item-product mt-5">
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8">
-                                                    <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
-                                                        class="text-full-payment-transaction">Total
-                                                        Semua
-                                                        Barang : <span class="text-full-price-transaction semi-bold"
-                                                            id="count">Rp.
-                                                            {{$row->totalbayar}}</span></span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
-                                                        data-status="{{$row->sell_status}}"
-                                                        data-date="{{$row->sell_date}}"
-                                                        data-customer="{{Auth::user()->cm_name}}"
-                                                        data-alamat="{{$row->sell_address}}"
-                                                        data-totalb="{{$row->totalbeli}}"
-                                                        data-provinsi="{{$row->p_nama}}"
-                                                        data-kecamatan="{{$row->c_nama}}"
-                                                        data-district="{{$row->d_nama}}"
-                                                        data-metode="{{$row->sell_method}}"
-                                                        data-pos="{{$row->sell_postalcode}}"
-                                                        data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
-                                                        class="detail"><button
-                                                            class="btn btn-view-more-all-transaction">Lihat Detail
-                                                            Transaksi</button></a>
-                                                </div>
-                                            </div>
-                                            @foreach($allstatus as $roww)
-                                            @if($roww->sell_nota == $row->sell_nota)
-                                            <div class="row column-item-product item-product-allstatus">
-                                                <div class="col-lg-6">
-                                                    <div class="d-flex">
-                                                        @foreach($gambar as $image)
-                                                        @if($image->sell_nota == $row->sell_nota)
-                                                        <img src="env('APP_WIB')}}storage/image/master/produk/{{$image->ip_path}}"
-                                                            width="100px" height="100px">
-                                                        @endif
-                                                        @endforeach
-                                                        <div class="padding-0-15">
-                                                            <div class="fs-14 semi-bold nameproduct">{{$roww->i_name}}
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">
-                                                                {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
-                                                                    class="text-full-payment-transaction">Total
-                                                                    Pembayaran :
-                                                                    <span class="text-full-price-transaction">Rp.
-                                                                        {{$roww->sell_total}}</span></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 text-center">
-                                                    <label class="label label-primary bg-primary-wib">
-                                                        @if($row->sell_status == 'P') Pembayaran
-                                                        @elseif($row->sell_status == 'PP') Proses Packing
-                                                        @elseif($row->sell_status == 'PS') Packing Selesai
-                                                        @elseif($row->sell_status == 'SD') Sedang Dikirim
-                                                        @elseif($row->sell_status == 'SB') Sudah Bayar
-                                                        @elseif($row->sell_status == 'SP') Sedang Diproses
-                                                        @elseif($row->sell_status == 'TS') Sedang Diproses
-                                                        @else Unkown
-                                                        @endif
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <a
-                                                        href="{{route('produk-detail-frontpage', ['code'=>$roww->i_code])}}"><button
-                                                            class="btn btn-buy-more-product">Beli Lagi</button></a>
-                                                </div>
-                                            </div>
-                                            @endif
-                                            @endforeach
-                                        </div>
-                                        @endif
-                                        @endforeach
-                                    </div>
+                                    @if($groupp !='[]')
+                                        <table class="table table-striped table-bordered table-hover" style="width: 100%" id="detail_1">
+                                            <thead style="opacity: 0;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -763,9 +702,8 @@
             } else {
                 $('#status').html('<span class="label label-success">Unknown</span>');
             }
-            console.log(nota);
+
             var table2 = $('#table_detail').DataTable({
-                
                 responsive: true,
                 serverSide: true,
                 destroy: true,
@@ -776,7 +714,6 @@
                     type: "post",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        'nota': nota,
                     }
                 },
                 columns: [{
@@ -822,6 +759,27 @@
         });
         @endif
 
+        var table = $('#detail_1').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "{{ route('table_allstatus') }}",
+                type: "post",
+                data: {
+                    "_token": "{{ csrf_token() }}"
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+        });
 
         $('.bayar').on('click', function () {
             var nota = $(this).data('nota');
