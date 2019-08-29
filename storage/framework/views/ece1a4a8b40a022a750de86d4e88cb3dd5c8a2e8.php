@@ -16,5 +16,4 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/bootstrap-4.3.1/dist/css/bootstrap.min.css')); ?>">
     <link href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/custom-customer.css')); ?>" rel="stylesheet">
-</head>
-<?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/auth/_head-auth.blade.php ENDPATH**/ ?>
+</head><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/auth/_head-auth.blade.php ENDPATH**/ ?>

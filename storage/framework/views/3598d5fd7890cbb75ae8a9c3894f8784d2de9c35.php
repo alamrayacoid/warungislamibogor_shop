@@ -19,7 +19,7 @@
     <!-- <link href="<?php echo e(asset('assets/css/plugins/toastr/toastr.min.css')); ?>" rel="stylesheet"> -->
 
     <!-- Gritter -->
-    <link href="<?php echo e(asset('assets/js/plugins/gritter/jquery.gritter.css')); ?>" rel="stylesheet">
+    <!-- <link href="<?php echo e(asset('assets/js/plugins/gritter/jquery.gritter.css')); ?>" rel="stylesheet"> -->
 
     <link href="<?php echo e(asset('assets/css/animate.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/style.css')); ?>" rel="stylesheet">
@@ -35,7 +35,7 @@
 
     <link href="<?php echo e(asset('assets/css/plugins/sweetalert/sweetalert.css')); ?>" rel="stylesheet">
 
-    <link href="<?php echo e(asset('assets/css/plugins/blueimp/css/blueimp-gallery.min.css')); ?>" rel="stylesheet">
+    <!-- <link href="<?php echo e(asset('assets/css/plugins/blueimp/css/blueimp-gallery.min.css')); ?>" rel="stylesheet"> -->
 
 
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/alamraya-customer-style.css')); ?>">
