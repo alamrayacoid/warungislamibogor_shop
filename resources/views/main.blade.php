@@ -2,7 +2,12 @@
 <html>
 @include('layouts._head')
 @yield('extra_style')
-<body class="top-navigation">
+<div id="overlay-loading">
+    <div class="content-loader">
+        <img src="{{asset("assets/img/img-product/Ellipsis-2s-140px.svg")}}">
+    </div>
+</div>
+<body class="top-navigation overflow-hidden">
 	<div id="wrapper">
 
 		{{-- @include('layouts._sidebar') --}}
