@@ -2,7 +2,8 @@
 <html>
 @include('layouts._head')
 @yield('extra_style')
-<body class="top-navigation">
+<body class="top-navigation ">
+	
 	<div id="wrapper">
 
 		{{-- @include('layouts._sidebar') --}}
