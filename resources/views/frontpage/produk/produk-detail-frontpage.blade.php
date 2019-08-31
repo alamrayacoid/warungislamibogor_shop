@@ -71,21 +71,11 @@
                                     <select id="cabang" name="" class="form-control select2 c-pointer">
                                         <option value="" selected>pilih cabang</option>
                                         @foreach($cabang as $cbng)
-                                        <option value="{{$cbng->b_code}}">{{$cbng->b_name}}</option>
+                                        <option value="{{$cbng->b_code}}">{{$cbng->c_nama}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-6 p-detail-product-last">
-                                    <select class="form-control c-pointer select2" id="satuan" name="">
-                                        <option value="" selected>pilih Satuan</option>
-                                        @foreach($satuan as $rows)
-                                        @foreach($rows as $rowss)
-                                        <option value="{{$rowss->iu_code}}">{{$rowss->iu_name}}</option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mt-2 d-flex">
+                                <div class="col-md-6 mt-2 d-flex">
                                     <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i
                                             class="fa fa-minus"></i></button>
                                     <input type="number" id="qty" value="1" min="1"

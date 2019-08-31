@@ -38,8 +38,8 @@
     <!-- <script src="<?php echo e(asset('assets/js/plugins/toastr/toastr.min.js')); ?>"></script> -->
 
     <script src="<?php echo e(asset('assets/js/plugins/dataTables/datatables.min.js')); ?>"></script>
-    <!-- <script src="<?php echo e(asset('assets/accounting-js/accounting.umd.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/maskmoney/jquery.maskMoney.min.js')); ?>"></script> -->
+    <script src="<?php echo e(asset('assets/accounting-js/accounting.umd.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/maskmoney/jquery.maskMoney.min.js')); ?>"></script> -->
     <script src="<?php echo e(asset('assets/select2/js/select2.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/iziToast/iziToast.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/plugins/slick/slick.min.js')); ?>"></script>

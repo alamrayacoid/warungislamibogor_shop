@@ -48,8 +48,15 @@ Route::post('/keranjang/detail_keranjang', 'Frontpage\KeranjangController@detail
 Route::post('/keranjang/updatecart', 'Frontpage\KeranjangController@updatecart')->name('updatecart.keranjang');
 // Status semua
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
+Route::post('pembelian/table_allstatus', 'Frontpage\PembelianController@table_allstatus')->name('table_allstatus');
+Route::post('pembelian/table_pengiriman', 'Frontpage\PembelianController@table_pengiriman')->name('table_pengiriman');
+Route::post('pembelian/table_proses', 'Frontpage\PembelianController@table_proses')->name('table_proses');
+Route::post('pembelian/table_pembayaran', 'Frontpage\PembelianController@table_pembayaran')->name('table_pembayaran');
+
+
 // Status pembayaran
 Route::get('pembelian/pembayaran', 'Frontpage\PembelianController@pembelian')->name('pembelian-pembayaran-frontpage');
+Route::post('pembelian/table_pembayaran', 'Frontpage\PembelianController@table_pembayaran')->name('table_pembayaran');
 //detail pembayaran
 Route::post('pembelian/pembayaran/detail', 'Frontpage\PembelianController@detail')->name('detail.pembayaran');
 //system pembayaran
@@ -77,20 +84,4 @@ Route::get('/checkout', 'Frontpage\CheckoutController@checkout')->name('checkout
 Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.checkout');
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
     
-Route::get('/filterstatusall','Frontpage\PembelianController@filterallstatus')->name('filterallstatus');
-Route::get('/filterdateallstatus','Frontpage\PembelianController@filtertanggalall')->name('filterdateallstatus');
-Route::get('/resetallstatus','Frontpage\PembelianController@resetallstatus')->name('resetallstatus');
-
-Route::get('/filterstatuspembayaran','Frontpage\PembelianController@filter_paymentstatus')->name('filter_paymentstatus');
-Route::get('/filterdatestatuspembayaran','Frontpage\PembelianController@filterdate_paymentstatus')->name('filterdate_paymentstatus');
-Route::get('/resetstatuspembayaran','Frontpage\PembelianController@reset_paymentstatus')->name('reset_paymentstatus');
-
-Route::get('/filterstatusprosess','Frontpage\PembelianController@filter_prosesstatus')->name('filter_prosesstatus');
-Route::get('/filterdatestatusproses','Frontpage\PembelianController@filterdate_prosesstatus')->name('filterdate_prosesstatus');
-Route::get('/resetstatusproses','Frontpage\PembelianController@reset_prosesstatus')->name('reset_prosesstatus');
-
-Route::get('/filterstatuspengiriman','Frontpage\PembelianController@filter_pengirimanstatus')->name('filter_pengirimanstatus');
-Route::get('/filterdatestatuspengiriman','Frontpage\PembelianController@filterdate_pengirimanstatus')->name('filterdate_pengirimanstatus');
-Route::get('/resetstatuspengiriman','Frontpage\PembelianController@reset_pengirimanstatus')->name('reset_pengirimanstatus');
-Route::post('/table_allstatus','Frontpage\PembelianController@table_allstatus')->name('table_allstatus');
 }); //End Route::Group wib-cpanel

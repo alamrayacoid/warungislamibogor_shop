@@ -70,21 +70,11 @@
                                     <select id="cabang" name="" class="form-control select2 c-pointer">
                                         <option value="" selected>pilih cabang</option>
                                         <?php $__currentLoopData = $cabang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cbng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($cbng->b_code); ?>"><?php echo e($cbng->b_name); ?></option>
+                                        <option value="<?php echo e($cbng->b_code); ?>"><?php echo e($cbng->c_nama); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
-                                <div class="col-md-6 p-detail-product-last">
-                                    <select class="form-control c-pointer select2" id="satuan" name="">
-                                        <option value="" selected>pilih Satuan</option>
-                                        <?php $__currentLoopData = $satuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php $__currentLoopData = $rows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowss): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($rowss->iu_code); ?>"><?php echo e($rowss->iu_name); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mt-2 d-flex">
+                                <div class="col-md-6 mt-2 d-flex">
                                     <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i
                                             class="fa fa-minus"></i></button>
                                     <input type="number" id="qty" value="1" min="1"

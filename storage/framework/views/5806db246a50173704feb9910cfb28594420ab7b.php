@@ -133,7 +133,6 @@
                                                 <h5 class="title-cart-product-item"><?php echo e($row->i_name); ?></h5>
                                                 <input type="hidden" value="<?php echo e($row->i_code); ?>" name="ciproduct[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_qty); ?>" name="qty[]">
-                                                <input type="hidden" value="<?php echo e($row->cart_cunit); ?>" name="satuan[]">
                                                 <input type="hidden" value="<?php echo e($row->cart_location); ?>" name="gudang[]">
                                                 <input type="text" value="<?php echo e($row->ipr_sunitprice); ?>" name="hargabarang[]"
                                                     hidden>
@@ -178,8 +177,14 @@
 <?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
+        var total = 0;
+        $('.total').each(function () {
+            total += parseInt(this.value);
+        });
+        var harga_ppn = (total * 10 / 100);
+
         var total_produk = $('.column-group-cart-item-product').length;
-        $('.text-item-full-cart').html('Total Barang : ' + total_produk + '<br><br> PPN : 10 %');
+        $('.text-item-full-cart').html('Total Barang : ' + total_produk + ' <br><br><?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><div class="column-full-price-cart" style="border: 1px #ffffff;"><h5 class=""><?php echo e($row->i_name); ?></h5><span class="text-price-cart-product">Rp. '+accounting.formatNumber("<?php echo e($row->ipr_sunitprice * $row->cart_qty); ?>")+'</span></div> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <div class="column-full-price-cart" style="margin-bottom:-30px;opacity:0.8;"><h5 class=""> PPN : 10 %</h5><span class="text-price-cart-product">Rp. '+accounting.formatNumber(harga_ppn)+'</span></div>');
 
         $('#provinsi').change(function () {
             $.ajax({
@@ -255,18 +260,13 @@
             $('#itemt').html($('.count').length);
         }, 500);
 
-        var total = 0;
-        $('.total').each(function () {
-            total += parseInt(this.value);
-        });
-
         var ppn = total + (total * 10 / 100);
 
         $('#totalview').html('Rp. ' + accounting.formatNumber(ppn));
 
         $('#ncart').html($('.ncart').length);
 
-        $('#btn-confirm').click(function () {
+        $('#btn-confirm').click(function() {
 
             swal({
                     title: "Apa anda yakin?",
