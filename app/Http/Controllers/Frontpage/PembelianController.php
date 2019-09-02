@@ -116,6 +116,7 @@ class PembelianController extends Controller
                 }
 
             return '<div id="itemproduct-group-allstatus">
+                    <div class="column-group-item-product mt-5">
                         <div class="row">
                         <div class="col-lg-8 col-md-8">
                         <span class="fs-14 semi-bold">'.$data->sell_nota.'</span><span class="text-full-payment-transaction">Total Semua Barang : <span class="text-full-price-transaction semi-bold" id="count">Rp. '. number_format($totalbayar,2).'</span></span>
@@ -167,6 +168,7 @@ class PembelianController extends Controller
                                                         href="'.route('produk-detail-frontpage', ['code'=>$data->i_code]).'"><button
                                                             class="btn btn-buy-more-product">Beli Lagi</button></a>
                                                 </div>
+                                            </div>
                                             </div>
                                         </div>';
         })

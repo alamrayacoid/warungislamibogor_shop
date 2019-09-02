@@ -2,7 +2,69 @@
 
 @section('extra_style')
 <style type="text/css">
-    
+    @keyframes placeHolderShimmer {
+        0% {
+            background-position: -468px 0;
+        }
+
+        100% {
+            background-position: 468px 0;
+        }
+    }
+
+    .title-product-load {
+        background: #f7c703 !important;
+        opacity: 0.5;
+    }
+
+    .desc-product-load {
+        background: #ff5722 !important;
+        opacity: 0.5;
+    }
+
+    .animated-background,
+    .image,
+    .text-line,
+    .image-product {
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f6f6;
+        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
+        background-size: 800px 104px;
+        height: 96px;
+        /* position: relative; */
+    }
+
+    .image-product {
+        height: 150px;
+        width: 100%;
+
+    }
+
+    .image {
+        height: 70px;
+        width: 70px;
+        border-radius: 10px;
+    }
+
+    .wrapper-cell {
+        display: flex;
+        margin-bottom: 30px;
+    }
+
+    .text {
+        /* margin-left: 20px; */
+    }
+
+    .text-line {
+        height: 9px;
+        border-radius: 5px;
+
+        margin: 4px 0;
+    }
 </style>
 @endsection
 
@@ -17,9 +79,82 @@
         @endforeach
     </ol>
     <div class="container-fluid">
+        <div class="ibox product-detail mt-5" style="border:1px solid #efeff4;">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="text">
+                            <div class="text-line" style="width:100%;height:400px"> </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text">
+                                    <div class="text-line" style="width:200px;height:15px;border-radius:0;"> </div>
+                                    <div style="margin-top:15px;">
+                                        <div class="text-line title-product-load"
+                                            style="width:100px;height:15px;border-radius:0;"> </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="col-lg-12 mt-2">
+                                <div class="text">
+                                    <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
+                                    <div class="mt-4">
+                                        <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                                <div class="text">
+                                    <div class="text-line" style="width:200px;height:15px;border-radius:0;"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                            </div class="row">
+                            <div class="col-lg-6 p-detail-product-first">
+                                <div class="text">
+                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 p-detail-product-last">
+                                <div class="text">
+                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="text">
+                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="text">
+                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 p-detail-product-first">
+                                <div class="text">
+                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 p-detail-product-last">
+                                <div class="text">
+                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-5">
             <div class="col-lg-12">
-                <div class="ibox product-detail">
+                <div class="ibox product-detail" style="border:1px solid #efeff4;">
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-md-5">
@@ -30,8 +165,7 @@
                                         <a href="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}" sty
                                             data-gallery="">
 
-                                            <img
-                                                src="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}">
+                                            <img src="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}">
                                         </a>
                                     </div>
                                     @endif
@@ -63,7 +197,8 @@
                                     <!-- <span>{{$row->itp_tagtitle}}</span> -->
                                     <div class="m-t-md">
                                         <h2 class="product-detail-price">Rp. {{$row->ipr_sunitprice}} <small
-                                                class="text-info-price">Tidak Termasuk Pajak pengiriman</small> </h2>
+                                                class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
+                                        </h2>
                                     </div>
                                 </div>
 
@@ -115,16 +250,19 @@
                                         @else
                                         <div class="col-md-12 ">
                                             <a href="{{url('/')}}"><button class="btn btn-product-detail-cart"><i
-                                                        class="fa fa-cart-plus"></i> Tambahkan ke keranjang</button>
+                                                        class="fa fa-cart-plus"></i> Tambahkan ke
+                                                    keranjang</button>
                                             </a>
                                         </div>
                                         <div class="col-md-6 p-detail-product-first">
-                                            <a href="{{url('/')}}" style="color:#676a6c;"><button class="btn btn-product-detail-wishlist"><i
-                                                        class="fa fa-star"></i> Add to wishlist </button></a>
+                                            <a href="{{url('/')}}" style="color:#676a6c;"><button
+                                                    class="btn btn-product-detail-wishlist"><i class="fa fa-star"></i>
+                                                    Add to wishlist </button></a>
                                         </div>
                                         <div class="col-md-6 p-detail-product-last">
-                                        <a href="{{url('/')}}" style="color:#676a6c;"><button class="btn btn-product-detail-wishlist">Lihat Produk Lainnya
-                                            </button></a>
+                                            <a href="{{url('/')}}" style="color:#676a6c;"><button
+                                                    class="btn btn-product-detail-wishlist">Lihat Produk Lainnya
+                                                </button></a>
                                         </div>
                                         @endif
                                     </div>

@@ -5,6 +5,9 @@
     .shoping-cart-table input {
         min-width: 50px;
     }
+    .dataTable{
+        margin-top:0 !important;
+    }
 </style>
 @endsection
 

@@ -227,6 +227,13 @@ class ProdukController extends Controller
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
                 ->paginate(12);
+        $data1 = DB::table('m_item')
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+                ->join('m_itemtype','ity_code','itp_citype')
+                ->where('itp_citype',$datas->ity_code)
+                ->where('m_item.status_data','true')
+                ->get();
 
                 $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
                 $type = DB::table('m_itemtype')->get();
@@ -234,6 +241,7 @@ class ProdukController extends Controller
                 $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
         return view('frontpage.produk.produk-kategori-frontpage',array(
             'test'=>$data,
+            'test1'=> $data1,
             'namakategori'=>$datas,
             'kategori'=>$kategori,
             'tipe'=>$type,

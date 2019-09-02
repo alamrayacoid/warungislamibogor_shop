@@ -3,6 +3,70 @@
     .testproduk {
         display: flex;
     }
+
+    @keyframes  placeHolderShimmer {
+        0% {
+            background-position: -468px 0;
+        }
+
+        100% {
+            background-position: 468px 0;
+        }
+    }
+
+    .title-product-load {
+        background: #f7c703 !important;
+        opacity: 0.5;
+    }
+
+    .desc-product-load {
+        background: #ff5722 !important;
+        opacity: 0.5;
+    }
+
+    .animated-background,
+    .image,
+    .text-line,
+    .image-product {
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f6f6;
+        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
+        background-size: 800px 104px;
+        height: 96px;
+        /* position: relative; */
+    }
+
+    .image-product {
+        height: 150px;
+        width: 100%;
+
+    }
+
+    .image {
+        height: 70px;
+        width: 70px;
+        border-radius: 10px;
+    }
+
+    .wrapper-cell {
+        display: flex;
+        margin-bottom: 30px;
+    }
+
+    .text {
+        /* margin-left: 20px; */
+    }
+
+    .text-line {
+        height: 9px;
+        border-radius: 5px;
+
+        margin: 4px 0;
+    }
 </style>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -10,6 +74,134 @@
 <div class="dashboard-frontpage" style="padding:0;">
     
 <section class="header_wrapper" style="margin-top:8em;">
+    <div class="container-fluid">
+    <!-- jangan dihapus -->
+        <div class="d-none" id="loadingpage"  style="margin-bottom:2em;">
+            <div class="row mt-2">
+                <div class="col-lg-7">
+                    <div class="text">
+                        <div class="text-line" style="width:100%;height:250px"> </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="text">
+                        <div class="text-line" style="width:100%;height:120px"> </div>
+                        <div style="margin-top:10px;">
+                            <div class="text-line" style="width:100%;height:120px"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5" id="">
+                <div class="col-lg-product col-md-4">
+                    <div class="thumbnail product-box-item">
+                        <div class="image-product"></div>
+                        <div class="caption">
+                            <div class="text">
+                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                </div>
+                                <div class="mt-3">
+                                    <div class="text-line title-product-load"
+                                        style="width:60px;height:10px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line desc-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-product col-md-4">
+                    <div class="thumbnail product-box-item">
+                        <div class="image-product"></div>
+                        <div class="caption">
+                            <div class="text">
+                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                </div>
+                                <div class="mt-3">
+                                    <div class="text-line title-product-load"
+                                        style="width:60px;height:10px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line desc-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-product col-md-4">
+                    <div class="thumbnail product-box-item">
+                        <div class="image-product"></div>
+                        <div class="caption">
+                            <div class="text">
+                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                </div>
+                                <div class="mt-3">
+                                    <div class="text-line title-product-load"
+                                        style="width:60px;height:10px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line desc-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-product col-md-4">
+                    <div class="thumbnail product-box-item">
+                        <div class="image-product"></div>
+                        <div class="caption">
+                            <div class="text">
+                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                </div>
+                                <div class="mt-3">
+                                    <div class="text-line title-product-load"
+                                        style="width:60px;height:10px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line desc-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-product col-md-4">
+                    <div class="thumbnail product-box-item">
+                        <div class="image-product"></div>
+                        <div class="caption">
+                            <div class="text">
+                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                </div>
+                                <div class="mt-3">
+                                    <div class="text-line title-product-load"
+                                        style="width:60px;height:10px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line desc-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7">
@@ -28,11 +220,10 @@
             </div>
         </div>
 </section>
-
 <section class="">
     <div class="container-fluid">
-    <?php if($popularnull == '[]'): ?>
-    <?php else: ?>
+        <?php if($popularnull == '[]'): ?>
+        <?php else: ?>
         <div class="row">
             <div class="product-opsi-group">
                 <h3 class="title-product-opsi">Rekomendasi Produk buat anda</h3>
@@ -49,7 +240,8 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <div class="caption">
                         <div class="title-product-group">
-                            <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>" class="title-product-item"><?php echo e($row->i_name); ?></a>
+                            <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                                class="title-product-item"><?php echo e($row->i_name); ?></a>
                         </div>
                         <div class="footer-product-item">
                             <div class="">
@@ -151,7 +343,8 @@
                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($row->i_code == $roww->ip_ciproduct): ?>
                         <div class="image-product-box"
-                            style="background:url('<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
+                            style="background:url('<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>')"
+                            alt="Sorry! Image not available at this time">
                         </div>
                         <?php endif; ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

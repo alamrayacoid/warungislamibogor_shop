@@ -24,7 +24,7 @@ class FrontpageController extends Controller
             ->get();
 
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
+            $gambar = DB::table('m_item')->leftjoin('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
             $imageslider = DB::table('m_banner')->where('status_data','true')->where('b_statusimage','Slider')->get();
             $imagesbasic = DB::table('m_banner')->where('status_data','true')->where('b_statusimage','Basic')->get();
@@ -56,6 +56,8 @@ class FrontpageController extends Controller
                 ->where('i_code','!=',$rekomendasi->i_code)
                 ->take(10)
                 ->get();
+             }else{
+                 $rekomendasiproduk = '';
              }
             
              $popularproduk = DB::table('d_wishlist')->where('status_data','true')->get();

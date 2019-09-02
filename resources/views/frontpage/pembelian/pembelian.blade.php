@@ -7,9 +7,13 @@
         position: relative;
     }
 
-    .dataTables_wrapper table thead{
-    display:none;
-}
+    #detail_1_wrapper table tbody tr td {
+        border-top: 0 !important;
+    }
+
+    .dataTables_wrapper table thead {
+        display: none;
+    }
 
     .btn-send-payment {
         color: #fff !important;
@@ -108,6 +112,74 @@
 
     .modal {
         z-index: 9999999 !important;
+    }
+
+
+
+
+
+    @keyframes placeHolderShimmer {
+        0% {
+            background-position: -468px 0;
+        }
+
+        100% {
+            background-position: 468px 0;
+        }
+    }
+
+    .title-product-load {
+        background: #f7c703 !important;
+        opacity: 0.5;
+    }
+
+    .desc-product-load {
+        background: #ff5722 !important;
+        opacity: 0.5;
+    }
+
+    .animated-background,
+    .image,
+    .text-line,
+    .image-product {
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f6f6;
+        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
+        background-size: 800px 104px;
+        height: 96px;
+        /* position: relative; */
+    }
+
+    .image-product {
+        height: 150px;
+        width: 100%;
+
+    }
+
+    .image {
+        height: 70px;
+        width: 70px;
+        border-radius: 10px;
+    }
+
+    .wrapper-cell {
+        display: flex;
+        margin-bottom: 30px;
+    }
+
+    .text {
+        /* margin-left: 20px; */
+    }
+
+    .text-line {
+        height: 9px;
+        border-radius: 5px;
+
+        margin: 4px 0;
     }
 </style>
 @endsection
@@ -245,22 +317,22 @@
                                         </div>
                                     </form>
                                     @if($groupp !='[]')
-                                        <table class="table table-striped table-bordered table-hover" style="width: 100%" id="detail_1">
-                                            <thead style="opacity: 0;">
-                                                <tr>
-                                                    <th width="1%">No.</th>
-                                                    <th>Nota</th>
-                                                    <th>Tanggal Beli</th>
-                                                    <th>Customer</th>
-                                                    <th>No. HP</th>
-                                                    <th>Alamat</th>
-                                                    <th>Status</th>
-                                                    <th width="15%">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                    <table class="table" style="width: 100%" id="detail_1">
+                                        <thead style="opacity: 0;">
+                                            <tr>
+                                                <th width="1%">No.</th>
+                                                <th>Nota</th>
+                                                <th>Tanggal Beli</th>
+                                                <th>Customer</th>
+                                                <th>No. HP</th>
+                                                <th>Alamat</th>
+                                                <th>Status</th>
+                                                <th width="15%">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -411,13 +483,15 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalawalprosesstatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        id="tanggalawalprosesstatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalakhirprosesstatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        id="tanggalakhirprosesstatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
@@ -444,11 +518,12 @@
                                     @if($groupprostat > 0)
                                     <div id="itemproduct-group-prosesstatus">
                                         @foreach($group as $row)
-                                        @if($row->sell_status == 'SP' || $row->sell_status == 'PS' || $row->sell_status == 'PP' || $row->sell_status == 'TS')
+                                        @if($row->sell_status == 'SP' || $row->sell_status == 'PS' || $row->sell_status
+                                        == 'PP' || $row->sell_status == 'TS')
                                         <div class="column-group-item-product mt-5">
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8">
-                                                <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
+                                                    <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
                                                         class="text-full-payment-transaction">Total
                                                         Semua
                                                         Barang : <span class="text-full-price-transaction semi-bold"
@@ -535,18 +610,21 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalawalpengirimantatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        id="tanggalawalpengirimantatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12" id="tanggalakhirpengirimantatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        id="tanggalakhirpengirimantatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
                                                 <select name="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12" id="filterbuypengirimanstatus">
+                                                    class="form-control c-cart-filter c-pointer fs-12"
+                                                    id="filterbuypengirimanstatus">
                                                     <option value="-" selected="" disabled="">Urutkan</option>
                                                     <option value="Terbaru">Terbaru</option>
                                                     <option value="Total Belanja">Total Belanja</option>
@@ -557,7 +635,8 @@
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12" id="searchbuypengirimanstatus">
+                                                    class="form-control c-cart-filter fs-12"
+                                                    id="searchbuypengirimanstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
                                             </div>
@@ -565,82 +644,87 @@
                                     </form>
                                     @if($groupppengstat > 0)
                                     <div id="itemproduct-group-pengirimanstatus">
-                                    @foreach($group as $row)
-                                    @if($row->sell_status == 'SD')
-                                    <div class="column-group-item-product mt-5">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8">
-                                            <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
+                                        @foreach($group as $row)
+                                        @if($row->sell_status == 'SD')
+                                        <div class="column-group-item-product mt-5">
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-8">
+                                                    <span class="fs-14 semi-bold">{{$row->sell_nota}}</span><span
                                                         class="text-full-payment-transaction">Total
                                                         Semua
                                                         Barang : <span class="text-full-price-transaction semi-bold"
                                                             id="count">Rp.
                                                             {{$row->totalbayar}}</span></span>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
-                                                    data-status="{{$row->sell_status}}" data-date="{{$row->sell_date}}"
-                                                    data-customer="{{Auth::user()->cm_name}}"
-                                                    data-pos="{{$row->sell_postalcode}}"
-                                                    data-alamat="{{$row->sell_address}}"
-                                                    data-totalb="{{$row->totalbeli}}" data-provinsi="{{$row->p_nama}}"
-                                                    data-kecamatan="{{$row->c_nama}}" data-district="{{$row->d_nama}}"
-                                                    data-metode="{{$row->sell_method}}"
-                                                    data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
-                                                    class="detail"><button class="btn btn-view-more-transaction">Lihat
-                                                        Detail
-                                                        Transaksi</button></a>
-                                                <button class="btn btn-delivery-transaction" type="button"
-                                                    data-toggle="modal" data-target="#modal-pengiriman">Lacak
-                                                    Pengiriman</button>
-                                            </div>
-                                        </div>
-                                        @foreach($allstatus as $roww)
-                                        @if($roww->sell_nota == $row->sell_nota)
-                                        <div class="row column-item-product item-product-pengirimanstatus">
-                                            <div class="col-lg-7">
-                                                <div class="d-flex">
-                                                    @foreach($gambar as $image)
-                                                    @if($image->sell_nota == $row->sell_nota)
-                                                    <img src="env('APP_WIB')}}storage/image/master/produk/{{$image->ip_path}}"
-                                                        width="100px" height="100px">
-                                                    @endif
-                                                    @endforeach
-                                                    <div class="padding-0-15">
-                                                        <div class="fs-14 semi-bold nameproduct"> {{$roww->i_name}}</div>
-                                                        <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
-                                                        </div>
-                                                        <div class="fs-14 semi-bold pt-3">
-                                                            {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
-                                                                class="text-full-payment-transaction">Total
-                                                                Pembayaran :
-                                                                <span class="text-full-price-transaction">Rp.
-                                                                    {{$roww->sell_total}}</span></span></div>
-                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <a data-target="#modal-detail" data-id="{{$row->sell_nota}}"
+                                                        data-status="{{$row->sell_status}}"
+                                                        data-date="{{$row->sell_date}}"
+                                                        data-customer="{{Auth::user()->cm_name}}"
+                                                        data-pos="{{$row->sell_postalcode}}"
+                                                        data-alamat="{{$row->sell_address}}"
+                                                        data-totalb="{{$row->totalbeli}}"
+                                                        data-provinsi="{{$row->p_nama}}"
+                                                        data-kecamatan="{{$row->c_nama}}"
+                                                        data-district="{{$row->d_nama}}"
+                                                        data-metode="{{$row->sell_method}}"
+                                                        data-hargat="Rp. {{$row->totalbayar}}" data-toggle="modal"
+                                                        class="detail"><button
+                                                            class="btn btn-view-more-transaction">Lihat
+                                                            Detail
+                                                            Transaksi</button></a>
+                                                    <button class="btn btn-delivery-transaction" type="button"
+                                                        data-toggle="modal" data-target="#modal-pengiriman">Lacak
+                                                        Pengiriman</button>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2 text-center">
-                                                <label class="label label-primary bg-primary-wib">
-                                                    @if($row->sell_status == 'P') Pembayaran
-                                                    @elseif($row->sell_status == 'PP') Proses Packing
-                                                    @elseif($row->sell_status == 'PS') Packing Selesai
-                                                    @elseif($row->sell_status == 'SD') Sedang Dikirim
-                                                    @elseif($row->sell_status == 'SB') Sudah Bayar
-                                                    @elseif($row->sell_status == 'SP') Sedang Diproses
-                                                    @elseif($row->sell_status == 'TS') Sedang Diproses
-                                                    @else Unkown
-                                                    @endif
-                                                </label>
+                                            @foreach($allstatus as $roww)
+                                            @if($roww->sell_nota == $row->sell_nota)
+                                            <div class="row column-item-product item-product-pengirimanstatus">
+                                                <div class="col-lg-7">
+                                                    <div class="d-flex">
+                                                        @foreach($gambar as $image)
+                                                        @if($image->sell_nota == $row->sell_nota)
+                                                        <img src="env('APP_WIB')}}storage/image/master/produk/{{$image->ip_path}}"
+                                                            width="100px" height="100px">
+                                                        @endif
+                                                        @endforeach
+                                                        <div class="padding-0-15">
+                                                            <div class="fs-14 semi-bold nameproduct"> {{$roww->i_name}}
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">{{$row->sell_nota}}<span>
+                                                            </div>
+                                                            <div class="fs-14 semi-bold pt-3">
+                                                                {{\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')}}<span
+                                                                    class="text-full-payment-transaction">Total
+                                                                    Pembayaran :
+                                                                    <span class="text-full-price-transaction">Rp.
+                                                                        {{$roww->sell_total}}</span></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 text-center">
+                                                    <label class="label label-primary bg-primary-wib">
+                                                        @if($row->sell_status == 'P') Pembayaran
+                                                        @elseif($row->sell_status == 'PP') Proses Packing
+                                                        @elseif($row->sell_status == 'PS') Packing Selesai
+                                                        @elseif($row->sell_status == 'SD') Sedang Dikirim
+                                                        @elseif($row->sell_status == 'SB') Sudah Bayar
+                                                        @elseif($row->sell_status == 'SP') Sedang Diproses
+                                                        @elseif($row->sell_status == 'TS') Sedang Diproses
+                                                        @else Unkown
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <button class="btn btn-buy-more-product">Beli Lagi</button>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <button class="btn btn-buy-more-product">Beli Lagi</button>
-                                            </div>
+                                            @endif
+                                            @endforeach
                                         </div>
                                         @endif
                                         @endforeach
-                                    </div>
-                                    @endif
-                                    @endforeach
                                     </div>
                                     @else
                                     <div class="column-empty-transaction">
@@ -651,14 +735,108 @@
                                         </div>
                                     </div>
                                     @endif
+
+                                    <!-- jangan dihapus -->
+                                    <div class="d-none">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:170px;"> </div>
+                                                    <div class="text-line"
+                                                        style="position:relative;top:0.7em;width:100px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="column-group-item-product mt-3">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:220px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:170px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:150px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:100px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
+                                                <div class="col-lg-4">
+                                                    <div class="wrapper-cell">
+                                                        <div class="image"></div>
+                                                        <div class="text" style="margin-left:20px;">
+                                                            <div class="text-line" style="width:60px;"> </div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:0.7em;width:120px;"></div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:1.4em;width:170px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 d-flex justify-content-center">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:200px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:110px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:100px;"> </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="wrapper">
+                                                <div class="wrapper-cell"> -->
+
+                                                <!-- </div>
+                                            </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end -->
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 @endsection
 @section('extra_script')
@@ -762,11 +940,11 @@
         var table = $('#detail_1').DataTable({
             responsive: true,
             serverSide: true,
-            destroy : true,
+            destroy: true,
             ordering: false,
-            bFilter: false, 
+            bFilter: false,
             bInfo: false,
-            paging : false,
+            paging: false,
             ajax: {
                 url: "{{ route('table_allstatus') }}",
                 type: "post",
@@ -774,11 +952,14 @@
                     "_token": "{{ csrf_token() }}"
                 }
             },
-            columns: [
-                {data: 'all'},
-            ],
+            columns: [{
+                data: 'all'
+            }, ],
             pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            lengthMenu: [
+                [10, 20, 50, -1],
+                [10, 20, 50, 'All']
+            ]
         });
 
         $('.bayar').on('click', function () {
@@ -994,7 +1175,8 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    document.getElementById('itemproduct-group-prosesstatus').innerHTML = data;
+                    document.getElementById('itemproduct-group-prosesstatus').innerHTML =
+                        data;
                 }
             });
         });
@@ -1009,7 +1191,8 @@
                     'sell_date': $('#filterbuyprosesstatus').val(),
                 },
                 success: function (data) {
-                    document.getElementById('itemproduct-group-prosesstatus').innerHTML = data;
+                    document.getElementById('itemproduct-group-prosesstatus').innerHTML =
+                        data;
                 }
             });
         });
@@ -1056,7 +1239,8 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    document.getElementById('itemproduct-group-pengirimanstatus').innerHTML = data;
+                    document.getElementById('itemproduct-group-pengirimanstatus')
+                        .innerHTML = data;
                 }
             });
         });
@@ -1071,7 +1255,8 @@
                     'sell_date': $('#filterbuypengirimanstatus').val(),
                 },
                 success: function (data) {
-                    document.getElementById('itemproduct-group-pengirimanstatus').innerHTML = data;
+                    document.getElementById('itemproduct-group-pengirimanstatus')
+                        .innerHTML = data;
                 }
             });
         });
@@ -1084,7 +1269,8 @@
                     $('#tanggalawalpengirimantatus').val('');
                     $('#tanggalakhirpengirimantatus').val('');
                     $('#filterbuypengirimanstatus').val('-').trigger('change');
-                    document.getElementById('itemproduct-group-pengirimanstatus').innerHTML = data;
+                    document.getElementById('itemproduct-group-pengirimanstatus')
+                        .innerHTML = data;
                 }
             });
         });

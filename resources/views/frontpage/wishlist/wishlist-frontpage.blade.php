@@ -2,7 +2,69 @@
 
 @section('extra_style')
 <style type="text/css">
+    @keyframes placeHolderShimmer {
+        0% {
+            background-position: -468px 0;
+        }
 
+        100% {
+            background-position: 468px 0;
+        }
+    }
+
+    .title-product-load {
+        background: #f7c703 !important;
+        opacity: 0.5;
+    }
+
+    .desc-product-load {
+        background: #ff5722 !important;
+        opacity: 0.5;
+    }
+
+    .animated-background,
+    .image,
+    .text-line,
+    .image-product {
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f6f6;
+        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
+        background-size: 800px 104px;
+        height: 96px;
+        /* position: relative; */
+    }
+
+    .image-product {
+        height: 150px;
+        width: 100%;
+
+    }
+
+    .image {
+        height: 70px;
+        width: 70px;
+        border-radius: 10px;
+    }
+
+    .wrapper-cell {
+        display: flex;
+        margin-bottom: 30px;
+    }
+
+    .text {
+        /* margin-left: 20px; */
+    }
+
+    .text-line {
+        height: 9px;
+        border-radius: 5px;
+
+        margin: 4px 0;
+    }
 </style>
 @endsection
 
@@ -122,6 +184,115 @@
                                 </div>
                                 @endforeach
                             </div>
+                            <!-- jangan dihapus -->
+                            <div class="row mt-5 d-none">
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end -->
                             <div class="row mt-5">
                                 @if($produkseen == '[]')
                                 @else
@@ -243,11 +414,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row mt-5">
-
-                    </div>
-                </div>
             </div>
         </div>
 </section>
@@ -306,21 +472,21 @@
         // });
     });
     $(document).ready(function () {
-            $('.searchwishlist').keyup(function () {
+        $('.searchwishlist').keyup(function () {
 
-                // Search text
-                var text = $(this).val().toLowerCase();
+            // Search text
+            var text = $(this).val().toLowerCase();
 
-                // Hide all content class element
-                $('.wishlist-content').hide();
+            // Hide all content class element
+            $('.wishlist-content').hide();
 
-                // Search 
-                $('.wishlist-content .title-product-item').each(function () {
-                    if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
-                        $(this).closest('.wishlist-content').fadeIn('slow');
-                    }
-                });
+            // Search 
+            $('.wishlist-content .title-product-item').each(function () {
+                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
+                    $(this).closest('.wishlist-content').fadeIn('slow');
+                }
             });
         });
+    });
 </script>
 @endsection

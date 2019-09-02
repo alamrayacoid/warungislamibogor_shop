@@ -75,4 +75,5 @@
         </div>
     </div>
 </div>
-<?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/layouts/_footer.blade.php ENDPATH**/ ?>
+<!-- <button class="btn btn-smallchat" id="smallchat-show" type="button"><span class="icon-chat"></span><span
+        class="text-chat">Whatsapp</span></button>  --><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/layouts/_footer.blade.php ENDPATH**/ ?>

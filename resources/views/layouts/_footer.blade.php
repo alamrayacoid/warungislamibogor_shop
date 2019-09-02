@@ -75,5 +75,5 @@
         </div>
     </div>
 </div>
-{{-- <button class="btn btn-smallchat" id="smallchat-show" type="button"><span class="icon-chat"></span><span
-        class="text-chat">Whatsapp</span></button> --}}
+<!-- <button class="btn btn-smallchat" id="smallchat-show" type="button"><span class="icon-chat"></span><span
+        class="text-chat">Whatsapp</span></button>  -->
