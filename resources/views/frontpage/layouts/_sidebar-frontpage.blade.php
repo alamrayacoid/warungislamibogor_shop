@@ -1,4 +1,4 @@
-<!-- <?php $notifp = App\Http\Controllers\notifController::pembelian();
+{{--<!-- <?php $notifp = App\Http\Controllers\notifController::pembelian();
       $notifpro = App\Http\Controllers\notifController::proses();
       $notifpem = App\Http\Controllers\notifController::pembayaran();
       $notifpen = App\Http\Controllers\notifController::pengiriman();
@@ -79,3 +79,4 @@
 
     </div>
 </nav> -->
+--}}

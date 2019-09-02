@@ -48,6 +48,11 @@ class KeranjangController extends Controller
             ->groupBy('i_code')
             ->where('i_code',$data->i_code)
             ->get();
+            if ($gambar != '[]') {
+                $isi_gambar = $gambar[0]->ip_path;
+            }else{
+                $isi_gambar = '';
+            }
 
             if($gambar != '[]'){
                 $image = $gambar[0]->ip_path;
@@ -59,7 +64,7 @@ class KeranjangController extends Controller
                             <div class="row column-group-cart-item-product">
                                 <div class="col-lg-8 col-md-7 column-left-cart-item-product">
                                     <div class="">
-                                        <img src="'.env("APP_WIB").'storage/image/master/produk/'.$image.'"
+                                        <img src="'.env("APP_WIB").'storage/image/master/produk/'.$isi_gambar.'"
                                             class="img-item-product-cart">
                                     </div>
                                     <div class="column-description-cart-product">
@@ -129,7 +134,6 @@ class KeranjangController extends Controller
         	    		'cart_ciproduct' => $request->code,
         	    		'cart_cmember' => Auth::user()->cm_code,
                         'cart_qty' => $request->cart_qty,
-        	    		'cart_cunit' => $request->satuan,
         	    		'cart_location' =>$request->cart_location,
         	    		'status_data' => 'true',
         	    	]);

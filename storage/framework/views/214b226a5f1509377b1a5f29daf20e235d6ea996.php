@@ -279,58 +279,62 @@
                             <div class="tab-content padding-15">
                                 <div id="tab-1" class="tab-pane animated fadeIn tabe-allstatus active">
                                     <form id="">
-                                        <div class="row ">
+                                        <div class="row">
                                             <div class="col-lg-5 mt-4">
                                                 <div class="input-group input-daterange">
                                                     <input type="text" id="tanggalawalallstatus"
                                                         name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" id="tanggalakhirallstatus"
                                                         name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
                                                 <select name="orderby" id="orderby"
-                                                    class="form-control c-cart-filter c-pointer filterbuyallstatus fs-12">
+                                                    class="form-control c-cart-filter c-pointer category fs-12">
                                                     <option value="-" selected="" disabled="">Urutkan</option>
                                                     <option value="Terbaru">Terbaru</option>
                                                     <option value="Total Belanja">Total Belanja</option>
                                                 </select>
-                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
+                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
                                                     type="button" id="resetallstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12 searchbuyallstatus">
+                                                    class="form-control c-cart-filter fs-12 produk">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
                                             </div>
                                         </div>
                                     </form>
-                                    <?php if($groupp !='[]'): ?>
-                                    <table class="table" style="width: 100%" id="detail_1">
-                                        <thead style="opacity: 0;">
-                                            <tr>
-                                                <th width="1%">No.</th>
-                                                <th>Nota</th>
-                                                <th>Tanggal Beli</th>
-                                                <th>Customer</th>
-                                                <th>No. HP</th>
-                                                <th>Alamat</th>
-                                                <th>Status</th>
-                                                <th width="15%">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                    <?php if($group !='[]'): ?>
+                                    <div id="itemproduct-group-paymentstatus">
+                                            <table class="table table-striped table-bordered table-hover" id="detail_1" style="width: 100%">
+                                            <thead style="opacity: 0; position: absolute;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            </table>
+                                    </div>
+
+                                        
                                     <?php else: ?>
                                     <div class="column-empty-transaction">
                                         <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
@@ -348,31 +352,31 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal"
                                                         id="tanggalawalpaymentstatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir"
                                                         id="tanggalakhirpaymentstatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
                                                 <select name="orderby" id="filterbuypaymentstatus"
-                                                    class="form-control c-cart-filter c-pointer fs-12">
+                                                    class="form-control c-cart-filter c-pointer fs-12 category">
                                                     <option value="-" selected="" disabled="">Urutkan</option>
                                                     <option value="Terbaru">Terbaru</option>
                                                     <option value="Total Belanja">Total Belanja</option>
                                                 </select>
-                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
+                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
                                                     type="button" id="resetpaymentstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12"
+                                                    class="form-control c-cart-filter fs-12 produk"
                                                     id="searchbuypaymentstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
@@ -381,89 +385,22 @@
                                     </form>
                                     <?php if($groupp !='[]'): ?>
                                     <div id="itemproduct-group-paymentstatus">
-                                        <?php $__currentLoopData = $groupp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <div class="column-group-item-product mt-5">
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8">
-                                                    <span class="fs-14 semi-bold"><?php echo e($row->sell_nota); ?></span><span
-                                                        class="text-full-payment-transaction">Total
-                                                        Semua
-                                                        Barang : <span class="text-full-price-transaction semi-bold"
-                                                            id="count">Rp.
-                                                            <?php echo e($row->totalbayar); ?></span></span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
-                                                        data-status="<?php echo e($row->sell_status); ?>"
-                                                        data-date="<?php echo e($row->sell_date); ?>"
-                                                        data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                        data-alamat="<?php echo e($row->sell_address); ?>"
-                                                        data-totalb="<?php echo e($row->totalbeli); ?>"
-                                                        data-provinsi="<?php echo e($row->p_nama); ?>"
-                                                        data-kecamatan="<?php echo e($row->c_nama); ?>"
-                                                        data-district="<?php echo e($row->d_nama); ?>"
-                                                        data-pos="<?php echo e($row->sell_postalcode); ?>"
-                                                        data-metode="<?php echo e($row->sell_method); ?>"
-                                                        data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
-                                                        class="detail"><button
-                                                            class="btn btn-view-more-transaction">Lihat
-                                                            Detail
-                                                            Transaksi</button></a>
-                                                    <button class="btn btn-payment-transaction bayar"
-                                                        data-nota="<?php echo e($row->sell_nota); ?>" type="button"
-                                                        data-toggle="modal" data-target="#modal-bayar">Bayar
-                                                        Sekarang</button>
-                                                </div>
-                                            </div>
-                                            <?php $__currentLoopData = $allstatus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($roww->sell_nota == $row->sell_nota): ?>
-                                            <div class="row column-item-product item-product-paymentstatus">
-                                                <div class="col-lg-7">
-                                                    <div class="d-flex">
-                                                        <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
-                                                            width="100px" height="100px">
-                                                        <?php endif; ?>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        <div class="padding-0-15">
-                                                            <div class="fs-14 semi-bold nameproduct"><?php echo e($roww->i_name); ?>
-
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3"><?php echo e($roww->sell_nota); ?><span>
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">
-                                                                <?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?><span
-                                                                    class="text-full-payment-transaction">Total
-                                                                    Pembayaran :
-                                                                    <span class="text-full-price-transaction">Rp.
-                                                                        <?php echo e($roww->sell_total); ?></span></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 text-center">
-                                                    <label class="label label-primary bg-primary-wib">
-                                                        <?php if($row->sell_status == 'P'): ?> Pembayaran
-                                                        <?php elseif($row->sell_status == 'PP'): ?> Proses Packing
-                                                        <?php elseif($row->sell_status == 'PS'): ?> Packing Selesai
-                                                        <?php elseif($row->sell_status == 'SD'): ?> Sedang Dikirim
-                                                        <?php elseif($row->sell_status == 'SB'): ?> Sudah Bayar
-                                                        <?php elseif($row->sell_status == 'SP'): ?> Sedang Diproses
-                                                        <?php elseif($row->sell_status == 'TS'): ?> Sedang Diproses
-                                                        <?php else: ?> Unkown
-                                                        <?php endif; ?>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <a
-                                                        href="<?php echo e(route('produk-detail-frontpage', ['code'=>$roww->i_code])); ?>"><button
-                                                            class="btn btn-buy-more-product">Beli Lagi</button></a>
-                                                </div>
-                                            </div>
-                                            <?php endif; ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <table class="table table-striped table-bordered table-hover" id="detail_2" style="width: 100%">
+                                            <thead style="opacity: 0; position: absolute;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            </table>
                                     </div>
                                     <?php else: ?>
                                     <div class="column-empty-transaction">
@@ -482,32 +419,30 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
-                                                        id="tanggalawalprosesstatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal" id="tanggalawalprosesstatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
-                                                        id="tanggalakhirprosesstatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir" id="tanggalakhirprosesstatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
                                                 <select name="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12"
+                                                    class="form-control c-cart-filter c-pointer fs-12 category"
                                                     id="filterbuyprosesstatus">
                                                     <option value="-" selected="" disabled="">Urutkan</option>
                                                     <option value="Terbaru">Terbaru</option>
                                                     <option value="Total Belanja">Total Belanja</option>
                                                 </select>
-                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
+                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
                                                     type="button" id="resetprosesstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12" id="searchbuyprosesstatus">
+                                                    class="form-control c-cart-filter fs-12 produk" id="searchbuyprosesstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
                                             </div>
@@ -516,82 +451,22 @@
                                     <h5></h5>
                                     <?php if($groupprostat > 0): ?>
                                     <div id="itemproduct-group-prosesstatus">
-                                        <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($row->sell_status == 'SP' || $row->sell_status == 'PS' || $row->sell_status
-                                        == 'PP' || $row->sell_status == 'TS'): ?>
-                                        <div class="column-group-item-product mt-5">
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8">
-                                                    <span class="fs-14 semi-bold"><?php echo e($row->sell_nota); ?></span><span
-                                                        class="text-full-payment-transaction">Total
-                                                        Semua
-                                                        Barang : <span class="text-full-price-transaction semi-bold"
-                                                            id="count">Rp.
-                                                            <?php echo e($row->totalbayar); ?></span></span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
-                                                        data-status="<?php echo e($row->sell_status); ?>"
-                                                        data-date="<?php echo e($row->sell_date); ?>"
-                                                        data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                        data-alamat="<?php echo e($row->sell_address); ?>"
-                                                        data-totalb="<?php echo e($row->totalbeli); ?>"
-                                                        data-pos="<?php echo e($row->sell_postalcode); ?>"
-                                                        data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
-                                                        class="detail"><button
-                                                            class="btn btn-view-more-transaction">Lihat
-                                                            Detail
-                                                            Transaksi</button></a>
-                                                </div>
-                                            </div>
-                                            <?php $__currentLoopData = $allstatus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($roww->sell_nota == $row->sell_nota): ?>
-                                            <div class="row column-item-product item-product-prosesstatus">
-                                                <div class="col-lg-7">
-                                                    <div class="d-flex">
-                                                        <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
-                                                            width="100px" height="100px">
-                                                        <?php endif; ?>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        <div class="padding-0-15">
-                                                            <div class="fs-14 semi-bold nameproduct"> <?php echo e($roww->i_name); ?>
-
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3"><?php echo e($row->sell_nota); ?><span>
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">
-                                                                <?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?><span
-                                                                    class="text-full-payment-transaction">Total
-                                                                    Pembayaran :
-                                                                    <span class="text-full-price-transaction">Rp.
-                                                                        <?php echo e($roww->sell_total); ?></span></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 text-center">
-                                                    <label class="label label-primary bg-primary-wib">
-                                                        <?php if($row->sell_status == 'P'): ?> Pembayaran
-                                                        <?php elseif($row->sell_status == 'PP'): ?> Proses Packing
-                                                        <?php elseif($row->sell_status == 'PS'): ?> Packing Selesai
-                                                        <?php elseif($row->sell_status == 'SD'): ?> Sedang Dikirim
-                                                        <?php elseif($row->sell_status == 'SB'): ?> Sudah Bayar
-                                                        <?php elseif($row->sell_status == 'SP'): ?> Sedang Diproses
-                                                        <?php elseif($row->sell_status == 'TS'): ?> Sedang Diproses
-                                                        <?php else: ?> Unkown
-                                                        <?php endif; ?>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <button class="btn btn-buy-more-product">Beli Lagi</button>
-                                                </div>
-                                            </div>
-                                            <?php endif; ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </div>
-                                        <?php endif; ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <table class="table table-striped table-bordered table-hover" id="detail_3" style="width: 100%">
+                                            <thead style="opacity: 0; position: absolute;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            </table>
                                     </div>
                                     <?php else: ?>
                                     <div class="column-empty-transaction">
@@ -610,33 +485,29 @@
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
                                                         placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
-                                                        id="tanggalawalpengirimantatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal" id="tanggalawalpengirimantatus">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
                                                     <input type="text" name="tanggal_transaksi_akhir" value=""
                                                         placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12"
-                                                        id="tanggalakhirpengirimantatus">
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir" id="tanggalakhirpengirimantatus">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-flex mt-4">
                                                 <select name="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12"
-                                                    id="filterbuypengirimanstatus">
+                                                    class="form-control c-cart-filter c-pointer fs-12 category" id="filterbuypengirimanstatus">
                                                     <option value="-" selected="" disabled="">Urutkan</option>
                                                     <option value="Terbaru">Terbaru</option>
                                                     <option value="Total Belanja">Total Belanja</option>
                                                 </select>
-                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12"
+                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
                                                     type="button" id="resetpengirimanstatus">Reset
                                                     Filter</button>
                                             </div>
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12"
-                                                    id="searchbuypengirimanstatus">
+                                                    class="form-control c-cart-filter fs-12 produk" id="searchbuypengirimanstatus">
                                                 <button class="btn btn-filter-product" type="button"><img
                                                         src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
                                             </div>
@@ -644,88 +515,23 @@
                                     </form>
                                     <?php if($groupppengstat > 0): ?>
                                     <div id="itemproduct-group-pengirimanstatus">
-                                        <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($row->sell_status == 'SD'): ?>
-                                        <div class="column-group-item-product mt-5">
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8">
-                                                    <span class="fs-14 semi-bold"><?php echo e($row->sell_nota); ?></span><span
-                                                        class="text-full-payment-transaction">Total
-                                                        Semua
-                                                        Barang : <span class="text-full-price-transaction semi-bold"
-                                                            id="count">Rp.
-                                                            <?php echo e($row->totalbayar); ?></span></span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    <a data-target="#modal-detail" data-id="<?php echo e($row->sell_nota); ?>"
-                                                        data-status="<?php echo e($row->sell_status); ?>"
-                                                        data-date="<?php echo e($row->sell_date); ?>"
-                                                        data-customer="<?php echo e(Auth::user()->cm_name); ?>"
-                                                        data-pos="<?php echo e($row->sell_postalcode); ?>"
-                                                        data-alamat="<?php echo e($row->sell_address); ?>"
-                                                        data-totalb="<?php echo e($row->totalbeli); ?>"
-                                                        data-provinsi="<?php echo e($row->p_nama); ?>"
-                                                        data-kecamatan="<?php echo e($row->c_nama); ?>"
-                                                        data-district="<?php echo e($row->d_nama); ?>"
-                                                        data-metode="<?php echo e($row->sell_method); ?>"
-                                                        data-hargat="Rp. <?php echo e($row->totalbayar); ?>" data-toggle="modal"
-                                                        class="detail"><button
-                                                            class="btn btn-view-more-transaction">Lihat
-                                                            Detail
-                                                            Transaksi</button></a>
-                                                    <button class="btn btn-delivery-transaction" type="button"
-                                                        data-toggle="modal" data-target="#modal-pengiriman">Lacak
-                                                        Pengiriman</button>
-                                                </div>
-                                            </div>
-                                            <?php $__currentLoopData = $allstatus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($roww->sell_nota == $row->sell_nota): ?>
-                                            <div class="row column-item-product item-product-pengirimanstatus">
-                                                <div class="col-lg-7">
-                                                    <div class="d-flex">
-                                                        <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <?php if($image->sell_nota == $row->sell_nota): ?>
-                                                        <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($image->ip_path); ?>"
-                                                            width="100px" height="100px">
-                                                        <?php endif; ?>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        <div class="padding-0-15">
-                                                            <div class="fs-14 semi-bold nameproduct"> <?php echo e($roww->i_name); ?>
+                                        <table class="table table-striped table-bordered table-hover" id="detail_4" style="width: 100%">
+                                            <thead style="opacity: 0; position: absolute;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            </table>
 
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3"><?php echo e($row->sell_nota); ?><span>
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">
-                                                                <?php echo e(\Carbon\Carbon::parse($row->sell_date)->formatLocalized('%d %B %Y')); ?><span
-                                                                    class="text-full-payment-transaction">Total
-                                                                    Pembayaran :
-                                                                    <span class="text-full-price-transaction">Rp.
-                                                                        <?php echo e($roww->sell_total); ?></span></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 text-center">
-                                                    <label class="label label-primary bg-primary-wib">
-                                                        <?php if($row->sell_status == 'P'): ?> Pembayaran
-                                                        <?php elseif($row->sell_status == 'PP'): ?> Proses Packing
-                                                        <?php elseif($row->sell_status == 'PS'): ?> Packing Selesai
-                                                        <?php elseif($row->sell_status == 'SD'): ?> Sedang Dikirim
-                                                        <?php elseif($row->sell_status == 'SB'): ?> Sudah Bayar
-                                                        <?php elseif($row->sell_status == 'SP'): ?> Sedang Diproses
-                                                        <?php elseif($row->sell_status == 'TS'): ?> Sedang Diproses
-                                                        <?php else: ?> Unkown
-                                                        <?php endif; ?>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <button class="btn btn-buy-more-product">Beli Lagi</button>
-                                                </div>
-                                            </div>
-                                            <?php endif; ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </div>
-                                        <?php endif; ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
                                     <?php else: ?>
                                     <div class="column-empty-transaction">
@@ -840,9 +646,123 @@
                         </div>
 </section>
 <?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
+        var awal,akhir,category,produk;
+
+        $('#tab-1').on('change','.tanggal_awal',function(){
+            awal = $(this).val();
+            get_table1();
+        })
+
+        $('#tab-1').on('change','.tanggal_akhir',function(){
+            akhir = $(this).val();
+            get_table1();
+        })
+        
+        $('#tab-1').on('change','.category',function(){
+            category = $(this).val();
+            get_table1();
+        })
+
+        $('#tab-1').on('keyup','.produk',function(){
+            produk = $(this).val();
+            get_table1();
+        })
+
+        $('#tab-1').on('click','.reset',function(){
+            awal = '';
+            akhir = '';
+            category = '';
+            produk = '';
+            table1.ajax.reload();
+        })
+
+        $('#tab-2').on('change','.tanggal_awal',function(){
+            awal = $(this).val();
+            get_table2();
+        })
+
+        $('#tab-2').on('change','.tanggal_akhir',function(){
+            akhir = $(this).val();
+            get_table2();
+        })
+        
+        $('#tab-2').on('change','.category',function(){
+            category = $(this).val();
+            get_table2();
+        })
+
+        $('#tab-2').on('keyup','.produk',function(){
+            produk = $(this).val();
+            get_table2();
+        })
+
+        $('#tab-2').on('click','.reset',function(){
+            awal = '';
+            akhir = '';
+            category = '';
+            produk = '';
+            table2.ajax.reload();
+        })
+
+        $('#tab-3').on('change','.tanggal_awal',function(){
+            awal = $(this).val();
+            get_table3();
+        })
+
+        $('#tab-3').on('change','.tanggal_akhir',function(){
+            akhir = $(this).val();
+            get_table3();
+        })
+        
+        $('#tab-3').on('change','.category',function(){
+            category = $(this).val();
+            get_table3();
+        })
+
+        $('#tab-3').on('keyup','.produk',function(){
+            produk = $(this).val();
+            get_table3();
+        })
+
+        $('#tab-3').on('click','.reset',function(){
+            awal = '';
+            akhir = '';
+            category = '';
+            produk = '';
+            table3.ajax.reload();
+        })
+
+        $('#tab-4').on('change','.tanggal_awal',function(){
+            awal = $(this).val();
+            get_table4();
+        })
+
+        $('#tab-4').on('change','.tanggal_akhir',function(){
+            akhir = $(this).val();
+            get_table4();
+        })
+        
+        $('#tab-4').on('change','.category',function(){
+            category = $(this).val();
+            get_table4();
+        })
+
+        $('#tab-4').on('keyup','.produk',function(){
+            produk = $(this).val();
+            get_table4();
+        })
+
+        $('#tab-4').on('click','.reset',function(){
+            awal = '';
+            akhir = '';
+            category = '';
+            produk = '';
+            table4.ajax.reload();
+        })
 
         var totall = $('.total').length;
 
@@ -864,22 +784,26 @@
             $('#total_barang').html($(this).data('totalb'));
             $('#harga_total').html($(this).data('hargat'));
             console.log(stat);
-            if (stat == 'P') {
+            if ( stat == 'P') {
                 $('#status').html('<span class="label label-warning">Pembayaran</span>');
-            } else if (stat == 'PP') {
+            }else if(stat == 'PP'){
                 $('#status').html('<label class="label label-info">Proses Packing</label>');
-            } else if (stat == 'PS') {
+            }else if(stat == 'PS'){
                 $('#status').html('<label class="label label-info">Packing Selesai</label>');
-            } else if (stat == 'SD') {
+            }else if(stat == 'SD'){
                 $('#status').html('<span class="label label-info">Sedang Dikirim</span>');
-            } else if (stat == 'SB') {
+            }else if(stat == 'SB'){
                 $('#status').html('<label class="label label-info">Sudah Bayar</label>');
-            } else if (stat == 'SP') {
+            }else if (stat == 'SP') {
                 $('#status').html('<span class="label label-primary">Sedang Diproses</span>');
-            } else if (stat == 'TS') {
+            }else if(stat == 'TS'){
                 $('#status').html('<span class="label label-success">Transaksi Selesai</span>');
-            } else {
-                $('#status').html('<span class="label label-success">Unknown</span>');
+            }else if(stat == 'T'){
+                $('#status').html('<span class="label label-success">Pengiriman Terlambat</span>');
+            }else if(stat == 'D'){
+                $('#status').html('<span class="label label-danger">Ditolak</span>');
+            }else{
+                 $('#status').html('<span class="label label-success">Unknown</span>');
             }
 
             var table2 = $('#table_detail').DataTable({
@@ -937,8 +861,124 @@
             message: 'Sudah Mengirim Bukti Pembayaran',
         });
         <?php endif; ?>
+        
+        function get_table1()
+        {
+            $('#detail_1').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_allstatus')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>",
+                    'tanggal_transaksi_awal' : awal,
+                    'tanggal_transaksi_akhir' : akhir,
+                    'produk' : produk,
+                    'category' : category
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            });
+        }
 
-        var table = $('#detail_1').DataTable({
+        function get_table2()
+        {
+            $('#detail_2').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_pembayaran')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>",
+                    'tanggal_transaksi_awal' : awal,
+                    'tanggal_transaksi_akhir' : akhir,
+                    'produk' : produk,
+                    'category' : category
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            });
+        }
+
+        function get_table3()
+        {
+            $('#detail_3').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_proses')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>",
+                    'tanggal_transaksi_awal' : awal,
+                    'tanggal_transaksi_akhir' : akhir,
+                    'produk' : produk,
+                    'category' : category
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            });
+        }
+
+        function get_table4()
+        {
+            $('#detail_4').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_pengiriman')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>",
+                    'tanggal_transaksi_awal' : awal,
+                    'tanggal_transaksi_akhir' : akhir,
+                    'produk' : produk,
+                    'category' : category
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            });
+        }
+
+        var table1 = $('#detail_1').DataTable({
             responsive: true,
             serverSide: true,
             destroy: true,
@@ -950,7 +990,30 @@
                 url: "<?php echo e(route('table_allstatus')); ?>",
                 type: "post",
                 data: {
+                    "_token": "<?php echo e(csrf_token()); ?>",
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+        });
+
+        var table2 = $('#detail_2').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_pembayaran')); ?>",
+                type: "post",
+                data: {
                     "_token": "<?php echo e(csrf_token()); ?>"
+
                 }
             },
             columns: [{
@@ -963,11 +1026,57 @@
             ]
         });
 
-        $('.bayar').on('click', function () {
+        var table3 = $('#detail_3').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_proses')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>"
+
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+        });
+
+        var table4 = $('#detail_4').DataTable({
+            responsive: true,
+            serverSide: true,
+            destroy : true,
+            ordering: false,
+            bFilter: false, 
+            bInfo: false,
+            paging : false,
+            ajax: {
+                url: "<?php echo e(route('table_pengiriman')); ?>",
+                type: "post",
+                data: {
+                    "_token": "<?php echo e(csrf_token()); ?>"
+
+                }
+            },
+            columns: [
+                {data: 'all'},
+            ],
+            pageLength: 10,
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+        });
+
+        $('#detail_2').on('click','.bayar', function () {
             var nota = $(this).data('nota');
             var isi = $('#cnota');
             if (isi.val() != '') {
-                $('#cnota').val('#');
+                $('#cnota').val('');
                 $('#cnota').val(nota);
             } else {
                 $('#cnota').val(nota);
@@ -1019,263 +1128,7 @@
             }
         }
     });
-    $(document).ready(function () {
-        $('.searchbuyallstatus').keyup(function () {
-            // Search text
-            var text = $(this).val().toLowerCase();
-
-            // Hide all content class element
-            $('.item-product-allstatus').hide();
-            // $('.item-product-allstatus .itemproduct-group-allstatus').hide();
-
-            // Search 
-            $('.item-product-allstatus .nameproduct').each(function () {
-                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
-                    $(this).closest('.item-product-allstatus').fadeIn();
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('.filterbuyallstatus').change(function () {
-            var filterstatus = this.value;
-            $.ajax({
-                url: "<?php echo e(route('filterallstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalallstatus').val(),
-                    'tanggalakhir': $('#tanggalakhirallstatus').val(),
-                    'sell_date': $('.filterbuyallstatus').val(),
-                },
-                success: function (data) {
-                    console.log(data);
-                    document.getElementById('itemproduct-group-allstatus').innerHTML = data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#tanggalakhirallstatus').change(function () {
-            $.ajax({
-                url: "<?php echo e(route('filterdateallstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalallstatus').val(),
-                    'tanggalakhir': $('#tanggalakhirallstatus').val(),
-                    'sell_date': $('.filterbuyallstatus').val(),
-                },
-                success: function (data) {
-                    document.getElementById('itemproduct-group-allstatus').innerHTML = data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#resetallstatus').click(function () {
-            $.ajax({
-                url: "<?php echo e(route('resetallstatus')); ?>",
-                success: function (data) {
-                    $('#tanggalawalallstatus').val('');
-                    $('#tanggalakhirallstatus').val('');
-                    $('.filterbuyallstatus').val('-').trigger('change');
-                    document.getElementById('itemproduct-group-allstatus').innerHTML = data;
-                }
-            })
-        });
-    });
-
-
-    $(document).ready(function () {
-        $('#searchbuypaymentstatus').keyup(function () {
-            // Search text
-            var text = $(this).val().toLowerCase();
-
-            // Hide all content class element
-            $('.item-product-paymentstatus').hide();
-
-            // Search 
-            $('.item-product-paymentstatus .nameproduct').each(function () {
-                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
-                    $(this).closest('.item-product-paymentstatus').fadeIn();
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#filterbuypaymentstatus').change(function () {
-            var filterstatus = this.value;
-            $.ajax({
-                url: "<?php echo e(route('filter_paymentstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalpaymentstatus').val(),
-                    'tanggalakhir': $('#tanggalakhirpaymentstatus').val(),
-                    'sell_date': $('#filterbuypaymentstatus').val(),
-                },
-                success: function (data) {
-                    console.log(data);
-                    document.getElementById('itemproduct-group-paymentstatus').innerHTML =
-                        data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#tanggalakhirpaymentstatus').change(function () {
-            $.ajax({
-                url: "<?php echo e(route('filterdate_paymentstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalpaymentstatus').val(),
-                    'tanggalakhir': $('#tanggalakhirpaymentstatus').val(),
-                    'sell_date': $('#filterbuypaymentstatus').val(),
-                },
-                success: function (data) {
-                    document.getElementById('itemproduct-group-paymentstatus').innerHTML =
-                        data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#resetpaymentstatus').click(function () {
-            $.ajax({
-                url: "<?php echo e(route('reset_paymentstatus')); ?>",
-                success: function (data) {
-                    $('#tanggalawalpaymentstatus').val('');
-                    $('#tanggalakhirpaymentstatus').val('');
-                    $('#filterbuypaymentstatus').val('-').trigger('change');
-                    document.getElementById('itemproduct-group-paymentstatus').innerHTML =
-                        data;
-                }
-            });
-        });
-    });
-
-    $(document).ready(function () {
-        $('#searchbuyprosesstatus').keyup(function () {
-            // Search text
-            var text = $(this).val().toLowerCase();
-
-            // Hide all content class element
-            $('.item-product-prosesstatus').hide();
-
-            // Search 
-            $('.item-product-prosesstatus .nameproduct').each(function () {
-                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
-                    $(this).closest('.item-product-prosesstatus').fadeIn();
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#filterbuyprosesstatus').change(function () {
-            var filterstatus = this.value;
-            $.ajax({
-                url: "<?php echo e(route('filter_prosesstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalprosesstatus').val(),
-                    'tanggalakhir': $('#tanggalakhirprosesstatus').val(),
-                    'sell_date': $('#filterbuyprosesstatus').val(),
-                },
-                success: function (data) {
-                    console.log(data);
-                    document.getElementById('itemproduct-group-prosesstatus').innerHTML =
-                        data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#tanggalakhirprosesstatus').change(function () {
-            $.ajax({
-                url: "<?php echo e(route('filterdate_prosesstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalprosesstatus').val(),
-                    'tanggalakhir': $('#tanggalakhirprosesstatus').val(),
-                    'sell_date': $('#filterbuyprosesstatus').val(),
-                },
-                success: function (data) {
-                    document.getElementById('itemproduct-group-prosesstatus').innerHTML =
-                        data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#resetprosesstatus').click(function () {
-            $.ajax({
-                url: "<?php echo e(route('reset_prosesstatus')); ?>",
-                success: function (data) {
-                    $('#tanggalawalprosesstatus').val('');
-                    $('#tanggalakhirprosesstatus').val('');
-                    $('#filterbuyprosesstatus').val('-').trigger('change');
-                    document.getElementById('itemproduct-group-prosesstatus').innerHTML =
-                        data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#searchbuypengirimanstatus').keyup(function () {
-            // Search text
-            var text = $(this).val().toLowerCase();
-
-            // Hide all content class element
-            $('.item-product-pengirimanstatus').hide();
-
-            // Search 
-            $('.item-product-pengirimanstatus .nameproduct').each(function () {
-                if ($(this).text().toLowerCase().indexOf("" + text + "") != -1) {
-                    $(this).closest('.item-product-pengirimanstatus').fadeIn();
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#filterbuypengirimanstatus').change(function () {
-            var filterstatus = this.value;
-            $.ajax({
-                url: "<?php echo e(route('filter_pengirimanstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalpengirimantatus').val(),
-                    'tanggalakhir': $('#tanggalakhirpengirimantatus').val(),
-                    'sell_date': $('#filterbuypengirimanstatus').val(),
-                },
-                success: function (data) {
-                    console.log(data);
-                    document.getElementById('itemproduct-group-pengirimanstatus')
-                        .innerHTML = data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#tanggalakhirpengirimantatus').change(function () {
-            $.ajax({
-                url: "<?php echo e(route('filterdate_pengirimanstatus')); ?>",
-                data: {
-                    'tanggalawal': $('#tanggalawalpengirimantatus').val(),
-                    'tanggalakhir': $('#tanggalakhirpengirimantatus').val(),
-                    'sell_date': $('#filterbuypengirimanstatus').val(),
-                },
-                success: function (data) {
-                    document.getElementById('itemproduct-group-pengirimanstatus')
-                        .innerHTML = data;
-                }
-            });
-        });
-    });
-    $(document).ready(function () {
-        $('#resetpengirimanstatus').click(function () {
-            $.ajax({
-                url: "<?php echo e(route('reset_pengirimanstatus')); ?>",
-                success: function (data) {
-                    $('#tanggalawalpengirimantatus').val('');
-                    $('#tanggalakhirpengirimantatus').val('');
-                    $('#filterbuypengirimanstatus').val('-').trigger('change');
-                    document.getElementById('itemproduct-group-pengirimanstatus')
-                        .innerHTML = data;
-                }
-            });
-        });
-    });
 </script>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/pembelian/pembelian.blade.php ENDPATH**/ ?>

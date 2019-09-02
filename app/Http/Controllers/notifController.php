@@ -10,28 +10,45 @@ class notifController extends Controller
 {
 	    static function pembelian(){
 			if (Auth::check()) {
-		    	$notif = DB::table('d_seller')->where('sell_ccustomer',Auth::user()->cm_code)->where('status_data','true')->count();
+		    	$notif = DB::table('d_sales')
+		    		->where('s_member',Auth::user()->cm_code)
+		    		->whereNotIn('s_paystatus',['N'])
+		    		->count();
+
 		    	return $notif; 
 			}
 	    }
 
 	    static function proses(){
 	    	if (Auth::check()) {
-	    	$notiff = DB::table('d_seller')->where('sell_ccustomer',Auth::user()->cm_code)->where('sell_status','Sedang Proses')->where('status_data','true')->count();
+	    	$notiff = DB::table('d_sales')
+	    		->where('s_member',Auth::user()->cm_code)
+	    		->where('s_paystatus','Y')
+	    		->where('s_delivered','N')
+	    		->count();
+
 	    	return $notiff; 
 	    }
 	    }
 
 	    static function pembayaran(){
 	    	if (Auth::check()) {
-	    	$notifff = DB::table('d_seller')->where('sell_ccustomer',Auth::user()->cm_code)->where('sell_status','Pembayaran')->where('status_data','true')->count();
+	    	$notifff = DB::table('d_sales')
+	    		->where('s_member',Auth::user()->cm_code)
+	    		->where('s_paystatus','N')
+	    		->count();
+
 	    	return $notifff; 
 	    }
 	    }
 
 	    static function pengiriman(){
 	    	if (Auth::check()) {
-	    	$notif2 = DB::table('d_seller')->where('sell_ccustomer',Auth::user()->cm_code)->where('sell_status','Sedang Dikirim')->where('status_data','true')->count();
+	    	$notif2 = DB::table('d_sales')
+	    		->where('s_member',Auth::user()->cm_code)
+	    		->whereIn('s_delivered',['L','P'])
+	    		->count();
+
 	    	return $notif2; 
 	    }
 	    }

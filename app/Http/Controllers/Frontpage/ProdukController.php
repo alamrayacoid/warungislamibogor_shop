@@ -112,8 +112,10 @@ class ProdukController extends Controller
         }
     	$code = $request->code;
         $cabang = DB::table('d_stock')
-        ->leftJoin('m_whouse','w_code','st_cwhouse')
+            ->leftJoin('m_whouse','w_code','st_cwhouse')
             ->join('m_branch','b_code','w_cbranch')
+            ->leftJoin('d_province','p_id','b_province')
+            ->leftJoin('d_city','c_id','b_city')
             ->groupBy('w_cbranch')
             ->get();
 
@@ -200,14 +202,15 @@ class ProdukController extends Controller
         $stock_sementara = 0;
 
         foreach ($stock as $row) {
-            $stocks = DB::table('d_seller')
-                ->where('sell_ciproduct',$request->produk)
-                ->where('sell_cwhouse',$row->st_cwhouse)
-                ->where('sell_status','P')
+            $stocks = DB::table('d_salesdt')
+                ->leftJoin('d_sales','s_id','sd_sales')
+                ->where('sd_item',$request->produk)
+                ->where('s_whouse',$row->st_cwhouse)
+                ->where('s_paystatus','N')
                 ->get();
 
             foreach ($stocks as $rows) {
-                $stock_sementara += $rows->sell_quantity;    
+                $stock_sementara += $rows->sd_qty;
             }
 
             $total_stock += $row->st_qty;

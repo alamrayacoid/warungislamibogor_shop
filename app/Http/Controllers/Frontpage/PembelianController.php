@@ -9,7 +9,7 @@ use Auth;
 use Carbon\Carbon;
 use App\gambar;
 use DataTables;
-use App\d_seller;
+use App\d_sales;
 
 class PembelianController extends Controller
 {
@@ -17,23 +17,27 @@ class PembelianController extends Controller
     public function pembelian(Request $request)
     {
             $totalbayar = 0;   
-            $group = DB::table('d_seller')->join('m_item','i_code','sell_ciproduct')
-    		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-    		->groupBy('sell_nota')
-    		->where('sell_ccustomer',Auth::user()->cm_code);
-    		$allstatus = DB::table('d_seller')
-    		->leftJoin('m_item','i_code','sell_ciproduct')
-    		->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->groupBy('sell_id')
-            ->where('sell_ccustomer',Auth::user()->cm_code);
+            $group = DB::table('d_sales')
+            ->leftJoin('d_salesdt','sd_sales','s_id')
+            ->join('m_item','i_code','sd_item')
+    		->leftJoin('m_itemproduct','itp_ciproduct','sd_item')
+            ->leftJoin('m_itemprice','ipr_ciproduct','sd_item')
+            ->leftJoin('d_province','p_id','s_province')
+            ->leftJoin('d_district','d_id','s_district')
+            ->leftJoin('d_city','c_id','s_city')
+    		->groupBy('s_nota')
+    		->where('s_member',Auth::user()->cm_code);
+
+    		$allstatus = DB::table('d_sales')
+            ->leftJoin('d_salesdt','sd_sales','s_id')
+    		->leftJoin('m_item','i_code','sd_item')
+    		->leftJoin('m_itemproduct','itp_ciproduct','sd_item')
+            ->leftJoin('m_itemprice','ipr_ciproduct','sd_item')
+            ->leftJoin('d_province','p_id','s_province')
+            ->leftJoin('d_district','d_id','s_district')
+            ->leftJoin('d_city','c_id','s_city')
+            ->groupBy('s_id')
+            ->where('s_member',Auth::user()->cm_code);
     		
 
             if ($request->nama_produk != null) {
@@ -42,135 +46,708 @@ class PembelianController extends Controller
             }
             
             if($request->tanggal_transaksi_awal != null && $request->tanggal_transaksi_akhir != null){
-                $group->whereBetween('sell_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y,m,d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y,m,d')]);
-                $allstatus->whereBetween('sell_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y,m,d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y,m,d')]);
+                $group->whereBetween('s_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y,m,d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y,m,d')]);
+                $allstatus->whereBetween('s_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y,m,d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y,m,d')]);
 
             }
 
             if($request->orderby){
                 if($request->orderby == '1'){
-                    $group->orderBy('sell_date','desc');
-                    $allstatus->orderBy('sell_date','desc');
+                    $group->orderBy('s_date','desc');
+                    $allstatus->orderBy('s_date','desc');
                 }else if ($request->orderby == '2'){
-                    $group->orderBy('sell_total','desc');
-                    $allstatus->orderBy('sell_total','desc');
+                    $group->orderBy('s_total','desc');
+                    $allstatus->orderBy('s_total','desc');
                 }
             }
 
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota');
+            $gambar = DB::table('d_sales')->leftJoin('d_salesdt','sd_sales','s_id')->join('m_imgproduct','ip_ciproduct','sd_item')->groupBy('s_nota');
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-            $countproses = DB::table('d_seller')->whereIn('sell_status',['SP','PS','PP','TS'])->where('sell_ccustomer',Auth::user()->cm_code)->count();
-            $countkirim = DB::table('d_seller')->where('sell_status','SD')->where('sell_ccustomer',Auth::user()->cm_code)->count();
+            $countproses = DB::table('d_sales')->where('s_isapprove','Y')->where('s_member',Auth::user()->cm_code)->count();
+            $countkirim = DB::table('d_sales')->whereIn('s_delivered',['L','P'])->where('s_member',Auth::user()->cm_code)->count();
     	return view('frontpage.pembelian.pembelian',array(
             'totalbayar' => $totalbayar,
     		'allstatus' => $allstatus->get(),
-    		'pembayaran' => $allstatus->whereIn('sell_status',['P','SB'])->get(),
-    		'proses' => $allstatus->whereIn('sell_status',['SP','PS','PP','TS'])->get(),
-    		'pengiriman' => $allstatus->where('sell_status','SD')->get(),
-            'group' => $group->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),	
-    		'groupp' => $group->whereIn('sell_status',['P','SB'])->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->orderBy('sell_status','asc')->get(),
-            'grouppro' => $group->where('sell_status','SP')->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'pembayaran' => $allstatus->whereIn('s_paystatus',['N'])->get(),
+    		'proses' => $allstatus->whereIn('s_isapprove',['Y'])->get(),
+    		'pengiriman' => $allstatus->whereIn('s_delivered',['P','L'])->get(),
+            'group' => $group->get(),	
+    		'groupp' => $group->whereIn('s_paystatus',['N'])->get(),
+            'grouppro' => $group->where('s_isapprove','Y')->get(),
             'groupprostat' => $countproses,
             'groupppengstat' => $countkirim,
-    		'groupppeng' => $group->where('sell_status','SD')->select('d_seller.*','m_itemproduct.*','m_itemprice.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))->get(),
+    		'groupppeng' => $group->whereIn('s_delivered',['P','L'])->get(),
             'gambar' => $gambar->get(),
             'kategori'=>$kategori,
     	));
     }
 
-    public function table_allstatus()
-    {
-        $data = DB::table('d_seller')
-            ->leftJoin('m_item','i_code','sell_ciproduct')
-            ->leftJoin('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->leftJoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->groupBy('sell_id')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
+    public function table_allstatus(Request $request)
+    {   
+        if ($request->category == 'Terbaru') {
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_date','desc');
+        }else if($request->category == 'Total Belanja'){
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_total','desc');
+        }else{
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district');
+        }
+
+
+        if ($request->tanggal_transaksi_awal != null && $request->tanggal_transaksi_akhir != null) {
+
+            $data = $data
+                ->whereBetween('s_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y-m-d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y-m-d')]);
+
+        }
+
+        $data = $data->get();
 
         return Datatables::of($data)
-        ->addColumn('all',function($data){
-            $image = 0 ;
-            $totalbayar = 0 ;
-            if($data->sell_status == 'P'){
-                    $stat = 'Pembayaran';
-                }else if($data->sell_status == 'PP'){
-                    $stat = 'Proses Packing';
-                }else if($data->sell_status == 'PS'){
-                    $stat = 'Packing Selesai';
-                }else if($data->sell_status == 'SD'){
-                    $stat = 'Sedang Dikirim';
-                }else if($data->sell_status == 'SB'){
-                    $stat = 'Sudah Bayar';
-                }else if($data->sell_status == 'SP'){
-                    $stat = 'Sedang Diproses';
-                }else if($data->sell_status == 'TS'){
-                    $stat = 'Sedang Diproses';
-                }else if($data->sell_status == 'T'){
-                    $stat = 'Pengiriman Terhambat';
-                }else {
-                    $stat = 'Unkown';
+        ->addColumn('all',function($data) use ($request){
+                $data2 = DB::table('d_salesdt')
+                    ->leftJoin('d_sales','s_id','=','sd_sales')
+                    ->leftJoin('m_member','cm_code','=','s_member')
+                    ->leftJoin('m_item','i_code','=','sd_item')
+                    ->leftJoin('m_itemprice','ipr_ciproduct','=','i_code')
+                    ->leftJoin('m_itemproduct','itp_ciproduct','=','i_code')
+                    ->leftJoin('m_imgproduct','ip_ciproduct','=','i_code')
+                    ->leftJoin('m_itemunit','iu_code','=','itp_ciunit')
+                    ->leftJoin('m_whouse','w_code','=','s_whouse')
+                    ->leftJoin('d_province','p_id','=','s_province')
+                    ->leftJoin('d_city','c_id','=','s_city')
+                    ->leftJoin('d_district','d_id','=','s_district')
+                    ->groupBy('sd_detailid')
+                    ->where('s_nota',$data->s_nota);
+
+                if ($request->produk != null) {
+                    $data2 = $data2->where('i_name','LIKE', '%'.$request->produk.'%');
+                }
+                
+
+            $data2 = $data2->get();
+            if ($data->s_paymethod == 'T') {
+                    $metode = 'Tunai'; 
+                }else if ($data->s_paymethod == 'N'){
+                    $metode = 'Tempo';
+                }else{
+                    $metode = '';
                 }
 
-            return '<div id="itemproduct-group-allstatus">
-                    <div class="column-group-item-product mt-5">
-                        <div class="row">
-                        <div class="col-lg-8 col-md-8">
-                        <span class="fs-14 semi-bold">'.$data->sell_nota.'</span><span class="text-full-payment-transaction">Total Semua Barang : <span class="text-full-price-transaction semi-bold" id="count">Rp. '. number_format($totalbayar,2).'</span></span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    <a data-target="#modal-detail" data-id="'.$data->sell_nota.'"
-                                                        data-status="'.$data->sell_status.'"
-                                                        data-date="'.$data->sell_date.'"
-                                                        data-customer="'.Auth::user()->cm_name.'"
-                                                        data-alamat="'.$data->sell_address.'"
-                                                        data-totalb="'.$data->sell_total.'"
-                                                        data-provinsi="'.$data->p_nama.'"
-                                                        data-kecamatan="'.$data->c_nama.'"
-                                                        data-district="'.$data->d_nama.'"
-                                                        data-metode="'.$data->sell_method.'"
-                                                        data-pos="'.$data->sell_postalcode.'"
-                                                        data-hargat="Rp. '.$totalbayar.'" data-toggle="modal"
-                                                        class="detail"><button
-                                                            class="btn btn-view-more-all-transaction">Lihat Detail
-                                                            Transaksi</button></a>
-                                                </div>
-                                            </div>
-                                            <div class="row column-item-product item-product-allstatus">
-                                                <div class="col-lg-6">
-                                                    <div class="d-flex">
-                                                        <img src="'.env("APP_WIB").'storage/image/master/produk/'.$image.'"
+            if ($data->s_paystatus == 'N') {
+                    $status = 'Pembayaran';
+                    $stat = 'P';
+                }
+
+                if ($data->s_paystatus == 'Y') {
+                    $status = 'Sudah Bayar';
+                    $stat = 'SB';
+                }
+
+                if ($data->s_isapprove == 'Y') {
+                    $status = 'Proses Packing';
+                    $stat = 'PP';
+                }
+
+                if ($data->s_packing == 'Y') {
+                    $status = 'Packing Selesai';
+                    $stat = 'PS';
+                }  
+
+                if ($data->s_delivered == 'P') {
+                    $status = 'Sedang Dikirim';
+                    $stat = 'SD';
+                }     
+
+                if ($data->s_delivered == 'L') {
+                    $status = 'Pengiriman Terhambat';
+                    $stat = 'T';
+                }
+
+                if ($data->s_delivered == 'Y') {
+                    $status = 'Transaksi Selesai';
+                    $stat = 'TS';
+                }   
+
+                if ($data->s_isapprove == 'N') {
+                    $status = 'Ditolak';
+                    $stat = 'D';
+                }
+
+            $daftar_barang = '';
+
+            $totalbeli = 0 ;
+            foreach ($data2 as $row) {
+                $daftar_barang .= '
+                    <div class="row column-item-product item-product-allstatus">
+                        <div class="col-lg-6">
+                            <div class="d-flex">
+                                <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
                                                             width="100px" height="100px">
-                                                        <div class="padding-0-15">
-                                                            <div class="fs-14 semi-bold nameproduct">'.$data->i_name.'
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">'.$data->sell_nota.'<span>
-                                                            </div>
-                                                            <div class="fs-14 semi-bold pt-3">
-                                                                '.Carbon::parse($data->sell_date)->formatLocalized('%d %B %Y').'<span
-                                                                    class="text-full-payment-transaction">Total
-                                                                    Pembayaran :
-                                                                    <span class="text-full-price-transaction">Rp.
-                                                                        '.$data->sell_total.'</span></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 text-center">
-                                                    <label class="label label-primary bg-primary-wib">'.
-                                                        $stat
-                                                    .'</label>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <a
-                                                        href="'.route('produk-detail-frontpage', ['code'=>$data->i_code]).'"><button
-                                                            class="btn btn-buy-more-product">Beli Lagi</button></a>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>';
+                                <div class="padding-0-15">
+                                    <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
+                                    <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
+                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-lg-2 text-center">
+                        <label class="label label-primary bg-primary-wib">'. $status .'</label>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        </div>
+                    </div>';
+
+            $totalbeli += $row->sd_qty;
+            }
+
+            $image = 0 ;
+
+            $totalbayar = 0 ;
+
+            return '<div class="column-group-item-product mt-5">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8">
+                            <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
+                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                                <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
+                            </span> 
+                            </div> <div class="col-lg-4 col-md-4">
+                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
+                                
+                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
+                            
+                            </a>
+                            
+                            </div>
+                        </div>'.$daftar_barang.'
+                    </div>';
+        })
+        ->rawColumns(['all'])
+        ->make(true);
+    }
+
+    public function table_pembayaran(Request $request)
+    {
+                
+        if ($request->category == 'Terbaru') {
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_date','desc')
+                ->where('s_paystatus','N');
+        }else if($request->category == 'Total Belanja'){
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_total','desc')
+                ->where('s_paystatus','N');
+        }else{
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->where('s_paystatus','N');
+        }
+
+
+        if ($request->tanggal_transaksi_awal != null && $request->tanggal_transaksi_akhir != null) {
+
+            $data = $data
+                ->whereBetween('s_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y-m-d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y-m-d')]);
+
+        }
+
+        if ($request->order == 'Terbaru') {
+            $data = $data->orderBy('s_date','desc');
+        }else if ($request->order == 'Total Belanja') {
+            $data = $data->orderBy('s_total','desc');
+        }
+
+        $data = $data->get();
+
+        return Datatables::of($data)
+        ->addColumn('all',function($data) use ($request){
+            $data2 = DB::table('d_salesdt')
+                ->leftJoin('d_sales','s_id','=','sd_sales')
+                ->leftJoin('m_member','cm_code','=','s_member')
+                ->leftJoin('m_item','i_code','=','sd_item')
+                ->leftJoin('m_itemprice','ipr_ciproduct','=','i_code')
+                ->leftJoin('m_itemproduct','itp_ciproduct','=','i_code')
+                ->leftJoin('m_imgproduct','ip_ciproduct','=','i_code')
+                ->leftJoin('m_itemunit','iu_code','=','itp_ciunit')
+                ->leftJoin('m_whouse','w_code','=','s_whouse')
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->groupBy('sd_detailid')
+                ->where('s_nota',$data->s_nota)
+                ->get();
+
+            if ($request->produk != null) {
+                $data2 = $data2->where('i_name','LIKE', '%'.$request->produk.'%');
+            }
+
+            if ($data->s_paymethod == 'T') {
+                    $metode = 'Tunai'; 
+                }else if ($data->s_paymethod == 'N'){
+                    $metode = 'Tempo';
+                }else{
+                    $metode = '';
+                }
+
+            if ($data->s_paystatus == 'N') {
+                    $status = 'Pembayaran';
+                    $stat = 'P';
+                }
+
+                if ($data->s_paystatus == 'Y') {
+                    $status = 'Sudah Bayar';
+                    $stat = 'SB';
+                }
+
+                if ($data->s_isapprove == 'Y') {
+                    $status = 'Proses Packing';
+                    $stat = 'PP';
+                }
+
+                if ($data->s_packing == 'Y') {
+                    $status = 'Packing Selesai';
+                    $stat = 'PS';
+                }  
+
+                if ($data->s_delivered == 'P') {
+                    $status = 'Sedang Dikirim';
+                    $stat = 'SD';
+                }     
+
+                if ($data->s_delivered == 'L') {
+                    $status = 'Pengiriman Terhambat';
+                    $stat = 'T';
+                }
+
+                if ($data->s_delivered == 'Y') {
+                    $status = 'Transaksi Selesai';
+                    $stat = 'TS';
+                }   
+
+                if ($data->s_isapprove == 'N') {
+                    $status = 'Ditolak';
+                    $stat = 'D';
+                }
+
+            $daftar_barang = '';
+
+            $totalbeli = 0 ;
+            foreach ($data2 as $row) {
+                $daftar_barang .= '
+                    <div class="row column-item-product item-product-allstatus">
+                        <div class="col-lg-6">
+                            <div class="d-flex">
+                                <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
+                                                            width="100px" height="100px">
+                                <div class="padding-0-15">
+                                    <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
+                                    <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
+                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-lg-2 text-center">
+                        <label class="label label-primary bg-primary-wib">'. $status .'</label>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        </div>
+                    </div>';
+
+            $totalbeli += $row->sd_qty;
+            }
+
+            $image = 0 ;
+
+            $totalbayar = 0 ;
+
+            return '<div class="column-group-item-product mt-5">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8">
+                            <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
+                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                                <span class="text-full-price-transaction semi-bold" id="count">Rp. '.$data->s_total.'</span>
+                            </span> 
+                            </div> <div class="col-lg-4 col-md-4">
+                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
+                                
+                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
+                            
+                            </a>
+                            
+                            <button class="btn btn-payment-transaction bayar" data-nota="'.$data->s_nota.'" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar Sekarang</button>
+                            </div>
+                        </div>'.$daftar_barang.'
+                    </div>';
+        })
+        ->rawColumns(['all'])
+        ->make(true);
+    }
+
+    public function table_pengiriman(Request $request)
+    {
+
+        if ($request->category == 'Terbaru') {
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_date','desc')
+                ->whereIn('s_delivered',['L','P']);
+        }else if($request->category == 'Total Belanja'){
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_total','desc')
+                ->whereIn('s_delivered',['L','P']);
+        }else{
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->whereIn('s_delivered',['L','P']);
+        }
+
+
+        if ($request->tanggal_transaksi_awal != null && $request->tanggal_transaksi_akhir != null) {
+
+            $data = $data
+                ->whereBetween('s_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y-m-d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y-m-d')]);
+
+        }
+
+        if ($request->order == 'Terbaru') {
+            $data = $data->orderBy('s_date','desc');
+        }else if ($request->order == 'Total Belanja') {
+            $data = $data->orderBy('s_total','desc');
+        }
+
+        $data = $data->get();
+
+        return Datatables::of($data)
+        ->addColumn('all',function($data) use ($request){
+                $data2 = DB::table('d_salesdt')
+                    ->leftJoin('d_sales','s_id','=','sd_sales')
+                    ->leftJoin('m_member','cm_code','=','s_member')
+                    ->leftJoin('m_item','i_code','=','sd_item')
+                    ->leftJoin('m_itemprice','ipr_ciproduct','=','i_code')
+                    ->leftJoin('m_itemproduct','itp_ciproduct','=','i_code')
+                    ->leftJoin('m_imgproduct','ip_ciproduct','=','i_code')
+                    ->leftJoin('m_itemunit','iu_code','=','itp_ciunit')
+                    ->leftJoin('m_whouse','w_code','=','s_whouse')
+                    ->leftJoin('d_province','p_id','=','s_province')
+                    ->leftJoin('d_city','c_id','=','s_city')
+                    ->leftJoin('d_district','d_id','=','s_district')
+                    ->groupBy('sd_detailid')
+                    ->where('s_nota',$data->s_nota);
+
+                if ($request->produk != null) {
+                    $data2 = $data2->where('i_name','LIKE', '%'.$request->produk.'%');
+                }
+            $data2 = $data2->get();
+            if ($data->s_paymethod == 'T') {
+                    $metode = 'Tunai'; 
+                }else if ($data->s_paymethod == 'N'){
+                    $metode = 'Tempo';
+                }else{
+                    $metode = '';
+                }
+
+            if ($data->s_paystatus == 'N') {
+                    $status = 'Pembayaran';
+                    $stat = 'P';
+                }
+
+                if ($data->s_paystatus == 'Y') {
+                    $status = 'Sudah Bayar';
+                    $stat = 'SB';
+                }
+
+                if ($data->s_isapprove == 'Y') {
+                    $status = 'Proses Packing';
+                    $stat = 'PP';
+                }
+
+                if ($data->s_packing == 'Y') {
+                    $status = 'Packing Selesai';
+                    $stat = 'PS';
+                }  
+
+                if ($data->s_delivered == 'P') {
+                    $status = 'Sedang Dikirim';
+                    $stat = 'SD';
+                }     
+
+                if ($data->s_delivered == 'L') {
+                    $status = 'Pengiriman Terhambat';
+                    $stat = 'T';
+                }
+
+                if ($data->s_delivered == 'Y') {
+                    $status = 'Transaksi Selesai';
+                    $stat = 'TS';
+                }   
+
+                if ($data->s_isapprove == 'N') {
+                    $status = 'Ditolak';
+                    $stat = 'D';
+                }
+
+            $daftar_barang = '';
+
+            $totalbeli = 0 ;
+            foreach ($data2 as $row) {
+                $daftar_barang .= '
+                    <div class="row column-item-product item-product-allstatus">
+                        <div class="col-lg-6">
+                            <div class="d-flex">
+                                <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
+                                                            width="100px" height="100px">
+                                <div class="padding-0-15">
+                                    <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
+                                    <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
+                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-lg-2 text-center">
+                        <label class="label label-primary bg-primary-wib">'. $status .'</label>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        </div>
+                    </div>';
+
+            $totalbeli += $row->sd_qty;
+            }
+
+            $image = 0 ;
+
+            $totalbayar = 0 ;
+
+            return '<div class="column-group-item-product mt-5">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8">
+                            <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
+                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                                <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
+                            </span> 
+                            </div> <div class="col-lg-4 col-md-4">
+                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
+                                
+                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
+                            
+                            </a>
+                            
+                            </div>
+                        </div>'.$daftar_barang.'
+                    </div>';
+        })
+        ->rawColumns(['all'])
+        ->make(true);
+    }
+
+    public function table_proses(Request $request)
+    {
+        if ($request->category == 'Terbaru') {
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_date','desc')
+                ->where('s_isapprove','Y')
+                ->where('s_delivered','N');
+        }else if($request->category == 'Total Belanja'){
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->orderBy('s_total','desc')
+               ->where('s_isapprove','Y')
+                ->where('s_delivered','N');
+        }else{
+            $data = DB::table('d_sales')
+                ->where('s_member',Auth::user()->cm_code)
+                ->leftJoin('d_province','p_id','=','s_province')
+                ->leftJoin('d_city','c_id','=','s_city')
+                ->leftJoin('d_district','d_id','=','s_district')
+                ->where('s_isapprove','Y')
+                ->where('s_delivered','N');
+        }
+
+
+        if ($request->tanggal_transaksi_awal != null && $request->tanggal_transaksi_akhir != null) {
+
+            $data = $data
+                ->whereBetween('s_date',[Carbon::parse($request->tanggal_transaksi_awal)->format('Y-m-d'),Carbon::parse($request->tanggal_transaksi_akhir)->format('Y-m-d')]);
+
+        }
+
+        if ($request->order == 'Terbaru') {
+            $data = $data->orderBy('s_date','desc');
+        }else if ($request->order == 'Total Belanja') {
+            $data = $data->orderBy('s_total','desc');
+        }
+
+        $data = $data->get();
+
+        return Datatables::of($data)
+        ->addColumn('all',function($data) use ($request){
+                $data2 = DB::table('d_salesdt')
+                    ->leftJoin('d_sales','s_id','=','sd_sales')
+                    ->leftJoin('m_member','cm_code','=','s_member')
+                    ->leftJoin('m_item','i_code','=','sd_item')
+                    ->leftJoin('m_itemprice','ipr_ciproduct','=','i_code')
+                    ->leftJoin('m_itemproduct','itp_ciproduct','=','i_code')
+                    ->leftJoin('m_imgproduct','ip_ciproduct','=','i_code')
+                    ->leftJoin('m_itemunit','iu_code','=','itp_ciunit')
+                    ->leftJoin('m_whouse','w_code','=','s_whouse')
+                    ->leftJoin('d_province','p_id','=','s_province')
+                    ->leftJoin('d_city','c_id','=','s_city')
+                    ->leftJoin('d_district','d_id','=','s_district')
+                    ->groupBy('sd_detailid')
+                    ->where('s_nota',$data->s_nota);
+
+                if ($request->produk != null) {
+                    $data2 = $data2->where('i_name','LIKE', '%'.$request->produk.'%');
+                }
+                
+
+            $data2 = $data2->get();
+            if ($data->s_paymethod == 'T') {
+                    $metode = 'Tunai'; 
+                }else if ($data->s_paymethod == 'N'){
+                    $metode = 'Tempo';
+                }else{
+                    $metode = '';
+                }
+
+            if ($data->s_paystatus == 'N') {
+                    $status = 'Pembayaran';
+                    $stat = 'P';
+                }
+
+                if ($data->s_paystatus == 'Y') {
+                    $status = 'Sudah Bayar';
+                    $stat = 'SB';
+                }
+
+                if ($data->s_isapprove == 'Y') {
+                    $status = 'Proses Packing';
+                    $stat = 'PP';
+                }
+
+                if ($data->s_packing == 'Y') {
+                    $status = 'Packing Selesai';
+                    $stat = 'PS';
+                }  
+
+                if ($data->s_delivered == 'P') {
+                    $status = 'Sedang Dikirim';
+                    $stat = 'SD';
+                }     
+
+                if ($data->s_delivered == 'L') {
+                    $status = 'Pengiriman Terhambat';
+                    $stat = 'T';
+                }
+
+                if ($data->s_delivered == 'Y') {
+                    $status = 'Transaksi Selesai';
+                    $stat = 'TS';
+                }   
+
+                if ($data->s_isapprove == 'N') {
+                    $status = 'Ditolak';
+                    $stat = 'D';
+                }
+
+            $daftar_barang = '';
+
+            $totalbeli = 0 ;
+            foreach ($data2 as $row) {
+                $daftar_barang .= '
+                    <div class="row column-item-product item-product-allstatus">
+                        <div class="col-lg-6">
+                            <div class="d-flex">
+                                <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
+                                                            width="100px" height="100px">
+
+                                <div class="padding-0-15">
+                                    <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
+                                    <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
+                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-lg-2 text-center">
+                        <label class="label label-primary bg-primary-wib">'. $status .'</label>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        </div>
+                    </div>';
+
+            $totalbeli += $row->sd_qty;
+            }
+
+            $image = 0 ;
+
+            $totalbayar = 0 ;
+
+            return '<div class="column-group-item-product mt-5">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8">
+                            <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
+                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                                <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
+                            </span> 
+                            </div> <div class="col-lg-4 col-md-4">
+                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
+                                
+                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
+                            
+                            </a>
+                            
+                            </div>
+                        </div>'.$daftar_barang.'
+                    </div>';
         })
         ->rawColumns(['all'])
         ->make(true);
@@ -198,9 +775,8 @@ class PembelianController extends Controller
                         'mp_cmember' => Auth::user()->cm_code,
                         'status_data' => 'true',
                     ]);
-                    DB::table('d_seller')->where('sell_nota',$request->nota)->update([
-                        'sell_status'=>'SB',
-                        'sell_method'=>'transfer',
+                    DB::table('d_sales')->where('s_nota',$request->nota)->update([
+                        's_paymethod'=>'T',
                     ]);
 
                 return redirect()->back()->with('success','success');
@@ -214,14 +790,15 @@ class PembelianController extends Controller
     }
 
     public function detail(Request $request){
-        $data = DB::table('d_seller')
-                ->join('m_member','cm_code','sell_ccustomer')
-                ->leftjoin('m_imgproduct','ip_ciproduct','sell_ciproduct')
-                ->leftJoin('m_itemunit','iu_code','d_seller.sell_cunit')
-                ->leftjoin('m_item','i_code','sell_ciproduct')
-                ->leftjoin('m_itemprice','ipr_ciproduct','sell_ciproduct')
-                ->where('sell_nota',$request->nota)
-                ->groupBy('sell_ciproduct')
+        $data = DB::table('d_sales')
+                ->leftJoin('d_salesdt','sd_sales','s_id')
+                ->join('m_member','cm_code','s_member')
+                ->leftjoin('m_imgproduct','ip_ciproduct','sd_item')
+                ->leftJoin('m_itemunit','iu_code','d_sales.sell_cunit')
+                ->leftjoin('m_item','i_code','sd_item')
+                ->leftjoin('m_itemprice','ipr_ciproduct','sd_item')
+                ->where('s_nota',$request->nota)
+                ->groupBy('sd_item')
                 ->get();
 
         return Datatables::of($data)
@@ -260,590 +837,5 @@ class PembelianController extends Controller
         })
         ->rawColumns(['daftar','harga','namabarang','satuanbarang','jumlahbeli'])
         ->make(true);
-    }
-    public function filterallstatus(Request $request){
-        $tanggalawal = Carbon::parse($request->tanggalawal);
-        $tanggalakhir = Carbon::parse($request->tanggalakhir);
-
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota');
-
-            $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-
-        if($request->sell_date == 'Terbaru'){
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-
-                $group = $allstatus->orderBy('sell_date','desc')->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-
-            }else{
-                $group = $allstatus->orderBy('sell_date','desc')
-                        ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                        ->get();    
-            }
-        }else if($request->sell_date == 'Total Belanja'){
-
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-
-            }else{
-
-                $group = $allstatus->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }
-
-        }
-        return view('frontpage.pembelian.filterallstatus.filterstatus',array(
-            'group'=>$group,
-            'allstatus'=> $item,
-            'gambar'=> $gambar,
-        ));
-    }
-    public function filtertanggalall(Request $request){
-        $tanggalawal = Carbon::parse($request->tanggalawal);
-        $tanggalakhir = Carbon::parse($request->tanggalakhir);
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota');
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-        
-        if($request->tanggalawal != null && $request->tanggalakhir != null){
-            if($request->sell_date == 'Terbaru'){
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('sell_date','desc')
-                ->get();
-
-            }else if($request->sell_date == 'Total Belanja'){
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }else{
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-            }
-        }else{
-            // $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-            // ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-            // ->get();
-        }
-            
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-            return view('frontpage.pembelian.filterallstatus.filterstatus',array(
-                'group'=>$group,
-                'allstatus'=> $item,
-                'gambar'=> $gambar,
-            ));
-    }
-    public function resetallstatus(){
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota')
-            ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-            ->orderBy('sell_date','desc')
-            ->get();
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-            
-            return view('frontpage.pembelian.filterallstatus.filterstatus',array(
-                'group'=>$allstatus,
-                'allstatus'=> $item,
-                'gambar'=> $gambar,
-            ));
-    }
-
-    public function filter_paymentstatus(Request $request){
-        $tanggalawal = Carbon::parse($request->tanggalawal);
-        $tanggalakhir = Carbon::parse($request->tanggalakhir);
-
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->whereIn('sell_status',['P','SB'])
-            ->groupBy('sell_nota');
-
-            $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->whereIn('sell_status',['P','SB'])
-            ->get();
-
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-
-        if($request->sell_date == 'Terbaru'){
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-
-                $group = $allstatus->orderBy('sell_date','desc')->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-
-            }else{
-                $group = $allstatus->orderBy('sell_date','desc')
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();    
-            }
-        }else if($request->sell_date == 'Total Belanja'){
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-
-            }else{
-                $group = $allstatus->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }
-        }
-        return view('frontpage.pembelian.filterstatuspembayaran.filterstatus',array(
-            'groupp'=>$group,
-            'allstatus'=> $item,
-            'gambar'=> $gambar,
-        ));
-    }
-
-    public function filterdate_paymentstatus(Request $request){
-        $tanggalawal = Carbon::parse($request->tanggalawal);
-        $tanggalakhir = Carbon::parse($request->tanggalakhir);
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->whereIn('sell_status',['P','SB'])
-            ->groupBy('sell_nota');
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->whereIn('sell_status',['P','SB'])
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-        
-        if($request->tanggalawal != null && $request->tanggalakhir != null){
-            if($request->sell_date == 'Terbaru'){
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('sell_date','desc')
-                ->get();
-
-            }else if($request->sell_date == 'Total Belanja'){
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }else{
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-            }
-        }else{
-           
-        }      
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-            return view('frontpage.pembelian.filterallstatus.filterstatus',array(
-                'group'=>$group,
-                'allstatus'=> $item,
-                'gambar'=> $gambar,
-            ));
-    }
-    public function reset_paymentstatus(Request $request){
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->whereIn('sell_status',['P','SB'])
-            ->groupBy('sell_nota')
-            ->select('d_seller.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-            ->orderBy('sell_date','desc')
-            ->get();
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->whereIn('sell_status',['P','SB'])
-            ->get();
-        $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-            
-            return view('frontpage.pembelian.filterstatuspembayaran.filterstatus',array(
-                'groupp'=>$allstatus,
-                'allstatus'=> $item,
-                'gambar'=> $gambar,
-            ));
-    }
-
-    public function filter_prosesstatus(Request $request){
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota');
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-            
-        $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-        if($request->sell_date == 'Terbaru'){
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-
-                $group = $allstatus->orderBy('sell_date','desc')->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-
-            }else{
-                $group = $allstatus->orderBy('sell_date','desc')
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();    
-            }
-        }else if($request->sell_date == 'Total Belanja'){
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-
-            }else{
-                $group = $allstatus->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }
-        }
-        $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-        $countproses = DB::table('d_seller')->whereIn('sell_status',['SP','PS','PP','TS'])->where('sell_ccustomer',Auth::user()->cm_code)->count();
-
-        return view('frontpage.pembelian.filterstatusproses.filterstatus',array(
-            'group'=>$group,
-            'allstatus'=> $item,
-            'gambar'=> $gambar,
-            'groupprostat' => $countproses,
-        ));
-    }
-    public function filterdate_prosesstatus(Request $request){
-        $tanggalawal = Carbon::parse($request->tanggalawal);
-        $tanggalakhir = Carbon::parse($request->tanggalakhir);
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota');
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-        
-        if($request->tanggalawal != null && $request->tanggalakhir != null){
-            if($request->sell_date == 'Terbaru'){
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('sell_date','desc')
-                ->get();
-
-            }else if($request->sell_date == 'Total Belanja'){
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }else{
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-            }
-        }else{
-           
-        }  
-        
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-            $countproses = DB::table('d_seller')->whereIn('sell_status',['SP','PS','PP','TS'])->where('sell_ccustomer',Auth::user()->cm_code)->count();
-            return view('frontpage.pembelian.filterstatusproses.filterstatus',array(
-                'group'=>$group,
-                'allstatus'=> $item,
-                'gambar'=> $gambar,
-                'groupprostat' => $countproses,
-            ));
-    }
-    public function reset_prosesstatus(Request $request){
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota')
-            ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-            ->get();
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-
-        $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-        $countproses = DB::table('d_seller')->whereIn('sell_status',['SP','PS','PP','TS'])->where('sell_ccustomer',Auth::user()->cm_code)->count();
-        return view('frontpage.pembelian.filterstatusproses.filterstatus',array(
-            'group'=>$allstatus,
-            'allstatus'=> $item,
-            'gambar'=> $gambar,
-            'groupprostat' => $countproses,
-        ));
-    }
-    public function filter_pengirimanstatus(Request $request){
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota');
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-            
-        $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-        if($request->sell_date == 'Terbaru'){
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-
-                $group = $allstatus->orderBy('sell_date','desc')->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-
-            }else{
-                $group = $allstatus->orderBy('sell_date','desc')
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();    
-            }
-        }else if($request->sell_date == 'Total Belanja'){
-            if($request->tanggalawal != null && $request->tanggalakhir != null){
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-
-            }else{
-                $group = $allstatus->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }
-        }
-        $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-        $countkirim = DB::table('d_seller')->where('sell_status','SD')->where('sell_ccustomer',Auth::user()->cm_code)->count();
-
-        return view('frontpage.pembelian.filterstatuspengiriman.filterstatus',array(
-            'group'=>$group,
-            'allstatus'=> $item,
-            'gambar'=> $gambar,
-            'groupppengstat' => $countkirim,
-        ));
-    }
-    public function filterdate_pengirimanstatus(Request $request){
-        $tanggalawal = Carbon::parse($request->tanggalawal);
-        $tanggalakhir = Carbon::parse($request->tanggalakhir);
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota');
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-        
-        if($request->tanggalawal != null && $request->tanggalakhir != null){
-            if($request->sell_date == 'Terbaru'){
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('sell_date','desc')
-                ->get();
-
-            }else if($request->sell_date == 'Total Belanja'){
-
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->orderBy('totalbayar','desc')
-                ->get();
-            }else{
-                $group = $allstatus->whereBetween('sell_date', [$tanggalawal->format('Y,m,d'), $tanggalakhir->format('Y,m,d')])
-                ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-                ->get();
-            }
-        }else{
-           
-        }  
-        $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-        $countkirim = DB::table('d_seller')->where('sell_status','SD')->where('sell_ccustomer',Auth::user()->cm_code)->count();
-            return view('frontpage.pembelian.filterstatuspengiriman.filterstatus',array(
-             'group'=>$group,
-            'allstatus'=> $item,
-            'gambar'=> $gambar,
-            'groupppengstat' => $countkirim,
-            ));
-    }
-    public function reset_pengirimanstatus(Request $request){
-        $allstatus = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->groupBy('sell_nota')
-            ->orderBy('sell_nota','asc')
-            ->select('d_seller.*','m_itemproduct.*','m_itemprice.*','d_province.*','d_city.*','d_district.*',DB::raw('SUM(sell_total) as totalbayar'),DB::raw('SUM(sell_quantity) as totalbeli'))
-            ->get();
-
-        $item = DB::table('d_seller')
-    		->join('m_item','i_code','sell_ciproduct')
-    		->join('m_itemproduct','itp_ciproduct','sell_ciproduct')
-            ->join('m_itemprice','ipr_ciproduct','sell_ciproduct')
-            ->leftJoin('d_province','p_id','sell_province')
-            ->leftJoin('d_district','d_id','sell_district')
-            ->leftJoin('d_city','c_id','sell_city')
-            ->where('sell_ccustomer',Auth::user()->cm_code)
-            ->get();
-            $gambar = DB::table('d_seller')->join('m_imgproduct','ip_ciproduct','sell_ciproduct')->groupBy('sell_nota')->get();
-            $countkirim = DB::table('d_seller')->where('sell_status','SD')->where('sell_ccustomer',Auth::user()->cm_code)->count();
-            return view('frontpage.pembelian.filterstatuspengiriman.filterstatus',array(
-            'group'=>$allstatus,
-            'allstatus'=> $item,
-            'gambar'=> $gambar,
-            'groupppengstat' => $countkirim,
-            ));
     }
 }
