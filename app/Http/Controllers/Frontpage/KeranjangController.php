@@ -95,7 +95,8 @@ class KeranjangController extends Controller
                                     </div>
                                     <div class="column-description-cart-product">
                                         <h5 class="title-cart-product-item">'.$data->i_name.'</h5>
-                                        <input type="hidden" class="id_produk" value="'.$data->i_code.'" name="ciproduct[]">
+                                        <input type="hidden" class="" value="'.$data->i_code.'" name="ciproduct[]">
+                                        <input type="hidden" class="id_produk" value="'.$data->cart_id.'">
                                         
                                         <input type="hidden" value="'.$data->cart_qty.'" name="qty[]">
                                         <input type="hidden" value="'.$data->ipr_sunitprice * $data->cart_qty.'"
@@ -197,20 +198,22 @@ class KeranjangController extends Controller
     {
         $get_data = DB::table('d_cart')
             ->where('cart_cmember',Auth::user()->cm_code)
-            ->where('cart_ciproduct',$request->produk)
+            ->where('cart_id',$request->produk)
             ->get();
         if ($get_data[0]->cart_qty > 0) {        
             if ($request->tambah == 'T') {
                 DB::table('d_cart')
                 ->where('cart_cmember',Auth::user()->cm_code)
-                ->where('cart_ciproduct',$request->produk)
+                ->where('cart_id',$request->produk)
+                ->where('status_data','true')
                 ->update([
                     'cart_qty' => $get_data[0]->cart_qty + 1, 
                 ]);
             }else if($request->kurang == 'T'){
                 DB::table('d_cart')
                 ->where('cart_cmember',Auth::user()->cm_code)
-                ->where('cart_ciproduct',$request->produk)
+                ->where('cart_id',$request->produk)
+                ->where('status_data','true')
                 ->update([
                     'cart_qty' => $get_data[0]->cart_qty - 1, 
                 ]);
