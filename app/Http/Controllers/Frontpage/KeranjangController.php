@@ -269,16 +269,28 @@ class KeranjangController extends Controller
 
     public function gocheck(Request $request){
         $id = $request->id;
-        for ($i=0; $i < count($request->id) ; $i++) { 
-            if ($request->id != '') {
+        DB::table('d_cart')
+        ->where('cart_cmember',Auth::user()->cm_code)
+        ->delete();
+        for ($i=0; $i < count($request->ciproduct) ; $i++) { 
                 DB::table('d_cart')
-                    ->where('cart_id',$id[$i])
-                    ->update([
-                        'status_data' => 'check',
-                    ]);
-            }else{
-                return false;
-            }
+                ->insert([
+                    'cart_ciproduct'=>$request->ciproduct{$i},
+                    'cart_qty'=> $request->qty{$i},
+                    'cart_cmember'=> Auth::user()->cm_code,
+                    'status_data'=> 'check',
+                ]);
+                // DB::table('d_cart')
+                //     ->where('cart_id',$id[$i])
+                //     ->update([
+                //         'status_data' => 'check',
+                //     ]);
+                //     $testing = DB::table('d_cart')
+                //         ->where('cart_cmember',Auth::user()->cm_code)
+                //         ->where('cart_id','!=',$id[$i])
+                //         ->update([
+                //             'status_data'=>'false',
+                //         ]);                    
         }
     }
 }

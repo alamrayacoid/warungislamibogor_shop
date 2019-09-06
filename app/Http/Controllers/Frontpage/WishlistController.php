@@ -75,18 +75,21 @@ class WishlistController extends Controller
 	    		'wl_ciproduct' => $request->code,
 	    		'wl_cmember' => Auth::user()->cm_code,
 	    		'status_data' => 'true',
-	    	]);
+			]);
+			return response()->json(['status' => 'New', 'message' => 'Berhasil ditambahkan ke wishlist']);
     	}else{
     		if ($cek->where('status_data','true')->count() == 1) {
-	    		DB::table('d_wishlist')->where('wl_ciproduct',$request->code)->where('wl_cmember',Auth::user()->cm_code)
+	    		$menambahkan = DB::table('d_wishlist')->where('wl_ciproduct',$request->code)->where('wl_cmember',Auth::user()->cm_code)
 		    	->update([
 		    		'status_data' => 'false',
-		    	]);
+				]);
+				return response()->json(['status' => 'Hapus', 'message' => 'Berhasil hapus dari wishlist']);
     		}else{
     			DB::table('d_wishlist')->where('wl_ciproduct',$request->code)->where('wl_cmember',Auth::user()->cm_code)
 		    	->update([
 		    		'status_data' => 'true',
-		    	]);
+				]);
+				return response()->json(['status' => 'Tambah', 'message' => 'Berhasil ditambahkan ke wishlist']);
     		}
 
     	}

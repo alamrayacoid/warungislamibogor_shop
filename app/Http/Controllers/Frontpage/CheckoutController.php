@@ -97,6 +97,8 @@ class CheckoutController extends Controller
                 ->orderBy('st_qty' ,'desc')
                 ->get(); 
 
+                dd($pilih_gudang);
+
             $id = $request->id[$run];
 
             DB::table('d_cart')

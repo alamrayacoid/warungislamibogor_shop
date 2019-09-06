@@ -167,9 +167,12 @@ class ProdukController extends Controller
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
             if(\Auth::check()){
             $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+            $wish = DB::table('d_wishlist')->where('status_data','true')->where('wl_ciproduct',$code)->where('wl_cmember',Auth::user()->cm_code)->count();
             }else{
                 $keranjang = '';
+                $wish = '';
             }
+
     	return view('frontpage.produk.produk-detail-frontpage',array(
             'data' => $data,
             'typeproduk'=>$datas,
@@ -180,6 +183,7 @@ class ProdukController extends Controller
             'cabang' => $cabang,
             'kategori' => $kategori,
             'satuan' => $satuan,
+            'wish'=> $wish,
             'produksejenis'=> $produksejenis,
             'keranjang'=> $keranjang,
 
