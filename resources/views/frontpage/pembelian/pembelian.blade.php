@@ -181,6 +181,15 @@
 
         margin: 4px 0;
     }
+    .table tbody tr{
+        background: white !important;
+    }
+    .table tbody tr td{
+        border-top: 0 !important;
+    }
+    .table{
+        border: 0 !important;
+    }
 </style>
 @endsection
 
@@ -189,13 +198,14 @@
 @include('frontpage.pembelian.modal-detailpembelian')
 @include('frontpage.pembelian.modal-detailpengiriman')
 @include('frontpage.pembelian.modal-pembayaran')
-<section style="margin-top:5em">
+<section style="margin-top:3.3em">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
         <li><a href="">Semua Transaksi</a></li>
     </ol>
     <div class="container-fluid mt-5">
-        <div class="row">
+            <div class="loader-wib"></div>
+        <div class="row" style="padding-bottom: 3em;">
             <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                 <div class="thumbnail profile-frame--sidebar">
                     <div class="d-flex align-items-center padding-0-15">
@@ -258,7 +268,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-10 col-md-9" style="padding:5px;">
+            <div class="col-lg-10 col-md-9" style="padding:0 5px;">
                 <div class="thumbnail">
                     <div class="caption p-0">
                         <div class="tabs-container">
@@ -764,7 +774,162 @@
         })
 
         var totall = $('.total').length;
-
+        $('#detail_1').on('click', '.detail_transaksi[data-id]', function (e) {
+            e.preventDefault();
+            var url = $(this).data('id');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    console.log(data.p_name);
+                    $('#date').text(data.datas.s_date);
+                    $('#nota').text(data.datas.s_nota);
+                    $('#customer').text(data.datas.cm_name);
+                    $('#provinsi').text(data.datas.p_nama);
+                    $('#kecamatan').text(data.datas.c_nama);
+                    $('#district').text(data.datas.d_nama);
+                    $('#alamat').text(data.datas.s_address);
+                    $('#kodepos').text(data.datas.s_postalcode);
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    var dataagenda = data.item;
+                    var trHTML = '';
+                            $.each(dataagenda, function (i, item) {
+                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
+                        });
+                    $('#tabledetailtransaksi tbody').html(trHTML);
+                    $('#modal-detail').modal('show');
+                    var total = 0;
+                    $('.jumlahbarang').each(function () {
+                    var ini = $(this).text();
+                    total += parseInt(ini);
+                    });
+                    $('#jumlahbarang').text(total);
+                    if(data.datas.s_paymethod == 'N'){
+                        $('#metodepambayaran').text('Tempo');
+                    }else{
+                        $('#metodepambayaran').text('Tunai');
+                    }
+                }
+            });
+        });
+        $('#detail_2').on('click', '.detail_transaksi[data-id]', function (e) {
+            e.preventDefault();
+            var url = $(this).data('id');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    console.log(data.p_name);
+                    $('#date').text(data.datas.s_date);
+                    $('#nota').text(data.datas.s_nota);
+                    $('#customer').text(data.datas.cm_name);
+                    $('#provinsi').text(data.datas.p_nama);
+                    $('#kecamatan').text(data.datas.c_nama);
+                    $('#district').text(data.datas.d_nama);
+                    $('#alamat').text(data.datas.s_address);
+                    $('#kodepos').text(data.datas.s_postalcode);
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    var dataagenda = data.item;
+                    var trHTML = '';
+                            $.each(dataagenda, function (i, item) {
+                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
+                        });
+                    $('#tabledetailtransaksi tbody').html(trHTML);
+                    $('#modal-detail').modal('show');
+                    var total = 0;
+                    $('.jumlahbarang').each(function () {
+                    var ini = $(this).text();
+                    total += parseInt(ini);
+                    });
+                    $('#jumlahbarang').text(total);
+                    if(data.datas.s_paymethod == 'N'){
+                        $('#metodepambayaran').text('Tempo');
+                    }else{
+                        $('#metodepambayaran').text('Tunai');
+                    }
+                }
+            });
+        });
+        $('#detail_4').on('click', '.detail_transaksi[data-id]', function (e) {
+            e.preventDefault();
+            var url = $(this).data('id');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    console.log(data.p_name);
+                    $('#date').text(data.datas.s_date);
+                    $('#nota').text(data.datas.s_nota);
+                    $('#customer').text(data.datas.cm_name);
+                    $('#provinsi').text(data.datas.p_nama);
+                    $('#kecamatan').text(data.datas.c_nama);
+                    $('#district').text(data.datas.d_nama);
+                    $('#alamat').text(data.datas.s_address);
+                    $('#kodepos').text(data.datas.s_postalcode);
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    var dataagenda = data.item;
+                    var trHTML = '';
+                            $.each(dataagenda, function (i, item) {
+                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
+                        });
+                    $('#tabledetailtransaksi tbody').html(trHTML);
+                    $('#modal-detail').modal('show');
+                    var total = 0;
+                    $('.jumlahbarang').each(function () {
+                    var ini = $(this).text();
+                    total += parseInt(ini);
+                    });
+                    $('#jumlahbarang').text(total);
+                    if(data.datas.s_paymethod == 'N'){
+                        $('#metodepambayaran').text('Tempo');
+                    }else{
+                        $('#metodepambayaran').text('Tunai');
+                    }
+                }
+            });
+        });
+        $('#detail_3').on('click', '.detail_transaksi[data-id]', function (e) {
+            e.preventDefault();
+            var url = $(this).data('id');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    console.log(data.p_name);
+                    $('#date').text(data.datas.s_date);
+                    $('#nota').text(data.datas.s_nota);
+                    $('#customer').text(data.datas.cm_name);
+                    $('#provinsi').text(data.datas.p_nama);
+                    $('#kecamatan').text(data.datas.c_nama);
+                    $('#district').text(data.datas.d_nama);
+                    $('#alamat').text(data.datas.s_address);
+                    $('#kodepos').text(data.datas.s_postalcode);
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    var dataagenda = data.item;
+                    var trHTML = '';
+                            $.each(dataagenda, function (i, item) {
+                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
+                        });
+                    $('#tabledetailtransaksi tbody').html(trHTML);
+                    $('#modal-detail').modal('show');
+                    var total = 0;
+                    $('.jumlahbarang').each(function () {
+                    var ini = $(this).text();
+                    total += parseInt(ini);
+                    });
+                    $('#jumlahbarang').text(total);
+                    if(data.datas.s_paymethod == 'N'){
+                        $('#metodepambayaran').text('Tempo');
+                    }else{
+                        $('#metodepambayaran').text('Tunai');
+                    }
+                }
+            });
+        })
         $(document).on('click', '.detail', function () {
             var nota = $(this).data('id');
             console.log(nota);
@@ -804,7 +969,6 @@
             }else{
                  $('#status').html('<span class="label label-success">Unknown</span>');
             }
-
             var table2 = $('#table_detail').DataTable({
                 responsive: true,
                 serverSide: true,

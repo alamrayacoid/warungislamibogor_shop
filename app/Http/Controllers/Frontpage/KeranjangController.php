@@ -11,7 +11,7 @@ use DataTables;
 class KeranjangController extends Controller
 {
     public function keranjang()
-    {
+    {   
         $produk = DB::table('d_cart')
                     ->join('m_item','i_code','cart_ciproduct')
                     ->join('m_itemproduct','itp_ciproduct','i_code')
@@ -23,13 +23,39 @@ class KeranjangController extends Controller
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
         $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+        if(\Auth::check()){
+        $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+        }else{
+            $keranjang = '';
+        }
     	return view('frontpage.keranjang.keranjang-frontpage',array(
             'produk' => $produk,
             'gambar' => $gambar,
             'kategori'=>$kategori,
+            'keranjang'=> $keranjang,
         ));
     }
 
+    public function table_keranjang(){
+        $data = DB::table('d_cart')
+        ->leftJoin('m_item','i_code','cart_ciproduct')
+        ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+        ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+        ->where('cart_cmember',Auth::user()->cm_code)
+        ->where('d_cart.status_data','true')
+        ->groupBy('cart_ciproduct')
+        ->get();
+
+        return DataTables::of($data)
+        ->addColumn('aksi',function($data){
+                    return'<div class="column-full-price-cart border-top-0"><input type="text" value="'.$data->ipr_sunitprice * $data->cart_qty.'" class="totalyess" hidden>
+                    <h5 class="">'.$data->i_name.'</h5><span class="text-price-cart-product total_price">Rp. '.$data->ipr_sunitprice * $data->cart_qty.'</span>
+                    </div>';
+        })
+        ->rawColumns(['aksi'])
+        ->make(true);
+
+    }
     public function detail_keranjang()
     {
         $data = DB::table('d_cart')
@@ -95,7 +121,78 @@ class KeranjangController extends Controller
         ->rawColumns(['detail'])
         ->make(true);
     }
+    public function detail_keranjang_nav(){
+        $data = DB::table('d_cart')
+                    ->leftJoin('m_item','i_code','cart_ciproduct')
+                    ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                    ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+                    ->where('cart_cmember',Auth::user()->cm_code)
+                    ->where('d_cart.status_data','true')
+                    ->groupBy('cart_ciproduct')
+                    ->get();
 
+        return DataTables::of($data)
+        ->addColumn('detail',function($data){
+            $gambar = DB::table('m_item')
+            ->join('m_imgproduct','ip_ciproduct','i_code')
+            ->groupBy('i_code')
+            ->where('i_code',$data->i_code)
+            ->get();
+            if ($gambar != '[]') {
+                $isi_gambar = $gambar[0]->ip_path;
+            }else{
+                $isi_gambar = '';
+            }
+
+            if($gambar != '[]'){
+                $image = $gambar[0]->ip_path;
+            }else{
+                $image = '';
+            }
+
+            return '<li>
+                <div class="product-item-cart-nav">
+                    <div>
+                        <img src="{{asset("assets/img/img-product/product-4.png")}}" width="50"
+            height="50">
+        </div>
+        <div class="text-product-item-cart-group">
+            <h5 class="title-product-item-cart-nav">'.$data->i_name.'</h5>
+            <p class="price-product-item-cart-nav">Rp. '.$data->ipr_sunitprice.' / Pcs</p>
+            <span class="text-qty-cart-nav">Qty</span><input type="text" class="input-qty-cart-nav"
+                value="'.$data->cart_qty.'" readonly>
+            <div class="product-item-cart-nav-action">
+            <a data-id="'.$data->cart_id.'" data-ciproduct="'.$data->cart_ciproduct.'" data-qty="'.$data->cart_qty.'"
+                                        class="remove"><button class="btn btn-remove-cart-nav"><i
+                        class="fa fa-trash"></i></button></a>
+            </div>
+        </div>
+
+</div>
+</li>';
+        })
+        ->rawColumns(['detail'])
+        ->make(true);
+    }
+    public function getnow_price_cart(Request $request){
+        $produk = DB::table('d_cart')
+                    ->join('m_item','i_code','cart_ciproduct')
+                    ->join('m_itemproduct','itp_ciproduct','i_code')
+                    ->join('m_itemprice','ipr_ciproduct','i_code')
+                    ->where('cart_cmember',$request->idcustomer)
+                    ->where('d_cart.status_data','true')
+                    ->groupBy('cart_ciproduct')
+                    ->get();
+        return view('frontpage.keranjang.keranjang-subtotal',array(
+            'produk'=> $produk,
+        ));
+    }
+    public function getnow_qty_cart(Request $request){
+        $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+        return view('frontpage.keranjang.keranjang-qty',array(
+            'jumlah'=> $keranjang,
+        ));
+    }
     public function updatecart(Request $request)
     {
         $get_data = DB::table('d_cart')

@@ -50,6 +50,11 @@ class WishlistController extends Controller
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
 			$wish = DB::table('d_wishlist')->where('status_data','true')->get();
 			$kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+			if(\Auth::check()){
+				$keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+				}else{
+					$keranjang = '';
+				}
             return view('frontpage.wishlist.wishlist-frontpage',array(
                 'data' => $data,
 				'gambar' => $gambar,
@@ -57,6 +62,7 @@ class WishlistController extends Controller
 				'wish' => $wish,
 				'produkseen' => $lastseen,
 				'kategori'=>$kategori,
+				'keranjang'=> $keranjang,
             ));
     }
 

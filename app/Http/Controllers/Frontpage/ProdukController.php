@@ -12,6 +12,11 @@ class ProdukController extends Controller
     public function produk(Request $request)
     {
         $type = DB::table('m_itemtype')->get();
+        if(\Auth::check()){
+        $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+        }else{
+            $keranjang = '';
+        }
         $kategory = $request->ctr;
             if ($kategory != null) {
             $data = DB::table('m_item')
@@ -78,7 +83,6 @@ class ProdukController extends Controller
             }
             $namabarang = $request->search;
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-
     	return view('frontpage.produk.produk-frontpage',array(
                 'data' => $data->get(),
                 'gambar' => $gambar,
@@ -86,6 +90,7 @@ class ProdukController extends Controller
                 'tipe' => $type,
                 'namabarang' => $namabarang,
                 'kategori'=>$kategori,
+                'keranjang'=> $keranjang,
             ));
     }
 
@@ -160,6 +165,11 @@ class ProdukController extends Controller
             ->get();
             
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+            if(\Auth::check()){
+            $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+            }else{
+                $keranjang = '';
+            }
     	return view('frontpage.produk.produk-detail-frontpage',array(
             'data' => $data,
             'typeproduk'=>$datas,
@@ -171,6 +181,7 @@ class ProdukController extends Controller
             'kategori' => $kategori,
             'satuan' => $satuan,
             'produksejenis'=> $produksejenis,
+            'keranjang'=> $keranjang,
 
     	));
     }
@@ -242,6 +253,11 @@ class ProdukController extends Controller
                 $type = DB::table('m_itemtype')->get();
                 $wish = DB::table('d_wishlist')->where('status_data','true')->get();
                 $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
+                if(\Auth::check()){
+                $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+                }else{
+                    $keranjang = '';
+                }
         return view('frontpage.produk.produk-kategori-frontpage',array(
             'test'=>$data,
             'test1'=> $data1,
@@ -250,6 +266,7 @@ class ProdukController extends Controller
             'tipe'=>$type,
             'wish'=>$wish,
             'gambar'=>$gambar,
+            'keranjang'=> $keranjang,
         ));
     }
 }

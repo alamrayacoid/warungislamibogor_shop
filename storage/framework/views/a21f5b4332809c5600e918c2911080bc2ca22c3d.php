@@ -31,7 +31,7 @@
 <?php echo $__env->make('frontpage.profile.modal-password', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('frontpage.profile.modal-rekening', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('frontpage.profile.modal-alamat', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<section style="margin-top:5em;">
+<section style="margin-top:3.3em;">
 
     <form id="frmeditprofile" method="post" action="<?php echo e(route('update.profile')); ?>" enctype="multipart/form-data"
         class="form-update-profile">
@@ -54,6 +54,7 @@
             <li><a href="">Profile</a></li>
         </ol>
         <div class="container-fluid mt-5">
+            <div class="loader-wib"></div>
             <div class="row">
                 <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                     <div class="thumbnail profile-frame--sidebar">

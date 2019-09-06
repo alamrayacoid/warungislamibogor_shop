@@ -61,6 +61,11 @@ class FrontpageController extends Controller
              }
             
              $popularproduk = DB::table('d_wishlist')->where('status_data','true')->get();
+             if(\Auth::check()){
+             $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+             }else{
+                $keranjang = '';
+             }
             //  dd($user_info)
             return view('frontpage.dashboard',array(
                 'data' => $data,
@@ -73,6 +78,7 @@ class FrontpageController extends Controller
                 'popular' => $user_info,
                 'rekomendasi' => $rekomendasi,
                 'popularnull' => $popularproduk,
+                'keranjang'=> $keranjang,
             ));
     }
     public function login_frontpage()

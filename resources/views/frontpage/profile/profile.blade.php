@@ -32,7 +32,7 @@
 @include('frontpage.profile.modal-password')
 @include('frontpage.profile.modal-rekening')
 @include('frontpage.profile.modal-alamat')
-<section style="margin-top:5em;">
+<section style="margin-top:3.3em;">
 
     <form id="frmeditprofile" method="post" action="{{route('update.profile')}}" enctype="multipart/form-data"
         class="form-update-profile">
@@ -54,6 +54,7 @@
             <li><a href="">Profile</a></li>
         </ol>
         <div class="container-fluid mt-5">
+            <div class="loader-wib"></div>
             <div class="row">
                 <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                     <div class="thumbnail profile-frame--sidebar">

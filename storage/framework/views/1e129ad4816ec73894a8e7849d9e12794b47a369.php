@@ -68,8 +68,9 @@
 
         margin: 4px 0;
     }
+    
 </style>
-<section style="margin-top:5em">
+<section style="margin-top:3.3em">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
         <li><a href="#">Pencarian</a></li>
@@ -144,7 +145,7 @@
             <div class="col-sm-8 col-md-9 col-lg-10 column-product-filter">
                 <h5 class="header-product-item-filter">Produk Warung Islami Bogor</h5>
                 <!-- jangan dihapus -->
-                <div class="row mt-5 d-none">
+                <div class="row mt-5 loader-wib">
                     <div class="col-lg-product col-md-4">
                         <div class="thumbnail product-box-item">
                             <div class="image-product"></div>
@@ -252,7 +253,7 @@
                     </div>
                 </div>
                 <!-- end -->
-                <div class="row">
+                <div class="row content-wib d-none">
                     <?php if($data != '[]'): ?>
                     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">

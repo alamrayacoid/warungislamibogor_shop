@@ -20,22 +20,17 @@
                                 <label class="d-block">Nomor Nota</label>
                                 <span id="nota"></span>
                             </div>
-                            <div class="form-group">
-                                <label class="d-block">Status Transaksi</label>
-                                <span id="status"></span>
-                            </div>
                         </div>
                     </div>
 
                     <div class="table-responsive mb-4">
-                        <table class="table table-wib table-bordered" id="table_detail" style="width: 100%">
+                        <table class="table table-wib table-bordered" id="tabledetailtransaksi" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
                                     <th>Nama Produk</th>
                                     <th>Satuan</th>
                                     <th>Jumlah Dibeli</th>
-                                    <th>Harga Per Satuan</th>
+                                    <th class="text-right">Harga Per Satuan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,7 +79,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td id="total_barang"></td>
+                                    <td id="jumlahbarang"></td>
                                     <td id="harga_total" class="text-right"></td>
                                     <td id="metodepambayaran"></td>
                                 </tr>

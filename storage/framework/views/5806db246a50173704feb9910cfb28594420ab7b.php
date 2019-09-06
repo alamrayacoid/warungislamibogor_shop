@@ -28,14 +28,14 @@
 <?php $__env->startSection('content'); ?>
 
 <?php echo $__env->make('frontpage.checkout.modal_gantialamat', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<section style="margin-top:5em;">
+<section style="margin-top:3.3em;">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
         <li><a href="">Checkout</a></li>
         <li class="active"><?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php echo e($row->i_name); ?>,<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></li>
     </ol>
     <div class="container-fluid mt-5">
-
+        <div class="loader-wib"></div>
         <div class="row">
             <div class="col-md-12">
                 <form id="keranjang_checkout" class="form-checkout">

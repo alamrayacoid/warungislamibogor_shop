@@ -63,12 +63,45 @@
 
         margin: 4px 0;
     }
+
+    .select2 .select2-selection--single {
+        height: 35px !important;
+        display: flex;
+        align-items: center;
+    }
+
+    .select2-selection__arrow {
+        height: 35px !important;
+        top: 0 !important;
+    }
+
+    .d-inline-block {
+        display: inline-block;
+    }
+
+    .footer-copy--wrapper {
+        margin-bottom: 7.9em;
+    }
+
+    .footer-new-wrapper {
+        margin-top: 4em;
+    }
+
+    @media(max-width:992px) {
+        .sticky-footer-product {
+            display: none !important;
+        }
+
+        .footer-copy--wrapper {
+            margin-bottom: 0 !important;
+        }
+    }
 </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
 
-<section style="margin-top:5em;">
+<section style="margin-top:3.3em;">
     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
@@ -77,84 +110,160 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </ol>
     <div class="container-fluid">
-        <div class="ibox product-detail mt-5" style="border:1px solid #efeff4;">
-            <div class="ibox-content">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="text">
-                            <div class="text-line" style="width:100%;height:400px"> </div>
-                        </div>
+        
+        
+        <div class="ibox-content d-none">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="text">
+                        <div class="text-line" style="width:100%;height:400px"> </div>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="text">
-                                    <div class="text-line" style="width:200px;height:15px;border-radius:0;"> </div>
-                                    <div style="margin-top:15px;">
-                                        <div class="text-line title-product-load"
-                                            style="width:100px;height:15px;border-radius:0;"> </div>
-                                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text">
+                                <div class="text-line" style="width:200px;height:15px;border-radius:0;"> </div>
+                                <div style="margin-top:15px;">
+                                    <div class="text-line title-product-load"
+                                        style="width:100px;height:15px;border-radius:0;"> </div>
                                 </div>
-                                <hr>
                             </div>
-                            <div class="col-lg-12 mt-2">
-                                <div class="text">
+                            <hr>
+                        </div>
+                        <div class="col-lg-12 mt-2">
+                            <div class="text">
+                                <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
+                                <div class="mt-4">
                                     <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
-                                    <div class="mt-4">
-                                        <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
-                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="text-line" style="width:120px;height:15px;border-radius:0;"> </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 mt-5">
-                                <div class="text">
-                                    <div class="text-line" style="width:200px;height:15px;border-radius:0;"> </div>
-                                </div>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <div class="text">
+                                <div class="text-line" style="width:200px;height:15px;border-radius:0;"> </div>
                             </div>
-                            <div class="col-lg-12 mt-5">
-                            </div class="row">
-                            <div class="col-lg-6 p-detail-product-first">
-                                <div class="text">
-                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
-                                </div>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                        </div class="row">
+                        <div class="col-lg-6 p-detail-product-first">
+                            <div class="text">
+                                <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
                             </div>
-                            <div class="col-lg-6 p-detail-product-last">
-                                <div class="text">
-                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
-                                </div>
+                        </div>
+                        <div class="col-lg-6 p-detail-product-last">
+                            <div class="text">
+                                <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="text">
-                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
-                                </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="text">
+                                <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="text">
-                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
-                                </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="text">
+                                <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
                             </div>
-                            <div class="col-lg-6 p-detail-product-first">
-                                <div class="text">
-                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
-                                </div>
+                        </div>
+                        <div class="col-lg-6 p-detail-product-first">
+                            <div class="text">
+                                <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
                             </div>
-                            <div class="col-lg-6 p-detail-product-last">
-                                <div class="text">
-                                    <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
-                                </div>
+                        </div>
+                        <div class="col-lg-6 p-detail-product-last">
+                            <div class="text">
+                                <div class="text-line" style="width:100%;height:25px;border-radius:0;"> </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        
         <div class="row mt-5">
             <div class="col-lg-12">
                 <div class="ibox product-detail" style="border:1px solid #efeff4;">
                     <div class="ibox-content">
-                        <div class="row">
+                        <div class="row loader-wib">
+                            <div class="col-lg-5">
+                                <div class="text">
+                                    <div class="text-line" style="width:100%;height:400px"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="text">
+                                            <div class="text-line" style="width:200px;height:15px;border-radius:0;">
+                                            </div>
+                                            <div style="margin-top:15px;">
+                                                <div class="text-line title-product-load"
+                                                    style="width:100px;height:15px;border-radius:0;"> </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div class="col-lg-12 mt-2">
+                                        <div class="text">
+                                            <div class="text-line" style="width:120px;height:15px;border-radius:0;">
+                                            </div>
+                                            <div class="mt-4">
+                                                <div class="text-line" style="width:120px;height:15px;border-radius:0;">
+                                                </div>
+                                            </div>
+                                            <div class="mt-4">
+                                                <div class="text-line" style="width:120px;height:15px;border-radius:0;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mt-5">
+                                        <div class="text">
+                                            <div class="text-line" style="width:200px;height:15px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mt-5">
+                                    </div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="text">
+                                            <div class="text-line" style="width:100%;height:25px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="text">
+                                            <div class="text-line" style="width:100%;height:25px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="text">
+                                            <div class="text-line" style="width:100%;height:25px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="text">
+                                            <div class="text-line" style="width:100%;height:25px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="text">
+                                            <div class="text-line" style="width:100%;height:25px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row content-wib d-none">
                             <div class="col-md-5">
                                 <div class="product-images product-imitations" style="outline:none;border:0;">
                                     <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -162,15 +271,12 @@
                                     <div>
                                         <a href="env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>" sty
                                             data-gallery="">
-
                                             <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
                                         </a>
                                     </div>
                                     <?php endif; ?>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
-
-
                             </div>
                             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col-md-7">
@@ -189,11 +295,10 @@
                                     <hr>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class=""><i class="fa fa-archive"></i>  Offiicial Store</p>
+                                    <p class=""><i class="fa fa-archive"></i>  Warung Islami Bogor</p>
                                     <p class=""><i class="fa fa-clock-o"></i>  05 Januari 2019</p>
-                                    <p class=""><i class="fa fa-map-marker"></i>  Pasuruan</p>
+                                    <p class=""><i class="fa fa-map-marker"></i>  Bogor</p>
 
-                                    <!-- <span><?php echo e($row->itp_tagtitle); ?></span> -->
                                     <div class="m-t-md">
                                         <h2 class="product-detail-price">Rp. <?php echo e($row->ipr_sunitprice); ?> <small
                                                 class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
@@ -201,27 +306,29 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 p-detail-product-first">
+                                <div class="col-md-6 column-input-detail-product">
                                     <select id="cabang" name="" class="form-control select2 c-pointer">
-                                        <option value="" selected>pilih cabang</option>
+                                        <option value="" selected>Pilih Cabang Pengiriman</option>
                                         <?php $__currentLoopData = $cabang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cbng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($cbng->b_code); ?>"><?php echo e($cbng->c_nama); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mt-2 d-flex">
-                                    <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i
-                                            class="fa fa-minus"></i></button>
-                                    <input type="number" id="qty" value="1" min="1"
-                                        class="form-control border-radius-0 text-center jumlahbelibarang" name="">
-                                    <button class="btn btn-count-product-stock border-left-0" onclick="plus()"><i
-                                            class="fa fa-plus"></i></button>
+                                <div class="col-md-6 column-input-detail-product">
+                                    <div class="d-flex">
+                                        <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i
+                                                class="fa fa-minus"></i></button>
+                                        <input type="number" id="qty" value="1" min="1"
+                                            class="form-control border-radius-0 text-center jumlahbelibarang" name="">
+                                        <button class="btn btn-count-product-stock border-left-0" onclick="plus()"><i
+                                                class="fa fa-plus"></i></button>
+                                    </div>
                                 </div>
                                 <div class="col-md-12 column-add-cart mt-2 w-100">
                                     <div class="row">
                                         <?php if(Auth::check()): ?>
                                         <div class="col-md-12">
-                                            <button class="btn btn-product-detail-cart" id="addcart"
+                                            <button class="btn btn-product-detail-cart addcart"
                                                 data-product="<?php echo e($code); ?>"><i class="fa fa-cart-plus"></i>&ensp;Tambahkan
                                                 ke
                                                 keranjang</button>
@@ -335,7 +442,40 @@
             <?php endif; ?>
         </div>
 </section>
+<div class="sticky-footer-product d-none" id="js-sticky-product">
+    <div class="container-fluid">
+    <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="row">
+            <div class="col-lg-6 col-md-4">
+                <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="50px" height="50px">
+                <div class="d-inline-block detail-product-sticky">
+                    <a href="" class="title-sticky-product"><?php echo e($row->i_name); ?> </a>
+                    <span class="rating-sticky-product">
+                        <i class="fa fa-star f-14 c-gold"></i>
+                        <i class="fa fa-star c-gold"></i>
+                        <i class="fa fa-star c-gold"></i>
+                        <i class="fa fa-star c-gold"></i>
+                        <i class="fa fa-star c-grey"></i>
+                    </span>
+                    <p class="desc-sticky-product">Warung Islami Bogor</p>
+                </div>
 
+            </div>
+            <div class="col-lg-6 col-md-8 text-right">
+                <div class="full-price-sticy-product-group d-inline-block">
+                    <div class="text-total-price-sticky-product">Harga</div>
+                    <span class="price-sticky-product">Rp. <?php echo e($row->ipr_sunitprice); ?></span>
+                </div>
+                <button class="btn btn-wishlist-sticky-product"><img
+                        src="<?php echo e(asset('assets/img/icon/icon-wishlist.svg')); ?>"></button>
+                <a href="<?php echo e(url('/')); ?>"><button class="btn btn-more-sticky-product">Produk Lainnya</button></a>
+                <button class="btn btn-addcart-sticky-product addcart" data-product="<?php echo e($code); ?>">Tambah Ke Keranjang</button>
+            </div>
+        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
+
+</div>
 
 <?php $__env->stopSection(); ?>
 
@@ -382,7 +522,8 @@
         $('#ncart').html($('.ncart').length);
 
 
-        $('#addcart').on('click', function () {
+        $('.addcart').on('click', function () {
+            var tablecart = $('.cart-refresh');
             var cproduct = $(this).data('product');
             var qty = $('#qty').val();
             var cabang = $('#cabang').val();
@@ -404,11 +545,34 @@
                             title: 'Gagal!',
                             message: 'Cabang dan Merk kosong / Barang Sudah Di Keranjang',
                         });
+                        $('.nav-link-shopping-cart').addClass('open');
                     } else if (get['done'] == 'done') {
                         iziToast.success({
                             title: 'Berhasil!',
                             message: 'Memasukkan Barang ke Keranjang',
                         });
+                        $('.header-dropdown-cart').removeClass('d-none');
+                        $('.cart-refresh').removeClass('d-none');
+                        $('.footer-dropdown-cart').removeClass('d-none');
+                        $('.nav-link-shopping-cart').addClass('open');
+                        $('.rounded-cart-nav').removeClass('d-none');
+                        $('.cart-nav-empty').addClass('d-none');
+                        $('.cart-refresh').DataTable().ajax.reload();
+                        $.ajax({
+                            url: "<?php echo e(route('getnow_qty-cart')); ?>",
+                            data: {
+                                'idcustomer': $('#idcustomer').val(),
+                            },
+                            success: function (data) {
+                                document.getElementById('qty-cart-nav')
+                                    .innerHTML = data;
+                                document.getElementById('js-cart-nav')
+                                    .innerHTML = data;
+
+                            }
+                        });
+
+
                         // setTimeout(function () {
                         //     window.location.href = "<?php echo e(route('home')); ?>";
                         // }, 1000);
@@ -454,6 +618,16 @@
             $('#qty').val(count);
         }
     }
+    $(function () {
+        $(window).scroll(function () {
+            var scroll = $(window).scrollTop();
+            if (scroll > 400) {
+                $("#js-sticky-product").removeClass('d-none');
+            } else {
+                $("#js-sticky-product").addClass('d-none');
+            }
+        });
+    });
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/produk/produk-detail-frontpage.blade.php ENDPATH**/ ?>

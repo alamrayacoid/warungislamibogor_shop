@@ -67,7 +67,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<section style="margin-top:5em;">
+<section style="margin-top:3.3em;">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
         <li><a href="">Barang Favorit</a></li>
@@ -150,7 +150,114 @@
                     </ul>
                     <div class="tab-content padding-15-0">
                         <div id="tab-12" class="tab-pane animated fadeIn active">
-                            <div class="row mt-5">
+                            <div class="row mt-5 loader-wib">
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-product">
+                                    <div class="thumbnail product-box-item">
+                                        <div class="image-product"></div>
+                                        <div class="caption">
+                                            <div class="text">
+                                                <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <div class="text-line title-product-load"
+                                                        style="width:60px;height:10px;border-radius:0;">
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <div class="text-line desc-product-load"
+                                                            style="width:60px;height:10px;border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5 content-wib d-none">
                                 <?php $__currentLoopData = $lastseen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail product-box-item">
@@ -183,7 +290,7 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <!-- jangan dihapus -->
-                            <div class="row mt-5 d-none">
+                            <div class="row mt-5 loader-wib">
                                 <div class="col-lg-product">
                                     <div class="thumbnail product-box-item">
                                         <div class="image-product"></div>
@@ -291,7 +398,7 @@
                                 </div>
                             </div>
                             <!-- end -->
-                            <div class="row mt-5">
+                            <div class="row content-wib mt-5 d-none">
                                 <?php if($produkseen == '[]'): ?>
                                 <?php else: ?>
                                 <h3 class="title-product-opsi-same">Inspirasi dari minat anda</h3>
@@ -450,25 +557,6 @@
 
             })
         })
-        // $('.searchwishlist').keyup(function () {
-        //     var query = $(this).val();
-        //     $.ajax({
-        //         url: "<?php echo e(route('cari_wishlist')); ?>",
-        //         method: 'GET',
-        //         data: {
-        //             query: query
-        //         },
-        //         dataType: 'json',
-        //         success: function (data) {
-        //             var datatimework = data.output;
-        //             var trHTML = '';
-        //             $.each(datatimework, function (i, item) {
-        //                 trHTML += '<tr><td>' + item.i_name + '</td></tr>';
-        //         });
-        //         $('#tbldetailtimework tbody').html(trHTML);
-        //         }
-        //     });
-        // });
     });
     $(document).ready(function () {
         $('.searchwishlist').keyup(function () {

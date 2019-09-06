@@ -107,24 +107,6 @@
     background: #f2f2f2;
     border:0;
 }
-.tooltip-custom:hover::after {
-    display: block;
-}
-
-.tooltip-custom:hover::before {
-    display: block;
-}
-.tooltip-custom.bottom::after {
-    content:""attr(value)"";
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, calc(100% + 10px));
-}
-.tooltip-custom.bottom::before {
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, calc(100% + 5px)) rotate(45deg);
-}      
 .overflow-hidden{
     overflow:hidden !important;
 }

@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function profile()
     {
     	$wishlist = DB::table('d_wishlist')->where('wl_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
-    	$transaksi = DB::table('d_seller')->where('sell_ccustomer',Auth::user()->cm_code)->where('status_data','true')->count();
+    	$transaksi = DB::table('d_sales')->where('s_member',Auth::user()->cm_code)->count();
     	$password = Auth::user()->password;
         $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
         $provinsi = DB::table('d_province')->get();
@@ -26,13 +26,14 @@ class ProfileController extends Controller
             ->leftJoin('d_city','c_id','cm_city')
             ->leftJoin('d_district','d_id','cm_district')
             ->get();
-
+        $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
         return view('frontpage.profile.profile',array(
         	'wishlist' => $wishlist,
             'transaksi' => $transaksi,
             'kategori'=>$kategori,
             'provinsi' => $provinsi,
             'alamat' => $alamat,
+            'keranjang'=> $keranjang,
         ));
     }
 
