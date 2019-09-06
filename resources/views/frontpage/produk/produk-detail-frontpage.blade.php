@@ -346,7 +346,7 @@
                                         </div>
                                         @else
                                         <div class="col-md-12 ">
-                                            <a href="{{url('/')}}"><button class="btn btn-product-detail-cart"><i
+                                            <a href="{{url('/signin')}}"><button class="btn btn-product-detail-cart"><i
                                                         class="fa fa-cart-plus"></i> Tambahkan ke
                                                     keranjang</button>
                                             </a>

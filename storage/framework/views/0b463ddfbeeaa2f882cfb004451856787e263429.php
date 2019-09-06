@@ -345,7 +345,7 @@
                                         </div>
                                         <?php else: ?>
                                         <div class="col-md-12 ">
-                                            <a href="<?php echo e(url('/')); ?>"><button class="btn btn-product-detail-cart"><i
+                                            <a href="<?php echo e(url('/signin')); ?>"><button class="btn btn-product-detail-cart"><i
                                                         class="fa fa-cart-plus"></i> Tambahkan ke
                                                     keranjang</button>
                                             </a>
