@@ -97,6 +97,7 @@ class KeranjangController extends Controller
                                         <h5 class="title-cart-product-item">'.$data->i_name.'</h5>
                                         <input type="hidden" class="" value="'.$data->i_code.'" name="ciproduct[]">
                                         <input type="hidden" class="id_produk" value="'.$data->cart_id.'">
+                                        <input type="text" class="cabangproduk" value="'.$data->cart_location.'" name="cabang[]">
                                         
                                         <input type="hidden" value="'.$data->cart_qty.'" name="qty[]">
                                         <input type="hidden" value="'.$data->ipr_sunitprice * $data->cart_qty.'"
@@ -277,20 +278,10 @@ class KeranjangController extends Controller
                 ->insert([
                     'cart_ciproduct'=>$request->ciproduct{$i},
                     'cart_qty'=> $request->qty{$i},
+                    'cart_location'=> $request->cabang{$i},
                     'cart_cmember'=> Auth::user()->cm_code,
                     'status_data'=> 'check',
                 ]);
-                // DB::table('d_cart')
-                //     ->where('cart_id',$id[$i])
-                //     ->update([
-                //         'status_data' => 'check',
-                //     ]);
-                //     $testing = DB::table('d_cart')
-                //         ->where('cart_cmember',Auth::user()->cm_code)
-                //         ->where('cart_id','!=',$id[$i])
-                //         ->update([
-                //             'status_data'=>'false',
-                //         ]);                    
         }
     }
 }
