@@ -97,7 +97,7 @@ class KeranjangController extends Controller
                                         <h5 class="title-cart-product-item">'.$data->i_name.'</h5>
                                         <input type="hidden" class="" value="'.$data->i_code.'" name="ciproduct[]">
                                         <input type="hidden" class="id_produk" value="'.$data->cart_id.'">
-                                        <input type="text" class="cabangproduk" value="'.$data->cart_location.'" name="cabang[]">
+                                        <input type="hidden" class="cabangproduk" value="'.$data->cart_location.'" name="cabang[]">
                                         
                                         <input type="hidden" value="'.$data->cart_qty.'" name="qty[]">
                                         <input type="hidden" value="'.$data->ipr_sunitprice * $data->cart_qty.'"
