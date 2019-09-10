@@ -102,6 +102,7 @@
     .icon-onwishlist {
         color: #ed5565 !important;
     }
+
 </style>
 @endsection
 
@@ -390,7 +391,7 @@
                         Detail Keterangan Barang
                     </div>
                     <div class="ibox-content">
-                        <div class="small text-muted" style="line-height:2;">
+                        <div class="" style="line-height:2;">
                             {!! html_entity_decode($row->itp_description) !!}
                         </div>
                     </div>
@@ -461,13 +462,16 @@
                     <span class="price-sticky-product">Rp. {{$row->ipr_sunitprice}}</span>
                 </div>
                 @if(Auth::check())
-                    @if($wish > 0)
-                    <button class="btn btn-wishlist-sticky-product addwishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button"><i class="fa fa-heart icon-onwishlist"></i></button>
-                    @else
-                    <button class="btn btn-wishlist-sticky-product addwishlist" data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}" type="button"><i class="fa fa-heart"></i></button>
-                    @endif
+                @if($wish > 0)
+                <button class="btn btn-wishlist-sticky-product addwishlist" data-ciproduct="{{$row->i_code}}"
+                    id="{{$row->i_code}}" type="button"><i class="fa fa-heart icon-onwishlist"></i></button>
                 @else
-                <a href="{{route('login-frontpage')}}" style="color:#676a6c;"><button class="btn btn-wishlist-sticky-product"  type="button"><i class="fa fa-heart"></i></button></a>
+                <button class="btn btn-wishlist-sticky-product addwishlist" data-ciproduct="{{$row->i_code}}"
+                    id="{{$row->i_code}}" type="button"><i class="fa fa-heart"></i></button>
+                @endif
+                @else
+                <a href="{{route('login-frontpage')}}" style="color:#676a6c;"><button
+                        class="btn btn-wishlist-sticky-product" type="button"><i class="fa fa-heart"></i></button></a>
                 @endif
                 <a href="{{url('/')}}"><button class="btn btn-more-sticky-product">Produk Lainnya</button></a>
                 <button class="btn btn-addcart-sticky-product addcart" data-product="{{$code}}">Tambah Ke
@@ -522,93 +526,94 @@
         }
 
         $('#ncart').html($('.ncart').length);
-
-
         $('.addcart').on('click', function () {
-            if($('#cabang').val() == null){
+            if ($('#cabang').val() == null) {
                 iziToast.error({
                     title: 'Peringatan!',
                     message: 'Silahkan Pilih Cabang Pengiriman Terlebih Dahulu',
                 });
-            }else{
-
-            var tablecart = $('.cart-refresh');
-            var cproduct = $(this).data('product');
-            var qty = $('#qty').val();
-            var cabang = $('#cabang').val();
-            $.ajax({
-                url: '{{route("addcart")}}',
-                method: 'POST',
-                data: {
-                    '_token': '{{csrf_token()}}',
-                    'code': cproduct,
-                    'user': 'user',
-                    'cart_qty': qty,
-                    'satuan': $('#satuan').val(),
-                    'cart_location': cabang,
-                },
-                success: function (get) {
-                    console.log(get['error']);
-                    if (get['error'] == 'error') {
+            } else {
+                $('.content-dropdown-cart').append(
+                    '<div class="loader-cart-nav-wib-group"><div class="loader-cart-nav--element"></div></div>'
+                    );
+                $('#cart-navbar').hide();
+                var tablecart = $('.cart-refresh');
+                var cproduct = $(this).data('product');
+                var qty = $('#qty').val();
+                var cabang = $('#cabang').val();
+                $.ajax({
+                    url: '{{route("addcart")}}',
+                    method: 'POST',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'code': cproduct,
+                        'user': 'user',
+                        'cart_qty': qty,
+                        'satuan': $('#satuan').val(),
+                        'cart_location': cabang,
+                    },
+                    success: function (get) {
+                        console.log(get['error']);
+                        if (get['error'] == 'error') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Cabang dan Merk kosong / Barang Sudah Di Keranjang',
+                            });
+                            $('.loader-cart-nav-wib-group').fadeOut();
+                            $('.nav-link-shopping-cart').addClass('open');
+                            setTimeout(function () {
+                                $('#cart-navbar').fadeIn();
+                            }, 300);
+                        } else if (get['done'] == 'done') {
+                            iziToast.success({
+                                title: 'Berhasil!',
+                                message: 'Memasukkan Barang ke Keranjang',
+                            });
+                            $('.cart-refresh').removeClass('d-none');
+                            $('.rounded-cart-nav').removeClass('d-none');
+                            $('.cart-nav-empty').addClass('d-none');
+                            $('.nav-link-shopping-cart').addClass('open');
+                            $('.cart-refresh').DataTable().ajax.reload();
+                            $.ajax({
+                                url: "{{route('getnow_qty-cart')}}",
+                                data: {
+                                    'idcustomer': $('#idcustomer').val(),
+                                },
+                                success: function (data) {
+                                    document.getElementById('qty-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-cart-nav')
+                                        .innerHTML = data;
+                                    $('.loader-cart-nav-wib-group').fadeOut();
+                                    setTimeout(function () {
+                                        $('#cart-navbar').fadeIn();
+                                    }, 300);
+                                }
+                            });
+                        } else if (get['error'] == 'stock') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Stock Gudang Tinggal ' + get['stock'],
+                            });
+                            iziToast.warning({
+                                title: 'Peringatan!',
+                                message: 'Cek Merk Yang Dimasukkan',
+                            });
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrow) {
                         iziToast.error({
                             title: 'Gagal!',
-                            message: 'Cabang dan Merk kosong / Barang Sudah Di Keranjang',
-                        });
-                        $('.nav-link-shopping-cart').addClass('open');
-                    } else if (get['done'] == 'done') {
-                        iziToast.success({
-                            title: 'Berhasil!',
-                            message: 'Memasukkan Barang ke Keranjang',
-                        });
-                        $('.header-dropdown-cart').removeClass('d-none');
-                        $('.cart-refresh').removeClass('d-none');
-                        $('.footer-dropdown-cart').removeClass('d-none');
-                        $('.nav-link-shopping-cart').addClass('open');
-                        $('.rounded-cart-nav').removeClass('d-none');
-                        $('.cart-nav-empty').addClass('d-none');
-                        $('.cart-refresh').DataTable().ajax.reload();
-                        $.ajax({
-                            url: "{{route('getnow_qty-cart')}}",
-                            data: {
-                                'idcustomer': $('#idcustomer').val(),
-                            },
-                            success: function (data) {
-                                document.getElementById('qty-cart-nav')
-                                    .innerHTML = data;
-                                document.getElementById('js-cart-nav')
-                                    .innerHTML = data;
-
-                            }
-                        });
-
-
-                        // setTimeout(function () {
-                        //     window.location.href = "{{route('home')}}";
-                        // }, 1000);
-                    } else if (get['error'] == 'stock') {
-                        iziToast.error({
-                            title: 'Gagal!',
-                            message: 'Stock Gudang Tinggal ' + get['stock'],
-                        });
-                        iziToast.warning({
-                            title: 'Peringatan!',
-                            message: 'Cek Merk Yang Dimasukkan',
+                            message: 'Masukkan Cabang dan Merk Barang',
                         });
                     }
-                },
-                error: function (xhr, textStatus, errorThrow) {
-                    iziToast.error({
-                        title: 'Gagal!',
-                        message: 'Masukkan Cabang dan Merk Barang',
-                    });
-                }
-            });
+                });
             }
         });
         $('.addwishlist').click(function () {
             var code = $(this).data('ciproduct');
             $('.addwishlist').find('i').toggleClass('icon-onwishlist');
-            
+
             $.ajax({
                 url: '{{route("addwishlist")}}',
                 method: 'POST',

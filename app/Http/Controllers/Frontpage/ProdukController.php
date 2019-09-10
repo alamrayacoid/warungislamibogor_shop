@@ -244,6 +244,7 @@ class ProdukController extends Controller
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
+                ->groupBy('i_code')
                 ->paginate(12);
         $data1 = DB::table('m_item')
                 ->join('m_itemprice','ipr_ciproduct','i_code')

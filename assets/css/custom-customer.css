@@ -127,6 +127,7 @@
 .content-dropdown-cart{
     max-height: 200px;
     overflow-y: auto;
+    min-height: 150px;
     overflow-x: hidden !important;
 }
 .dataTables_wrapper{
@@ -1267,7 +1268,7 @@ input.form-control:focus {
     font-size: 14px;
     padding: 25px 0;
 }
-.column-right-cart-item-product h5{
+.column-right-cart-item-product .text-price-cart-item{
     font-size: 14px;
     padding-right: 1em;
     font-weight: normal;
@@ -2423,6 +2424,47 @@ font-size: 24px !important;
 }
 .btn-wishlist-sticky-product i{
     font-size: 18px !important;
+}
+
+.loader-cart-nav--element {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #009a51;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-cart-nav-wib-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 150px;
+    width: 100%;
 }
 /* endfooter */
 /* //end */

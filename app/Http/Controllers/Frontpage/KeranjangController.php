@@ -112,7 +112,7 @@ class KeranjangController extends Controller
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-5 column-right-cart-item-product">
-                                    <h5 class="">Rp. '.$data->ipr_sunitprice * $data->cart_qty.'</h5>
+                                    <div class="text-price-cart-item">Rp. '.$data->ipr_sunitprice * $data->cart_qty.'</div>
                                     <input type="hidden" value="'.$data->ipr_sunitprice * $data->cart_qty.'" class="total_harga">
                                     <a data-id="'.$data->cart_id.'" data-ciproduct="'.$data->cart_ciproduct.'" data-qty="'.$data->cart_qty.'"
                                         class="remove"><button class="btn btn-default"><i

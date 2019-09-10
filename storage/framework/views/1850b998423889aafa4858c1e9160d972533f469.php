@@ -21,62 +21,6 @@
 
 <script src="<?php echo e(asset('assets/infinite-scroll/dist/infinite-scroll.pkgd.js')); ?>"></script>
 
-
-<script>
-    $(document).ready(function () {
-        $.extend(true, $.fn.dataTable.defaults, {
-            "responsive": true,
-            "pageLength": 10,
-            "lengthMenu": [
-                [10, 20, 50, -1],
-                [10, 20, 50, "All"]
-            ],
-            "language": {
-                "searchPlaceholder": "Cari Data",
-                "emptyTable": "Tidak ada data",
-                "sInfo": "Menampilkan _START_ - _END_ Dari _TOTAL_ Data",
-                "sSearch": '<i class="fa fa-search"></i>',
-                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-                "infoEmpty": "",
-                "paginate": {
-                    "previous": "Sebelumnya",
-                    "next": "Selanjutnya",
-                }
-            }
-
-        });
-
-        // $('.input-uang').maskMoney();
-
-        $('.select2').select2();
-
-
-        $.fn.select2.defaults.set('dropdownAutoWidth', true);
-        $.fn.select2.defaults.set('width', 'resolve');
-
-        setTimeout(function () {
-            $('.select2-container').css('width', '100%');
-
-        }, 1000);
-
-        $('.select2').on('select2:opening', function () {
-
-            $('.select2-container').css('width', '100%');
-
-        });
-
-        $('.data-table').DataTable();
-
-        iziToast.settings({
-            position: 'topRight' //Where it will be shown. It can be bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter or center.
-        })
-
-        $('#btn-logout').click(function () {
-            Cookies.remove('tes_frontpage');
-            window.location.reload();
-        })
-    });
-</script>
 <script type="text/javascript">
     $(window).on('load', function () {
         setTimeout(removeLoaderweb, 1000);
@@ -95,39 +39,7 @@
             $('html, body').scrollTop(0);
         });
     });
-    $(document).ready(function () {
 
-        $('[data-target="#navbar"]').click(function () {
-
-            ($('#navbar').hasClass('in')) ? $(this).find('i').removeClass('fa-caret-up').addClass(
-                'fa-caret-down'): $(this).find('i').removeClass('fa-caret-down').addClass(
-                'fa-caret-up')
-
-        });
-        $('.tooltip-demo').tooltip({
-            selector: "[data-toggle=tooltip]",
-            container: "body"
-        });
-    });
-    $(function () {
-        $(".btn-scrollTop").hide();
-        $(window).scroll(function () {
-            var scroll = $(window).scrollTop();
-            if (scroll > 150) {
-                $(".btn-scrollTop").slideDown();
-            } else {
-                $(".btn-scrollTop").slideUp();
-            }
-        });
-
-    });
-    $(document).ready(function () {
-        $(".btn-scrollTop").click(function () {
-            $('html, body').animate({
-                scrollTop: $("#bodytop").offset().top
-            }, 2000);
-        });
-    });
     $(document).ready(function () {
         $(".searchbarang").autocomplete({
             source: "<?php echo e(route('cari-barang')); ?>",
@@ -181,6 +93,10 @@
             var code = $(this).data('ciproduct');
             var label = $(this).data('label');
             var jumlah = $(this).data('qty');
+            $('.content-dropdown-cart').append(
+                '<div class="loader-cart-nav-wib-group"><div class="loader-cart-nav--element"></div></div>'
+                    );
+            $('#cart-navbar').hide();
             $.ajax({
                 url: '<?php echo e(route("remove.keranjang")); ?>',
                 method: 'POST',
@@ -203,11 +119,18 @@
                                 document.getElementById('qty-cart-nav').innerHTML = '0';    
                                 $('.cart-refresh').addClass('d-none');
                                 $('.rounded-cart-nav').addClass('d-none');
-                                $('.cart-nav-empty').removeClass('d-none');
                                 console.log('success');
+                                $('.loader-cart-nav-wib-group').fadeOut();
+                                    setTimeout(function () {
+                                        $('.cart-nav-empty').removeClass('d-none');
+                                }, 300);
                             }else{
                             document.getElementById('qty-cart-nav').innerHTML = data;
                             document.getElementById('js-cart-nav').innerHTML = data;
+                            $('.loader-cart-nav-wib-group').fadeOut();
+                                    setTimeout(function () {
+                                        $('#cart-navbar').fadeIn();
+                            }, 500);
                         }
                         
                         }
@@ -241,9 +164,31 @@
             ]
         });
     });
-    (function($){
-        $(document).ready(function() {
-            $('.dropdown-toggle[href="#"]').dropdown();
+    $(document).ready(function(){
+        
+        $('.select2').select2();
+
+        $.fn.select2.defaults.set('dropdownAutoWidth', true);
+        $.fn.select2.defaults.set('width', 'resolve');
+
+        setTimeout(function () {
+            $('.select2-container').css('width', '100%');
+
+        }, 1000);
+
+        $('.select2').on('select2:opening', function () {
+
+            $('.select2-container').css('width', '100%');
+
         });
-    })(jQuery);
+
+        $('.data-table').DataTable();
+
+        iziToast.settings({
+            position: 'topRight' //Where it will be shown. It can be bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter or center.
+        });
+        $('.dropdown-menu').on('click', function(e) {
+            e.stopPropagation();
+        });
+    })
 </script><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_script-frontpage.blade.php ENDPATH**/ ?>

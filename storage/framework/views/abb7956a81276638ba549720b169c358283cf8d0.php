@@ -24,6 +24,43 @@
     .dataTables_wrapper {
         padding-bottom: 0 !important;
     }
+    .loader-wrapper-element {
+        border: 3px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 3px solid #009a51;
+        width: 25px;
+        height: 25px;
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes  spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .loader-element-wib-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -103,6 +140,7 @@
     $(document).ready(function () {
 
         $('#detail_keranjang').on('click', '.tambah', function () {
+            $('#detail_keranjang button').attr('disabled',true);
             ajax_helper('<?php echo e(route("updatecart.keranjang")); ?>', 'POST', {
                 '_token': '<?php echo e(csrf_token()); ?>',
                 'produk': $(this).parents('tr').find('.id_produk').val(),
@@ -111,6 +149,7 @@
         })
 
         $('#detail_keranjang').on('click', '.kurang', function () {
+            $('#detail_keranjang button').attr('disabled',true);
             ajax_helper('<?php echo e(route("updatecart.keranjang")); ?>', 'POST', {
                 '_token': '<?php echo e(csrf_token()); ?>',
                 'produk': $(this).parents('tr').find('.id_produk').val(),
@@ -124,6 +163,15 @@
         })
 
         function ajax_helper(url, type, data) {
+            $('.column-right-cart-item-product').append(
+                    '<div class="loader-element-wib-group" id="cart-loading-nav"><div class="loader-wrapper-element"></div></div>'
+                    );
+            $('.column-full-price-cart').append(
+                    '<div class="loader-element-wib-group" id="cart-loading-nav"><div class="loader-wrapper-element"></div></div>'
+                    );
+            $('.text-price-cart-item').addClass('d-none');
+            $('.column-right-cart-item-product button').addClass('d-none');
+            $('.text-price-cart-product').addClass('d-none');
             $.ajax({
                 url: url,
                 type: type,
@@ -146,13 +194,12 @@
                     }); 
                     $('#totalview').html('Rp. ' + accounting.formatNumber(totalnow));
                     $('.cart-refresh').DataTable().ajax.reload()
+                    $('.loader-element-wib-group').hide();
+                    $('.text-price-cart-product').removeClass('d-none');
                 }
             });
-                    // $(':input').val('');
                 },
                 error: function (xhr, textStatus, errorThrowl) {
-                    // swal("Gagal!", error, "error");
-                    // $(':input').val('');
                 }
 
             })

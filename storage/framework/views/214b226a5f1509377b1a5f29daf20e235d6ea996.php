@@ -179,13 +179,16 @@
 
         margin: 4px 0;
     }
-    .table tbody tr{
+
+    .table tbody tr {
         background: white !important;
     }
-    .table tbody tr td{
+
+    .table tbody tr td {
         border-top: 0 !important;
     }
-    .table{
+
+    .table {
         border: 0 !important;
     }
 </style>
@@ -202,7 +205,7 @@
         <li><a href="">Semua Transaksi</a></li>
     </ol>
     <div class="container-fluid mt-5">
-            <div class="loader-wib"></div>
+        <div class="loader-wib"></div>
         <div class="row" style="padding-bottom: 3em;">
             <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                 <div class="thumbnail profile-frame--sidebar">
@@ -288,8 +291,99 @@
                             </ul>
                             <div class="tab-content padding-15">
                                 <div id="tab-1" class="tab-pane animated fadeIn tabe-allstatus active">
-                                    <form id="">
+                                    <div class="loader-wib">
                                         <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:170px;"> </div>
+                                                    <div class="text-line"
+                                                        style="position:relative;top:0.7em;width:100px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="column-group-item-product mt-3">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:220px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:170px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:150px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:100px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
+                                                <div class="col-lg-4">
+                                                    <div class="wrapper-cell">
+                                                        <div class="image"></div>
+                                                        <div class="text" style="margin-left:20px;">
+                                                            <div class="text-line" style="width:60px;"> </div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:0.7em;width:120px;"></div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:1.4em;width:170px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 d-flex justify-content-center">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:200px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:110px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:100px;"> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form id="">
+                                        <div class="row content-wib d-none">
                                             <div class="col-lg-5 mt-4">
                                                 <div class="input-group input-daterange">
                                                     <input type="text" id="tanggalawalallstatus"
@@ -319,14 +413,79 @@
                                             <div class="col-lg-4 d-flex mt-4">
                                                 <input type="text" placeholder="Cari Berdasarkan Nama Barang"
                                                     class="form-control c-cart-filter fs-12 produk">
-                                                <button class="btn btn-filter-product" type="button"><img
+                                                <button class="btn btn-filter-product btn-filter-product-name" type="button"><img
                                                         src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
                                             </div>
                                         </div>
                                     </form>
                                     <?php if($group !='[]'): ?>
-                                    <div id="itemproduct-group-paymentstatus">
-                                            <table class="table table-striped table-bordered table-hover" id="detail_1" style="width: 100%">
+                                    <div id="itemproduct-group-paymentstatus" class="content-wib d-none row">
+                                        <div class="column-group-item-product mt-3 d-none" id="loadingtab1">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:220px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:170px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:150px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:100px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
+                                                <div class="col-lg-4">
+                                                    <div class="wrapper-cell">
+                                                        <div class="image"></div>
+                                                        <div class="text" style="margin-left:20px;">
+                                                            <div class="text-line" style="width:60px;"> </div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:0.7em;width:120px;"></div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:1.4em;width:170px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 d-flex justify-content-center">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:200px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:110px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:100px;"> </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="wrapper">
+                                                                        <div class="wrapper-cell"> -->
+
+                                                <!-- </div>
+                                                                    </div> -->
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover" id="detail_1"
+                                            style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">
                                                 <tr>
                                                     <th width="1%">No.</th>
@@ -341,10 +500,10 @@
                                             </thead>
                                             <tbody>
                                             </tbody>
-                                            </table>
+                                        </table>
                                     </div>
                                     <?php else: ?>
-                                    <div class="column-empty-transaction">
+                                    <div class="column-empty-transaction content-wib d-none">
                                         <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
                                         <h5>Oops, Anda Belum Transaksi Sama Sekali.</h5>
                                         <div class="d-flex justify-content-center">
@@ -354,204 +513,7 @@
                                     <?php endif; ?>
                                 </div>
                                 <div id="tab-2" class="tab-pane animated fadeIn">
-                                    <form id="">
-                                        <div class="row ">
-                                            <div class="col-lg-5 mt-4">
-                                                <div class="input-group input-daterange">
-                                                    <input type="text" name="tanggal_transaksi_awal" value=""
-                                                        placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal"
-                                                        id="tanggalawalpaymentstatus">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-minus"></i>
-                                                    </span>
-                                                    <input type="text" name="tanggal_transaksi_akhir" value=""
-                                                        placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir"
-                                                        id="tanggalakhirpaymentstatus">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 d-flex mt-4">
-                                                <select name="orderby" id="filterbuypaymentstatus"
-                                                    class="form-control c-cart-filter c-pointer fs-12 category">
-                                                    <option value="-" selected="" disabled="">Urutkan</option>
-                                                    <option value="Terbaru">Terbaru</option>
-                                                    <option value="Total Belanja">Total Belanja</option>
-                                                </select>
-                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
-                                                    type="button" id="resetpaymentstatus">Reset
-                                                    Filter</button>
-                                            </div>
-                                            <div class="col-lg-4 d-flex mt-4">
-                                                <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12 produk"
-                                                    id="searchbuypaymentstatus">
-                                                <button class="btn btn-filter-product" type="button"><img
-                                                        src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <?php if($groupp !='[]'): ?>
-                                    <div id="itemproduct-group-paymentstatus">
-                                        <table class="table table-striped table-bordered table-hover" id="detail_2" style="width: 100%">
-                                            <thead style="opacity: 0; position: absolute;">
-                                                <tr>
-                                                    <th width="1%">No.</th>
-                                                    <th>Nota</th>
-                                                    <th>Tanggal Beli</th>
-                                                    <th>Customer</th>
-                                                    <th>No. HP</th>
-                                                    <th>Alamat</th>
-                                                    <th>Status</th>
-                                                    <th width="15%">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                            </table>
-                                    </div>
-                                    <?php else: ?>
-                                    <div class="column-empty-transaction">
-                                        <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
-                                        <h5>Oops, Daftar Transaksi Status Pembayaran Anda Kosong.</h5>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
-                                        </div>
-                                    </div>
-                                    <?php endif; ?>
-                                </div>
-                                <div id="tab-3" class="tab-pane animated fadeIn">
-                                    <form id="">
-                                        <div class="row ">
-                                            <div class="col-lg-5 mt-4">
-                                                <div class="input-group input-daterange">
-                                                    <input type="text" name="tanggal_transaksi_awal" value=""
-                                                        placeholder="Tanggal Awal" class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal" id="tanggalawalprosesstatus">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-minus"></i>
-                                                    </span>
-                                                    <input type="text" name="tanggal_transaksi_akhir" value=""
-                                                        placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir" id="tanggalakhirprosesstatus">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 d-flex mt-4">
-                                                <select name="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12 category"
-                                                    id="filterbuyprosesstatus">
-                                                    <option value="-" selected="" disabled="">Urutkan</option>
-                                                    <option value="Terbaru">Terbaru</option>
-                                                    <option value="Total Belanja">Total Belanja</option>
-                                                </select>
-                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
-                                                    type="button" id="resetprosesstatus">Reset
-                                                    Filter</button>
-                                            </div>
-                                            <div class="col-lg-4 d-flex mt-4">
-                                                <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12 produk" id="searchbuyprosesstatus">
-                                                <button class="btn btn-filter-product" type="button"><img
-                                                        src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <h5></h5>
-                                    <?php if($groupprostat > 0): ?>
-                                    <div id="itemproduct-group-prosesstatus">
-                                        <table class="table table-striped table-bordered table-hover" id="detail_3" style="width: 100%">
-                                            <thead style="opacity: 0; position: absolute;">
-                                                <tr>
-                                                    <th width="1%">No.</th>
-                                                    <th>Nota</th>
-                                                    <th>Tanggal Beli</th>
-                                                    <th>Customer</th>
-                                                    <th>No. HP</th>
-                                                    <th>Alamat</th>
-                                                    <th>Status</th>
-                                                    <th width="15%">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                            </table>
-                                    </div>
-                                    <?php else: ?>
-                                    <div class="column-empty-transaction">
-                                        <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
-                                        <h5>Oops, Daftar Transaksi Status Sedang diproses Anda Kosong.</h5>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
-                                        </div>
-                                    </div>
-                                    <?php endif; ?>
-                                </div>
-                                <div id="tab-4" class="tab-pane animated fadeIn">
-                                    <form id="">
-                                        <div class="row ">
-                                            <div class="col-lg-5 mt-4">
-                                                <div class="input-group input-daterange">
-                                                    <input type="text" name="tanggal_transaksi_awal" value=""
-                                                        placeholder="Tanggal Awal"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal" id="tanggalawalpengirimantatus">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-minus"></i>
-                                                    </span>
-                                                    <input type="text" name="tanggal_transaksi_akhir" value=""
-                                                        placeholder="Tanggal Akhir"
-                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir" id="tanggalakhirpengirimantatus">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 d-flex mt-4">
-                                                <select name="orderby"
-                                                    class="form-control c-cart-filter c-pointer fs-12 category" id="filterbuypengirimanstatus">
-                                                    <option value="-" selected="" disabled="">Urutkan</option>
-                                                    <option value="Terbaru">Terbaru</option>
-                                                    <option value="Total Belanja">Total Belanja</option>
-                                                </select>
-                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
-                                                    type="button" id="resetpengirimanstatus">Reset
-                                                    Filter</button>
-                                            </div>
-                                            <div class="col-lg-4 d-flex mt-4">
-                                                <input type="text" placeholder="Cari Berdasarkan Nama Barang"
-                                                    class="form-control c-cart-filter fs-12 produk" id="searchbuypengirimanstatus">
-                                                <button class="btn btn-filter-product" type="button"><img
-                                                        src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <?php if($groupppengstat > 0): ?>
-                                    <div id="itemproduct-group-pengirimanstatus">
-                                        <table class="table table-striped table-bordered table-hover" id="detail_4" style="width: 100%">
-                                            <thead style="opacity: 0; position: absolute;">
-                                                <tr>
-                                                    <th width="1%">No.</th>
-                                                    <th>Nota</th>
-                                                    <th>Tanggal Beli</th>
-                                                    <th>Customer</th>
-                                                    <th>No. HP</th>
-                                                    <th>Alamat</th>
-                                                    <th>Status</th>
-                                                    <th width="15%">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                            </table>
-
-                                    </div>
-                                    <?php else: ?>
-                                    <div class="column-empty-transaction">
-                                        <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
-                                        <h5>Oops, Daftar Transaksi Status Proses Pengiriman Anda Kosong.</h5>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
-                                        </div>
-                                    </div>
-                                    <?php endif; ?>
-
-                                    <!-- jangan dihapus -->
-                                    <div class="d-none">
+                                    <div class="loader-wib">
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="text">
@@ -640,13 +602,413 @@
                                                     </div>
                                                 </div>
                                                 <!-- <div class="wrapper">
-                                                <div class="wrapper-cell"> -->
+                                                        <div class="wrapper-cell"> -->
 
                                                 <!-- </div>
-                                            </div> -->
+                                                    </div> -->
                                             </div>
                                         </div>
                                     </div>
+                                    <form id="">
+                                        <div class="row content-wib d-none">
+                                            <div class="col-lg-5 mt-4">
+                                                <div class="input-group input-daterange">
+                                                    <input type="text" name="tanggal_transaksi_awal" value=""
+                                                        placeholder="Tanggal Awal"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal"
+                                                        id="tanggalawalpaymentstatus">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-minus"></i>
+                                                    </span>
+                                                    <input type="text" name="tanggal_transaksi_akhir" value=""
+                                                        placeholder="Tanggal Akhir"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir"
+                                                        id="tanggalakhirpaymentstatus">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-flex mt-4">
+                                                <select name="orderby" id="filterbuypaymentstatus"
+                                                    class="form-control c-cart-filter c-pointer fs-12 category">
+                                                    <option value="-" selected="" disabled="">Urutkan</option>
+                                                    <option value="Terbaru">Terbaru</option>
+                                                    <option value="Total Belanja">Total Belanja</option>
+                                                </select>
+                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
+                                                    type="button" id="resetpaymentstatus">Reset
+                                                    Filter</button>
+                                            </div>
+                                            <div class="col-lg-4 d-flex mt-4">
+                                                <input type="text" placeholder="Cari Berdasarkan Nama Barang"
+                                                    class="form-control c-cart-filter fs-12 produk"
+                                                    id="searchbuypaymentstatus">
+                                                <button class="btn btn-filter-product" type="button"><img
+                                                        src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <?php if($groupp !='[]'): ?>
+                                    <div id="itemproduct-group-paymentstatus" class="content-wib d-none">
+                                        <table class="table table-striped table-bordered table-hover" id="detail_2"
+                                            style="width: 100%">
+                                            <thead style="opacity: 0; position: absolute;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="column-empty-transaction content-wib d-none">
+                                        <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
+                                        <h5>Oops, Daftar Transaksi Status Pembayaran Anda Kosong.</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                                <div id="tab-3" class="tab-pane animated fadeIn">
+                                    <div class="loader-wib">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:170px;"> </div>
+                                                    <div class="text-line"
+                                                        style="position:relative;top:0.7em;width:100px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="column-group-item-product mt-3">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:220px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:170px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:150px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:100px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
+                                                <div class="col-lg-4">
+                                                    <div class="wrapper-cell">
+                                                        <div class="image"></div>
+                                                        <div class="text" style="margin-left:20px;">
+                                                            <div class="text-line" style="width:60px;"> </div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:0.7em;width:120px;"></div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:1.4em;width:170px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 d-flex justify-content-center">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:200px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:110px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:100px;"> </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="wrapper">
+                                                                        <div class="wrapper-cell"> -->
+
+                                                <!-- </div>
+                                                                    </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form id="">
+                                        <div class="row content-wib d-none">
+                                            <div class="col-lg-5 mt-4">
+                                                <div class="input-group input-daterange">
+                                                    <input type="text" name="tanggal_transaksi_awal" value=""
+                                                        placeholder="Tanggal Awal"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal"
+                                                        id="tanggalawalprosesstatus">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-minus"></i>
+                                                    </span>
+                                                    <input type="text" name="tanggal_transaksi_akhir" value=""
+                                                        placeholder="Tanggal Akhir"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir"
+                                                        id="tanggalakhirprosesstatus">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-flex mt-4">
+                                                <select name="orderby"
+                                                    class="form-control c-cart-filter c-pointer fs-12 category"
+                                                    id="filterbuyprosesstatus">
+                                                    <option value="-" selected="" disabled="">Urutkan</option>
+                                                    <option value="Terbaru">Terbaru</option>
+                                                    <option value="Total Belanja">Total Belanja</option>
+                                                </select>
+                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
+                                                    type="button" id="resetprosesstatus">Reset
+                                                    Filter</button>
+                                            </div>
+                                            <div class="col-lg-4 d-flex mt-4">
+                                                <input type="text" placeholder="Cari Berdasarkan Nama Barang"
+                                                    class="form-control c-cart-filter fs-12 produk"
+                                                    id="searchbuyprosesstatus">
+                                                <button class="btn btn-filter-product" type="button"><img
+                                                        src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <h5></h5>
+                                    <?php if($groupprostat > 0): ?>
+                                    <div id="itemproduct-group-prosesstatus" class="content-wib d-none">
+                                        <table class="table table-striped table-bordered table-hover" id="detail_3"
+                                            style="width: 100%">
+                                            <thead style="opacity: 0; position: absolute;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="column-empty-transaction content-wib d-none">
+                                        <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
+                                        <h5>Oops, Daftar Transaksi Status Sedang diproses Anda Kosong.</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                                <div id="tab-4" class="tab-pane animated fadeIn">
+                                    <div class="loader-wib">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:170px;"> </div>
+                                                    <div class="text-line"
+                                                        style="position:relative;top:0.7em;width:100px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="text">
+                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="column-group-item-product mt-3">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:220px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:170px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:120px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:90px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:150px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:100px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
+                                                <div class="col-lg-4">
+                                                    <div class="wrapper-cell">
+                                                        <div class="image"></div>
+                                                        <div class="text" style="margin-left:20px;">
+                                                            <div class="text-line" style="width:60px;"> </div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:0.7em;width:120px;"></div>
+                                                            <div class="text-line"
+                                                                style="position:relative;top:1.4em;width:170px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 d-flex justify-content-center">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:200px;"> </div>
+                                                        <div class="text-line"
+                                                            style="position:relative;top:0.7em;width:110px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="text">
+                                                        <div class="text-line" style="width:100px;"> </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="wrapper">
+                                                                        <div class="wrapper-cell"> -->
+
+                                                <!-- </div>
+                                                                    </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form id="">
+                                        <div class="row content-wib d-none">
+                                            <div class="col-lg-5 mt-4">
+                                                <div class="input-group input-daterange">
+                                                    <input type="text" name="tanggal_transaksi_awal" value=""
+                                                        placeholder="Tanggal Awal"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_awal"
+                                                        id="tanggalawalpengirimantatus">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-minus"></i>
+                                                    </span>
+                                                    <input type="text" name="tanggal_transaksi_akhir" value=""
+                                                        placeholder="Tanggal Akhir"
+                                                        class="form-control datepicker c-cart-filter c-pointer fs-12 tanggal_akhir"
+                                                        id="tanggalakhirpengirimantatus">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-flex mt-4">
+                                                <select name="orderby"
+                                                    class="form-control c-cart-filter c-pointer fs-12 category"
+                                                    id="filterbuypengirimanstatus">
+                                                    <option value="-" selected="" disabled="">Urutkan</option>
+                                                    <option value="Terbaru">Terbaru</option>
+                                                    <option value="Total Belanja">Total Belanja</option>
+                                                </select>
+                                                <button class="btn bg-transparent c-primary-wib semi-bold fs-12 reset"
+                                                    type="button" id="resetpengirimanstatus">Reset
+                                                    Filter</button>
+                                            </div>
+                                            <div class="col-lg-4 d-flex mt-4">
+                                                <input type="text" placeholder="Cari Berdasarkan Nama Barang"
+                                                    class="form-control c-cart-filter fs-12 produk"
+                                                    id="searchbuypengirimanstatus">
+                                                <button class="btn btn-filter-product" type="button"><img
+                                                        src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <?php if($groupppengstat > 0): ?>
+                                    <div id="itemproduct-group-pengirimanstatus" class="content-wib d-none">
+                                        <table class="table table-striped table-bordered table-hover" id="detail_4"
+                                            style="width: 100%">
+                                            <thead style="opacity: 0; position: absolute;">
+                                                <tr>
+                                                    <th width="1%">No.</th>
+                                                    <th>Nota</th>
+                                                    <th>Tanggal Beli</th>
+                                                    <th>Customer</th>
+                                                    <th>No. HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Status</th>
+                                                    <th width="15%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="column-empty-transaction content-wib d-none">
+                                        <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
+                                        <h5>Oops, Daftar Transaksi Status Proses Pengiriman Anda Kosong.</h5>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+
+                                    <!-- jangan dihapus -->
                                     <!-- end -->
                                 </div>
                             </div>
@@ -657,29 +1019,29 @@
 <?php $__env->startSection('extra_script'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
-        var awal,akhir,category,produk;
+        var awal, akhir, category, produk;
 
-        $('#tab-1').on('change','.tanggal_awal',function(){
+        $('#tab-1').on('change', '.tanggal_awal', function () {
             awal = $(this).val();
             get_table1();
         })
 
-        $('#tab-1').on('change','.tanggal_akhir',function(){
+        $('#tab-1').on('change', '.tanggal_akhir', function () {
             akhir = $(this).val();
             get_table1();
         })
-        
-        $('#tab-1').on('change','.category',function(){
+
+        $('#tab-1').on('change', '.category', function () {
             category = $(this).val();
             get_table1();
         })
 
-        $('#tab-1').on('keyup','.produk',function(){
+        $('#tab-1').on('keyup', '.produk', function () {
             produk = $(this).val();
             get_table1();
         })
 
-        $('#tab-1').on('click','.reset',function(){
+        $('#tab-1').on('click', '.reset', function () {
             awal = '';
             akhir = '';
             category = '';
@@ -687,27 +1049,27 @@
             table1.ajax.reload();
         })
 
-        $('#tab-2').on('change','.tanggal_awal',function(){
+        $('#tab-2').on('change', '.tanggal_awal', function () {
             awal = $(this).val();
             get_table2();
         })
 
-        $('#tab-2').on('change','.tanggal_akhir',function(){
+        $('#tab-2').on('change', '.tanggal_akhir', function () {
             akhir = $(this).val();
             get_table2();
         })
-        
-        $('#tab-2').on('change','.category',function(){
+
+        $('#tab-2').on('change', '.category', function () {
             category = $(this).val();
             get_table2();
         })
 
-        $('#tab-2').on('keyup','.produk',function(){
+        $('#tab-2').on('keyup', '.produk', function () {
             produk = $(this).val();
             get_table2();
         })
 
-        $('#tab-2').on('click','.reset',function(){
+        $('#tab-2').on('click', '.reset', function () {
             awal = '';
             akhir = '';
             category = '';
@@ -715,27 +1077,27 @@
             table2.ajax.reload();
         })
 
-        $('#tab-3').on('change','.tanggal_awal',function(){
+        $('#tab-3').on('change', '.tanggal_awal', function () {
             awal = $(this).val();
             get_table3();
         })
 
-        $('#tab-3').on('change','.tanggal_akhir',function(){
+        $('#tab-3').on('change', '.tanggal_akhir', function () {
             akhir = $(this).val();
             get_table3();
         })
-        
-        $('#tab-3').on('change','.category',function(){
+
+        $('#tab-3').on('change', '.category', function () {
             category = $(this).val();
             get_table3();
         })
 
-        $('#tab-3').on('keyup','.produk',function(){
+        $('#tab-3').on('keyup', '.produk', function () {
             produk = $(this).val();
             get_table3();
         })
 
-        $('#tab-3').on('click','.reset',function(){
+        $('#tab-3').on('click', '.reset', function () {
             awal = '';
             akhir = '';
             category = '';
@@ -743,27 +1105,27 @@
             table3.ajax.reload();
         })
 
-        $('#tab-4').on('change','.tanggal_awal',function(){
+        $('#tab-4').on('change', '.tanggal_awal', function () {
             awal = $(this).val();
             get_table4();
         })
 
-        $('#tab-4').on('change','.tanggal_akhir',function(){
+        $('#tab-4').on('change', '.tanggal_akhir', function () {
             akhir = $(this).val();
             get_table4();
         })
-        
-        $('#tab-4').on('change','.category',function(){
+
+        $('#tab-4').on('change', '.category', function () {
             category = $(this).val();
             get_table4();
         })
 
-        $('#tab-4').on('keyup','.produk',function(){
+        $('#tab-4').on('keyup', '.produk', function () {
             produk = $(this).val();
             get_table4();
         })
 
-        $('#tab-4').on('click','.reset',function(){
+        $('#tab-4').on('click', '.reset', function () {
             awal = '';
             akhir = '';
             category = '';
@@ -789,23 +1151,27 @@
                     $('#district').text(data.datas.d_nama);
                     $('#alamat').text(data.datas.s_address);
                     $('#kodepos').text(data.datas.s_postalcode);
-                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas
+                        .s_total));
                     var dataagenda = data.item;
                     var trHTML = '';
-                            $.each(dataagenda, function (i, item) {
-                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
-                        });
+                    $.each(dataagenda, function (i, item) {
+                        trHTML += '<tr><td>' + item.i_name + '</td><td>' + item
+                            .iu_name + '</td><td class="jumlahbarang">' + item
+                            .sd_qty + '</td><td class="text-right">Rp. ' + item
+                            .ipr_sunitprice + '</td></tr>';
+                    });
                     $('#tabledetailtransaksi tbody').html(trHTML);
                     $('#modal-detail').modal('show');
                     var total = 0;
                     $('.jumlahbarang').each(function () {
-                    var ini = $(this).text();
-                    total += parseInt(ini);
+                        var ini = $(this).text();
+                        total += parseInt(ini);
                     });
                     $('#jumlahbarang').text(total);
-                    if(data.datas.s_paymethod == 'N'){
+                    if (data.datas.s_paymethod == 'N') {
                         $('#metodepambayaran').text('Tempo');
-                    }else{
+                    } else {
                         $('#metodepambayaran').text('Tunai');
                     }
                 }
@@ -828,23 +1194,27 @@
                     $('#district').text(data.datas.d_nama);
                     $('#alamat').text(data.datas.s_address);
                     $('#kodepos').text(data.datas.s_postalcode);
-                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas
+                        .s_total));
                     var dataagenda = data.item;
                     var trHTML = '';
-                            $.each(dataagenda, function (i, item) {
-                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
-                        });
+                    $.each(dataagenda, function (i, item) {
+                        trHTML += '<tr><td>' + item.i_name + '</td><td>' + item
+                            .iu_name + '</td><td class="jumlahbarang">' + item
+                            .sd_qty + '</td><td class="text-right">Rp. ' + item
+                            .ipr_sunitprice + '</td></tr>';
+                    });
                     $('#tabledetailtransaksi tbody').html(trHTML);
                     $('#modal-detail').modal('show');
                     var total = 0;
                     $('.jumlahbarang').each(function () {
-                    var ini = $(this).text();
-                    total += parseInt(ini);
+                        var ini = $(this).text();
+                        total += parseInt(ini);
                     });
                     $('#jumlahbarang').text(total);
-                    if(data.datas.s_paymethod == 'N'){
+                    if (data.datas.s_paymethod == 'N') {
                         $('#metodepambayaran').text('Tempo');
-                    }else{
+                    } else {
                         $('#metodepambayaran').text('Tunai');
                     }
                 }
@@ -867,23 +1237,27 @@
                     $('#district').text(data.datas.d_nama);
                     $('#alamat').text(data.datas.s_address);
                     $('#kodepos').text(data.datas.s_postalcode);
-                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas
+                        .s_total));
                     var dataagenda = data.item;
                     var trHTML = '';
-                            $.each(dataagenda, function (i, item) {
-                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
-                        });
+                    $.each(dataagenda, function (i, item) {
+                        trHTML += '<tr><td>' + item.i_name + '</td><td>' + item
+                            .iu_name + '</td><td class="jumlahbarang">' + item
+                            .sd_qty + '</td><td class="text-right">Rp. ' + item
+                            .ipr_sunitprice + '</td></tr>';
+                    });
                     $('#tabledetailtransaksi tbody').html(trHTML);
                     $('#modal-detail').modal('show');
                     var total = 0;
                     $('.jumlahbarang').each(function () {
-                    var ini = $(this).text();
-                    total += parseInt(ini);
+                        var ini = $(this).text();
+                        total += parseInt(ini);
                     });
                     $('#jumlahbarang').text(total);
-                    if(data.datas.s_paymethod == 'N'){
+                    if (data.datas.s_paymethod == 'N') {
                         $('#metodepambayaran').text('Tempo');
-                    }else{
+                    } else {
                         $('#metodepambayaran').text('Tunai');
                     }
                 }
@@ -906,23 +1280,27 @@
                     $('#district').text(data.datas.d_nama);
                     $('#alamat').text(data.datas.s_address);
                     $('#kodepos').text(data.datas.s_postalcode);
-                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas.s_total));
+                    $('#harga_total').html('Rp. ' + accounting.formatNumber(data.datas
+                        .s_total));
                     var dataagenda = data.item;
                     var trHTML = '';
-                            $.each(dataagenda, function (i, item) {
-                            trHTML += '<tr><td>' + item.i_name + '</td><td>' + item.iu_name + '</td><td class="jumlahbarang">' + item.sd_qty + '</td><td class="text-right">Rp. ' + item.ipr_sunitprice + '</td></tr>';
-                        });
+                    $.each(dataagenda, function (i, item) {
+                        trHTML += '<tr><td>' + item.i_name + '</td><td>' + item
+                            .iu_name + '</td><td class="jumlahbarang">' + item
+                            .sd_qty + '</td><td class="text-right">Rp. ' + item
+                            .ipr_sunitprice + '</td></tr>';
+                    });
                     $('#tabledetailtransaksi tbody').html(trHTML);
                     $('#modal-detail').modal('show');
                     var total = 0;
                     $('.jumlahbarang').each(function () {
-                    var ini = $(this).text();
-                    total += parseInt(ini);
+                        var ini = $(this).text();
+                        total += parseInt(ini);
                     });
                     $('#jumlahbarang').text(total);
-                    if(data.datas.s_paymethod == 'N'){
+                    if (data.datas.s_paymethod == 'N') {
                         $('#metodepambayaran').text('Tempo');
-                    }else{
+                    } else {
                         $('#metodepambayaran').text('Tunai');
                     }
                 }
@@ -946,26 +1324,26 @@
             $('#total_barang').html($(this).data('totalb'));
             $('#harga_total').html($(this).data('hargat'));
             console.log(stat);
-            if ( stat == 'P') {
+            if (stat == 'P') {
                 $('#status').html('<span class="label label-warning">Pembayaran</span>');
-            }else if(stat == 'PP'){
+            } else if (stat == 'PP') {
                 $('#status').html('<label class="label label-info">Proses Packing</label>');
-            }else if(stat == 'PS'){
+            } else if (stat == 'PS') {
                 $('#status').html('<label class="label label-info">Packing Selesai</label>');
-            }else if(stat == 'SD'){
+            } else if (stat == 'SD') {
                 $('#status').html('<span class="label label-info">Sedang Dikirim</span>');
-            }else if(stat == 'SB'){
+            } else if (stat == 'SB') {
                 $('#status').html('<label class="label label-info">Sudah Bayar</label>');
-            }else if (stat == 'SP') {
+            } else if (stat == 'SP') {
                 $('#status').html('<span class="label label-primary">Sedang Diproses</span>');
-            }else if(stat == 'TS'){
+            } else if (stat == 'TS') {
                 $('#status').html('<span class="label label-success">Transaksi Selesai</span>');
-            }else if(stat == 'T'){
+            } else if (stat == 'T') {
                 $('#status').html('<span class="label label-success">Pengiriman Terlambat</span>');
-            }else if(stat == 'D'){
+            } else if (stat == 'D') {
                 $('#status').html('<span class="label label-danger">Ditolak</span>');
-            }else{
-                 $('#status').html('<span class="label label-success">Unknown</span>');
+            } else {
+                $('#status').html('<span class="label label-success">Unknown</span>');
             }
             var table2 = $('#table_detail').DataTable({
                 responsive: true,
@@ -1022,120 +1400,128 @@
             message: 'Sudah Mengirim Bukti Pembayaran',
         });
         <?php endif; ?>
-        
-        function get_table1()
-        {
+
+        function get_table1() {
             $('#detail_1').DataTable({
-            responsive: true,
-            serverSide: true,
-            destroy : true,
-            ordering: false,
-            bFilter: false, 
-            bInfo: false,
-            paging : false,
-            ajax: {
-                url: "<?php echo e(route('table_allstatus')); ?>",
-                type: "post",
-                data: {
-                    "_token": "<?php echo e(csrf_token()); ?>",
-                    'tanggal_transaksi_awal' : awal,
-                    'tanggal_transaksi_akhir' : akhir,
-                    'produk' : produk,
-                    'category' : category
-                }
-            },
-            columns: [
-                {data: 'all'},
-            ],
-            pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+                responsive: true,
+                serverSide: true,
+                destroy: true,
+                ordering: false,
+                bFilter: false,
+                bInfo: false,
+                paging: false,
+                ajax: {
+                    url: "<?php echo e(route('table_allstatus')); ?>",
+                    type: "post",
+                    data: {
+                        "_token": "<?php echo e(csrf_token()); ?>",
+                        'tanggal_transaksi_awal': awal,
+                        'tanggal_transaksi_akhir': akhir,
+                        'produk': produk,
+                        'category': category
+                    }
+                },
+                columns: [{
+                    data: 'all'
+                }, ],
+                pageLength: 10,
+                lengthMenu: [
+                    [10, 20, 50, -1],
+                    [10, 20, 50, 'All']
+                ]
             });
         }
 
-        function get_table2()
-        {
+        function get_table2() {
             $('#detail_2').DataTable({
-            responsive: true,
-            serverSide: true,
-            destroy : true,
-            ordering: false,
-            bFilter: false, 
-            bInfo: false,
-            paging : false,
-            ajax: {
-                url: "<?php echo e(route('table_pembayaran')); ?>",
-                type: "post",
-                data: {
-                    "_token": "<?php echo e(csrf_token()); ?>",
-                    'tanggal_transaksi_awal' : awal,
-                    'tanggal_transaksi_akhir' : akhir,
-                    'produk' : produk,
-                    'category' : category
-                }
-            },
-            columns: [
-                {data: 'all'},
-            ],
-            pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+                responsive: true,
+                serverSide: true,
+                destroy: true,
+                ordering: false,
+                bFilter: false,
+                bInfo: false,
+                paging: false,
+                ajax: {
+                    url: "<?php echo e(route('table_pembayaran')); ?>",
+                    type: "post",
+                    data: {
+                        "_token": "<?php echo e(csrf_token()); ?>",
+                        'tanggal_transaksi_awal': awal,
+                        'tanggal_transaksi_akhir': akhir,
+                        'produk': produk,
+                        'category': category
+                    }
+                },
+                columns: [{
+                    data: 'all'
+                }, ],
+                pageLength: 10,
+                lengthMenu: [
+                    [10, 20, 50, -1],
+                    [10, 20, 50, 'All']
+                ]
             });
         }
 
-        function get_table3()
-        {
+        function get_table3() {
             $('#detail_3').DataTable({
-            responsive: true,
-            serverSide: true,
-            destroy : true,
-            ordering: false,
-            bFilter: false, 
-            bInfo: false,
-            paging : false,
-            ajax: {
-                url: "<?php echo e(route('table_proses')); ?>",
-                type: "post",
-                data: {
-                    "_token": "<?php echo e(csrf_token()); ?>",
-                    'tanggal_transaksi_awal' : awal,
-                    'tanggal_transaksi_akhir' : akhir,
-                    'produk' : produk,
-                    'category' : category
-                }
-            },
-            columns: [
-                {data: 'all'},
-            ],
-            pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+                responsive: true,
+                serverSide: true,
+                destroy: true,
+                ordering: false,
+                bFilter: false,
+                bInfo: false,
+                paging: false,
+                ajax: {
+                    url: "<?php echo e(route('table_proses')); ?>",
+                    type: "post",
+                    data: {
+                        "_token": "<?php echo e(csrf_token()); ?>",
+                        'tanggal_transaksi_awal': awal,
+                        'tanggal_transaksi_akhir': akhir,
+                        'produk': produk,
+                        'category': category
+                    }
+                },
+                columns: [{
+                    data: 'all'
+                }, ],
+                pageLength: 10,
+                lengthMenu: [
+                    [10, 20, 50, -1],
+                    [10, 20, 50, 'All']
+                ]
             });
         }
 
-        function get_table4()
-        {
+        function get_table4() {
             $('#detail_4').DataTable({
-            responsive: true,
-            serverSide: true,
-            destroy : true,
-            ordering: false,
-            bFilter: false, 
-            bInfo: false,
-            paging : false,
-            ajax: {
-                url: "<?php echo e(route('table_pengiriman')); ?>",
-                type: "post",
-                data: {
-                    "_token": "<?php echo e(csrf_token()); ?>",
-                    'tanggal_transaksi_awal' : awal,
-                    'tanggal_transaksi_akhir' : akhir,
-                    'produk' : produk,
-                    'category' : category
-                }
-            },
-            columns: [
-                {data: 'all'},
-            ],
-            pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+                responsive: true,
+                serverSide: true,
+                destroy: true,
+                ordering: false,
+                bFilter: false,
+                bInfo: false,
+                paging: false,
+                ajax: {
+                    url: "<?php echo e(route('table_pengiriman')); ?>",
+                    type: "post",
+                    data: {
+                        "_token": "<?php echo e(csrf_token()); ?>",
+                        'tanggal_transaksi_awal': awal,
+                        'tanggal_transaksi_akhir': akhir,
+                        'produk': produk,
+                        'category': category
+                    }
+                },
+                columns: [{
+                    data: 'all'
+                }, ],
+                pageLength: 10,
+                lengthMenu: [
+                    [10, 20, 50, -1],
+                    [10, 20, 50, 'All']
+                ]
             });
         }
 
@@ -1154,21 +1540,24 @@
                     "_token": "<?php echo e(csrf_token()); ?>",
                 }
             },
-            columns: [
-                {data: 'all'},
-            ],
+            columns: [{
+                data: 'all'
+            }, ],
             pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            lengthMenu: [
+                [10, 20, 50, -1],
+                [10, 20, 50, 'All']
+            ]
         });
 
         var table2 = $('#detail_2').DataTable({
             responsive: true,
             serverSide: true,
-            destroy : true,
+            destroy: true,
             ordering: false,
-            bFilter: false, 
+            bFilter: false,
             bInfo: false,
-            paging : false,
+            paging: false,
             ajax: {
                 url: "<?php echo e(route('table_pembayaran')); ?>",
                 type: "post",
@@ -1190,11 +1579,11 @@
         var table3 = $('#detail_3').DataTable({
             responsive: true,
             serverSide: true,
-            destroy : true,
+            destroy: true,
             ordering: false,
-            bFilter: false, 
+            bFilter: false,
             bInfo: false,
-            paging : false,
+            paging: false,
             ajax: {
                 url: "<?php echo e(route('table_proses')); ?>",
                 type: "post",
@@ -1203,21 +1592,24 @@
 
                 }
             },
-            columns: [
-                {data: 'all'},
-            ],
+            columns: [{
+                data: 'all'
+            }, ],
             pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            lengthMenu: [
+                [10, 20, 50, -1],
+                [10, 20, 50, 'All']
+            ]
         });
 
         var table4 = $('#detail_4').DataTable({
             responsive: true,
             serverSide: true,
-            destroy : true,
+            destroy: true,
             ordering: false,
-            bFilter: false, 
+            bFilter: false,
             bInfo: false,
-            paging : false,
+            paging: false,
             ajax: {
                 url: "<?php echo e(route('table_pengiriman')); ?>",
                 type: "post",
@@ -1226,14 +1618,17 @@
 
                 }
             },
-            columns: [
-                {data: 'all'},
-            ],
+            columns: [{
+                data: 'all'
+            }, ],
             pageLength: 10,
-            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+            lengthMenu: [
+                [10, 20, 50, -1],
+                [10, 20, 50, 'All']
+            ]
         });
 
-        $('#detail_2').on('click','.bayar', function () {
+        $('#detail_2').on('click', '.bayar', function () {
             var nota = $(this).data('nota');
             var isi = $('#cnota');
             if (isi.val() != '') {
@@ -1287,6 +1682,65 @@
 
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        function appendini() {
+            var appendini = '<div class="column-group-item-product mt-3 append-js-animate">' +
+                '<div class="row">' +
+                '<div class="col-lg-5">' +
+                '<div class="text">' +
+                '<div class="text-line" style="width:220px;"> </div>' +
+                '<div class="text-line"style="position:relative;top:0.7em;width:170px;"></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-lg-2">' +
+                '<div class="text">' +
+                '<div class="text-line" style="width:120px;"> </div>' +
+                '<div class="text-line"style="position:relative;top:0.7em;width:90px;"></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-lg-2">' +
+                '<div class="text">' +
+                '<div class="text-line" style="width:120px;"> </div>' +
+                '<div class="text-line"style="position:relative;top:0.7em;width:90px;"></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-lg-3">' +
+                '<div class="text">' +
+                '<div class="text-line" style="width:150px;"> </div>' +
+                '<div class="text-line"style="position:relative;top:0.7em;width:100px;"></div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row"style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">' +
+                '<div class="col-lg-4">' +
+                '<div class="wrapper-cell">' +
+                '<div class="image"></div>' +
+                '<div class="text" style="margin-left:20px;">' +
+                '<div class="text-line" style="width:60px;"> </div>' +
+                '<div class="text-line"style="position:relative;top:0.7em;width:120px;"></div>' +
+                '<div class="text-line" style="position:relative;top:1.4em;width:170px;"></div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-lg-6 d-flex justify-content-center">' +
+                '<div class="text">' +
+                '<div class="text-line" style="width:200px;"> </div>' +
+                '<div class="text-line"style="position:relative;top:0.7em;width:110px;"></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-lg-2">' +
+                '<div class="text">' +
+                '<div class="text-line" style="width:100px;"> </div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+
+            if ($(".append-js-animate").length == 1)
+                $('.append-js-animate').replaceWith(appendini);
+            else
+                $('#itemproduct-group-paymentstatus').append(appendini);
         }
     });
 </script>
