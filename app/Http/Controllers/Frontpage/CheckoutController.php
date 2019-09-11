@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Auth;
 use DB;
+use DataTables;
 use App\orderpenjualan;
 
 class CheckoutController extends Controller

@@ -70,7 +70,7 @@
         margin: 4px 0;
     }
 </style>
-<section style="margin-top:3.3em">
+<section style="margin-top:4.5em">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
         <li><a href="#">Kategori Produk</a></li>
@@ -293,6 +293,12 @@
                                 </div>
                                 @endif
                                 @endforeach
+                                @if($row->ip_path == null)
+                                <div class="image-product-box"
+                                      style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                                        alt="Sorry! Image not available at this time">
+                                </div>
+                                @endif
                                 <div class="caption">
                                     <div class="title-product-group">
                                         <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
@@ -313,7 +319,7 @@
                         </div>
                     </div>
                     @endforeach
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 mb-5">
                         {{$test->Links()}}
                     </div>
                     @else

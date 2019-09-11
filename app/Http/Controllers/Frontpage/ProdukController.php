@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
+use DataTables;
 
 class ProdukController extends Controller
 {
@@ -242,6 +243,7 @@ class ProdukController extends Controller
                 ->join('m_itemprice','ipr_ciproduct','i_code')
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
                 ->groupBy('i_code')
@@ -250,6 +252,7 @@ class ProdukController extends Controller
                 ->join('m_itemprice','ipr_ciproduct','i_code')
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
                 ->get();

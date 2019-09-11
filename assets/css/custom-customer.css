@@ -2466,5 +2466,8 @@ font-size: 24px !important;
     height: 150px;
     width: 100%;
 }
+#ifrm{
+    display: none !important;
+}
 /* endfooter */
 /* //end */

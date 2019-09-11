@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontpage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use DataTables;
 use Auth;
 
 class WishlistController extends Controller

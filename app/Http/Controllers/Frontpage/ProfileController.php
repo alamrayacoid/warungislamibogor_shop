@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
 use DB;
+use DataTables;
 use Carbon\Carbon;
 use Hash;
 use File;

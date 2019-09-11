@@ -20,6 +20,7 @@
 <script src="{{asset('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 
 <script src="{{asset('assets/infinite-scroll/dist/infinite-scroll.pkgd.js')}}"></script>
+<script src="{{asset('assets/jscroll-master/dist/jquery.jscroll.min.js')}}"></script>
 
 <script type="text/javascript">
     $(window).on('load', function () {

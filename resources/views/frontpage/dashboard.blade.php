@@ -200,7 +200,7 @@
                 </div>
             </div>
         </div>
-        <div class="">
+        <div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-7">
@@ -222,7 +222,7 @@
             </div>
         </div>
     </section>
-    <section class="">
+    <section class="mb-5">
         <div class="container-fluid">
             @if($popularnull == '[]')
             @else
@@ -240,6 +240,12 @@
                         </div>
                         @endif
                         @endforeach
+                        @if($row->ip_path == null)
+                            <div class="image-product-box"
+                                  style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                            alt="Sorry! Image not available at this time">
+                            </div>
+                            @endif
                         <div class="caption">
                             <div class="title-product-group">
                                 <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
@@ -269,7 +275,7 @@
                     <h3 class="title-product-opsi">Produk Paling Banyak Dicari</h3>
                 </div>
                 <div class="slick">
-                    @foreach($popular as $row)
+                @foreach($popular as $row)
                     @foreach($data as $rows)
                     @if($rows->i_code == $row->wl_ciproduct)
                     <div class="thumbnail product-box-item-slider">
@@ -280,6 +286,12 @@
                         </div>
                         @endif
                         @endforeach
+                        @if($rows->ip_path == null)
+                            <div class="image-product-box"
+                                  style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                            alt="Sorry! Image not available at this time">
+                            </div>
+                            @endif
                         <div class="caption">
                             <div class="title-product-group">
                                 <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}"
@@ -308,7 +320,7 @@
                     <h3 class="title-product-opsi">Semua Produk</h3>
                 </div>
             </div>
-            <div class="row">
+            <div class="infinite-scroll row">
                 @foreach($data as $row)
                 <div class="col-lg-product col-md-4 testing">
                     <div class="thumbnail product-box-item">
@@ -350,6 +362,12 @@
                             </div>
                             @endif
                             @endforeach
+                            @if($row->ip_path == null)
+                            <div class="image-product-box"
+                                  style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                            alt="Sorry! Image not available at this time">
+                            </div>
+                            @endif
                             <div class="caption">
                                 <div class="title-product-group">
                                     <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
@@ -371,16 +389,133 @@
                     </div>
                 </div>
                 @endforeach
+                {{$data->links()}}
             </div>
     </section>
-
-
-
-
     @endsection
     @section('extra_script')
     <script>
         $(document).ready(function () {
+            $('ul.pagination').hide();
+            var appendload = `<div class="row mt-5" id="">
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            $(function() {
+            $('.infinite-scroll').jscroll({
+                autoTrigger: true,
+                loadingHtml: appendload,
+                padding: 0,
+                nextSelector: '.pagination li.active + li a',
+                contentSelector: 'div.infinite-scroll',
+                callback: function() {
+                $('ul.pagination').remove();
+            }
+        });
+    });
             $('#ncart').html($('.ncart').length);
 
             $(".variable").slick({
