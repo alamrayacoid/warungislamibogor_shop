@@ -80,7 +80,7 @@
     }
 
     .footer-copy--wrapper {
-        margin-bottom: 7.9em;
+        margin-bottom: 7.2em;
     }
 
     .footer-new-wrapper {
@@ -100,7 +100,6 @@
     .icon-onwishlist {
         color: #ed5565 !important;
     }
-
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -383,7 +382,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-lg-12">
                 <div class="ibox product-description">
                     <div class="ibox-title" style="background:#fafafa;">
@@ -398,7 +397,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-4">
             <?php if($produksejenis == '[]'): ?>
             <?php else: ?>
             <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>

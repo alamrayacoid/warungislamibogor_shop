@@ -70,14 +70,15 @@
     }
 </style>
 <section style="margin-top:4.5em">
-    <ol class="breadcrumb breadcumb-header">
+    <ol class="breadcrumb breadcumb-header" style="margin-bottom: 0 !important;">
         <li><a href="#">Home</a></li>
         <li><a href="#">Kategori Produk</a></li>
         <li class="active"><?php echo e($namakategori->ity_name); ?></a></li>
     </ol>
+    <section style="border-bottom: 1px solid #efeff4">
+    <div class="container-fluid">
     <div class="row header-search-filter-group">
         <div class="col-md-6">
-
             <div class="text-header-filter">
                 Kategori Produk <?php echo e($namakategori->ity_name); ?>
 
@@ -95,7 +96,9 @@
                         <option>Paling Banyak Dibeli</option>
                     </select>
         </div>
+        </div>
     </div>
+    </section>
     <div class="container-fluid">
         <div class="row ">
             <div class="col-sm-4 col-md-3 col-lg-2">
@@ -258,34 +261,34 @@
                         <div class="thumbnail product-box-item">
                             <div class="product-box">
                                 <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if(Auth::check()): ?>
-                                <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
-                                <div class="product-wishlist onproduk-page onwishlist">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
-                                </div>
-                                <?php else: ?>
-                                <div class="product-wishlist onproduk-page">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                            class="far fa-heart"></i></button>
-                                </div>
-                                <?php endif; ?>
-                                <?php else: ?>
-                                <div class="product-wishlist onproduk-page">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                            class="far fa-heart"></i></button>
-                                </div>
-                                <?php endif; ?>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($wish == '[]'): ?>
-                                <div class="product-wishlist onproduk-page">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                            class="far fa-heart"></i></button>
-                                </div>
-                                <?php endif; ?>
+                            <?php if(Auth::check()): ?>
+                            <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
+                            <div class="product-wishlist onproduk-page onwishlist">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
+                            </div>
+                            <?php else: ?>
+                            <div class="product-wishlist onproduk-page">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button>
+                            </div>
+                            <?php endif; ?>
+                            <?php else: ?>
+                            <div class="product-wishlist onproduk-page">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button>
+                            </div>
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($wish == '[]'): ?>
+                            <div class="product-wishlist onproduk-page">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button>
+                            </div>
+                            <?php endif; ?>
                                 <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                 <div class="image-product-box"

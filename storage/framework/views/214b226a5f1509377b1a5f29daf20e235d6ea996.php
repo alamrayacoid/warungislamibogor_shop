@@ -48,6 +48,7 @@
         color: #fff;
         font-size: 12px !important;
         text-align: center;
+        border-bottom-width: 0 !important;
     }
 
     .table-wib thead tr th {
@@ -199,10 +200,10 @@
 <?php echo $__env->make('frontpage.pembelian.modal-detailpembelian', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('frontpage.pembelian.modal-detailpengiriman', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('frontpage.pembelian.modal-pembayaran', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<section style="margin-top:3.3em">
+<section style="margin-top:4.5em">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="">Semua Transaksi</a></li>
+        <li class="active">Semua Transaksi</li>
     </ol>
     <div class="container-fluid mt-5">
         <div class="loader-wib"></div>

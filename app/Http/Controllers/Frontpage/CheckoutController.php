@@ -9,6 +9,7 @@ use Auth;
 use DB;
 use DataTables;
 use App\orderpenjualan;
+use App\Events\PushPembelian;
 
 class CheckoutController extends Controller
 {
@@ -209,6 +210,14 @@ class CheckoutController extends Controller
             }
 
         DB::table('d_salesdt')->insert($data);
+
+        $pushdata = array(
+            'nota'=> $nota,
+            'totalpembelian'=> $total_pembelian,
+            'namacustomer'=> Auth::user()->cm_name,
+            'jumlahpenjualan'=> DB::table('d_sales')->count(),
+        );
+        event(new PushPembelian($pushdata));
 
        DB::commit();
 

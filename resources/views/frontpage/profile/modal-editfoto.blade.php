@@ -1,7 +1,7 @@
     {{-- Modal --}}
-    <div class="modal" id="modal-foto" role="dialog" aria-hidden="true">
+    <div class="modal modal-profile fade" id="modal-foto" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content animated bounceInRight">
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     

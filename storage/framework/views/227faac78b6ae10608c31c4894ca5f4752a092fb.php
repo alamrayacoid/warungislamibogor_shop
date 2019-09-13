@@ -29,7 +29,7 @@
                 <li class="dropdown dropdown-categories-navbar nav-link">
                     <a href="javascript:void(0)" class="dropdown-toggle c-white" id="dropdown-categories"
                         data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
-                            class="fa fa-list-ul" aria-hidden="true"></i>Kategori</a>
+                            class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
                         <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li><a href="<?php echo e(route('kategori-produk',['id'=> $row->ity_name ])); ?>"><?php echo e($row->ity_name); ?></a></li>
@@ -89,7 +89,7 @@
                 <li class="dropdown dropdown-categories-navbar">
                     <a href="javascript:void(0)" class="dropdown-toggle c-white" id="dropdown-categories"
                         data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
-                            class="fa fa-list-ul" aria-hidden="true"></i>Kategori</a>
+                            class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
                         <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li><a href="<?php echo e(route('kategori-produk',['id'=> $row->ity_name ])); ?>"><?php echo e($row->ity_name); ?></a></li>
@@ -110,8 +110,8 @@
             <ul class="nav navbar-nav navbar-right navbar-right-user" style="margin-right:0;">
                 <li class="dropdown nav-link">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false">Lihat Status Transaksi <span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-user">
+                        aria-expanded="false">Lihat Status Transaksi&ensp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-user" style="width:250px;">
                         <li class="d-flex justify-content-between"><a
                                 href="<?php echo e(route('pembelian-semua-frontpage' , ['status' => 1])); ?>">Daftar Pembelian
                             </a><span class="label label-primary" style="float:right;"><?php echo e($notifp); ?></span></li>
@@ -121,6 +121,9 @@
                         <li class="d-flex justify-content-between"><a
                                 href="<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>">Pembayaran</a> <span
                                 class="label label-primary" style="float:right"><?php echo e($notifpem); ?></span></li>
+                        <li class="d-flex justify-content-between">
+                            <a href="<?php echo e(route('pembelian-dikirim-frontpage', ['status' => 4])); ?>">Status Pengiriman </a><span
+                                    class="label label-primary" style="float: right;"><?php echo e($notifpen); ?></span></li>
                     </ul>
                 </li>
                 <li class="nav-link nav-link-shopping-cart"><a a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -137,8 +140,8 @@
                         <div class="header-dropdown-cart">Total : <span id="qty-cart-nav"><?php echo e($keranjang); ?></span> Barang
                         </div>
                         <div class="content-dropdown-cart">
-                            <table class="w-100 cart-refresh" id="cart-navbar">
-                            </table>
+                                <table class="w-100 cart-refresh" id="cart-navbar">
+                                    </table>
                             <?php if($keranjang == 0): ?>
                             <div class="cart-nav-empty w-100">
                                     <img src="<?php echo e(asset('assets/img/img-product/empty-cart.png')); ?>" width="50" height="50">
@@ -158,28 +161,39 @@
                 </li>
                 <li class="dropdown nav-link">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false"><i class="fa fa-user"></i><span
+                        aria-expanded="false"><i class="fa fa-user"></i>&ensp;<span
                             class="text-name-header"><?php echo e(Auth::user()->cm_name); ?></span><span class="caret"
                             style="position:relative;top:-0.1em;"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-user">
-                        <h5 class="text-hello">Halo,</h5>
-                        <p class="text-person"><?php echo e(Auth::user()->cm_name); ?></p>
-                        <div role="separator" class="divider"></div>
-                        <li><a href="<?php echo e(route('profile')); ?>">Profile</a></li>
-                        <li><a href="<?php echo e(route('pembelian-dikirim-frontpage', ['status' => 4])); ?>">Status Pengiriman <span
-                                    class="label label-primary ml-4"><?php echo e($notifpen); ?></span> </a></li>
-                        <li><a href="<?php echo e(route('wishlist-frontpage')); ?>">Barang Favorit<span
-                                    class="label label-primary ml-4">Baru</span></a></li>
-                        <li>
-                            <a href="<?php echo e(route('logout')); ?>"
-                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                Keluar
-                            </a>
-                            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-                                <?php echo e(csrf_field()); ?>
+                    <ul class="dropdown-menu dropdown-menu-user navbar-profile-menu">
+                        <div class="navbar-account-profile">
+                            <img src="<?php echo e(asset('assets/img/a4.jpg')); ?>" class="img-navbar-profile">
+                            <div class="text-name-navbar-profile">
+                                <a href=""><?php echo e(Auth::user()->cm_name); ?></a>
+                            </div>
+                        </div>
+                        <div class="navbar-account-content">
+                            <div class="navbar-account-content-left">
+                                <ul class="list-account-content-profile">
+                                    <li class="d-flex justify-content-between">
+                                        <div>Saldo Anda : </div>
+                                        <span class="balance-profile-navbar">Rp.4.500.000</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="navbar-account-content-right">
+                                <ul class="list-account-content-profile">
+                                    <li><a href="<?php echo e(route('wishlist-frontpage')); ?>">Barang Favorit</a></li>
+                                    <li><a href="<?php echo e(route('profile')); ?>">Pengaturan</a></li>
+                                    <li class="mt-5"><a href="<?php echo e(route('logout')); ?>"
+                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>&ensp;Logout</a></li>
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                            <?php echo e(csrf_field()); ?>
 
-                            </form>
-                        </li>
+                                        </form>
+                                </ul>
+                            </div>
+                        </div>
+                        
                     </ul>
                 </li>
 
@@ -191,20 +205,4 @@
 <div class="Sidenav-backdoor" id="mySidenav-backdoor"></div>
 <?php endif; ?>
 
-
-
-<?php $__env->startSection('extra_script'); ?>
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('[data-target="#navbar"]').click(function () {
-
-            ($('#navbar').hasClass('in')) ? $(this).find('i').removeClass('fa-caret-up')
-                .addClass(
-                    'fa-caret-down'): $(this).find('i').removeClass('fa-caret-down').addClass(
-                    'fa-caret-up')
-
-        });
-    })
-</script>
-<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_navbar-frontpage.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_navbar-frontpage.blade.php ENDPATH**/ ?>

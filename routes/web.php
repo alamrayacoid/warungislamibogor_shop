@@ -89,4 +89,7 @@ Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.c
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
 
 Route::get('pembelian/detail/{id}','Frontpage\PembelianController@detail_transaksi')->name('detail_transaksi');
+Broadcast::channel('my-channel', function ($user) {
+    return true; // change this to your authentication logic
+});
 }); //End Route::Group wib-cpanel

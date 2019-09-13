@@ -67,6 +67,9 @@
 
         margin: 4px 0;
     }
+    .jscroll-added{
+        padding: 0 15px;
+    }
 </style>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -199,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="content-wib d-none">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-7">
@@ -321,7 +324,7 @@
             </div>
             <div class="infinite-scroll row">
                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-lg-product col-md-4 testing">
+                <div class="col-lg-product col-md-4">
                     <div class="thumbnail product-box-item">
                         <div class="product-box">
                             <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

@@ -67,10 +67,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<section style="margin-top:3.3em;">
+<section style="margin-top:4.5em;">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="">Barang Favorit</a></li>
+        <li class="active">Barang Favorit</li>
     </ol>
     <div class="container-fluid mt-5">
         <div class="row">
@@ -141,11 +141,11 @@
                     <ul class="nav nav-tabs nav-tabs-custom">
                         <li class="active">
                             <a data-toggle="tab" href="#tab-12"><span class="tab-title"><i
-                                        class="fa fa-eye"></i>Terakhir Dilihat</span></a>
+                                        class="fa fa-eye"></i>&ensp;Terakhir Dilihat</span></a>
                         </li>
                         <li class="">
                             <a data-toggle="tab" href="#tab-22"><span class="tab-title"><i
-                                        class="fa fa-heart"></i>Barang Favorit</span></a>
+                                        class="fa fa-heart"></i>&ensp;Barang Favorit</span></a>
                         </li>
                     </ul>
                     <div class="tab-content padding-15-0">

@@ -68,6 +68,9 @@
 
         margin: 4px 0;
     }
+    .jscroll-added{
+        padding: 0 15px;
+    }
 </style>
 @endsection
 @section('content')
@@ -200,7 +203,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="content-wib d-none">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-7">
@@ -322,7 +325,7 @@
             </div>
             <div class="infinite-scroll row">
                 @foreach($data as $row)
-                <div class="col-lg-product col-md-4 testing">
+                <div class="col-lg-product col-md-4">
                     <div class="thumbnail product-box-item">
                         <div class="product-box">
                             @foreach($wish as $wis)

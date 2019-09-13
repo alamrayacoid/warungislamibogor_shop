@@ -50,6 +50,7 @@
         color: #fff;
         font-size: 12px !important;
         text-align: center;
+        border-bottom-width: 0 !important;
     }
 
     .table-wib thead tr th {
@@ -201,10 +202,10 @@
 @include('frontpage.pembelian.modal-detailpembelian')
 @include('frontpage.pembelian.modal-detailpengiriman')
 @include('frontpage.pembelian.modal-pembayaran')
-<section style="margin-top:3.3em">
+<section style="margin-top:4.5em">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="">Semua Transaksi</a></li>
+        <li class="active">Semua Transaksi</li>
     </ol>
     <div class="container-fluid mt-5">
         <div class="loader-wib"></div>
