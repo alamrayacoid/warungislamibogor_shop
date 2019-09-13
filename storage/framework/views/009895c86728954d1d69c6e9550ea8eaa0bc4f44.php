@@ -1,7 +1,7 @@
     
-    <div class="modal" id="modal-foto" role="dialog" aria-hidden="true">
+    <div class="modal modal-profile fade" id="modal-foto" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content animated bounceInRight">
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     
@@ -24,7 +24,8 @@
                             <label>Preview Foto</label>
                             <div class="image-preview"></div>
 
-                            <label class="btn btn-primary d-flex align-items-center btn-sm btn-block mt-3 mb-3" for="input-foto" style="height:50px">
+                            <label class="btn btn-primary d-flex justify-content-center align-items-center btn-sm btn-block mt-3 mb-3" for="input-foto" style="height:50px;font-size:14px;">
+                                Pilih Foto
                                 <input type="file" accept="image/*" name="gambar" id="input-foto" class="d-none">
                             </label>
                             

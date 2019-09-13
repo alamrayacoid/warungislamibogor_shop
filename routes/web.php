@@ -45,7 +45,11 @@ Route::get('/keranjang', 'Frontpage\KeranjangController@keranjang')->name('keran
 Route::post('/keranjang/remove', 'Frontpage\KeranjangController@removecart')->name('remove.keranjang');
 Route::post('/keranjang/check', 'Frontpage\KeranjangController@gocheck')->name('check.keranjang');
 Route::post('/keranjang/detail_keranjang', 'Frontpage\KeranjangController@detail_keranjang')->name('detail.keranjang');
+Route::post('/keranjang/detail_keranjang_nav', 'Frontpage\KeranjangController@detail_keranjang_nav')->name('detail.keranjang.nav');
+Route::post('/keranjang/table_keranjang','Frontpage\KeranjangController@table_keranjang')->name('table_keranjang');
 Route::post('/keranjang/updatecart', 'Frontpage\KeranjangController@updatecart')->name('updatecart.keranjang');
+Route::get('/getnow_price-cart','Frontpage\KeranjangController@getnow_price_cart')->name('getnow_price-cart');
+Route::get('/getnow_qty-cart','Frontpage\KeranjangController@getnow_qty_cart')->name('getnow_qty-cart');
 // Status semua
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
 Route::post('pembelian/table_allstatus', 'Frontpage\PembelianController@table_allstatus')->name('table_allstatus');
@@ -83,5 +87,9 @@ Route::post('/profile/update', 'Frontpage\ProfileController@update')->name('upda
 Route::get('/checkout', 'Frontpage\CheckoutController@checkout')->name('checkout');
 Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.checkout');
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
-    
+
+Route::get('pembelian/detail/{id}','Frontpage\PembelianController@detail_transaksi')->name('detail_transaksi');
+Broadcast::channel('my-channel', function ($user) {
+    return true; // change this to your authentication logic
+});
 }); //End Route::Group wib-cpanel

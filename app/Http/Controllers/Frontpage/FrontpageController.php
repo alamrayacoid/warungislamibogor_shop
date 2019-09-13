@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontpage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cookie;
+use DataTables;
 use Auth;
 use App\d_user;
 use DB;
@@ -19,12 +20,14 @@ class FrontpageController extends Controller
             ->join('m_itemprice','ipr_ciproduct','i_code')
             ->join('m_itemproduct as p','itp_ciproduct','i_code')
             ->join('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
             ->groupBy('i_name')
             ->where('m_item.status_data','true')
-            ->get();
+            ->paginate(5);
 
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
+            $gambar = DB::table('m_item')->leftjoin('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
+            $cekgambar = DB::table('m_item')->leftJoin('m_imgproduct','ip_ciproduct','i_code')->first();
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
             $imageslider = DB::table('m_banner')->where('status_data','true')->where('b_statusimage','Slider')->get();
             $imagesbasic = DB::table('m_banner')->where('status_data','true')->where('b_statusimage','Basic')->get();
@@ -50,27 +53,37 @@ class FrontpageController extends Controller
                 ->join('m_itemprice','ipr_ciproduct','i_code')
                 ->join('m_itemproduct as p','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->groupBy('i_name')
                 ->where('m_item.status_data','true')
                 ->where('itp_citype',$rekomendasi->itp_citype)
                 ->where('i_code','!=',$rekomendasi->i_code)
                 ->take(10)
                 ->get();
+             }else{
+                 $rekomendasiproduk = '';
              }
             
              $popularproduk = DB::table('d_wishlist')->where('status_data','true')->get();
+             if(\Auth::check()){
+             $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+             }else{
+                $keranjang = '';
+             }
             //  dd($user_info)
             return view('frontpage.dashboard',array(
                 'data' => $data,
                 'rekomendasiproduk'=> $rekomendasiproduk,
                 'gambar' => $gambar,
                 'wish' => $wish,
+                'cekgambar'=> $cekgambar,
                 'kategori' => $kategori,
                 'imgslider'=> $imageslider,
                 'imgbasic'=> $imagesbasic,
                 'popular' => $user_info,
                 'rekomendasi' => $rekomendasi,
                 'popularnull' => $popularproduk,
+                'keranjang'=> $keranjang,
             ));
     }
     public function login_frontpage()

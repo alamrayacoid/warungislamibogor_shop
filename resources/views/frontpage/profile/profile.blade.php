@@ -23,6 +23,15 @@
         width: 200px !important padding: 0;
         z-index: 999999;
     }
+    .in{
+    display: flex !important;
+    align-items: center;
+    padding-right: 0 !important;
+
+}
+.table-responsive{
+    border:0 !important;   
+    }
 </style>
 @endsection
 @section('content')
@@ -32,7 +41,9 @@
 @include('frontpage.profile.modal-password')
 @include('frontpage.profile.modal-rekening')
 @include('frontpage.profile.modal-alamat')
-<section style="margin-top:5em;">
+@include('frontpage.profile.modal-editfoto')
+
+<section style="margin-top:4.5em;">
 
     <form id="frmeditprofile" method="post" action="{{route('update.profile')}}" enctype="multipart/form-data"
         class="form-update-profile">
@@ -51,9 +62,10 @@
         <input type="hidden" id="gambar" name="gambar">
         <ol class="breadcrumb breadcumb-header">
             <li><a href="#">Home</a></li>
-            <li><a href="">Profile</a></li>
+            <li class="active">Profile</li>
         </ol>
         <div class="container-fluid mt-5">
+            <div class="loader-wib"></div>
             <div class="row">
                 <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
                     <div class="thumbnail profile-frame--sidebar">
@@ -135,14 +147,13 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="tab-content tab-content-profile padding-15">
+                            <div class="tab-content tab-content-profile">
                                 <div id="tab-1" class="tab-pane animated fadeIn active">
                                     <div class="row">
                                         <div class="col-lg-4 padding-15">
                                             <div class="profile-image-group padding-15">
                                                 <img src="env('APP_WIB')}}storage/image/member/profile/{{Auth::user()->cm_path}}"
                                                     class="image-profile-setting">
-                                                @include('frontpage.profile.modal-editfoto')
                                                 <button class="btn btn-upload-image-profile btn-block mt-5"
                                                     type="button" data-toggle="modal" data-target="#modal-foto">Upload
                                                     Foto </button>
@@ -229,7 +240,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="tab-2" class="tab-pane animated fadeIn" style="padding:15px 5px 30px 5px">
+                                <div id="tab-2" class="tab-pane animated fadeIn">
                                     @if(Auth::user()->cm_address === null || Auth::user()->cm_address === '')
                                     <div class="column-empty-profile-advanced">
                                         <img src="{{asset('assets/img/img-product/location-icon.png')}}">

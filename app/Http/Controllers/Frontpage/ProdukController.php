@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
+use DataTables;
 
 class ProdukController extends Controller
 {
     public function produk(Request $request)
     {
         $type = DB::table('m_itemtype')->get();
+        if(\Auth::check()){
+        $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+        }else{
+            $keranjang = '';
+        }
         $kategory = $request->ctr;
             if ($kategory != null) {
             $data = DB::table('m_item')
@@ -78,7 +84,6 @@ class ProdukController extends Controller
             }
             $namabarang = $request->search;
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-
     	return view('frontpage.produk.produk-frontpage',array(
                 'data' => $data->get(),
                 'gambar' => $gambar,
@@ -86,6 +91,7 @@ class ProdukController extends Controller
                 'tipe' => $type,
                 'namabarang' => $namabarang,
                 'kategori'=>$kategori,
+                'keranjang'=> $keranjang,
             ));
     }
 
@@ -160,6 +166,14 @@ class ProdukController extends Controller
             ->get();
             
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+            if(\Auth::check()){
+            $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+            $wish = DB::table('d_wishlist')->where('status_data','true')->where('wl_ciproduct',$code)->where('wl_cmember',Auth::user()->cm_code)->count();
+            }else{
+                $keranjang = '';
+                $wish = '';
+            }
+
     	return view('frontpage.produk.produk-detail-frontpage',array(
             'data' => $data,
             'typeproduk'=>$datas,
@@ -170,7 +184,9 @@ class ProdukController extends Controller
             'cabang' => $cabang,
             'kategori' => $kategori,
             'satuan' => $satuan,
+            'wish'=> $wish,
             'produksejenis'=> $produksejenis,
+            'keranjang'=> $keranjang,
 
     	));
     }
@@ -227,21 +243,38 @@ class ProdukController extends Controller
                 ->join('m_itemprice','ipr_ciproduct','i_code')
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
+                ->groupBy('i_code')
                 ->paginate(12);
+        $data1 = DB::table('m_item')
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+                ->join('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                ->where('itp_citype',$datas->ity_code)
+                ->where('m_item.status_data','true')
+                ->get();
 
                 $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
                 $type = DB::table('m_itemtype')->get();
                 $wish = DB::table('d_wishlist')->where('status_data','true')->get();
                 $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
+                if(\Auth::check()){
+                $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+                }else{
+                    $keranjang = '';
+                }
         return view('frontpage.produk.produk-kategori-frontpage',array(
             'test'=>$data,
+            'test1'=> $data1,
             'namakategori'=>$datas,
             'kategori'=>$kategori,
             'tipe'=>$type,
             'wish'=>$wish,
             'gambar'=>$gambar,
+            'keranjang'=> $keranjang,
         ));
     }
 }

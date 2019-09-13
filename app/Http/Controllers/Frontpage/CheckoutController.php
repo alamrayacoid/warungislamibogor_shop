@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Auth;
 use DB;
+use DataTables;
 use App\orderpenjualan;
+use App\Events\PushPembelian;
 
 class CheckoutController extends Controller
 {
@@ -25,12 +27,18 @@ class CheckoutController extends Controller
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
         $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+        if(\Auth::check()){
+        $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+        }else{
+            $keranjang = '';
+        }
         return view('frontpage.checkout.checkout',array(
             'produk' => $produk->get(),
             'gambar' => $gambar,
             'count' => $produk->count(),
             'kategori' => $kategori,
             'provinsi' => $provinsi,
+            'keranjang'=> $keranjang,
         ));
     }
 
@@ -203,6 +211,14 @@ class CheckoutController extends Controller
             }
 
         DB::table('d_salesdt')->insert($data);
+
+        $pushdata = array(
+            'nota'=> $nota,
+            'totalpembelian'=> $total_pembelian,
+            'namacustomer'=> Auth::user()->cm_name,
+            'jumlahpenjualan'=> DB::table('d_sales')->count(),
+        );
+        event(new PushPembelian($pushdata));
 
        DB::commit();
 

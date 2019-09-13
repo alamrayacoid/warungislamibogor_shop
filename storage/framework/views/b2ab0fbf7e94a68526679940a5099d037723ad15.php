@@ -1,19 +1,84 @@
 <?php $__env->startSection('content'); ?>
 <style>
-.pagination{
-    float:right;
-    margin:2em 15px 1em 15px;
-}
+    .pagination {
+        float: right;
+        margin: 2em 15px 1em 15px;
+    }
+
+    @keyframes  placeHolderShimmer {
+        0% {
+            background-position: -468px 0;
+        }
+
+        100% {
+            background-position: 468px 0;
+        }
+    }
+
+    .title-product-load {
+        background: #f7c703 !important;
+        opacity: 0.5;
+    }
+
+    .desc-product-load {
+        background: #ff5722 !important;
+        opacity: 0.5;
+    }
+
+    .animated-background,
+    .image,
+    .text-line,
+    .image-product {
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f6f6;
+        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
+        background-size: 800px 104px;
+        height: 96px;
+        /* position: relative; */
+    }
+
+    .image-product {
+        height: 150px;
+        width: 100%;
+
+    }
+
+    .image {
+        height: 70px;
+        width: 70px;
+        border-radius: 10px;
+    }
+
+    .wrapper-cell {
+        display: flex;
+        margin-bottom: 30px;
+    }
+
+    .text {
+        /* margin-left: 20px; */
+    }
+
+    .text-line {
+        height: 9px;
+        border-radius: 5px;
+
+        margin: 4px 0;
+    }
 </style>
-<section style="margin-top:5em">
-    <ol class="breadcrumb breadcumb-header">
+<section style="margin-top:4.5em">
+    <ol class="breadcrumb breadcumb-header" style="margin-bottom: 0 !important;">
         <li><a href="#">Home</a></li>
         <li><a href="#">Kategori Produk</a></li>
         <li class="active"><?php echo e($namakategori->ity_name); ?></a></li>
     </ol>
+    <section style="border-bottom: 1px solid #efeff4">
+    <div class="container-fluid">
     <div class="row header-search-filter-group">
         <div class="col-md-6">
-
             <div class="text-header-filter">
                 Kategori Produk <?php echo e($namakategori->ity_name); ?>
 
@@ -31,7 +96,9 @@
                         <option>Paling Banyak Dibeli</option>
                     </select>
         </div>
+        </div>
     </div>
+    </section>
     <div class="container-fluid">
         <div class="row ">
             <div class="col-sm-4 col-md-3 col-lg-2">
@@ -80,41 +147,148 @@
             </div>
             <div class="col-sm-8 col-md-9 col-lg-10 column-product-filter">
                 <h5 class="header-product-item-filter">Produk Warung Islami Bogor</h5>
-                <div class="row">
-                    <?php if($test != '[]'): ?>
+                <div class="row mt-5 loader-wib">
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-product col-md-4">
+                        <div class="thumbnail product-box-item">
+                            <div class="image-product"></div>
+                            <div class="caption">
+                                <div class="text">
+                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-line title-product-load"
+                                            style="width:60px;height:10px;border-radius:0;">
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class="text-line desc-product-load"
+                                                style="width:60px;height:10px;border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row content-wib d-none">
+                    <?php if($test1 != '[]'): ?>
                     <?php $__currentLoopData = $test; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
                             <div class="product-box">
                                 <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if(Auth::check()): ?>
-                                <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
-                                <div class="product-wishlist onproduk-page onwishlist">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
-                                </div>
-                                <?php else: ?>
-                                <div class="product-wishlist onproduk-page">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                            class="far fa-heart"></i></button>
-                                </div>
-                                <?php endif; ?>
-                                <?php else: ?>
-                                <div class="product-wishlist onproduk-page">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                            class="far fa-heart"></i></button>
-                                </div>
-                                <?php endif; ?>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($wish == '[]'): ?>
-                                <div class="product-wishlist onproduk-page">
-                                    <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                        id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                            class="far fa-heart"></i></button>
-                                </div>
-                                <?php endif; ?>
+                            <?php if(Auth::check()): ?>
+                            <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
+                            <div class="product-wishlist onproduk-page onwishlist">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
+                            </div>
+                            <?php else: ?>
+                            <div class="product-wishlist onproduk-page">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button>
+                            </div>
+                            <?php endif; ?>
+                            <?php else: ?>
+                            <div class="product-wishlist onproduk-page">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button>
+                            </div>
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($wish == '[]'): ?>
+                            <div class="product-wishlist onproduk-page">
+                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
+                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button>
+                            </div>
+                            <?php endif; ?>
                                 <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                 <div class="image-product-box"
@@ -122,6 +296,12 @@
                                 </div>
                                 <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($row->ip_path == null): ?>
+                                <div class="image-product-box"
+                                      style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
+                                        alt="Sorry! Image not available at this time">
+                                </div>
+                                <?php endif; ?>
                                 <div class="caption">
                                     <div class="title-product-group">
                                         <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
@@ -142,18 +322,18 @@
                         </div>
                     </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-lg-12">
-                    <?php echo e($test->Links()); ?>
+                    <div class="col-lg-12 mb-5">
+                        <?php echo e($test->Links()); ?>
 
                     </div>
                     <?php else: ?>
-                <div class="column-empty-transaction">
+                    <div class="column-empty-transaction">
                         <img src="<?php echo e(asset('assets/img/img-product/empty-transaction.png')); ?>">
                         <h5>Oops, Produk Yang Anda Cari Tidak Ada.</h5>
-                    <div class="d-flex justify-content-center">
-                    <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
+                        <div class="d-flex justify-content-center">
+                            <a href="<?php echo e(url('/')); ?>"><button>Cari Produk Sekarang</button></a>
+                        </div>
                     </div>
-                </div>
                     <?php endif; ?>
                 </div>
             </div>

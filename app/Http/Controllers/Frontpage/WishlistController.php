@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontpage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use DataTables;
 use Auth;
 
 class WishlistController extends Controller
@@ -50,6 +51,11 @@ class WishlistController extends Controller
             $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
 			$wish = DB::table('d_wishlist')->where('status_data','true')->get();
 			$kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+			if(\Auth::check()){
+				$keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+				}else{
+					$keranjang = '';
+				}
             return view('frontpage.wishlist.wishlist-frontpage',array(
                 'data' => $data,
 				'gambar' => $gambar,
@@ -57,6 +63,7 @@ class WishlistController extends Controller
 				'wish' => $wish,
 				'produkseen' => $lastseen,
 				'kategori'=>$kategori,
+				'keranjang'=> $keranjang,
             ));
     }
 
@@ -69,18 +76,21 @@ class WishlistController extends Controller
 	    		'wl_ciproduct' => $request->code,
 	    		'wl_cmember' => Auth::user()->cm_code,
 	    		'status_data' => 'true',
-	    	]);
+			]);
+			return response()->json(['status' => 'New', 'message' => 'Berhasil ditambahkan ke wishlist']);
     	}else{
     		if ($cek->where('status_data','true')->count() == 1) {
-	    		DB::table('d_wishlist')->where('wl_ciproduct',$request->code)->where('wl_cmember',Auth::user()->cm_code)
+	    		$menambahkan = DB::table('d_wishlist')->where('wl_ciproduct',$request->code)->where('wl_cmember',Auth::user()->cm_code)
 		    	->update([
 		    		'status_data' => 'false',
-		    	]);
+				]);
+				return response()->json(['status' => 'Hapus', 'message' => 'Berhasil hapus dari wishlist']);
     		}else{
     			DB::table('d_wishlist')->where('wl_ciproduct',$request->code)->where('wl_cmember',Auth::user()->cm_code)
 		    	->update([
 		    		'status_data' => 'true',
-		    	]);
+				]);
+				return response()->json(['status' => 'Tambah', 'message' => 'Berhasil ditambahkan ke wishlist']);
     		}
 
     	}

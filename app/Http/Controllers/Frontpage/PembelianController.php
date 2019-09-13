@@ -65,6 +65,7 @@ class PembelianController extends Controller
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
             $countproses = DB::table('d_sales')->where('s_isapprove','Y')->where('s_member',Auth::user()->cm_code)->count();
             $countkirim = DB::table('d_sales')->whereIn('s_delivered',['L','P'])->where('s_member',Auth::user()->cm_code)->count();
+            $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
     	return view('frontpage.pembelian.pembelian',array(
             'totalbayar' => $totalbayar,
     		'allstatus' => $allstatus->get(),
@@ -79,6 +80,7 @@ class PembelianController extends Controller
     		'groupppeng' => $group->whereIn('s_delivered',['P','L'])->get(),
             'gambar' => $gambar->get(),
             'kategori'=>$kategori,
+            'keranjang'=> $keranjang,
     	));
     }
 
@@ -227,13 +229,8 @@ class PembelianController extends Controller
                             <span class="text-full-payment-transaction">Total Semua Barang : 
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
                             </span> 
-                            </div> <div class="col-lg-4 col-md-4">
-                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
-                                
-                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
-                            
-                            </a>
-                            
+                            </div> <div class="col-lg-4 col-md-4">                            
+                                <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
@@ -241,7 +238,29 @@ class PembelianController extends Controller
         ->rawColumns(['all'])
         ->make(true);
     }
+    public function detail_transaksi($id){
+        $datas = DB::table('d_sales')
+        ->leftJoin('m_member','cm_code','s_member')
+        ->leftJoin('d_province','p_id','s_province')
+        ->leftJoin('d_city','c_id','s_city')
+        ->leftJoin('d_district','d_id','s_district')
+        ->where('s_id',$id)
+        ->first();
 
+        $data = DB::table('d_salesdt')
+        ->leftJoin('m_item','i_code','sd_item')
+        ->leftJoin('d_sales','s_id','sd_sales')
+        ->leftJoin('m_itemproduct','itp_ciproduct','d_salesdt.sd_item')
+        ->leftJoin('m_itemunit','iu_code','itp_ciunit')
+        ->leftJoin('m_itemprice','ipr_ciproduct','d_salesdt.sd_item')
+        ->where('sd_sales',$datas->s_id)
+        ->groupBy('sd_item')
+        ->get();
+        return response()->json(array(
+            'datas'=> $datas,
+            'item'=> $data,
+        ));
+    }
     public function table_pembayaran(Request $request)
     {
                 
@@ -397,12 +416,7 @@ class PembelianController extends Controller
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.$data->s_total.'</span>
                             </span> 
                             </div> <div class="col-lg-4 col-md-4">
-                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
-                                
-                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
-                            
-                            </a>
-                            
+                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
                             <button class="btn btn-payment-transaction bayar" data-nota="'.$data->s_nota.'" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar Sekarang</button>
                             </div>
                         </div>'.$daftar_barang.'
@@ -476,8 +490,6 @@ class PembelianController extends Controller
                 if ($request->produk != null) {
                     $data2 = $data2->where('i_name','LIKE', '%'.$request->produk.'%');
                 }
-                
-
             $data2 = $data2->get();
             if ($data->s_paymethod == 'T') {
                     $metode = 'Tunai'; 
@@ -568,12 +580,7 @@ class PembelianController extends Controller
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
                             </span> 
                             </div> <div class="col-lg-4 col-md-4">
-                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
-                                
-                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
-                            
-                            </a>
-                            
+                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
@@ -709,6 +716,7 @@ class PembelianController extends Controller
                             <div class="d-flex">
                                 <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
                                                             width="100px" height="100px">
+
                                 <div class="padding-0-15">
                                     <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
                                     <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
@@ -740,12 +748,7 @@ class PembelianController extends Controller
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
                             </span> 
                             </div> <div class="col-lg-4 col-md-4">
-                                <a data-target="#modal-detail" data-id="'.$data->s_nota.'" data-status="'.$stat.'" data-date="'.$data->s_date.'" data-customer="'.Auth::user()->cm_name.'" data-alamat="'.$data->s_address.'" data-totalb="'.$totalbeli.'" data-provinsi="'.$data->p_nama.'" data-kecamatan="'.$data->c_nama.'" data-district="'.$data->d_nama.'" data-pos="'.$data->s_postalcode.'" data-metode="'.$metode.'" data-hargat="Rp. '.$data->s_total.'" data-toggle="modal" class="detail">
-                                
-                                <button class="btn btn-view-more-transaction">Lihat Detail Transaksi</button>
-                            
-                            </a>
-                            
+                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';

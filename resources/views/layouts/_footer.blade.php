@@ -1,79 +1,150 @@
-<section class="follow_social_media_section">
+<section class="footer-new-wrapper">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 column-footer-logo" style="padding:0;">
-                <img src="{{asset('assets/img/img-product/warungislamibogor-text.png')}}" width="300px" height="80px"
-                    alt="Warung Islami Bogor">
-            </div>
-            <div class="col-md-6 column-footer-social" style="padding:0;">
-                <div class="d-flex social-media-column">
-                    <span class="text-social-media">Temukan kami di :</span>
-                    <div class="d-flex">
-                        <i class="fa fa-facebook icon-facebook mr-2"></i>
-                        <i class="fa fa-twitter icon-twitter mr-2"></i>
-                        <i class="fa fa-instagram icon-instagram mr-2"></i>
-                        <i class="fa fa-linkedin icon-linkedin"></i>
+        <div class="media-footer-wrapper">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="media-footer-group">
+                        <div class="media-footer-image">
+                            <img src="{{asset('assets/img/icon-garansi.png')}}">
+                        </div>
+                        <div class="media-footer-text">
+                            <h5>Kualitas Produk</h5>
+                            <p>Warung Islami Bogor Menjual Produk yang berkualitas tinggi dan dijamin keasliannya</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="media-footer-group">
+                        <div class="media-footer-image">
+                            <img src="{{asset('assets/img/icon-garansi.png')}}">
+                        </div>
+                        <div class="media-footer-text">
+                            <h5>Kualitas Produk</h5>
+                            <p>Warung Islami Bogor Menjual Produk yang berkualitas tinggi dan dijamin keasliannya</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="media-footer-group">
+                        <div class="media-footer-image">
+                            <img src="{{asset('assets/img/icon-garansi.png')}}">
+                        </div>
+                        <div class="media-footer-text">
+                            <h5>Kualitas Produk</h5>
+                            <p>Warung Islami Bogor Menjual Produk yang berkualitas tinggi dan dijamin keasliannya</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="media-footer-group">
+                        <div class="media-footer-image">
+                            <img src="{{asset('assets/img/icon-garansi.png')}}">
+                        </div>
+                        <div class="media-footer-text">
+                            <h5>Kualitas Produk</h5>
+                            <p>Warung Islami Bogor Menjual Produk yang berkualitas tinggi dan dijamin keasliannya</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="footer-wrapper">
-    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
-                <h5 class="title-footer-item">Tentang Warungislamibogor</h5>
-                <p class="text-description-footer">WIB merupakan perusahaan distributor yang bergerak di bidang bisnis
-                    penjualan dan distribusi
-                    di indonesia. Berawal dari sebuah ide untuk membantu rekan-rekan pebisnis /produsen akan sulitnya
-                    mendapatkan kemasan botol plastik untuk menutupi kebutuhan produksi mereka, maka pada tahun 2012
-                    kami merintis perusahaan dari rumah yang berlokasi di Bogor, hingga menjadi sebuah perusahaan
-                    nasional yang terus berkembang. </p>
+            <div class="col-lg-6 col-md-6">
+                <div class="media-footer-about">
+                    <h5>Warung Islami Bogor</h5>
+                    <div class="footer-about-description">
+                        <p>WIB Online Shop adalah e-commerce dari Warung Islami Bogor yang menyediakan berbagai produk
+                            botol
+                            dengan kualitas terbaik.</p>
+                        <div class="border-top-gray mt-5 pt-2">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p>Telephone :&ensp;<b>081285270793</b></p>
+                                    <p>WA :&ensp;<b>081285270793</b></p>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>Email : <b>Customer@wib.com</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top-gray mt-2 pt-2 social-footer-group">
+                            <h5>Ikuti Kami : </h5>
+                            <ul class="footer-social-group">
+                                <li><i class="fa fa-facebook icon-facebook"></i></li>
+                                <li><i class="fa fa-twitter icon-twitter"></i></li>
+                                <li><i class="fa fa-instagram icon-instagram"></i></li>
+                                <li><i class="fa fa-linkedin icon-linkedin"></i></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-                <h5 class="title-footer-item">Layanan Pelanggan</h5>
-                <ul class="list-description-footer">
-                    <li>Cara Belanja Barang</li>
-                    <li>Cara Bayar Pesanan</li>
-                    <li>Promo</li>
-                    <li>Produk Terbaru</li>
+            <div class="col-lg-3 col-md-3">
+                <h5 class="text-payment-method">METODE PEMBAYARAN</h5>
+                <ul class="list-bank">
+                    <li><img src="{{asset('assets/img/icon/icon-tiki.png')}}" alt="TIKI"></li>
+                    <li><img src="{{asset('assets/img/icon/icon-jne.png')}}" alt="JNE"></li>
+                    <li><img src="{{asset('assets/img/icon/icon-sicepat.png')}}" alt="SICEPAT"></li>
+                    <li><img src="{{asset('assets/img/icon/icon-j&t.jpg')}}" alt="J&T"></li>
                 </ul>
             </div>
-            <div class="col-md-3">
-                <h5 class="title-footer-item">Pusat Bantuan</h5>
-                <ul class="list-description-footer">
-                    <li>Hubungi Kami</li>
-                    <li>Bantuan</li>
-                    <li>Gratis Ongkir</li>
+            <div class="col-lg-3 col-md-3">
+                <h5 class="text-payment-method">METODE PENGIRIMAN</h5>
+                <ul class="list-bank">
+                    <li><img src="{{asset('assets/img/icon/icon-bni.jpg')}}" alt="BNI"></li>
+                    <li><img src="{{asset('assets/img/icon/icon-bri.jpg')}}" alt="BRI"></li>
+                    <li><img src="{{asset('assets/img/icon/icon-bca.jpg')}}" alt="BCA"></li>
+                    <li><img src="{{asset('assets/img/icon/icon-mandiri.jpg')}}" alt="Mandiri"></li>
                 </ul>
             </div>
         </div>
-    </div>
-</section>
-<section class="footer-copy-wrapper">
-    <div class="text-center">
-        Copyright © 2019 Warungislamibogor
-    </div>
-</section>
-<div class="smallchat-box">
-    <div class="header-smallchat-box">
-        <div class="header-avatar-group-chat">
-            <img src="{{asset('assets/img/a4.jpg')}}" class="avatar-smallchat-header">
-            <div class="text-header-avatar-group">
-                <h5>Warung Islami Bogor<span>Penjual</span></h5>
-                <p>Customer Services</p>
+        <div class="footer-main-endgroup">
+            <div class="row">
+                <div class="col-lg-3 footer-item">
+                    <h5>Warung Islami Bogor</h5>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">FAQ (Tanya Jawab)</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 footer-item">
+                    <h5>Layanan Pelanggan</h5>
+                    <ul>
+                        <li><a href="#">Cara Belanja Barang</a></li>
+                        <li><a href="#">Cara Bayar Pesanan</a></li>
+                        <li><a href="#">Promo</a></li>
+                        <li><a href="#">Produk Terbaru</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 footer-item">
+                    <h5>Bantuan</h5>
+                    <ul>
+                        <li><a href="#">Cara Belanja Barang</a></li>
+                        <li><a href="#">Cara Bayar Pesanan</a></li>
+                        <li><a href="#">Promo</a></li>
+                        <li><a href="#">Produk Terbaru</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 footer-item">
+                    <h5>Subscribe</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-footer-subscribe" placeholder="Masukkan Email Anda">
+                        <span class="input-group-btn">
+                            <button class="btn btn-footer-subscribe" type="button">Berlangganan</button>
+                        </span>
+                    </div>
+                    <p class="description-subscribe-footer">Dapatkan Mengenai Produk Terbaru dan Promo Menarik di Warung Islami Bogor Online</p>
+                </div>
             </div>
         </div>
-        <span class="hidechat-widget"><i class="fa fa-chevron-down"></i></span>
+
     </div>
-    <div class="body-smallchat-box">
-        <div class="chat-text-person">Selamat datang di Warung Islami Bogor Online Shop. Ada yang bisa kami bantu guna
-            memudahkan belanja anda ?</div>
-        <div class="footer-smallchat-box">
-            <a href="https://api.whatsapp.com/send?phone=6281285270793&text=Saya%20tertarik%20dengan%20Produk%20Anda"  target="_blank"><button class=""> <i class="fa fa-paper-plane"></i>&ensp;Chat Sekarang</button></a>
-        </div>
-    </div>
-</div>
-{{-- <button class="btn btn-smallchat" id="smallchat-show" type="button"><span class="icon-chat"></span><span
-        class="text-chat">Whatsapp</span></button> --}}
+</section>
+<section class="footer-copy--wrapper">
+        <div class="container">Copyright © 2019 Warungislamibogor</div>
+</section>

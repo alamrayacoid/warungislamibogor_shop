@@ -111,6 +111,13 @@ body.mini-navbar .sidebar-collapse .nav.nav-third-level li a .label
 	background-color: #e6e6e6;
 	border-color: #adadad;
 }
+.product-wishlist .btn-wishlist{
+  border-radius: 100px !important;
+  outline: none !important;
+}
+.product-wishlist .btn-wishlist::focus{
+  outline: none !important;
+}
 .product-wishlist.onwishlist,
 .product-box:hover .product-wishlist.onproduk-page
 {
@@ -118,9 +125,9 @@ body.mini-navbar .sidebar-collapse .nav.nav-third-level li a .label
 }
 .product-wishlist.onwishlist button
 {
-	color: #fff;
-	background-color: #d9534f;
-	border-color: #d43f3a;
+	color: #fff !important;
+	background-color: #d9534f !important;
+	border-color: #d43f3a !important;
 }
 .product-wishlist.onwishlist button:hover
 {
