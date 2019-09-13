@@ -168,12 +168,6 @@
         });
     </script>
     <script type="text/javascript">
-    let appendloader = '<div id="overlay-loading">' +
-    '<div class="content-loader">' +
-        '<img src="<?php echo e(asset("assets/img/img-product/Ellipsis-2s-140px.svg")); ?>">' +
-    '</div>' +
-    '</div>';
-    $("body").prepend(appendloader).addClass('overflow-hidden');
     $(window).on('load', function () {
     setTimeout(removeLoaderweb, 1000); //wait for page load PLUS two seconds.
     });

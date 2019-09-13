@@ -150,6 +150,7 @@ class CheckoutController extends Controller
                     's_address' => $request->alamat,
                     's_paystatus' => $stat_pay,
                     's_paymethod' => $method_pay,
+                    's_isapprove' => 'N',
                     's_created_at' => Carbon::now('Asia/Jakarta'),
                     's_created_by' => Auth::user()->cm_code,
                 ]);
