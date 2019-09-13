@@ -21,6 +21,7 @@
 
 <script src="<?php echo e(asset('assets/infinite-scroll/dist/infinite-scroll.pkgd.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/jscroll-master/dist/jquery.jscroll.min.js')); ?>"></script>
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
 <script type="text/javascript">
     $(window).on('load', function () {
@@ -191,5 +192,48 @@
         $('.dropdown-menu').on('click', function(e) {
             e.stopPropagation();
         });
-    })
+
+        <?php if(!Auth::check()): ?>
+        <?php else: ?>
+        Pusher.logToConsole = true;
+        var pusher = new Pusher("<?php echo e(env('PUSHER_APP_KEY')); ?>", {
+          cluster: "<?php echo e(env('PUSHER_APP_CLUSTER')); ?>",
+          forceTLS: true
+        });
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            if(data.message.customer.s_member == $('#idcustomernav').val()){
+                var jumlahpembelian  = data.message.jumlahpenjualan;
+                var penjualan = data.message.item;
+                var nota = data.message.nota;
+                var harga = data.message;
+                $('#notif-delivery').text(jumlahpembelian);
+                var trHTML = '';
+                    $.each(penjualan, function (i, item) {
+                            trHTML += `<div class="group-notif-delivery  bold" style="font-size:12px;">
+                        <div class="row">
+                        <div class="col-lg-3 d-flex justify-content-center">
+                            <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="">`+item.i_name+`</div>
+                            <div class="pt-4">`+item.s_nota+`</div>
+                            <div style="color:rgba(0,0,0,.54);" class="pt-4">Total Harga : <span class="c-primary-wib">Rp. `+item.sd_price+`</span> | <span>`+item.sd_qty+`</span> Qty
+                        </div>
+                    </div>
+                </div>
+                </div>`;
+                });
+                $('body').append(`<button class="btn btn-primary d-none" id="get-notif-delivery" data-toggle="modal" data-target="#mdl-penjualan" hidden></button>`);
+                $('.content-delivery-warning').append(trHTML);
+                setTimeout(function(){
+                    $('#get-notif-delivery').click();
+                }, 1000);
+            }else{
+                console.log('Ops');
+            }
+        });
+    <?php endif; ?>
+    
+    });
 </script><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_script-frontpage.blade.php ENDPATH**/ ?>

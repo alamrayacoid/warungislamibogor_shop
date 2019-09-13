@@ -1318,9 +1318,11 @@ input.form-control:focus {
 .column-empty-cart h5{
     color: #333;
     font-size: 16px;
+    font-weight: 600;
     padding-top: 2em;
 }.column-empty-cart p{
     color: #999;
+    
     margin-bottom: 30px;
 }
 .column-empty-cart button{
@@ -2502,7 +2504,7 @@ font-size: 24px !important;
 .navbar-profile-menu{
     width: 450px;
 }
-.navbar-account-profile .text-name-navbar-profile a{
+.navbar-account-profile .text-name-navbar-profile span{
     color: black !important;
     margin-left: 3px;
     font-size: 14px;
@@ -2549,4 +2551,15 @@ a{
     color: #009a51;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: bold;
+}
+.group-notif-delivery{
+    padding: 15px 0;
+    border-top: 1px solid #efeff4;
+}
+.group-notif-delivery:first-child{
+    border-top: 0 !important;
+}
+.btn-notif-delivery{
+    background: #009a51 !important;
+    color: #fff !important;
 }

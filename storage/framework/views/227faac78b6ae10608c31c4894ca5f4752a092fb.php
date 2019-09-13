@@ -123,7 +123,7 @@
                                 class="label label-primary" style="float:right"><?php echo e($notifpem); ?></span></li>
                         <li class="d-flex justify-content-between">
                             <a href="<?php echo e(route('pembelian-dikirim-frontpage', ['status' => 4])); ?>">Status Pengiriman </a><span
-                                    class="label label-primary" style="float: right;"><?php echo e($notifpen); ?></span></li>
+                                    class="label label-primary" style="float: right;" id="notif-delivery"><?php echo e($notifpen); ?></span></li>
                     </ul>
                 </li>
                 <li class="nav-link nav-link-shopping-cart"><a a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -168,7 +168,7 @@
                         <div class="navbar-account-profile">
                             <img src="<?php echo e(asset('assets/img/a4.jpg')); ?>" class="img-navbar-profile">
                             <div class="text-name-navbar-profile">
-                                <a href=""><?php echo e(Auth::user()->cm_name); ?></a>
+                                <span><?php echo e(Auth::user()->cm_name); ?></span>
                             </div>
                         </div>
                         <div class="navbar-account-content">
