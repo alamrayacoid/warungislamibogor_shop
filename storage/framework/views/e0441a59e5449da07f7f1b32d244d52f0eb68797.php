@@ -37,7 +37,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header" style="background: #009a51;color: #fff;font-weight: 600;letter-spacing: 1px;">
-            	Peringatan !
+            	Peringatan barang sedang dikirim!
                 <button type="button" class="close btn-close-mdl-custom" data-dismiss="modal" style="color: #fff;">&times;</button>
             </div>
             <div class="modal-body content-delivery-warning">
@@ -45,7 +45,23 @@
         	</div>
         <div class="modal-footer">
             	<button type="button" class="btn btn-notif-delivery" data-dismiss="modal">OK , Saya Paham !!</button>
+          </div>
+    </div>
+</div>
+<div class="modal fade" id="mdl-proses" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background: #009a51;color: #fff;font-weight: 600;letter-spacing: 1px;">
+            	Peringatan transaksi sedang diproses!
+                <button type="button" class="close btn-close-mdl-custom" data-dismiss="modal" style="color: #fff;">&times;</button>
             </div>
+            <div class="modal-body content-proses-warning">
+                	
+        	</div>
+        <div class="modal-footer">
+            	<button type="button" class="btn btn-notif-delivery" data-dismiss="modal">OK , Saya Paham !!</button>
+          </div>
     </div>
 </div>
 </body>
