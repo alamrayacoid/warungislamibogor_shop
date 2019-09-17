@@ -13,10 +13,9 @@
 @if(!Auth::check())
 
 <nav class="navbar navbar_custom not-login">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="padding-right:0;">
+    <div class="container-fluid navbar-group-mobile">
+        <div class="navbar-header d-flex">
+            <button type="button" class="navbar-toggle" style="padding-right:0;" id="js-sidebar-collapse">
                 <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand" href="{{url('/')}}">
@@ -24,7 +23,7 @@
             </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-right:0;">
+        <div class="navbar-collapse-custom" id="js-sidebar" style="margin-left:-300px;">
             <ul class="nav navbar-nav">
                 <li class="dropdown dropdown-categories-navbar nav-link">
                     <a href="javascript:void(0)" class="dropdown-toggle c-white" id="dropdown-categories"
@@ -64,9 +63,19 @@
                             class="btn btn-register-header">Daftar</button></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
+        <ul class="opsi-nav-mobile">
+            <li><button id="js-search-mobile"><i class="fa fa-search"></i></button></li>
+        </ul>
     </div><!-- /.container-fluid -->
 </nav>
 <div class="Sidenav-backdoor" id="mySidenav-backdoor"></div>
+<div class="form-group-nav--mobile d-none">
+    <form class="w-100" action="{{route('produk-frontpage')}}" method="get">
+    <input type="text" name="search" class="form-control input-search--mobile" placeholder="Cari Produk Warung Islami Bogor">
+    <button type="submit" class="btn btn-search--mobile" id="js-search--mobile"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+<div class="Sidenav-backdoor-categories"></div>
 @endif
 
 @if(!Auth::check())
