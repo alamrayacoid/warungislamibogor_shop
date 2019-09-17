@@ -172,7 +172,7 @@
                         <div class="navbar-account-content">
                             <div class="navbar-account-content-left">
                                 <ul class="list-account-content-profile">
-                                    <li class="d-flex justify-content-between" style="margin: 0 20px !important;border:0 !important;">
+                                    <li class="d-flex justify-content-between" style="margin: 0 20px !important;border-right:0 !important;border-left:0 !important;">
                                         <div>Saldo Anda : </div>
                                         <span class="balance-profile-navbar">Rp.4.500.000</span>
                                     </li>
@@ -180,8 +180,8 @@
                             </div>
                             <div class="navbar-account-content-right">
                                 <ul class="list-account-content-profile">
-                                    <li class="border-0"><a href="{{route('wishlist-frontpage')}}">Barang Favorit</a></li>
-                                    <li class="border-0"><a href="{{route('profile')}}">Pengaturan</a></li>
+                                    <li style="border-left:0 !important;"><a href="{{route('wishlist-frontpage')}}">Barang Favorit</a></li>
+                                    <li style="border-left:0 !important;"><a href="{{route('profile')}}">Pengaturan</a></li>
                                     <li class="mt-5 border-0"><a href="{{route('logout')}}"
                                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>&ensp;Logout</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
