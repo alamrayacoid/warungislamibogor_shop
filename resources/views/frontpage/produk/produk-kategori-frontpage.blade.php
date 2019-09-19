@@ -309,30 +309,33 @@
                                         <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
                                             class="title-product-item">{{$row->i_name}}</a>
                                     </div>
-                                    @if($row->d_value == null)
+                                    @if($row->gpp_sellprice == null)
                                     <div class="discount-product-item">
                                         
                                     </div>
                                     @else
                                     <div class="discount-product-item">
-                                        <span class="discount-value">{{$row->d_value}}%</span><span class="discount-price"> Rp. {{$row->ipr_sunitprice}}</span>
+                                        <span class="discount-value">{{number_format(($row->ipr_sunitprice - $row->gpp_sellprice) / ($row->ipr_sunitprice / 100))}}%</span><span class="discount-price"> Rp. {{$row->ipr_sunitprice}}</span>
                                     </div>
                                     @endif
-                                    <div class="footer-product-item">
-                                        <div class="">
-                                            <i class="fa fa-star f-14 c-gold"></i>
-                                            <i class="fa fa-star c-gold"></i>
-                                            <i class="fa fa-star c-gold"></i>
-                                            <i class="fa fa-star c-gold"></i>
-                                            <i class="fa fa-star c-grey"></i>
-                                        </div>
-                                        @if($row->d_value == null)
-                                        <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
-                                        @else
-                                        <div class="price-product-item">Rp. {{$row->ipr_sunitprice - $row->ipr_sunitprice * $row->d_value / 100}}</div>
-
-                                        @endif
+                                <div class="footer-product-item">
+                                    <div class="">
+                                        <i class="fa fa-star f-14 c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-grey"></i>
                                     </div>
+                                    @if($row->gpp_sellprice == null)
+                                    <div class="price-product-item">
+                                        Rp. {{$row->ipr_sunitprice}}
+                                    </div>
+                                    @else
+                                    <div class="price-product-item">
+                                        Rp. {{$row->gpp_sellprice}}
+                                    </div>
+                                    @endif
+                                </div>
                                 </div>
                             </div>
                         </div>
