@@ -280,7 +280,7 @@
                                         Rp. {{$row->gpp_sellprice}}
                                     </div>
                                     @endif
-                                    </div>
+                                </div>
                         </div>
                     </div>
                     @endforeach
@@ -317,13 +317,13 @@
                                 <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}"
                                     class="title-product-item">{{$rows->i_name}}</a>
                             </div>
-                            @if($rows->gpp_sellprice == null)
+                            @if($row->gpp_sellprice == null)
                                     <div class="discount-product-item">
                                         
                                     </div>
                                     @else
                                     <div class="discount-product-item">
-                                        <span class="discount-value">{{number_format(($rows->ipr_sunitprice - $rows->gpp_sellprice) / ($rows->ipr_sunitprice / 100))}}%</span><span class="discount-price"> Rp. {{$rows->ipr_sunitprice}}</span>
+                                        <span class="discount-value">{{number_format(($row->ipr_sunitprice - $row->gpp_sellprice) / ($row->ipr_sunitprice / 100))}}%</span><span class="discount-price"> Rp. {{$row->ipr_sunitprice}}</span>
                                     </div>
                                     @endif
                                 <div class="footer-product-item">
@@ -334,16 +334,16 @@
                                         <i class="fa fa-star c-gold"></i>
                                         <i class="fa fa-star c-grey"></i>
                                     </div>
-                                    @if($rows->gpp_sellprice == null)
+                                    @if($row->gpp_sellprice == null)
                                     <div class="price-product-item">
-                                        Rp. {{$rows->ipr_sunitprice}}
+                                        Rp. {{$row->ipr_sunitprice}}
                                     </div>
                                     @else
                                     <div class="price-product-item">
-                                        Rp. {{$rows->gpp_sellprice}}
+                                        Rp. {{$row->gpp_sellprice}}
                                     </div>
                                     @endif
-                                    </div>
+                                </div>
                         </div>
                     </div>
                     @endif
