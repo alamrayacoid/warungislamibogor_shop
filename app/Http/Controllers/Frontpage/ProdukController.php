@@ -234,6 +234,8 @@ class ProdukController extends Controller
 
         $stocknow = $total_stock - $stock_sementara;
 
+//        dd($stock_sementara);
+
         return response()->json(['stock' => $stocknow]);
     }
 
