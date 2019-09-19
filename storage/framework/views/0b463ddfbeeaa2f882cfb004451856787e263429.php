@@ -339,12 +339,12 @@
                                         </div>
                                         <div class="col-md-6 p-detail-product-first">
                                             <?php if($wish > 0): ?>
-                                            <button class="btn btn-product-detail-wishlist addwishlist"
+                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;
                                                 data-ciproduct="<?php echo e($row->i_code); ?>" id="<?php echo e($row->i_code); ?>" type="button"><i
                                                     class="fa fa-heart  icon-onwishlist"></i>&ensp;Add to wishlist
                                             </button>
                                             <?php else: ?>
-                                            <button class="btn btn-product-detail-wishlist addwishlist"
+                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;
                                                 data-ciproduct="<?php echo e($row->i_code); ?>" id="<?php echo e($row->i_code); ?>" type="button"><i
                                                     class="fa fa-heart"></i>&ensp;Add to wishlist
                                             </button>
@@ -583,6 +583,7 @@
                                         .innerHTML = data;
                                     document.getElementById('js-cart-nav')
                                         .innerHTML = data;
+                                    document.getElementById('js-amount-cart--mobile').innerHTML = data;
                                     $('.loader-cart-nav-wib-group').fadeOut();
                                     setTimeout(function () {
                                         $('#cart-navbar').fadeIn();

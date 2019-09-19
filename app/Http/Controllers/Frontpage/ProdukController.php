@@ -24,6 +24,7 @@ class ProdukController extends Controller
                 ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
                 ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
                 ->leftJoin('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->where('m_item.status_data','true')
                 ->groupBy('i_name');
 
@@ -51,6 +52,7 @@ class ProdukController extends Controller
                 ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
                 ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
                 ->leftJoin('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->where('m_item.status_data','true')
                 ->groupBy('i_name');
                 

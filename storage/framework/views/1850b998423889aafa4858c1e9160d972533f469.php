@@ -21,145 +21,9 @@
 
 <script src="<?php echo e(asset('assets/infinite-scroll/dist/infinite-scroll.pkgd.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/jscroll-master/dist/jquery.jscroll.min.js')); ?>"></script>
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
-    <!-- ChartJS-->
-    <!-- <script src="<?php echo e(asset('assets/js/plugins/chartJs/Chart.min.js')); ?>"></script> -->
-
-    <!-- Toastr -->
-    <!-- <script src="<?php echo e(asset('assets/js/plugins/toastr/toastr.min.js')); ?>"></script> -->
-
-    <script src="<?php echo e(asset('assets/js/plugins/dataTables/datatables.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/accounting-js/accounting.umd.js')); ?>"></script>
-    <!-- <script src="<?php echo e(asset('assets/maskmoney/jquery.maskMoney.min.js')); ?>"></script> -->
-    <script src="<?php echo e(asset('assets/select2/js/select2.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/iziToast/iziToast.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/plugins/slick/slick.min.js')); ?>"></script>
-    <!-- <script src="<?php echo e(asset('assets/js/plugins/easypiechart/jquery.easypiechart.js')); ?>"></script> -->
-
-    <!-- <script src="<?php echo e(asset('assets/js-cookie/js.cookie.js')); ?>"></script> -->
-    <script src="<?php echo e(asset('assets/js/plugins/datapicker/bootstrap-datepicker.js')); ?>"></script>
-
-    <!-- Image cropper -->
-    <script src="<?php echo e(asset('assets/jquery-cropper/cropper.min.js')); ?>"></script>
-
-    <script src="<?php echo e(asset('assets/js/plugins/sweetalert/sweetalert.min.js')); ?>"></script>
-
-    <!-- <script src="<?php echo e(asset('assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js')); ?>"></script> -->
-    <script src="<?php echo e(asset('assets/infinite-scroll/dist/infinite-scroll.pkgd.js')); ?>"></script>
-
-
-    <script>
-        $(document).ready(function() {
-
-        var availableTags = [
-          "Botol Aqua",
-          "Botol Air",
-          "Botol Cat",
-          "Galon",
-          "Botol Kosmetik"
-        ];
-        $( "#top-search" ).autocomplete({
-          source: availableTags,
-          select: noResiChange
-        });
-
-        function noResiChange(event, ui)
-        {
-            console.log('selected', ui);
-            
-            window.location.href = '<?php echo e(route('produk-detail-frontpage')); ?>';
-        }
-
-            $.extend(true, $.fn.dataTable.defaults, {
-                "responsive":true,
-                "pageLength": 10,
-                "lengthMenu": [[10, 20, 50, - 1], [10, 20, 50, "All"]],
-                "language": {
-                    "searchPlaceholder": "Cari Data",
-                    "emptyTable": "Tidak ada data",
-                    "sInfo": "Menampilkan _START_ - _END_ Dari _TOTAL_ Data",
-                    "sSearch": '<i class="fa fa-search"></i>',
-                    "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-                    "infoEmpty": "",
-                    "paginate": {
-                        "previous": "Sebelumnya",
-                        "next": "Selanjutnya",
-                    }
-                }
-
-            });
-
-            // $('.input-uang').maskMoney();
-
-            $('.select2').select2();
-
-            
-            $.fn.select2.defaults.set( 'dropdownAutoWidth', true );
-            $.fn.select2.defaults.set( 'width', 'resolve' );
-
-            setTimeout(function(){
-              $('.select2-container').css('width','100%');
-
-            },1000);
-
-            $('.select2').on('select2:opening', function(){
-
-              $('.select2-container').css('width','100%');
-
-            });
-
-            $('.data-table').DataTable();
-
-            // toastr.options = {
-            //     closeButton: true,
-            //     progressBar: true,
-            //     showMethod: 'slideDown',
-            //     timeOut: 4000
-            // };
-
-            iziToast.settings({
-                position:'topRight'//Where it will be shown. It can be bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter or center.
-            })
-
-            $('#btn-logout').click(function(){
-                Cookies.remove('tes_frontpage');
-                window.location.reload();
-            })
-
-            // var cbpAnimatedHeader = (function() {
-            //     var docElem = document.documentElement,
-            //             header = document.querySelector( '#navbar-top' ),
-            //             didScroll = false,
-            //             changeHeaderOn = 200;
-            //     function init() {
-            //         window.addEventListener( 'scroll', function( event ) {
-            //             if( !didScroll ) {
-            //                 didScroll = true;
-            //                 setTimeout( scrollPage, 250 );
-            //             }
-            //         }, false );
-            //     }
-            //     function scrollPage() {
-            //         var sy = scrollY();
-            //         if ( sy >= changeHeaderOn ) {
-            //             $(header).addClass('navbar-scroll')
-            //         }
-            //         else {
-            //             $(header).removeClass('navbar-scroll')
-            //         }
-            //         didScroll = false;
-            //     }
-            //     function scrollY() {
-            //         return window.pageYOffset || docElem.scrollTop;
-            //     }
-            //     init();
-
-            // })();
-
-        });
-    </script>
-    <script type="text/javascript">
-
+<script type="text/javascript">
     $(window).on('load', function () {
         setTimeout(removeLoaderweb, 1000);
     });
@@ -190,15 +54,43 @@
             },
         });
 
+        $(".input-search--mobile").autocomplete({
+            source: "<?php echo e(route('cari-barang')); ?>",
+            minLength: 1,
+            select: function (event, data) {
+                console.log(data);
+                setTimeout(function () {
+                    $("#js-search--mobile").click();
+                }, 200);
+            },
+        });
+
     });
     $(document).ready(function () {
         $("#dropdown-categories").click(function () {
-            $(".Sidenav-backdoor").toggleClass("w-100");
+            $(".Sidenav-backdoor-categories").toggleClass("w-100");
         });
+        $('#js-search-mobile').click(function(){
+            $('#js-sidebar-collapse').find('i').removeClass('fa-times');
+            $('#js-sidebar-collapse').find('i').addClass('fa-bars');
+            $('.navbar-collapse-custom').removeClass('active');
+            $(".Sidenav-backdoor").removeClass("w-100");
+            setTimeout(function(){
+                $('.form-group-nav--mobile').toggleClass('d-none');
+                }, 500);
+            
+            if($('.form-group-nav--mobile').hasClass('d-none')){
+            $('#js-search-mobile').find('i').removeClass('fa-search');
+            $('#js-search-mobile').find('i').addClass('fa-times');
+            }else{
+                $('#js-search-mobile').find('i').removeClass('fa-times');
+                $('#js-search-mobile').find('i').addClass('fa-search');
+            }
+        })
     });
     $(document).ready(function () {
         $(".Sidenav-backdoor").click(function () {
-            $(".Sidenav-backdoor").removeClass("w-100");
+            $(".Sidenav-backdoor-categories").removeClass("w-100");
         });
     });
     $(document).ready(function () {
@@ -328,5 +220,99 @@
         $('.dropdown-menu').on('click', function(e) {
             e.stopPropagation();
         });
-    })
+
+        <?php if(!Auth::check()): ?>
+        <?php else: ?>
+        Pusher.logToConsole = true;
+        var pusher = new Pusher("<?php echo e(env('PUSHER_APP_KEY')); ?>", {
+          cluster: "<?php echo e(env('PUSHER_APP_CLUSTER')); ?>",
+          forceTLS: true
+        });
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            if(data.message.customer.s_member == $('#idcustomernav').val()){
+                if(data.message.request == 'Pengiriman'){
+
+
+                var jumlahpembelian  = data.message.jumlahpenjualan;
+                var penjualan = data.message.item;
+                var nota = data.message.nota;
+                var harga = data.message;
+                console.log(data.message.jumlahpenjualan);
+                $('#notif-pengiriman-transaksi').text(jumlahpembelian);
+                var trHTML = '';
+                    $.each(penjualan, function (i, item) {
+                            trHTML += `<div class="group-notif-delivery  bold" style="font-size:12px;">
+                        <div class="row">
+                        <div class="col-lg-3 d-flex justify-content-center">
+                            <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="">`+item.i_name+`</div>
+                            <div class="pt-4">`+item.s_nota+`</div>
+                            <div style="color:rgba(0,0,0,.54);" class="pt-4">Total Harga : <span class="c-primary-wib">Rp. `+item.sd_price+`</span> | <span>`+item.sd_qty+`</span> Qty
+                        </div>
+                    </div>
+                </div>
+                </div>`;
+                });
+                $('body').append(`<button class="btn btn-primary d-none" id="get-notif-delivery" data-toggle="modal" data-target="#mdl-penjualan" hidden></button>`);
+                $('.content-delivery-warning').append(trHTML);
+                setTimeout(function(){
+                    $('#get-notif-delivery').click();
+                }, 1000);
+            }else{
+                var jumlahproses  = data.message.jumlahproses;
+                var itemproses = data.message.item;
+                $('#notif-proses-transaksi').text(jumlahproses);
+                var trHTML = '';
+                    $.each(itemproses, function (i, item) {
+                            trHTML += `<div class="group-notif-delivery  bold" style="font-size:12px;">
+                        <div class="row">
+                        <div class="col-lg-3 d-flex justify-content-center">
+                            <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="">`+item.i_name+`</div>
+                            <div class="pt-4">`+item.s_nota+`</div>
+                            <div style="color:rgba(0,0,0,.54);" class="pt-4">Total Harga : <span class="c-primary-wib">Rp. `+item.sd_price+`</span> | <span>`+item.sd_qty+`</span> Qty
+                        </div>
+                    </div>
+                </div>
+                </div>`;
+                });
+                $('body').append(`<button class="btn btn-primary d-none" id="get-notif-proses" data-toggle="modal" data-target="#mdl-proses" hidden></button>`);
+                $('.content-proses-warning').append(trHTML);
+                setTimeout(function(){
+                    $('#get-notif-proses').click();
+                }, 1000);
+            }
+            }else{
+                console.log('Ops');
+            }
+        });
+    <?php endif; ?>
+
+    $('#js-sidebar-collapse').on('click', function () {
+        // open or close navbar
+        $('.navbar-collapse-custom').toggleClass('active');
+        // close dropdowns
+        $('.collapse.in').toggleClass('in');
+        if($('.navbar-collapse-custom').hasClass('active')){
+            $('#js-sidebar-collapse').find('i').removeClass('fa-bars');
+            $('#js-sidebar-collapse').find('i').addClass('fa-times');
+            $(".Sidenav-backdoor").addClass("w-100");
+        }else{
+            $('#js-sidebar-collapse').find('i').removeClass('fa-times');
+            $('#js-sidebar-collapse').find('i').addClass('fa-bars');
+            $(".Sidenav-backdoor").removeClass("w-100");
+        }
+        // and also adjust aria-expanded attributes we use for the open/closed arrows
+        // in our CSS
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
+
+
+    
+    });
 </script><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_script-frontpage.blade.php ENDPATH**/ ?>
