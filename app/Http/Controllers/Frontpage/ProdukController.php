@@ -25,6 +25,7 @@ class ProdukController extends Controller
                 ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
                 ->leftJoin('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                ->leftJoin('m_diskon','d_barang','i_code')
                 ->where('m_item.status_data','true')
                 ->groupBy('i_name');
 
@@ -53,6 +54,7 @@ class ProdukController extends Controller
                 ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
                 ->leftJoin('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                ->leftJoin('m_diskon','d_barang','i_code')
                 ->where('m_item.status_data','true')
                 ->groupBy('i_name');
                 
@@ -146,6 +148,7 @@ class ProdukController extends Controller
             ->join('m_itemprice','ipr_ciproduct','i_code')
             ->join('m_itemproduct','itp_ciproduct','i_code')
             ->join('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('m_diskon','d_barang','i_code')
             ->where('i_code',$code)
             ->groupBy('i_name')
             ->get();
@@ -236,6 +239,8 @@ class ProdukController extends Controller
 
         $stocknow = $total_stock - $stock_sementara;
 
+//        dd($stock_sementara);
+
         return response()->json(['stock' => $stocknow]);
     }
 
@@ -246,6 +251,7 @@ class ProdukController extends Controller
                 ->join('m_itemproduct','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                ->leftJoin('m_diskon','d_barang','i_code')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
                 ->groupBy('i_code')
