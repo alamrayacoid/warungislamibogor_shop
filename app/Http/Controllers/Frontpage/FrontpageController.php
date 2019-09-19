@@ -18,16 +18,16 @@ class FrontpageController extends Controller
     {
             $data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
-            ->join('m_itemproduct as p','itp_ciproduct','i_code')
-            ->join('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
             ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
             ->groupBy('i_name')
             ->where('m_item.status_data','true')
+            ->select('m_item.*','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice')
             ->paginate(5);
 
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
             $gambar = DB::table('m_item')->leftjoin('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
-            $cekgambar = DB::table('m_item')->leftJoin('m_imgproduct','ip_ciproduct','i_code')->first();
+            // $cekgambar = DB::table('m_item')->leftJoin('m_imgproduct','ip_ciproduct','i_code')->first();
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
             $imageslider = DB::table('m_banner')->where('status_data','true')->where('b_statusimage','Slider')->get();
             $imagesbasic = DB::table('m_banner')->where('status_data','true')->where('b_statusimage','Basic')->get();
@@ -51,13 +51,16 @@ class FrontpageController extends Controller
              if($rekomendasi != null){
                  $rekomendasiproduk = DB::table('m_item')
                 ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
                 ->join('m_itemproduct as p','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                ->leftJoin('m_diskon','d_barang','i_code')
                 ->groupBy('i_name')
                 ->where('m_item.status_data','true')
                 ->where('itp_citype',$rekomendasi->itp_citype)
                 ->where('i_code','!=',$rekomendasi->i_code)
+                ->select('m_item.*','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice')
                 ->take(10)
                 ->get();
              }else{
@@ -76,7 +79,7 @@ class FrontpageController extends Controller
                 'rekomendasiproduk'=> $rekomendasiproduk,
                 'gambar' => $gambar,
                 'wish' => $wish,
-                'cekgambar'=> $cekgambar,
+                // 'cekgambar'=> $cekgambar,
                 'kategori' => $kategori,
                 'imgslider'=> $imageslider,
                 'imgbasic'=> $imagesbasic,

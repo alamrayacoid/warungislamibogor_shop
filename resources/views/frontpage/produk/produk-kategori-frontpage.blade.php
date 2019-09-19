@@ -259,6 +259,8 @@
                     @foreach($test as $row)
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
+                            <input type="hidden" class="discount-percent-val" value="{{$row->d_value}}" name="">
+                            <input type="hidden" value="{{$row->ipr_sunitprice}}" class="harga" name="">
                             <div class="product-box">
                                 @foreach($wish as $wis)
                             @if(Auth::check())
@@ -307,6 +309,15 @@
                                         <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
                                             class="title-product-item">{{$row->i_name}}</a>
                                     </div>
+                                    @if($row->d_value == null)
+                                    <div class="discount-product-item">
+                                        
+                                    </div>
+                                    @else
+                                    <div class="discount-product-item">
+                                        <span class="discount-value">{{$row->d_value}}%</span><span class="discount-price"> Rp. {{$row->ipr_sunitprice}}</span>
+                                    </div>
+                                    @endif
                                     <div class="footer-product-item">
                                         <div class="">
                                             <i class="fa fa-star f-14 c-gold"></i>
@@ -315,7 +326,12 @@
                                             <i class="fa fa-star c-gold"></i>
                                             <i class="fa fa-star c-grey"></i>
                                         </div>
+                                        @if($row->d_value == null)
                                         <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
+                                        @else
+                                        <div class="price-product-item">Rp. {{$row->ipr_sunitprice - $row->ipr_sunitprice * $row->d_value / 100}}</div>
+
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -357,7 +373,14 @@
                 },
 
             })
-        })
+        });
+        // $('.column-product-item').each(function(){
+        // var diskon = $(this).find('.discount-percent-val').val();
+        // var harga = $(this).find('.harga').val();
+        // var diskontotal = harga * diskon / 100;
+        // var hargareal = harga - diskontotal;
+        // $('.price-product-item').text(harga);
+        // })
 
     });
 </script>
