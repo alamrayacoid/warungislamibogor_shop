@@ -302,11 +302,14 @@
                                     <p class=""><i class="fa fa-archive"></i>  Warung Islami Bogor</p>
                                     <p class=""><i class="fa fa-clock-o"></i>  05 Januari 2019</p>
                                     <p class=""><i class="fa fa-map-marker"></i>  Bogor</p>
-
                                     <div class="m-t-md">
+                                        <?php if($row->d_value == null): ?>
+                                        <?php else: ?>
+                                        <span class="product-detail-percent">Rp. <?php echo e($row->ipr_sunitprice); ?></span>
                                         <h2 class="product-detail-price">Rp. <?php echo e($row->ipr_sunitprice); ?> <small
                                                 class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
                                         </h2>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 

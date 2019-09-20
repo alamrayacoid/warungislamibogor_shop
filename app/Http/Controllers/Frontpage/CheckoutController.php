@@ -135,14 +135,8 @@ class CheckoutController extends Controller
 
             if ($cek_nota < 1) { 
 
-                if ($request->metode == 'Tunai') {
-                    $stat_pay = 'Y';
-                    $method_pay = 'T';
-
-                }else{
                     $stat_pay = 'N';
-                    $method_pay = 'N';
-                }
+                    $method_pay = 'T';
 
                 DB::table('d_sales')->insert([
                     's_id' => $urutan,
