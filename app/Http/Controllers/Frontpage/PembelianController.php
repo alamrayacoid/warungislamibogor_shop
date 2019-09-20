@@ -271,7 +271,8 @@ class PembelianController extends Controller
                 ->leftJoin('d_city','c_id','=','s_city')
                 ->leftJoin('d_district','d_id','=','s_district')
                 ->orderBy('s_date','desc')
-                ->where('s_paystatus','N');
+                ->where('s_paystatus','N')
+                ->where('s_isapprove','P');
         }else if($request->category == 'Total Belanja'){
             $data = DB::table('d_sales')
                 ->where('s_member',Auth::user()->cm_code)
@@ -279,14 +280,16 @@ class PembelianController extends Controller
                 ->leftJoin('d_city','c_id','=','s_city')
                 ->leftJoin('d_district','d_id','=','s_district')
                 ->orderBy('s_total','desc')
-                ->where('s_paystatus','N');
+                ->where('s_paystatus','N')
+                ->where('s_isapprove','P');
         }else{
             $data = DB::table('d_sales')
                 ->where('s_member',Auth::user()->cm_code)
                 ->leftJoin('d_province','p_id','=','s_province')
                 ->leftJoin('d_city','c_id','=','s_city')
                 ->leftJoin('d_district','d_id','=','s_district')
-                ->where('s_paystatus','N');
+                ->where('s_paystatus','N')
+                ->where('s_isapprove','P');
         }
 
 
@@ -436,7 +439,8 @@ class PembelianController extends Controller
                 ->leftJoin('d_city','c_id','=','s_city')
                 ->leftJoin('d_district','d_id','=','s_district')
                 ->orderBy('s_date','desc')
-                ->whereIn('s_delivered',['L','P']);
+                ->whereIn('s_delivered',['L','P'])
+                ->where('s_isapprove','Y');
         }else if($request->category == 'Total Belanja'){
             $data = DB::table('d_sales')
                 ->where('s_member',Auth::user()->cm_code)
@@ -444,14 +448,16 @@ class PembelianController extends Controller
                 ->leftJoin('d_city','c_id','=','s_city')
                 ->leftJoin('d_district','d_id','=','s_district')
                 ->orderBy('s_total','desc')
-                ->whereIn('s_delivered',['L','P']);
+                ->whereIn('s_delivered',['L','P'])
+                ->where('s_isapprove','Y');
         }else{
             $data = DB::table('d_sales')
                 ->where('s_member',Auth::user()->cm_code)
                 ->leftJoin('d_province','p_id','=','s_province')
                 ->leftJoin('d_city','c_id','=','s_city')
                 ->leftJoin('d_district','d_id','=','s_district')
-                ->whereIn('s_delivered',['L','P']);
+                ->whereIn('s_delivered',['L','P'])
+                ->where('s_isapprove','Y');
         }
 
 
