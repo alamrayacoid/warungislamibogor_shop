@@ -253,16 +253,35 @@
                                 <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
                                     class="title-product-item"><?php echo e($row->i_name); ?></a>
                             </div>
-                            <div class="footer-product-item">
-                                <div class="">
-                                    <i class="fa fa-star f-14 c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-grey"></i>
+                            <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="discount-product-item">
+                                        
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="discount-product-item">
+                                        <span class="discount-value"><?php echo e(number_format(($row->ipr_sunitprice - $row->gpp_sellprice) / ($row->ipr_sunitprice / 100))); ?>%</span><span class="discount-price"> Rp. <?php echo e($row->ipr_sunitprice); ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                <div class="footer-product-item">
+                                    <div class="">
+                                        <i class="fa fa-star f-14 c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-grey"></i>
+                                    </div>
+                                    <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->ipr_sunitprice); ?>
+
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->gpp_sellprice); ?>
+
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
-                            </div>
                         </div>
                     </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -299,16 +318,35 @@
                                 <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($rows->i_code); ?>"
                                     class="title-product-item"><?php echo e($rows->i_name); ?></a>
                             </div>
-                            <div class="footer-product-item">
-                                <div class="">
-                                    <i class="fa fa-star f-14 c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-gold"></i>
-                                    <i class="fa fa-star c-grey"></i>
+                            <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="discount-product-item">
+                                        
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="discount-product-item">
+                                        <span class="discount-value"><?php echo e(number_format(($row->ipr_sunitprice - $row->gpp_sellprice) / ($row->ipr_sunitprice / 100))); ?>%</span><span class="discount-price"> Rp. <?php echo e($row->ipr_sunitprice); ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                <div class="footer-product-item">
+                                    <div class="">
+                                        <i class="fa fa-star f-14 c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-grey"></i>
+                                    </div>
+                                    <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->ipr_sunitprice); ?>
+
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->gpp_sellprice); ?>
+
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="price-product-item">Rp. <?php echo e($rows->ipr_sunitprice); ?></div>
-                            </div>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -375,6 +413,15 @@
                                     <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
                                         class="title-product-item"><?php echo e($row->i_name); ?></a>
                                 </div>
+                                <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="discount-product-item">
+                                        
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="discount-product-item">
+                                        <span class="discount-value"><?php echo e(number_format(($row->ipr_sunitprice - $row->gpp_sellprice) / ($row->ipr_sunitprice / 100))); ?>%</span><span class="discount-price"> Rp. <?php echo e($row->ipr_sunitprice); ?></span>
+                                    </div>
+                                    <?php endif; ?>
                                 <div class="footer-product-item">
                                     <div class="">
                                         <i class="fa fa-star f-14 c-gold"></i>
@@ -383,9 +430,17 @@
                                         <i class="fa fa-star c-gold"></i>
                                         <i class="fa fa-star c-grey"></i>
                                     </div>
-                                    <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?>
+                                    <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->ipr_sunitprice); ?>
 
                                     </div>
+                                    <?php else: ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->gpp_sellprice); ?>
+
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
