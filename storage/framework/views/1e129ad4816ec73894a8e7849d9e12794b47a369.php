@@ -311,6 +311,7 @@
                                             class="title-product-item"><?php echo e($row->i_name); ?></a>
                                     </div>
                                     <?php if($row->gpp_sellprice == null): ?>
+
                                     <div class="discount-product-item">
                                         
                                     </div>

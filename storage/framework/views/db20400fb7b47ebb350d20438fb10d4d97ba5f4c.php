@@ -319,12 +319,14 @@
                                     class="title-product-item"><?php echo e($rows->i_name); ?></a>
                             </div>
                             <?php if($rows->gpp_sellprice == null): ?>
+                            
                                     <div class="discount-product-item">
                                         
                                     </div>
                                     <?php else: ?>
                                     <div class="discount-product-item">
                                         <span class="discount-value"><?php echo e(number_format(($rows->ipr_sunitprice - $rows->gpp_sellprice) / ($rows->ipr_sunitprice / 100))); ?>%</span><span class="discount-price"> Rp. <?php echo e($rows->ipr_sunitprice); ?></span>
+
                                     </div>
                                     <?php endif; ?>
                                 <div class="footer-product-item">
@@ -343,6 +345,7 @@
                                     <?php else: ?>
                                     <div class="price-product-item">
                                         Rp. <?php echo e($rows->gpp_sellprice); ?>
+
 
                                     </div>
                                     <?php endif; ?>

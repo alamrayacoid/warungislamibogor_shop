@@ -135,14 +135,8 @@ class CheckoutController extends Controller
 
             if ($cek_nota < 1) { 
 
-                if ($request->metode == 'Tunai') {
-                    $stat_pay = 'Y';
-                    $method_pay = 'T';
-
-                }else{
                     $stat_pay = 'N';
-                    $method_pay = 'N';
-                }
+                    $method_pay = 'T';
 
                 DB::table('d_sales')->insert([
                     's_id' => $urutan,
@@ -158,7 +152,7 @@ class CheckoutController extends Controller
                     's_address' => $request->alamat,
                     's_paystatus' => $stat_pay,
                     's_paymethod' => $method_pay,
-                    's_isapprove' => 'N',
+                    's_isapprove' => 'P',
                     's_created_at' => Carbon::now('Asia/Jakarta'),
                     's_created_by' => Auth::user()->cm_code,
                 ]);

@@ -311,8 +311,10 @@
                                     <?php endif; ?>
                                         <span class="product-detail-percent">Rp. <?php echo e($row->ipr_sunitprice); ?></span>
                                         <h2 class="product-detail-price">Rp. <?php echo e($row->gpp_sellprice); ?> <small
+
                                                 class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
                                         </h2>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 
