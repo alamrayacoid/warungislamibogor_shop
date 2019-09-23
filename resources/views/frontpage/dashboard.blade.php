@@ -579,7 +579,7 @@
                 infinite: true,
                 variableWidth: true
             });
-            $('.btn-wishlist').click(function () {
+            $('.infinite-scroll').on('click', '.btn-wishlist', function () {
                 var code = $(this).data('ciproduct');
                 $(this).find('i').toggleClass('fa far');
                 $(this).parents('.product-wishlist').toggleClass('onwishlist');
