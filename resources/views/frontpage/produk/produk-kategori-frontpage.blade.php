@@ -259,7 +259,6 @@
                     @foreach($test as $row)
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
-                            <input type="hidden" class="discount-percent-val" value="{{$row->d_value}}" name="">
                             <input type="hidden" value="{{$row->ipr_sunitprice}}" class="harga" name="">
                             <div class="product-box">
                                 @foreach($wish as $wis)
@@ -364,6 +363,7 @@
         $('#ncart').html($('.ncart').length);
 
         $('.btn-wishlist').click(function () {
+            
             var code = $(this).data('ciproduct');
             $(this).find('i').toggleClass('fa far');
             $(this).parents('.product-wishlist').toggleClass('onwishlist');

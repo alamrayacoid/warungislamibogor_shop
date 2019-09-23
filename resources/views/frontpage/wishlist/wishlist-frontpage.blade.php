@@ -458,11 +458,15 @@
                                             </div>
                                             @endif
                                             @endforeach
+                                            @if($rows->ip_path == null)
+                                            <div class="image-product-box"
+                                            style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                                            alt="Sorry! Image not available at this time">
+                                            </div>
+                                            @endif
                                             <div class="caption">
                                                 @foreach($wish as $wis)
-                                                @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct
-                                                ==
-                                                $row->i_code)
+                                                @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
                                                 <div class="product-wishlist onproduk-page onwishlist">
                                                     <button data-ciproduct="{{$wis->wl_ciproduct}}"
                                                         data-member="{{Auth::user()->cm_code}}"

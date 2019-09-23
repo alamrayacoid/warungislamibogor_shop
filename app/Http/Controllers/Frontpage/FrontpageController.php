@@ -18,7 +18,10 @@ class FrontpageController extends Controller
     {
             $data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
-            ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
+            ->leftJoin('m_groupperprice', function($join){
+                $join->on('m_groupperprice.gpp_ciproduct','=','m_item.i_code')
+                ->where('m_groupperprice.status_data','=','true');
+            })
             ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
             ->groupBy('i_name')
             ->where('m_item.status_data','true')
@@ -51,7 +54,10 @@ class FrontpageController extends Controller
              if($rekomendasi != null){
                  $rekomendasiproduk = DB::table('m_item')
                 ->join('m_itemprice','ipr_ciproduct','i_code')
-                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
+                ->leftJoin('m_groupperprice', function($join){
+                $join->on('m_groupperprice.gpp_ciproduct','=','m_item.i_code')
+                ->where('m_groupperprice.status_data','=','true');
+                })
                 ->join('m_itemproduct as p','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')

@@ -456,11 +456,15 @@
                                             </div>
                                             <?php endif; ?>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($rows->ip_path == null): ?>
+                                            <div class="image-product-box"
+                                            style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
+                                            alt="Sorry! Image not available at this time">
+                                            </div>
+                                            <?php endif; ?>
                                             <div class="caption">
                                                 <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct
-                                                ==
-                                                $row->i_code): ?>
+                                                <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
                                                 <div class="product-wishlist onproduk-page onwishlist">
                                                     <button data-ciproduct="<?php echo e($wis->wl_ciproduct); ?>"
                                                         data-member="<?php echo e(Auth::user()->cm_code); ?>"

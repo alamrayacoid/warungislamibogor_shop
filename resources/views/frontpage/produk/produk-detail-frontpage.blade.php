@@ -285,6 +285,7 @@
                                 </div>
                             </div>
                             @foreach($data as $row)
+                            <input type="hidden" value="{{$row->i_code}}" id="codedetailproduk" name="">
                             <div class="col-md-7">
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product">{{$row->i_name}}
@@ -418,6 +419,12 @@
                     </div>
                     @endif
                     @endforeach
+                    @if($rows->ip_path == null)
+                            <div class="image-product-box"
+                                  style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                            alt="Sorry! Image not available at this time">
+                            </div>
+                    @endif
                     <div class="caption">
                         <div class="title-product-group">
                             <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}"
@@ -562,7 +569,7 @@
                         if (get['error'] == 'error') {
                             iziToast.error({
                                 title: 'Gagal!',
-                                message: 'Cabang dan Merk kosong / Barang Sudah Di Keranjang',
+                                message: 'Barang Sudah Di Keranjang',
                             });
                             $('.loader-cart-nav-wib-group').fadeOut();
                             $('.nav-link-shopping-cart').addClass('open');
@@ -601,10 +608,6 @@
                                 title: 'Gagal!',
                                 message: 'Stock Gudang Tinggal ' + get['stock'],
                             });
-                            iziToast.warning({
-                                title: 'Peringatan!',
-                                message: 'Cek Merk Yang Dimasukkan',
-                            });
                         }
                     },
                     error: function (xhr, textStatus, errorThrow) {
@@ -617,7 +620,7 @@
             }
         });
         $('.addwishlist').click(function () {
-            var code = $(this).data('ciproduct');
+            var code = $('#codedetailproduk').val();
             $('.addwishlist').find('i').toggleClass('icon-onwishlist');
 
             $.ajax({

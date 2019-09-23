@@ -13,10 +13,15 @@ class WishlistController extends Controller
     public function wishlist()
     {
     	$data = DB::table('m_item')
-            ->join('m_itemprice','ipr_ciproduct','i_code')
-            ->join('m_itemproduct','itp_ciproduct','i_code')
-            ->join('m_itemtype','ity_code','itp_citype')
-            ->join('d_wishlist','wl_ciproduct','i_code')
+            ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+            ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+            ->leftJoin('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('d_wishlist','wl_ciproduct','i_code')
+            ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+            ->leftJoin('m_groupperprice', function($join){
+                $join->on('m_groupperprice.gpp_ciproduct','=','m_item.i_code')
+                ->where('m_groupperprice.status_data','=','true');
+            })
             ->where('wl_cmember',Auth::user()->cm_code)
             ->where('d_wishlist.status_data','true')
             ->groupBy('i_name')
@@ -24,22 +29,33 @@ class WishlistController extends Controller
 			
 			$datas = DB::table('d_lastseen')
 			->join('m_item','i_code','ls_cproduct')
-			->join('m_itemprice','ipr_ciproduct','i_code')
-            ->join('m_itemproduct','itp_ciproduct','i_code')
-            ->join('m_itemtype','ity_code','itp_citype')
+			->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+            ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+            ->leftJoin('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+            ->leftJoin('m_groupperprice', function($join){
+                $join->on('m_groupperprice.gpp_ciproduct','=','m_item.i_code')
+                ->where('m_groupperprice.status_data','=','true');
+            })
 			->where('d_lastseen.ls_ccustomer',Auth::user()->cm_code)
 			->where('m_item.status_data','true')
 			->get();
 			$getlast = DB::table('d_lastseen')
 					->join('m_item','i_code','ls_cproduct')
-					->join('m_itemproduct','itp_ciproduct','i_code')
-					->join('m_itemtype','ity_code','itp_citype')
+					->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+					->leftJoin('m_itemtype','ity_code','itp_citype')
+					->leftJoin('m_imgproduct','ip_ciproduct','i_code')
 					->where('d_lastseen.ls_ccustomer',Auth::user()->cm_code)
 					->first();
 			$lastseen = DB::table('m_item')
-			->join('m_itemprice','ipr_ciproduct','i_code')
-            ->join('m_itemproduct','itp_ciproduct','i_code')
-            ->join('m_itemtype','ity_code','itp_citype')
+			->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+            ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+            ->leftJoin('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+            ->leftJoin('m_groupperprice', function($join){
+                $join->on('m_groupperprice.gpp_ciproduct','=','m_item.i_code')
+                ->where('m_groupperprice.status_data','=','true');
+            })
             ->where('m_item.status_data','true')
             ->where('itp_citype',$getlast->itp_citype)
 			->where('i_code','!=',$getlast->ls_cproduct)

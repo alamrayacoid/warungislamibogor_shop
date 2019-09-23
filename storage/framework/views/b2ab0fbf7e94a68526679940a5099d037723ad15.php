@@ -259,7 +259,6 @@
                     <?php $__currentLoopData = $test; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
-                            <input type="hidden" class="discount-percent-val" value="<?php echo e($row->d_value); ?>" name="">
                             <input type="hidden" value="<?php echo e($row->ipr_sunitprice); ?>" class="harga" name="">
                             <div class="product-box">
                                 <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -367,6 +366,7 @@
         $('#ncart').html($('.ncart').length);
 
         $('.btn-wishlist').click(function () {
+            
             var code = $(this).data('ciproduct');
             $(this).find('i').toggleClass('fa far');
             $(this).parents('.product-wishlist').toggleClass('onwishlist');
