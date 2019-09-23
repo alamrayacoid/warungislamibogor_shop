@@ -259,6 +259,8 @@
                     <?php $__currentLoopData = $test; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
+                            <input type="hidden" class="discount-percent-val" value="<?php echo e($row->d_value); ?>" name="">
+                            <input type="hidden" value="<?php echo e($row->ipr_sunitprice); ?>" class="harga" name="">
                             <div class="product-box">
                                 <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if(Auth::check()): ?>
@@ -307,16 +309,35 @@
                                         <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
                                             class="title-product-item"><?php echo e($row->i_name); ?></a>
                                     </div>
-                                    <div class="footer-product-item">
-                                        <div class="">
-                                            <i class="fa fa-star f-14 c-gold"></i>
-                                            <i class="fa fa-star c-gold"></i>
-                                            <i class="fa fa-star c-gold"></i>
-                                            <i class="fa fa-star c-gold"></i>
-                                            <i class="fa fa-star c-grey"></i>
-                                        </div>
-                                        <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
+                                    <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="discount-product-item">
+                                        
                                     </div>
+                                    <?php else: ?>
+                                    <div class="discount-product-item">
+                                        <span class="discount-value"><?php echo e(number_format(($row->ipr_sunitprice - $row->gpp_sellprice) / ($row->ipr_sunitprice / 100))); ?>%</span><span class="discount-price"> Rp. <?php echo e($row->ipr_sunitprice); ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                <div class="footer-product-item">
+                                    <div class="">
+                                        <i class="fa fa-star f-14 c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-gold"></i>
+                                        <i class="fa fa-star c-grey"></i>
+                                    </div>
+                                    <?php if($row->gpp_sellprice == null): ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->ipr_sunitprice); ?>
+
+                                    </div>
+                                    <?php else: ?>
+                                    <div class="price-product-item">
+                                        Rp. <?php echo e($row->gpp_sellprice); ?>
+
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -358,7 +379,14 @@
                 },
 
             })
-        })
+        });
+        // $('.column-product-item').each(function(){
+        // var diskon = $(this).find('.discount-percent-val').val();
+        // var harga = $(this).find('.harga').val();
+        // var diskontotal = harga * diskon / 100;
+        // var hargareal = harga - diskontotal;
+        // $('.price-product-item').text(harga);
+        // })
 
     });
 </script>
