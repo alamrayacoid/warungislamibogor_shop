@@ -309,11 +309,11 @@
                                                 class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
                                         </h2>
                                     @else
-                                    @endif
                                         <span class="product-detail-percent">Rp. {{$row->ipr_sunitprice}}</span>
                                         <h2 class="product-detail-price">Rp. {{$row->gpp_sellprice}} <small
                                                 class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
                                         </h2>
+                                        @endif
                                     </div>
                                 </div>
 
