@@ -304,13 +304,16 @@
                                     <p class=""><i class="fa fa-clock-o"></i>  05 Januari 2019</p>
                                     <p class=""><i class="fa fa-map-marker"></i>  Bogor</p>
                                     <div class="m-t-md">
-                                        @if($row->d_value == null)
-                                        @else
-                                        <span class="product-detail-percent">Rp. {{$row->ipr_sunitprice}}</span>
-                                        <h2 class="product-detail-price">Rp. {{$row->ipr_sunitprice}} <small
+                                    @if($row->gpp_sellprice == null)
+                                    <h2 class="product-detail-price">Rp. {{$row->ipr_sunitprice}} <small
                                                 class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
                                         </h2>
-                                        @endif
+                                    @else
+                                    @endif
+                                        <span class="product-detail-percent">Rp. {{$row->ipr_sunitprice}}</span>
+                                        <h2 class="product-detail-price">Rp. {{$row->gpp_sellprice}} <small
+                                                class="text-info-price">Tidak Termasuk Pajak pengiriman</small>
+                                        </h2>
                                     </div>
                                 </div>
 

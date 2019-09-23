@@ -55,7 +55,6 @@ class FrontpageController extends Controller
                 ->join('m_itemproduct as p','itp_ciproduct','i_code')
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
-                ->leftJoin('m_diskon','d_barang','i_code')
                 ->groupBy('i_name')
                 ->where('m_item.status_data','true')
                 ->where('itp_citype',$rekomendasi->itp_citype)

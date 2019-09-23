@@ -26,7 +26,6 @@ class ProdukController extends Controller
                 ->leftJoin('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
-                ->leftJoin('m_diskon','d_barang','i_code')
                 ->where('m_item.status_data','true')
                 ->groupBy('i_name');
 
@@ -56,7 +55,6 @@ class ProdukController extends Controller
                 ->leftJoin('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
-                ->leftJoin('m_diskon','d_barang','i_code')
                 ->where('m_item.status_data','true')
                 ->groupBy('i_name');
                 
@@ -149,8 +147,8 @@ class ProdukController extends Controller
     	$data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
             ->join('m_itemproduct','itp_ciproduct','i_code')
-            ->join('m_itemtype','ity_code','itp_citype')
-            ->leftJoin('m_diskon','d_barang','i_code')
+            ->join('m_itemtype','ity_code','itp_citype') 
+            ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')           
             ->where('i_code',$code)
             ->groupBy('i_name')
             ->get();
@@ -158,6 +156,7 @@ class ProdukController extends Controller
             ->join('m_itemprice','ipr_ciproduct','i_code')
             ->join('m_itemproduct','itp_ciproduct','i_code')
             ->join('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
             ->where('i_code',$code)
             ->groupBy('i_name')
             ->first();
@@ -165,6 +164,7 @@ class ProdukController extends Controller
             ->join('m_itemprice','ipr_ciproduct','i_code')
             ->join('m_itemproduct','itp_ciproduct','i_code')
             ->join('m_itemtype','ity_code','itp_citype')
+            ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
             ->groupBy('i_name')
             ->where('m_item.status_data','true')
             ->where('itp_citype',$datas->itp_citype)
@@ -254,7 +254,6 @@ class ProdukController extends Controller
                 ->join('m_itemtype','ity_code','itp_citype')
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
-                ->leftJoin('m_diskon','d_barang','i_code')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
                 ->groupBy('i_code')
