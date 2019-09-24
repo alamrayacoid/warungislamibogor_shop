@@ -587,6 +587,7 @@ class PembelianController extends Controller
                             </span> 
                             </div> <div class="col-lg-4 col-md-4">
                             <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
+                            <button class="btn btn-delivery-transaction detail_transaksi" id="detail_pengiriman" data-detail="'.route('detail_pengiriman', ['id'=> $data->s_id]).'">Lacak Pengiriman</button>
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
@@ -594,7 +595,16 @@ class PembelianController extends Controller
         ->rawColumns(['all'])
         ->make(true);
     }
-
+    public function detail_pengiriman($id){
+        $datas = DB::table('d_sales')->where('s_id',$id)->groupBy('s_nota')->first();
+        $tracking = DB::table('d_salestracking')->where('st_sales',$datas->s_id)
+        ->select(DB::raw("(DATE_FORMAT(st_date,'%d %M %Y %h:%i:%s')) as tanggal"),'st_position')
+        ->get();
+        return response()->json(array(
+            'data' => $datas,
+            'tracking' => $tracking,
+        ));
+    }
     public function table_proses(Request $request)
     {
         if ($request->category == 'Terbaru') {

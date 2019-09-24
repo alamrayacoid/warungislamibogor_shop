@@ -1746,6 +1746,42 @@
                 $('#itemproduct-group-paymentstatus').append(appendini);
         }
     });
+        $('#detail_4').on('click', '#detail_pengiriman[data-detail]', function (e) {
+            e.preventDefault();
+            var url = $(this).data('detail');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    jQuery('#ekspedisi').text(response.data.s_expedition);
+                    jQuery('#resi').text(response.data.s_resi);
+                    $('#biayapengiriman').html('Rp. ' + accounting.formatNumber(response.data
+                        .s_payexpedition));
+                    if(response.data.s_delivered == 'P'){
+                        $('#statuspengiriman').text('Sedang Dikirim')
+                    }else if(response.data.s_delivered == 'L'){
+                        $('#statuspengiriman').text('Pengiriman Terhambat');
+                    }
+                    // jQuery('#nama_pegawai').text(data.pegawai.ap_name);
+                    // jQuery('#tanggal_awal').text(data.pegawai.ap_startdate);
+                    // jQuery('#tanggal_akhir').text(data.pegawai.ap_enddate);
+                    jQuery('#modal-pengiriman').modal('show');
+                    // var array = data.agenda;
+                    // for (let i = 0; i < array.length; i++) {
+
+                    //     console.log(array[i]);
+                    // }
+                    let datatracking = response.tracking;
+                    let trHTML = '';
+                            $.each(datatracking, function (i, item) {
+                            trHTML += '<tr><td width="30%">' + item.tanggal + '</td><td>' + item.st_position + '</td></tr>';
+                        });
+                    $('#table_modal_detailtracking tbody').html(trHTML);
+                }
+
+            });
+        });
 </script>
 
 @endsection

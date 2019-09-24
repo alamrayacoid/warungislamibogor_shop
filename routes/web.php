@@ -69,6 +69,7 @@ Route::post('pembelian/gambar', 'Frontpage\PembelianController@bayar')->name('ba
 Route::get('pembelian/diproses', 'Frontpage\PembelianController@pembelian')->name('pembelian-diproses-frontpage');
 // Status dikirim
 Route::get('pembelian/dikirim', 'Frontpage\PembelianController@pembelian')->name('pembelian-dikirim-frontpage');
+Route::get('pembelian/detail_pengiriman/{id}','Frontpage\PembelianController@detail_pengiriman')->name('detail_pengiriman');
 
 // Wishlist
 Route::get('/wishlist', 'Frontpage\WishlistController@wishlist')->name('wishlist-frontpage');

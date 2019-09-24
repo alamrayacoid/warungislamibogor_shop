@@ -381,9 +381,9 @@
                             <?php endif; ?>
                             <?php else: ?>
                             <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button>
+
+                                <a href="<?php echo e(route('login-frontpage')); ?>"><button class="btn btn-circle btn-lg btn-wishlist" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button></a>
                             </div>
                             <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -585,7 +585,7 @@
                 infinite: true,
                 variableWidth: true
             });
-            $('.btn-wishlist').click(function () {
+            $('.infinite-scroll').on('click', '.btn-wishlist', function () {
                 var code = $(this).data('ciproduct');
                 $(this).find('i').toggleClass('fa far');
                 $(this).parents('.product-wishlist').toggleClass('onwishlist');

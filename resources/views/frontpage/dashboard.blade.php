@@ -378,9 +378,9 @@
                             @endif
                             @else
                             <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
-                                    id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button>
+
+                                <a href="{{route('login-frontpage')}}"><button class="btn btn-circle btn-lg btn-wishlist" type="button" title="Tambah ke wishlist"><i
+                                        class="far fa-heart"></i></button></a>
                             </div>
                             @endif
                             @endforeach
