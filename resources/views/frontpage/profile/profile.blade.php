@@ -32,6 +32,19 @@
 .table-responsive{
     border:0 !important;   
     }
+    .fs-12{
+        font-size: 12px;
+    }
+    .mb-0{
+        margin-bottom: 0 !important;
+    }
+    .label-profile::after{
+        content: "*";
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+        padding-left: 5px;
+    }
 </style>
 @endsection
 @section('content')
@@ -51,6 +64,8 @@
         <input type="text" id="inputemail" value="{{Auth::user()->cm_email}}" name="email" hidden>
         <input type="text" id="inputponsel" value="{{Auth::user()->cm_nphone}}" name="nphone" hidden>
         <input type="text" id="inputpassword" name="newpassword" hidden>
+        <input type="text" id="inputpasswordlama" name="oldpassword" hidden>
+        <input type="text" id="inputpasswordkonfirmasi" name="confirmpassword" hidden>
         <input type="text" id="inputrekening" value="{{Auth::user()->cm_bank}}" name="bank" hidden>
         <input type="text" id="inputnomorrekening" value="{{Auth::user()->cm_nbank}}" name="nbank" hidden>
         <input type="text" id="inputjkel" value="{{Auth::user()->cm_gender}}" name="gender" hidden>
@@ -511,8 +526,14 @@
                     message: 'Password Baru Wajib Diisi',
                 });
             } else {
-                var passwordbaru = $('#mdlpassword').val();
+                let passwordbaru = $('#mdlpassword').val();
+                let passwordlama = $('#mdlpasswordlama').val();
+                let passwordkonfirmasi = $('#mdlpasswordkonfirmasi').val();
+
                 $('#inputpassword').val(passwordbaru);
+                $('#inputpasswordlama').val(passwordlama);
+                $('#inputpasswordkonfirmasi').val(passwordkonfirmasi);
+
                 $('#mdl-password').modal('hide');
                 setTimeout(function () {
                     $('.simpanprofile').click();
@@ -574,13 +595,25 @@
                 type: "post",
                 data: $("#frmeditprofile").serialize(),
                 success: function (data) {
-                    iziToast.success({
+                    if(data.status == 'password beda'){
+                        iziToast.error({
+                        title: 'Peringatan!',
+                        message: 'Password baru dan Konfirmasi password baru tidak sama',
+                    });
+                    }else if(data.status == 'password lama beda'){
+                        iziToast.error({
+                        title: 'Peringatan!',
+                        message: 'Password lama anda tidak sama dengan yang sebelumnya',
+                    }); 
+                    }else{
+                        iziToast.success({
                         title: 'Berhasil!',
                         message: 'Berhasil Memperbarui Profile',
                     });
                     setTimeout(function () {
                         location.reload();
                     }, 1000);
+                    }
 
                 },
                 error: function (xhr, textStatus, errorThrowl) {

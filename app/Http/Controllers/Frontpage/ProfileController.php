@@ -41,22 +41,40 @@ class ProfileController extends Controller
     public function update(Request $request)
     {	
         if ($request->newpassword != null) {
-        DB::table('m_member')->where('cm_code',Auth::user()->cm_code)->update([
-            'cm_name' => Auth::user()->cm_name,
-            'cm_code' => Auth::user()->cm_code,
-            'cm_email' => $request->email,
-            'cm_nphone' => $request->nphone,
-            'cm_city' => $request->kabupaten,
-            'cm_province' => $request->provinsi,
-            'cm_district' => $request->kecamatan,
-            'cm_address' => $request->address,
-            'cm_gender' => $request->gender,
-            'cm_postalcode'=> $request->kodepos,
-            'password' => bcrypt($request->newpassword),
-            'cm_bank' => $request->bank,
-            'cm_nbank' => $request->nbank,
-            'cm_update_at' => Carbon::now('Asia/Jakarta'),
-        ]);
+         if(Hash::check($request->oldpassword,Auth::user()->password)){
+            if($request->newpassword == $request->confirmpassword){
+                DB::table('m_member')->where('cm_code',Auth::user()->cm_code)->update([
+                    'cm_name' => Auth::user()->cm_name,
+                    'cm_code' => Auth::user()->cm_code,
+                    'cm_email' => $request->email,
+                    'cm_nphone' => $request->nphone,
+                    'cm_city' => $request->kabupaten,
+                    'cm_province' => $request->provinsi,
+                    'cm_district' => $request->kecamatan,
+                    'cm_address' => $request->address,
+                    'cm_gender' => $request->gender,
+                    'cm_postalcode'=> $request->kodepos,
+                    'password' => bcrypt($request->newpassword),
+                    'cm_bank' => $request->bank,
+                    'cm_nbank' => $request->nbank,
+                    'cm_update_at' => Carbon::now('Asia/Jakarta'),
+                ]);
+            return response()->json([
+                'status' => 'success',
+            ]);
+
+            }else{
+            return response()->json([
+                'status' => 'password beda',
+            ]);
+
+            }
+         }else{
+            return response()->json([
+                'status' => 'password lama beda',
+            ]);
+         }
+        
         }else{
             DB::table('m_member')->where('cm_code',Auth::user()->cm_code)->update([
                 'cm_name' => Auth::user()->cm_name,
@@ -73,6 +91,10 @@ class ProfileController extends Controller
                 'cm_nbank' => $request->nbank,
                 'cm_update_at' => Carbon::now('Asia/Jakarta'),
                 ]);
+
+            return response()->json([
+                'status' => 'success',
+            ]);
         }
 
         $datagambar = DB::table('m_member')->where([

@@ -9,11 +9,19 @@
             <div class="modal-body">
                 <h5>Setting Password</h5>
                 <p>Anda dapat mengubah pengaturan akun Password anda sesuai keinginan.</p>
-                <div class="form-group padding-15-0">
-                <label class="label-profile">Password Baru</label>
-                    <input type="password" class="form-control" placeholder="Password Baru Akun Anda" id="mdlpassword">
+                <div class="form-group mb-0">
+                <label class="label-profile">Password Lama</label>
+                    <input type="password" class="form-control fs-12" placeholder="Password Baru Akun Anda" id="mdlpasswordlama">
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="form-group mb-0">
+                <label class="label-profile">Password Baru</label>
+                    <input type="password" class="form-control fs-12" placeholder="Password Baru Akun Anda" id="mdlpassword">
+                </div>
+                <div class="form-group mb-0">
+                <label class="label-profile">Konfirmasi Password baru</label>
+                    <input type="password" class="form-control fs-12" placeholder="Password Baru Akun Anda" id="mdlpasswordkonfirmasi">
+                </div>
+                <div class="d-flex justify-content-center mt-4">
                     <button type="button" class="btn btn-save-profile-modal" id="update-password">Simpan Sekarang</button>
                 </div>
             </div>

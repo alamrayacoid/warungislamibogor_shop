@@ -64,5 +64,21 @@
           </div>
     </div>
 </div>
+<div class="modal fade" id="mdl-paymentpenjualan" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background: #009a51;color: #fff;font-weight: 600;letter-spacing: 1px;">
+                Peringatan barang yang sudah dibayar!
+                <button type="button" class="close btn-close-mdl-custom" data-dismiss="modal" style="color: #fff;">&times;</button>
+            </div>
+            <div class="modal-body content-payment-warning">
+                    
+            </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-notif-delivery" data-dismiss="modal">OK , Saya Paham !!</button>
+          </div>
+    </div>
+</div>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/main-frontpage.blade.php ENDPATH**/ ?>

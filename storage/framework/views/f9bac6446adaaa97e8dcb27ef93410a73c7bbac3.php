@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div>
-                                    <a href="#">
+                                    <a href="<?php echo e(route('lupa_password')); ?>">
                                         <small>Lupa password?</small>
                                     </a>
                                 </div>

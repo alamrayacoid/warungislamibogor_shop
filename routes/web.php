@@ -29,6 +29,12 @@ Route::post('/login', 'Frontpage\FrontpageController@login')->name('login');
 Route::post('/register', 'Frontpage\FrontpageController@register')->name('register');
 Route::post('/logout', 'Frontpage\FrontpageController@logout')->name('logout');
 
+Route::get('/reset-password','Frontpage\ResetPasswordController@index')->name('lupa_password');
+Route::post('/kirim-reset-password','Frontpage\ResetPasswordController@kirim_request_password')->name('kirim_request_password');
+Route::get('/password/reset/{token}/{email}','Frontpage\ResetPasswordController@resetpasswordform')->name('reset.password.form');
+Route::post('/ganti-password-member','Frontpage\ResetPasswordController@ganti_password_member')->name('ganti_password_member');
+Route::get('/mail-resetpassword','Frontpage\ResetPasswordController@mail')->name('mail.reset.password');
+
 
 Route::get('/produk', 'Frontpage\ProdukController@produk')->name('produk-frontpage');
 Route::post('/stock_check', 'Frontpage\ProdukController@stock_check')->name('stock_check');

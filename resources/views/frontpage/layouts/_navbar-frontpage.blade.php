@@ -121,11 +121,11 @@
                     <ul class="dropdown-menu dropdown-menu-user" style="width:250px;">
                         <li class="d-flex justify-content-between"><a
                                 href="{{route('pembelian-semua-frontpage' , ['status' => 1])}}">Daftar Pembelian
-                            </a><span class="label label-primary bg-primary-wib" style="float:right;">{{$notifp}}</span></li>
+                            </a><span class="label label-primary bg-primary-wib" id="notif-payment-transaksi" style="float:right;">{{$notifp}}</span></li>
                         <li class="d-flex justify-content-between"><a
                                 href="{{route('pembelian-diproses-frontpage', ['status' => 3])}}">Sedang diproses
-                            </a><span class="label label-primary bg-primary-wib" style="float:right">{{$notifpro}}</span></li>
-                        <li class="d-flex justify-content-between" id="notif-proses-transaksi"><a
+                            </a><span class="label label-primary bg-primary-wib" id="notif-proses-transaksi" style="float:right">{{$notifpro}}</span></li>
+                        <li class="d-flex justify-content-between"><a
                                 href="{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}">Pembayaran</a> <span
                                 class="label label-primary bg-primary-wib" style="float:right">{{$notifpem}}</span></li>
                         <li class="d-flex justify-content-between border-0">

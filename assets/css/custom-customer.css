@@ -1938,9 +1938,7 @@ color: #333;
 }
 .modal-profile .label-profile{
     font-size: 12px !important;
-    
-    font-weight: normal;
-    padding-bottom: 0.5em;
+    font-weight: normal;    
     padding-top: 1em;
     color: #606060;
 }

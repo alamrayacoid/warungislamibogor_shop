@@ -228,17 +228,12 @@
           cluster: "<?php echo e(env('PUSHER_APP_CLUSTER')); ?>",
           forceTLS: true
         });
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
+        var penjualandelivered = pusher.subscribe('penjualan-channel');
+        penjualandelivered.bind('penjualan-delivered', function(data) {
             if(data.message.customer.s_member == $('#idcustomernav').val()){
-                if(data.message.request == 'Pengiriman'){
-
-
-                var jumlahpembelian  = data.message.jumlahpenjualan;
-                var penjualan = data.message.item;
-                var nota = data.message.nota;
-                var harga = data.message;
-                console.log(data.message.jumlahpenjualan);
+                let jumlahpembelian  = data.message.jumlahpenjualan;
+                let penjualan = data.message.item;
+                let nota = data.message.nota;
                 $('#notif-pengiriman-transaksi').text(jumlahpembelian);
                 var trHTML = '';
                     $.each(penjualan, function (i, item) {
@@ -262,12 +257,20 @@
                     $('#get-notif-delivery').click();
                 }, 1000);
             }else{
-                var jumlahproses  = data.message.jumlahproses;
-                var itemproses = data.message.item;
+                console.log('Ops');
+            }
+        });
+
+
+    var penjualanproses = pusher.subscribe('penjualan-channel');
+        penjualanproses.bind('penjualan-proses', function(data) {
+            if(data.message.customer.s_member == $('#idcustomernav').val()){
+                let jumlahproses  = data.message.jumlahproses;
+                let itemproses = data.message.item;
                 $('#notif-proses-transaksi').text(jumlahproses);
-                var trHTML = '';
+                var trHTML2 = '';
                     $.each(itemproses, function (i, item) {
-                            trHTML += `<div class="group-notif-delivery  bold" style="font-size:12px;">
+                            trHTML2 += `<div class="group-notif-delivery  bold" style="font-size:12px;">
                         <div class="row">
                         <div class="col-lg-3 d-flex justify-content-center">
                             <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
@@ -282,11 +285,42 @@
                 </div>`;
                 });
                 $('body').append(`<button class="btn btn-primary d-none" id="get-notif-proses" data-toggle="modal" data-target="#mdl-proses" hidden></button>`);
-                $('.content-proses-warning').append(trHTML);
+                $('.content-proses-warning').append(trHTML2);
                 setTimeout(function(){
                     $('#get-notif-proses').click();
                 }, 1000);
+            }else{
+                console.log('Ops');
             }
+        });
+
+        var penjualanpayment = pusher.subscribe('penjualan-channel');
+        penjualanpayment.bind('penjualan-payment', function(data) {
+            if(data.message.customer.s_member == $('#idcustomernav').val()){
+                let jumlahpembayaran  = data.message.jumlahpembayaran;
+                let itempembayaran = data.message.item;
+                $('#notif-proses-transaksi').text(jumlahpembayaran);
+                var trHTML2 = '';
+                    $.each(itemproses, function (i, item) {
+                            trHTML2 += `<div class="group-notif-delivery  bold" style="font-size:12px;">
+                        <div class="row">
+                        <div class="col-lg-3 d-flex justify-content-center">
+                            <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="">`+item.i_name+`</div>
+                            <div class="pt-4">`+item.s_nota+`</div>
+                            <div style="color:rgba(0,0,0,.54);" class="pt-4">Total Harga : <span class="c-primary-wib">Rp. `+item.sd_price+`</span> | <span>`+item.sd_qty+`</span> Qty
+                        </div>
+                    </div>
+                </div>
+                </div>`;
+                });
+                $('body').append(`<button class="btn btn-primary d-none" id="get-notif-payment" data-toggle="modal" data-target="#mdl-proses" hidden></button>`);
+                $('.content-payment-warning').append(trHTML2);
+                setTimeout(function(){
+                    $('#get-notif-payment').click();
+                }, 1000);
             }else{
                 console.log('Ops');
             }

@@ -33,10 +33,10 @@ class PushPembelian implements ShouldBroadcast
      */
       public function broadcastOn()
   {
-      return ['my-channel'];
+      return ['penjualan-channel'];
   }
   public function broadcastAs()
   {
-      return 'my-event';
+      return 'penjualan-terbaru';
   }
 }
