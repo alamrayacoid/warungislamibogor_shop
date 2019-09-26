@@ -155,7 +155,7 @@ class KeranjangController extends Controller
             return '<li>
                 <div class="product-item-cart-nav">
                     <div>
-                        <img src="{{asset("assets/img/img-product/product-4.png")}}" width="50"
+                        <img src="'.asset("assets/img/img-product/product-4.png").'" width="50"
             height="50">
         </div>
         <div class="text-product-item-cart-group">
