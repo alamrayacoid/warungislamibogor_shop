@@ -415,7 +415,7 @@
                     @foreach($gambarsejenis as $roww)
                     @if($rows->i_code == $roww->ip_ciproduct)
                     <div class="image-product-box"
-                        style="background:url('env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
+                        style="background:url('{{env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
                     </div>
                     @endif
                     @endforeach
@@ -502,7 +502,7 @@
     $(document).ready(function () {
         $('#cabang').on('change', function () {
             $('#stocknya').removeClass('selected');                    
-            
+
             setInterval(function () {
                 ajax_helper('{{route("stock_check")}}', 'POST', {
                     '_token': '{{csrf_token()}}',
