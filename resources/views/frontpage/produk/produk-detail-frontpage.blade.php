@@ -275,9 +275,9 @@
                                     @foreach($gambar as $roww)
                                     @if($roww->ip_ciproduct)
                                     <div>
-                                        <a href="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}" sty
+                                        <a href="{{env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}" sty
                                             data-gallery="">
-                                            <img src="env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}">
+                                            <img src="{{env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}">
                                         </a>
                                     </div>
                                     @endif
