@@ -501,6 +501,8 @@
 <script>
     $(document).ready(function () {
         $('#cabang').on('change', function () {
+            $('#stocknya').removeClass('selected');                    
+            
             setInterval(function () {
                 ajax_helper('{{route("stock_check")}}', 'POST', {
                     '_token': '{{csrf_token()}}',
