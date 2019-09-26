@@ -12,7 +12,7 @@ class notifController extends Controller
 			if (Auth::check()) {
 		    	$notif = DB::table('d_sales')
 		    		->where('s_member',Auth::user()->cm_code)
-		    		->whereNotIn('s_paystatus',['N'])
+		    		// ->whereNotIn('s_paystatus',['N'])
 		    		->count();
 
 		    	return $notif; 
@@ -36,6 +36,7 @@ class notifController extends Controller
 	    	$notifff = DB::table('d_sales')
 	    		->where('s_member',Auth::user()->cm_code)
 	    		->where('s_paystatus','N')
+	    		->where('s_isapprove','P')
 	    		->count();
 
 	    	return $notifff; 

@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\gambar;
 use DataTables;
 use App\d_sales;
+use App\Events\PenjualanPayment;
 
 class PembelianController extends Controller
 {
@@ -798,6 +799,12 @@ class PembelianController extends Controller
                     DB::table('d_sales')->where('s_nota',$request->nota)->update([
                         's_paymethod'=>'T',
                     ]);
+                $nota = $request->nota;
+                $pushdata = array(
+                    'customer' => Auth::user()->cm_name,
+                    'nota' => $nota,
+                );
+                event(new PenjualanPayment($pushdata));
 
                 return redirect()->back()->with('success','success');
                 }else{
