@@ -17,4 +17,5 @@
     <link rel="stylesheet" href="{{asset('assets/bootstrap-4.3.1/dist/css/bootstrap.min.css')}}">
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/custom-customer.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
 </head>

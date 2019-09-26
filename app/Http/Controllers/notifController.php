@@ -23,8 +23,8 @@ class notifController extends Controller
 	    	if (Auth::check()) {
 	    	$notiff = DB::table('d_sales')
 	    		->where('s_member',Auth::user()->cm_code)
-	    		->where('s_paystatus','Y')
-	    		->where('s_delivered','N')
+	    		->where('s_isapprove','Y')
+                ->where('s_delivered','N')
 	    		->count();
 
 	    	return $notiff; 

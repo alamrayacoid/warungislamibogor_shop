@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
 
-	<title></title>
+	<title>Reset Password WIB</title>
 	<style type="text/css">
 		.header{
 			font-size: 18px;
@@ -61,7 +64,7 @@
 	<h5 class="header text-center">Password Reset !</h5>
 	<p class="description">Anda menerima email ini karena kami menerima permintaan pengaturan ulang kata sandi untuk akun Anda.</p>
 	<div class="text-center">
-		<button>Reset Password</button>
+		<a href="{{url('/password/reset')}}/{{$token}}/{{$email}}"><button>Reset Password</button>
 	</div>
 	<p class="description">Kalau anda tidak meminta pengaturan ulang kata sandi, anda bisa abaikan pesan ini.</p>
 	<!-- <div class="description mt-4">Salam Hormat, <br><br>Tim Warung Islami Bogor</div> -->

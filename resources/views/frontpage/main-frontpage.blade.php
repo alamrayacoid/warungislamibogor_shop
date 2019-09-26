@@ -27,6 +27,7 @@
 
 
 			@include('layouts._footer')
+            
 
 		</div>
 	</div>
@@ -45,10 +46,11 @@
         	</div>
         <div class="modal-footer">
             	<button type="button" class="btn btn-notif-delivery" data-dismiss="modal">OK , Saya Paham !!</button>
-          </div>
+        </div>
+        </div>
     </div>
 </div>
-<div class="modal fade" id="mdl-proses" role="dialog" aria-hidden="true">
+<div id="mdl-prosespenjualan" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -63,6 +65,7 @@
             	<button type="button" class="btn btn-notif-delivery" data-dismiss="modal">OK , Saya Paham !!</button>
           </div>
     </div>
+</div>
 </div>
 <div class="modal fade" id="mdl-paymentpenjualan" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -80,5 +83,6 @@
           </div>
     </div>
 </div>
+
 </body>
 </html>

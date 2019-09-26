@@ -33,7 +33,6 @@ Route::get('/reset-password','Frontpage\ResetPasswordController@index')->name('l
 Route::post('/kirim-reset-password','Frontpage\ResetPasswordController@kirim_request_password')->name('kirim_request_password');
 Route::get('/password/reset/{token}/{email}','Frontpage\ResetPasswordController@resetpasswordform')->name('reset.password.form');
 Route::post('/ganti-password-member','Frontpage\ResetPasswordController@ganti_password_member')->name('ganti_password_member');
-Route::get('/mail-resetpassword','Frontpage\ResetPasswordController@mail')->name('mail.reset.password');
 
 
 Route::get('/produk', 'Frontpage\ProdukController@produk')->name('produk-frontpage');

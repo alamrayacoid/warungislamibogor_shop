@@ -115,7 +115,7 @@ padding: 30px;
                         </div>
                         <div class="reset-password--footer">
                             <button class="btn btn-send-reset-password" type="button" id="lupa-password" disabled="">Kirim Sekarang</button>
-                            <div class="reset-passwod-footer--opsi">Kembali ke halaman <a href="">login</a> atau <a href="">daftar</a></div>
+                            <div class="reset-passwod-footer--opsi">Kembali ke halaman <a href="{{route('login-frontpage')}}">login</a> atau <a href="{{route('register_frontpage-frontpage')}}">daftar</a></div>
                         </div>
                         </form>
                     </div>
@@ -169,12 +169,19 @@ padding: 30px;
                         $('#lupa-password').attr('disabled',false);
                     }
                 },
-                error:function(){
-                    $('#emailnotfound').addClass('d-none');
-                    $('#emailreset').addClass('undifined-email-reset');
-                    $('#emailvalid').removeClass('d-none');
-                    $('#lupa-password').html('Kirim Sekarang');
+                error: function(jqXHR, exception) {
+                    if (jqXHR.status == 422) {
+                        $('#emailnotfound').addClass('d-none');
+                        $('#emailreset').addClass('undifined-email-reset');
+                        $('#emailvalid').removeClass('d-none');
+                        $('#lupa-password').html('Kirim Sekarang');
                         $('#lupa-password').attr('disabled',false);
+                    }else{
+                        iziToast.error({
+                            title: 'Error!',
+                            message: 'Ada Yang Eror',
+                        });
+                    }
                 }
             });
         });

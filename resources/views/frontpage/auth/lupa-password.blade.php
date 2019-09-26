@@ -10,6 +10,14 @@
 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.20);
 padding: 30px;
 }
+.expired-password-box{
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.20);
+    display: flex;
+}
+body{
+            font-family: 'Nunito', sans-serif;
+           
+        }
 .reset-password-wrapper{
     height: 100vh;
     display: flex;
@@ -67,7 +75,60 @@ padding: 30px;
 .undifined-email-reset{
     border:1px #d50000 solid;
 }
+.expired-password-content--left{
+    background-color: #cc0000;
+    width: 150px;
+}
+.expired-password-content--right{
+    padding: 15px 15px 30px 15px;
+}
+.expired-password-content--right h5{
+    font-size: 16px;
+    line-height: 2;
+    font-weight: bold;
 
+}
+.expired-password-content--left{
+    display: flex;
+    justify-content: center;
+}
+.expired-password-content--left i{
+    color: #fff;
+    margin-top: 0.5em;
+    font-size: 34px;
+}
+.expired-password-content--right p{
+    color: rgba(0,0,0,.95);
+    font-size: 13px;
+    line-height: 2;
+}
+.expired-password-content--right .btn-request-token{
+    background-color: #fff;
+    border: 1px black solid;
+    font-size: 12px;
+    color: black;
+    font-weight: bold;
+}
+.title-password-token-expired{
+    letter-spacing: 2px;
+    padding-bottom: 0.5em;
+}
+.img-password-reset-notfound{
+    width: 100%;
+    margin-top: 1em;
+}
+.title-password-resetnotfound{
+    text-align: center;
+    font-size: 22px;
+    font-weight: normal;
+}
+.btn-password-resetnotfound{
+    background-color: #192442;
+    color: #fff !important;
+    font-size: 14px;
+    padding: 15px 15px;
+    border: 0;
+}
 </style>
 
 <body class="">
@@ -84,8 +145,33 @@ padding: 30px;
         <div class="container">
             <div class="row justify-content-center">
                 @if($cek == 0 )
-                golek opo
+                <div class="col-lg-6">
+                    <div>
+                <img src="{{asset('assets/img/flat-404.jpg')}}" class="img-password-reset-notfound">
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                <p class="title-password-resetnotfound">Oops, Halaman tidak ditemukan !</p>
+                <a href="{{route('home')}}"><button class="btn btn-password-resetnotfound">Kembali Ke Halaman Awal</button></a>
+                </div>
+            </div>
                 @else
+
+                 @if($cektime->rpm_expired < \Carbon\Carbon::now())
+                 <div class="col-lg-7">
+                    <h5 class="title-password-token-expired">Token Expired</h5>
+                 <div class="expired-password-box">
+                     <div class="expired-password-content--left">
+                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                     </div>
+                     <div class="expired-password-content--right">
+                         <h5>Your request Reset Password Token is Expired Token Permintaan anda Reset Password Kadaluwarsa</h5>
+                         <p>Maaf Toekn Untuk mengatur ulang kata sandi akun anda telah kadaluwarsa, silahkan lakukan lagi permintaan reset password dengan menekan tombol dibawah ini</p>
+                         <a href="{{route('lupa_password')}}"><button class="btn btn-request-token">Request a new token</button></a>
+                     </div>
+                 </div>
+             </div>
+
+                 @else
                 <div class="col-lg-5">
                     <div class="reset-password-box">
                         <form id="frmlupapassword">
@@ -94,7 +180,7 @@ padding: 30px;
                         </div>
                         <div class="reset-password--body">
                             <input type="hidden" name="token" value="{{ $token }}">
-                            <input id="email" type="email" readonly="" class="form-control" name="email" value="{{ $email }}" required autofocus placeholder="E-mail">
+                            <input id="email" type="hidden" readonly="" class="form-control" name="email" value="{{ $email }}" required autofocus placeholder="E-mail">
                             <div class="form-group">
                                 <label>Password Baru</label>
                                 <input type="password" class="form-control" name="passwordbaru">
@@ -113,6 +199,8 @@ padding: 30px;
                         </form>
                     </div>
                 </div>
+
+                 @endif
                 @endif
             </div>
         </div>
@@ -140,8 +228,11 @@ padding: 30px;
                     if(response.status == 'sukses'){
                         iziToast.success({      
                             title: 'Berhasil!',
-                            message: 'Berhasil Request Reset Password',
+                            message: 'Berhasil Reset Password',
                         });
+                        setTimeout(function(){
+                             window.location.href="{{route('login-frontpage')}}";
+                         }, 2000);
                     }
                     else if(response.status == 'tidaksama'){
                         iziToast.error({      

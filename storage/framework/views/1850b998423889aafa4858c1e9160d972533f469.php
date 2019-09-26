@@ -264,13 +264,14 @@
 
     var penjualanproses = pusher.subscribe('penjualan-channel');
         penjualanproses.bind('penjualan-proses', function(data) {
+            console.log('kok gakenek');
             if(data.message.customer.s_member == $('#idcustomernav').val()){
                 let jumlahproses  = data.message.jumlahproses;
                 let itemproses = data.message.item;
                 $('#notif-proses-transaksi').text(jumlahproses);
-                var trHTML2 = '';
+                var trHTML3 = '';
                     $.each(itemproses, function (i, item) {
-                            trHTML2 += `<div class="group-notif-delivery  bold" style="font-size:12px;">
+                            trHTML3 += `<div class="group-notif-delivery  bold" style="font-size:12px;">
                         <div class="row">
                         <div class="col-lg-3 d-flex justify-content-center">
                             <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
@@ -284,8 +285,8 @@
                 </div>
                 </div>`;
                 });
-                $('body').append(`<button class="btn btn-primary d-none" id="get-notif-proses" data-toggle="modal" data-target="#mdl-proses" hidden></button>`);
-                $('.content-proses-warning').append(trHTML2);
+                $('body').append(`<button type="button" class="btn btn-info d-none" id="get-notif-proses" data-toggle="modal" data-target="#mdl-prosespenjualan">Open Modal</button>`);
+                $('.content-proses-warning').append(trHTML3);
                 setTimeout(function(){
                     $('#get-notif-proses').click();
                 }, 1000);
@@ -294,37 +295,37 @@
             }
         });
 
-        var penjualanpayment = pusher.subscribe('penjualan-channel');
-        penjualanpayment.bind('penjualan-payment', function(data) {
-            if(data.message.customer.s_member == $('#idcustomernav').val()){
-                let jumlahpembayaran  = data.message.jumlahpembayaran;
-                let itempembayaran = data.message.item;
-                $('#notif-proses-transaksi').text(jumlahpembayaran);
-                var trHTML2 = '';
-                    $.each(itemproses, function (i, item) {
-                            trHTML2 += `<div class="group-notif-delivery  bold" style="font-size:12px;">
-                        <div class="row">
-                        <div class="col-lg-3 d-flex justify-content-center">
-                            <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="">`+item.i_name+`</div>
-                            <div class="pt-4">`+item.s_nota+`</div>
-                            <div style="color:rgba(0,0,0,.54);" class="pt-4">Total Harga : <span class="c-primary-wib">Rp. `+item.sd_price+`</span> | <span>`+item.sd_qty+`</span> Qty
-                        </div>
-                    </div>
-                </div>
-                </div>`;
-                });
-                $('body').append(`<button class="btn btn-primary d-none" id="get-notif-payment" data-toggle="modal" data-target="#mdl-proses" hidden></button>`);
-                $('.content-payment-warning').append(trHTML2);
-                setTimeout(function(){
-                    $('#get-notif-payment').click();
-                }, 1000);
-            }else{
-                console.log('Ops');
-            }
-        });
+        // var penjualanpayment = pusher.subscribe('penjualan-channel');
+        // penjualanpayment.bind('penjualan-payment', function(data) {
+        //     if(data.message.customer.s_member == $('#idcustomernav').val()){
+        //         let jumlahpembayaran  = data.message.jumlahpembayaran;
+        //         let itempembayaran = data.message.item;
+        //         $('#notif-payment-transaksi').text(jumlahpembayaran);
+        //         var trHTML2 = '';
+        //             $.each(itemproses, function (i, item) {
+        //                     trHTML2 += `<div class="group-notif-delivery  bold" style="font-size:12px;">
+        //                 <div class="row">
+        //                 <div class="col-lg-3 d-flex justify-content-center">
+        //                     <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
+        //                 </div>
+        //                 <div class="col-lg-9">
+        //                     <div class="">`+item.i_name+`</div>
+        //                     <div class="pt-4">`+item.s_nota+`</div>
+        //                     <div style="color:rgba(0,0,0,.54);" class="pt-4">Total Harga : <span class="c-primary-wib">Rp. `+item.sd_price+`</span> | <span>`+item.sd_qty+`</span> Qty
+        //                 </div>
+        //             </div>
+        //         </div>
+        //         </div>`;
+        //         });
+        //         $('body').append(`<button class="btn btn-primary d-none" id="get-notif-payment" data-toggle="modal" data-target="#mdl-payment" hidden></button>`);
+        //         $('.content-payment-warning').append(trHTML2);
+        //         setTimeout(function(){
+        //             $('#get-notif-payment').click();
+        //         }, 1000);
+        //     }else{
+        //         console.log('Ops');
+        //     }
+        // });
     <?php endif; ?>
 
     $('#js-sidebar-collapse').on('click', function () {

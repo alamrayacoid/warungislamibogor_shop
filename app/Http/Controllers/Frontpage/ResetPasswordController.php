@@ -17,7 +17,7 @@ class ResetPasswordController extends Controller
     public function kirim_request_password(Request $request){
     	$this->validateEmail($request);
     	setlocale(LC_TIME, 'IND');
-    	$email = $request->email;
+    	$email = $request->email;        
     	$token = csrf_token();
     	$cek = DB::table('m_member')->where('cm_email',$email)->get();
     	$cekreset = DB::table('d_reset_passwordmember')->where('rpm_email',$email)->get();
@@ -31,22 +31,22 @@ class ResetPasswordController extends Controller
             		DB::table('d_reset_passwordmember')->insert([
             			'rpm_email' => $email,
             			'rpm_token' => $token,
-            			'rpm_expired' => Carbon::now(),
+            			'rpm_expired' => Carbon::now()->addHours(1),
             		]);
 
             	}else{
 					DB::table('d_reset_passwordmember')->insert([
             			'rpm_email' => $email,
             			'rpm_token' => $token,
-            			'rpm_expired' => Carbon::now(),
+            			'rpm_expired' => Carbon::now()->addHours(1),
             		]);
             	}
-            	$name = $cek[0]->cm_name;
-            	$data=array('email'=>$email,'name'=>$name);
+                
+                $name = $cek[0]->cm_name;
+                $data=array('email'=>$email,'token'=>$token);
                 Mail::send('frontpage.auth.mail-reset-password', $data, function($message) use ($email, $name) {
                 $message->to($email, $name)
                 ->subject('Reset Password Akun');
-                $message->from('bakhrulrpl@gmail.com','Test Mail');
                 });
 
             	DB::commit();
@@ -79,11 +79,13 @@ class ResetPasswordController extends Controller
 
     public function resetpasswordform(Request $request, $token = null){
     	$cek = DB::table('d_reset_passwordmember')->where('rpm_token', $token)->where('rpm_email',$request->email)->count();
+    	$cektime = DB::table('d_reset_passwordmember')->where('rpm_token', $token)->where('rpm_email',$request->email)->first();
 
     	return view('frontpage.auth.lupa-password')->with([
     		'token' => $token,
     		'email' => $request->email,
     		'cek' => $cek,
+    		'cektime' => $cektime,
     	]);
     }
     public function ganti_password_member(Request $request){
