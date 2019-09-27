@@ -88,7 +88,7 @@
         <div class="col-md-6 column-opsi-filter-group">
             <button class="btn-filter-opsi"><i class="fa fa-th" aria-hidden="true"></i></button>
             <button class="btn-filter-opsi"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-            <span>Urutkan<span>
+            <span>Urutkan</span>
                     <Select class="select-opsi-filter">
                         <option>Terbaru</option>
                         <option>Termurah</option>
@@ -293,17 +293,16 @@
                                 <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                 <div class="image-product-box"
-                                    style="background:url('env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
-                                    <!-- <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>"> -->
+                                    style="background:url('<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                                 </div>
                                 <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($row->ip_path == null): ?>
-                                <div class="image-product-box"
-                                      style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
-                                        alt="Sorry! Image not available at this time">
-                                </div>
-                                <?php endif; ?>
+
+
+
+
+
+
                                 <div class="caption">
                                     <div class="title-product-group">
                                         <a href="<?php echo e(route('produk-detail-frontpage', ['code'=>$row->i_code])); ?>"
@@ -319,13 +318,6 @@
                                     </div>
                                     <?php endif; ?>
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     <?php if($row->gpp_sellprice == null): ?>
                                     <div class="price-product-item">
                                         Rp. <?php echo e($row->ipr_sunitprice); ?>
@@ -337,6 +329,9 @@
 
                                     </div>
                                     <?php endif; ?>
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"><?php echo e($row->ity_name); ?></span>
+                                    </div>
                                 </div>
                                 </div>
 
