@@ -18,6 +18,8 @@ class FrontpageController extends Controller
     {
             $data = DB::table('m_item')
             ->join('m_itemprice','ipr_ciproduct','i_code')
+            ->join('m_itemproduct','itp_ciproduct','i_code')
+            ->join('m_itemtype','ity_code','itp_citype')
             ->leftJoin('m_groupperprice', function($join){
                 $join->on('m_groupperprice.gpp_ciproduct','=','m_item.i_code')
                 ->where('m_groupperprice.status_data','=','true');
@@ -25,10 +27,10 @@ class FrontpageController extends Controller
             ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
             ->groupBy('i_name')
             ->where('m_item.status_data','true')
-            ->select('m_item.*','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice')
+            ->select('m_item.i_name','m_item.i_code','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
             ->paginate(5);
 
-            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+            $kategori = DB::table('m_itemtype')->where('status_data','true')->select('ity_name')->get();
             $gambar = DB::table('m_item')->leftjoin('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
             // $cekgambar = DB::table('m_item')->leftJoin('m_imgproduct','ip_ciproduct','i_code')->first();
             $wish = DB::table('d_wishlist')->where('status_data','true')->get();
@@ -65,7 +67,7 @@ class FrontpageController extends Controller
                 ->where('m_item.status_data','true')
                 ->where('itp_citype',$rekomendasi->itp_citype)
                 ->where('i_code','!=',$rekomendasi->i_code)
-                ->select('m_item.*','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice')
+                ->select('m_item.i_name','m_item.i_code','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
                 ->take(10)
                 ->get();
              }else{

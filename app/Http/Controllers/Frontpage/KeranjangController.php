@@ -75,22 +75,18 @@ class KeranjangController extends Controller
             ->where('i_code',$data->i_code)
             ->get();
             if ($gambar != '[]') {
-                $isi_gambar = $gambar[0]->ip_path;
+    
+                $isi_gambar = ''.env("APP_WIB").'storage/image/master/produk/'.$gambar[0]->ip_path.'';
             }else{
-                $isi_gambar = '';
+                $isi_gambar = ''.asset("assets/img/noimage.jpg").'';
             }
 
-            if($gambar != '[]'){
-                $image = $gambar[0]->ip_path;
-            }else{
-                $image = '';
-            }
 
             return '<input type="hidden" class="count" value="'.$data->cart_id.'" name="id[]">
                             <div class="row column-group-cart-item-product">
                                 <div class="col-lg-8 col-md-7 column-left-cart-item-product">
                                     <div class="">
-                                        <img src="'.env("APP_WIB").'storage/image/master/produk/'.$isi_gambar.'"
+                                        <img src="'.$isi_gambar.'"
                                             class="img-item-product-cart">
                                     </div>
                                     <div class="column-description-cart-product">

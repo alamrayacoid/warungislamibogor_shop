@@ -270,20 +270,22 @@
                                         </div>
                                         @endif
                                         @endforeach
+                                        @if($row->ip_path == null)
+                                            <div class="image-product-box"
+                                            style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                                            alt="Sorry! Image not available at this time">
+                                            </div>
+                                        @endif
                                         <div class="caption">
                                             <div class="title-product-group">
                                                 <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
                                                     class="title-product-item">{{$row->i_name}}</a>
                                             </div>
                                             <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
                                                 <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
+                                                <div class="">
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -408,26 +410,28 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail product-box-item">
                                         @foreach($gambar as $roww)
-                                        @if($row->i_code == $roww->ip_ciproduct)
+                                        @if($rows->i_code == $roww->ip_ciproduct)
                                         <div class="image-product-box"
                                             style="background:url('env('APP_WIB')}}storage/image/master/produk/{{$roww->ip_path}}')">
                                         </div>
                                         @endif
                                         @endforeach
+                                        @if($rows->ip_path == null)
+                                            <div class="image-product-box"
+                                            style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                                            alt="Sorry! Image not available at this time">
+                                            </div>
+                                        @endif
                                         <div class="caption">
                                             <div class="title-product-group">
                                                 <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}"
                                                     class="title-product-item">{{$rows->i_name}}</a>
                                             </div>
                                             <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
                                                 <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
+                                                <div class="">
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -490,15 +494,11 @@
                                                             class="title-product-item">{{$row->i_name}}</a>
                                                     </div>
                                                     <div class="footer-product-item">
-                                                        <div class="">
-                                                            <i class="fa fa-star f-14 c-gold"></i>
-                                                            <i class="fa fa-star c-gold"></i>
-                                                            <i class="fa fa-star c-gold"></i>
-                                                            <i class="fa fa-star c-gold"></i>
-                                                            <i class="fa fa-star c-grey"></i>
-                                                        </div>
                                                         <div class="price-product-item">Rp. Rp.
                                                             {{$row->ipr_sunitprice}}
+                                                        </div>
+                                                        <div class="">
+                                                            <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -264,13 +264,6 @@
                                     </div>
                                     @endif
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     @if($row->gpp_sellprice == null)
                                     <div class="price-product-item">
                                         Rp. {{$row->ipr_sunitprice}}
@@ -280,6 +273,9 @@
                                         Rp. {{$row->gpp_sellprice}}
                                     </div>
                                     @endif
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
+                                    </div>
                                 </div>
                         </div>
                     </div>
@@ -327,13 +323,6 @@
                                     </div>
                                     @endif
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     @if($rows->gpp_sellprice == null)
                                     <div class="price-product-item">
                                         Rp. {{$rows->ipr_sunitprice}}
@@ -343,6 +332,9 @@
                                         Rp. {{$rows->gpp_sellprice}}
                                     </div>
                                     @endif
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$rows->ity_name}}</span>
+                                    </div>
                                 </div>
                         </div>
                     </div>
@@ -420,13 +412,6 @@
                                     </div>
                                     @endif
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     @if($row->gpp_sellprice == null)
                                     <div class="price-product-item">
                                         Rp. {{$row->ipr_sunitprice}}
@@ -436,6 +421,9 @@
                                         Rp. {{$row->gpp_sellprice}}
                                     </div>
                                     @endif
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

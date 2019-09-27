@@ -64,7 +64,7 @@ class WishlistController extends Controller
             ->get();
 
 			
-            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
+            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
 			$wish = DB::table('d_wishlist')->where('status_data','true')->get();
 			$kategori = DB::table('m_itemtype')->where('status_data','true')->get();
 			if(\Auth::check()){
