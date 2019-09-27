@@ -139,23 +139,20 @@ class KeranjangController extends Controller
             ->join('m_imgproduct','ip_ciproduct','i_code')
             ->groupBy('i_code')
             ->where('i_code',$data->i_code)
+            ->select('m_imgproduct.ip_path')
             ->get();
             if ($gambar != '[]') {
-                $isi_gambar = $gambar[0]->ip_path;
+    
+                $isi_gambar = ''.env("APP_WIB").'storage/image/master/produk/'.$gambar[0]->ip_path.'';
             }else{
-                $isi_gambar = '';
+                $isi_gambar = ''.asset("assets/img/noimage.jpg").'';
             }
 
-            if($gambar != '[]'){
-                $image = $gambar[0]->ip_path;
-            }else{
-                $image = '';
-            }
 
             return '<li>
                 <div class="product-item-cart-nav">
                     <div>
-                        <img src="'.asset("assets/img/img-product/product-4.png").'" width="50"
+                        <img src="'.$isi_gambar.'" width="50"
             height="50">
         </div>
         <div class="text-product-item-cart-group">
