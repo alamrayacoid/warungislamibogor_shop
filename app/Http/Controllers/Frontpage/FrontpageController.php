@@ -139,27 +139,35 @@ class FrontpageController extends Controller
     }
 
     public function register(Request $request){
-        $address = $request->email;
-        $username = $request->username;
-        $check = DB::table('m_member')->where('cm_email',$address)->count();
-        $checku = DB::table('m_member')->where('cm_username',$username)->count();
-        $urutan = DB::table('m_member')->count();
-        $code = 'SA'.$urutan.Carbon::now()->format('yhs');
-        if ($check == 0 && $checku == 0  ) {
-            d_user::create([
-                'cm_name' => $request->name,
-                'cm_username' => $request->username,
-                'cm_email' => $request->email,
-                'password' => bcrypt($request->password),
-                'cm_user' => $request->user,
-                'cm_code' => $code,
-                'status_data' =>'true',
-            ]);     
+        DB::beginTransaction();
+        try {
+            $address = $request->email;
+            $username = $request->username;
+            $check = DB::table('m_member')->where('cm_email',$address)->count();
+            $checku = DB::table('m_member')->where('cm_username',$username)->count();
+            $urutan = DB::table('m_member')->count();
+            $code = 'SA'.$urutan.Carbon::now()->format('yhs');
+            if ($check == 0 && $checku == 0  ) {
+                d_user::create([
+                    'cm_name' => $request->name,
+                    'cm_username' => $request->username,
+                    'cm_email' => $request->email,
+                    'password' => bcrypt($request->password),
+                    'cm_user' => $request->user,
+                    'cm_code' => $code,
+                    'status_data' =>'true',
+                ]);
 
-            return redirect()->route('login-frontpage')->with('registerc','berhasil register'); 
-        }else{
-            return redirect()->back()->with('registere','Email atau Username Sudah Terpakai'); 
+                DB::commit();
+                return redirect()->route('login-frontpage')->with('registerc','berhasil register');
+            }else{
+                return redirect()->back()->with('registere','Email atau Username Sudah Terpakai');
+            }
+        } catch (Exception $e) {
+            throw $e;
+            return redirect()->back()->with('registere','Email atau Username Sudah Terpakai');
         }
+
     }
 
 }

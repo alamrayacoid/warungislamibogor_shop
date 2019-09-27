@@ -263,13 +263,6 @@
                                     </div>
                                     <?php endif; ?>
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     <?php if($row->gpp_sellprice == null): ?>
                                     <div class="price-product-item">
                                         Rp. <?php echo e($row->ipr_sunitprice); ?>
@@ -281,6 +274,9 @@
 
                                     </div>
                                     <?php endif; ?>
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                    </div>
                                 </div>
                         </div>
                     </div>
@@ -328,13 +324,6 @@
                                     </div>
                                     <?php endif; ?>
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     <?php if($rows->gpp_sellprice == null): ?>
                                     <div class="price-product-item">
                                         Rp. <?php echo e($rows->ipr_sunitprice); ?>
@@ -346,6 +335,9 @@
 
                                     </div>
                                     <?php endif; ?>
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($rows->ity_name); ?></span>
+                                    </div>
                                 </div>
                         </div>
                     </div>
@@ -423,13 +415,6 @@
                                     </div>
                                     <?php endif; ?>
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     <?php if($row->gpp_sellprice == null): ?>
                                     <div class="price-product-item">
                                         Rp. <?php echo e($row->ipr_sunitprice); ?>
@@ -441,6 +426,9 @@
 
                                     </div>
                                     <?php endif; ?>
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

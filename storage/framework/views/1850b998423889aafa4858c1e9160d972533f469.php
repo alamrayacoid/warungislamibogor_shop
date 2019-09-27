@@ -24,6 +24,82 @@
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
 <script type="text/javascript">
+
+    function check_text(variable,text_data)
+    {
+        var text = /[.*+?^${}();:'/"|[\]\\]/g;
+
+        if(text.test(text_data))
+        {
+            variable.val(text_data.replace(/[.*+?^${}();:'//"|[\]\\]/g, ''));
+        }
+        else
+        {
+            variable.val(text_data.replace(/[.*+?^${}();:'//"|[\]\\]/g, ''));
+        }
+    }
+
+    function check_number(variable,text_data)
+    {
+        if(variable.val() != ''){
+            var text = /[a-zA-Z.*?^${}();://'"|[\]\\]/g;
+            var number = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\./0-9]*$/g;
+
+            if(number.test(text_data))
+            {
+                variable.val(text_data.replace(text, ''));
+            }
+            else
+            {
+                variable.val(text_data.replace(text, ''));
+            }
+        }
+    }
+
+    function validateEmail(variable,email) {
+        var text = /[.*+?^${}();:'//"|[\]\\]/g;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if(re.test(String(email).toLowerCase()))
+        {
+            return true;
+        }
+        else
+        {
+            iziToast.warning({
+                title:'Peringatan!',
+                message:'Email Tidak Valid!'
+            });
+            variable.val(email.replace(/[*+?^${}();:'"/|[\]\\]/g, ''));
+            return false;
+        }
+
+    }
+
+    $('.text_limit').on('change',function(){
+        check_text($(this),$(this).val());
+    })
+
+    $('.email_limit').on('change',function(){
+        validateEmail($(this),$(this).val());
+    })
+
+    $('.number_limit').on('change',function(){
+        check_number($(this),$(this).val());
+    })
+
+    $('.number_readonly').mouseenter(function(){
+        $(this).prop("disabled", true);
+    })
+
+    $('.number_readonly').focus(function(){
+        $(this).prop("disabled", true);
+    })
+
+    $(document).on('mouseleave , blur','.number_readonly',function(){
+        $(this).prop("disabled", false);
+    })
+
     $(window).on('load', function () {
         setTimeout(removeLoaderweb, 1000);
     });
@@ -350,4 +426,5 @@
 
     
     });
+
 </script><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/layouts/_script-frontpage.blade.php ENDPATH**/ ?>

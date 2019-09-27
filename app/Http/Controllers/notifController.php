@@ -53,4 +53,18 @@ class notifController extends Controller
 	    	return $notif2; 
 	    }
 	    }
+
+    static function saldo(){
+        if (Auth::check()) {
+            $saldo = DB::table('d_walletmember')
+                ->where('wm_ccustomer',Auth::user()->cm_code)
+                ->get();
+
+            if($saldo != '[]'){
+                return number_format($saldo[0]->wm_total,2);
+            }else{
+                return 0;
+            }
+        }
+    }
 }

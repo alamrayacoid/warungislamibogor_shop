@@ -36,21 +36,21 @@
                                 <span class="input-group-text" id="inputGroup-sizing-default"><i
                                         class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" name="name" placeholder="Nama Lengkap" required="">
+                            <input type="text" class="form-control text_limit" name="name" placeholder="Nama Lengkap" required="">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default"><i
                                         class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" name="username" placeholder="Username" required="">
+                            <input type="text" class="form-control text_limit" name="username" placeholder="Username" required="">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default"><i
                                         class="fa fa-envelope"></i></span>
                             </div>
-                            <input type="email" class="form-control" name="email" placeholder="Email" required="">
+                            <input type="email" class="form-control email_limit" name="email" placeholder="Email" required="">
                         </div>
                         <div class="input-group mb-3" style="position:relative;">
                             <div class="input-group-prepend">
@@ -59,7 +59,7 @@
                             </div>
                             <input type="password" name="password" id="pass_log_id" class="form-control"
                                 placeholder="Password" required="">
-                            <button type="button" class=" btn-see-password toggle-password"><i class="fa fa-eye"></i>
+                            <button type="button" class=" btn-see-password toggle-password"><i class="fa fa-eye"></i></button>
                         </div>
                         <div class="form-group" style="position:relative;top:-1em;">
                             <input type="checkbox" class="checkbox-lamar" id="check_1">
@@ -77,8 +77,9 @@
                     </form>
                 </div>
             </div>
+        </div>
     </section>
-
+    <?php echo $__env->make('frontpage.layouts._script-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Mainly scripts -->
     <script src="<?php echo e(asset('assets/js/jquery-2.1.1.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap.min.js')); ?>"></script>
