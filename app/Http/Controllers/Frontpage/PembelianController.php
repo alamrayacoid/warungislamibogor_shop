@@ -800,9 +800,12 @@ class PembelianController extends Controller
                         's_paymethod'=>'T',
                     ]);
                 $nota = $request->nota;
+                $idnota = DB::table('d_sales')->where('s_nota',$nota)->first();
                 $pushdata = array(
                     'customer' => Auth::user()->cm_name,
                     'nota' => $nota,
+                    'id_nota' => $idnota->s_id,
+                    's_isapprove' => 'P',
                 );
                 event(new PenjualanPayment($pushdata));
 
