@@ -99,6 +99,12 @@
                                         <h5 class="">Total Belanja</h5><span class="text-price-cart-product"
                                             id="totalview"></span>
                                     </div>
+                                        <div class="form-group">
+                                            <input type="checkbox" class="checkbox-lamar" id="check_1">
+                                            <label for="check_1" class="cek">
+                                        <span>Bayar Menggunakan Saldo WIB Store<span></span></span></label>
+                                                </div>
+
                                     <div class="m-t-sm">
 
                                         <a class="btn btn-primary btn-sm btn-checkout-cart bayar_sekarang"

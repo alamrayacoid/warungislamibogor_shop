@@ -8,6 +8,7 @@
       $notifpro = App\Http\Controllers\notifController::proses();
       $notifpem = App\Http\Controllers\notifController::pembayaran();
       $notifpen = App\Http\Controllers\notifController::pengiriman();
+      $saldo = App\Http\Controllers\notifController::saldo();
  ?>
 
 <?php if(!Auth::check()): ?>
@@ -183,7 +184,7 @@
                                 <ul class="list-account-content-profile">
                                     <li class="d-flex justify-content-between" style="margin: 0 20px !important;border-right:0 !important;border-left:0 !important;">
                                         <div>Saldo Anda : </div>
-                                        <span class="balance-profile-navbar">Rp.4.500.000</span>
+                                        <span class="balance-profile-navbar">Rp. <?php echo e($saldo); ?></span>
                                     </li>
                                 </ul>
                             </div>
