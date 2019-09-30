@@ -119,69 +119,6 @@
 
 
 
-    @keyframes placeHolderShimmer {
-        0% {
-            background-position: -468px 0;
-        }
-
-        100% {
-            background-position: 468px 0;
-        }
-    }
-
-    .title-product-load {
-        background: #f7c703 !important;
-        opacity: 0.5;
-    }
-
-    .desc-product-load {
-        background: #ff5722 !important;
-        opacity: 0.5;
-    }
-
-    .animated-background,
-    .image,
-    .text-line,
-    .image-product {
-        animation-duration: 1.25s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-        animation-name: placeHolderShimmer;
-        animation-timing-function: linear;
-        background: #f6f6f6;
-        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
-        background-size: 800px 104px;
-        height: 96px;
-        /* position: relative; */
-    }
-
-    .image-product {
-        height: 150px;
-        width: 100%;
-
-    }
-
-    .image {
-        height: 70px;
-        width: 70px;
-        border-radius: 10px;
-    }
-
-    .wrapper-cell {
-        display: flex;
-        margin-bottom: 30px;
-    }
-
-    .text {
-        /* margin-left: 20px; */
-    }
-
-    .text-line {
-        height: 9px;
-        border-radius: 5px;
-
-        margin: 4px 0;
-    }
 
     .table tbody tr {
         background: white !important;
@@ -294,99 +231,8 @@
                             </ul>
                             <div class="tab-content padding-15">
                                 <div id="tab-1" class="tab-pane animated fadeIn tabe-allstatus active">
-                                    <div class="loader-wib">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:170px;"> </div>
-                                                    <div class="text-line"
-                                                        style="position:relative;top:0.7em;width:100px;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="column-group-item-product mt-3">
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:220px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:170px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:150px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:100px;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
-                                                <div class="col-lg-4">
-                                                    <div class="wrapper-cell">
-                                                        <div class="image"></div>
-                                                        <div class="text" style="margin-left:20px;">
-                                                            <div class="text-line" style="width:60px;"> </div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:0.7em;width:120px;"></div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:1.4em;width:170px;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 d-flex justify-content-center">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:200px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:110px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:100px;"> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <form id="">
-                                        <div class="row content-wib d-none">
+                                        <div class="row">
                                             <div class="col-lg-5 mt-4">
                                                 <div class="input-group input-daterange">
                                                     <input type="text" id="tanggalawalallstatus"
@@ -422,71 +268,8 @@
                                         </div>
                                     </form>
                                     @if($group !='[]')
-                                    <div id="itemproduct-group-paymentstatus" class="content-wib d-none row">
-                                        <div class="column-group-item-product mt-3 d-none" id="loadingtab1">
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:220px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:170px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:150px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:100px;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
-                                                <div class="col-lg-4">
-                                                    <div class="wrapper-cell">
-                                                        <div class="image"></div>
-                                                        <div class="text" style="margin-left:20px;">
-                                                            <div class="text-line" style="width:60px;"> </div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:0.7em;width:120px;"></div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:1.4em;width:170px;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 d-flex justify-content-center">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:200px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:110px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:100px;"> </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="wrapper">
-                                                                        <div class="wrapper-cell"> -->
-
-                                                <!-- </div>
-                                                                    </div> -->
-                                            </div>
-                                        </div>
+                                    <div id="itemproduct-group-paymentstatus" class="row">
+                                        
                                         <table class="table table-striped table-bordered table-hover" id="detail_1"
                                             style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">
@@ -506,7 +289,7 @@
                                         </table>
                                     </div>
                                     @else
-                                    <div class="column-empty-transaction content-wib d-none">
+                                    <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
                                         <h5>Oops, Anda Belum Transaksi Sama Sekali.</h5>
                                         <div class="d-flex justify-content-center">
@@ -516,104 +299,9 @@
                                     @endif
                                 </div>
                                 <div id="tab-2" class="tab-pane animated fadeIn">
-                                    <div class="loader-wib">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:170px;"> </div>
-                                                    <div class="text-line"
-                                                        style="position:relative;top:0.7em;width:100px;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="column-group-item-product mt-3">
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:220px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:170px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:150px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:100px;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
-                                                <div class="col-lg-4">
-                                                    <div class="wrapper-cell">
-                                                        <div class="image"></div>
-                                                        <div class="text" style="margin-left:20px;">
-                                                            <div class="text-line" style="width:60px;"> </div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:0.7em;width:120px;"></div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:1.4em;width:170px;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 d-flex justify-content-center">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:200px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:110px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:100px;"> </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="wrapper">
-                                                        <div class="wrapper-cell"> -->
-
-                                                <!-- </div>
-                                                    </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                     <form id="">
-                                        <div class="row content-wib d-none">
+                                        <div class="row">
                                             <div class="col-lg-5 mt-4">
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
@@ -650,7 +338,7 @@
                                         </div>
                                     </form>
                                     @if($groupp !='[]')
-                                    <div id="itemproduct-group-paymentstatus" class="content-wib d-none">
+                                    <div id="itemproduct-group-paymentstatus" class="">
                                         <table class="table table-striped table-bordered table-hover" id="detail_2"
                                             style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">
@@ -670,7 +358,7 @@
                                         </table>
                                     </div>
                                     @else
-                                    <div class="column-empty-transaction content-wib d-none">
+                                    <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
                                         <h5>Oops, Daftar Transaksi Status Pembayaran Anda Kosong.</h5>
                                         <div class="d-flex justify-content-center">
@@ -680,104 +368,8 @@
                                     @endif
                                 </div>
                                 <div id="tab-3" class="tab-pane animated fadeIn">
-                                    <div class="loader-wib">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:170px;"> </div>
-                                                    <div class="text-line"
-                                                        style="position:relative;top:0.7em;width:100px;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="column-group-item-product mt-3">
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:220px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:170px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:150px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:100px;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
-                                                <div class="col-lg-4">
-                                                    <div class="wrapper-cell">
-                                                        <div class="image"></div>
-                                                        <div class="text" style="margin-left:20px;">
-                                                            <div class="text-line" style="width:60px;"> </div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:0.7em;width:120px;"></div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:1.4em;width:170px;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 d-flex justify-content-center">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:200px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:110px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:100px;"> </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="wrapper">
-                                                                        <div class="wrapper-cell"> -->
-
-                                                <!-- </div>
-                                                                    </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
                                     <form id="">
-                                        <div class="row content-wib d-none">
+                                        <div class="row">
                                             <div class="col-lg-5 mt-4">
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
@@ -816,7 +408,7 @@
                                     </form>
                                     <h5></h5>
                                     @if($groupprostat > 0)
-                                    <div id="itemproduct-group-prosesstatus" class="content-wib d-none">
+                                    <div id="itemproduct-group-prosesstatus">
                                         <table class="table table-striped table-bordered table-hover" id="detail_3"
                                             style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">
@@ -836,7 +428,7 @@
                                         </table>
                                     </div>
                                     @else
-                                    <div class="column-empty-transaction content-wib d-none">
+                                    <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
                                         <h5>Oops, Daftar Transaksi Status Sedang diproses Anda Kosong.</h5>
                                         <div class="d-flex justify-content-center">
@@ -846,104 +438,8 @@
                                     @endif
                                 </div>
                                 <div id="tab-4" class="tab-pane animated fadeIn">
-                                    <div class="loader-wib">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:170px;"> </div>
-                                                    <div class="text-line"
-                                                        style="position:relative;top:0.7em;width:100px;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px; height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="text">
-                                                    <div class="text-line" style="width:120px;height:40px;"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="column-group-item-product mt-3">
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:220px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:170px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:120px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:90px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:150px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:100px;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top:2em;padding-top:2em;border-top:1px solid #efeff4;">
-                                                <div class="col-lg-4">
-                                                    <div class="wrapper-cell">
-                                                        <div class="image"></div>
-                                                        <div class="text" style="margin-left:20px;">
-                                                            <div class="text-line" style="width:60px;"> </div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:0.7em;width:120px;"></div>
-                                                            <div class="text-line"
-                                                                style="position:relative;top:1.4em;width:170px;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 d-flex justify-content-center">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:200px;"> </div>
-                                                        <div class="text-line"
-                                                            style="position:relative;top:0.7em;width:110px;"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="text">
-                                                        <div class="text-line" style="width:100px;"> </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="wrapper">
-                                                                        <div class="wrapper-cell"> -->
-
-                                                <!-- </div>
-                                                                    </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
                                     <form id="">
-                                        <div class="row content-wib d-none">
+                                        <div class="row">
                                             <div class="col-lg-5 mt-4">
                                                 <div class="input-group input-daterange">
                                                     <input type="text" name="tanggal_transaksi_awal" value=""
@@ -981,7 +477,7 @@
                                         </div>
                                     </form>
                                     @if($groupppengstat > 0)
-                                    <div id="itemproduct-group-pengirimanstatus" class="content-wib d-none">
+                                    <div id="itemproduct-group-pengirimanstatus">
                                         <table class="table table-striped table-bordered table-hover" id="detail_4"
                                             style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">
@@ -1002,7 +498,7 @@
 
                                     </div>
                                     @else
-                                    <div class="column-empty-transaction content-wib d-none">
+                                    <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
                                         <h5>Oops, Daftar Transaksi Status Proses Pengiriman Anda Kosong.</h5>
                                         <div class="d-flex justify-content-center">

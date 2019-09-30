@@ -2777,3 +2777,60 @@ top: 21px;
     position: relative;
     top: 1em;
 }
+
+/*//start loader fixed*/
+    .loader-new-wrapper{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+        top: 0;
+    z-index: 9999999;
+    position: fixed;
+    background-color: #fff !important;
+    justify-content: center;
+}
+.loader-new-wib {
+  position: relative;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-gap: 2px;
+  width: 80px;
+  height: 80px;
+}
+.loader-new-wib > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: green;
+  transform: scale(0);
+  transform-origin: center center;
+  animation: loader 2s infinite linear;
+}
+.loader-new-wib > div:nth-of-type(1), .loader > div:nth-of-type(5), .loader > div:nth-of-type(9) {
+  animation-delay: 0.4s;
+}
+.loader-new-wib > div:nth-of-type(4), .loader > div:nth-of-type(8) {
+  animation-delay: 0.2s;
+}
+.loader-new-wib > div:nth-of-type(2), .loader > div:nth-of-type(6) {
+  animation-delay: 0.6s;
+}
+.loader-new-wib > div:nth-of-type(3) {
+  animation-delay: 0.8s;
+}
+@keyframes loader {
+  0% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+/*endloader fixed*/

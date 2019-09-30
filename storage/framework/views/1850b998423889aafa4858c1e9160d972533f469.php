@@ -105,18 +105,18 @@
     });
 
     function removeLoaderweb() {
-        $(".loader-wib").fadeOut(500, function () {
-            $(".loader-wib").remove();
-            $('body').removeClass('overflow-hidden');
-            $('.content-wib').removeClass('d-none');
+        $(".loader-new-wrapper").fadeOut(500, function () {
+            $(".loader-new-wrapper").remove();
+            
+            // $('.content-wib').removeClass('d-none');
         });
     }
-    $(document).ready(function () {
-        $('html, body').scrollTop(0);
-        $(window).on('beforeunload', function () {
-            $('html, body').scrollTop(0);
-        });
-    });
+    // $(document).ready(function () {
+    //     $('html, body').scrollTop(0);
+    //     $(window).on('beforeunload', function () {
+    //         $('html, body').scrollTop(0);
+    //     });
+    // });
 
     $(document).ready(function () {
         $(".searchbarang").autocomplete({
@@ -177,23 +177,8 @@
 
 
 
-    function toggleSwitchLang() {
-        ls.classList.toggle('active-chat')
-    }
+    
     $(document).ready(function () {
-
-        $("#smallchat-show").click(function () {
-            $("#smallchat-show").slideUp();
-            setTimeout(function () {
-                $(".smallchat-box").slideDown("slow");
-            }, 300);
-        });
-        $(".hidechat-widget").click(function () {
-            $(".smallchat-box").slideUp("slow");
-            setTimeout(function () {
-                $("#smallchat-show").slideDown("slow");
-            }, 300);
-        });
         $('#cart-navbar').on('click', '.remove', function () {
             var id = $(this).data('id');
             var code = $(this).data('ciproduct');
@@ -371,37 +356,6 @@
             }
         });
 
-        // var penjualanpayment = pusher.subscribe('penjualan-channel');
-        // penjualanpayment.bind('penjualan-payment', function(data) {
-        //     if(data.message.customer.s_member == $('#idcustomernav').val()){
-        //         let jumlahpembayaran  = data.message.jumlahpembayaran;
-        //         let itempembayaran = data.message.item;
-        //         $('#notif-payment-transaksi').text(jumlahpembayaran);
-        //         var trHTML2 = '';
-        //             $.each(itemproses, function (i, item) {
-        //                     trHTML2 += `<div class="group-notif-delivery  bold" style="font-size:12px;">
-        //                 <div class="row">
-        //                 <div class="col-lg-3 d-flex justify-content-center">
-        //                     <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="80px" height="80px" class="mt-2">
-        //                 </div>
-        //                 <div class="col-lg-9">
-        //                     <div class="">`+item.i_name+`</div>
-        //                     <div class="pt-4">`+item.s_nota+`</div>
-        //                     <div style="color:rgba(0,0,0,.54);" class="pt-4">Total Harga : <span class="c-primary-wib">Rp. `+item.sd_price+`</span> | <span>`+item.sd_qty+`</span> Qty
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         </div>`;
-        //         });
-        //         $('body').append(`<button class="btn btn-primary d-none" id="get-notif-payment" data-toggle="modal" data-target="#mdl-payment" hidden></button>`);
-        //         $('.content-payment-warning').append(trHTML2);
-        //         setTimeout(function(){
-        //             $('#get-notif-payment').click();
-        //         }, 1000);
-        //     }else{
-        //         console.log('Ops');
-        //     }
-        // });
     <?php endif; ?>
 
     $('#js-sidebar-collapse').on('click', function () {
