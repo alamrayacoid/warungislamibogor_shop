@@ -268,20 +268,22 @@
                                         </div>
                                         <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($row->ip_path == null): ?>
+                                            <div class="image-product-box"
+                                            style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
+                                            alt="Sorry! Image not available at this time">
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="caption">
                                             <div class="title-product-group">
                                                 <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
                                                     class="title-product-item"><?php echo e($row->i_name); ?></a>
                                             </div>
                                             <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
                                                 <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
+                                                <div class="">
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -406,26 +408,28 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail product-box-item">
                                         <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($row->i_code == $roww->ip_ciproduct): ?>
+                                        <?php if($rows->i_code == $roww->ip_ciproduct): ?>
                                         <div class="image-product-box"
                                             style="background:url('env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                                         </div>
                                         <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($rows->ip_path == null): ?>
+                                            <div class="image-product-box"
+                                            style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
+                                            alt="Sorry! Image not available at this time">
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="caption">
                                             <div class="title-product-group">
                                                 <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($rows->i_code); ?>"
                                                     class="title-product-item"><?php echo e($rows->i_name); ?></a>
                                             </div>
                                             <div class="footer-product-item">
-                                                <div class="">
-                                                    <i class="fa fa-star f-14 c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-gold"></i>
-                                                    <i class="fa fa-star c-grey"></i>
-                                                </div>
                                                 <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
+                                                <div class="">
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -488,16 +492,12 @@
                                                             class="title-product-item"><?php echo e($row->i_name); ?></a>
                                                     </div>
                                                     <div class="footer-product-item">
-                                                        <div class="">
-                                                            <i class="fa fa-star f-14 c-gold"></i>
-                                                            <i class="fa fa-star c-gold"></i>
-                                                            <i class="fa fa-star c-gold"></i>
-                                                            <i class="fa fa-star c-gold"></i>
-                                                            <i class="fa fa-star c-grey"></i>
-                                                        </div>
                                                         <div class="price-product-item">Rp. Rp.
                                                             <?php echo e($row->ipr_sunitprice); ?>
 
+                                                        </div>
+                                                        <div class="">
+                                                            <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
                                                         </div>
                                                     </div>
                                                 </div>

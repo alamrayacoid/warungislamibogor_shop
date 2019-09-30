@@ -95,7 +95,7 @@ class ProdukController extends Controller
             $namabarang = $request->search;
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
     	return view('frontpage.produk.produk-frontpage',array(
-                'data' => $data->get(),
+                'data' => $data->paginate(12),
                 'gambar' => $gambar,
                 'wish' => $wish,
                 'tipe' => $type,
@@ -282,7 +282,7 @@ class ProdukController extends Controller
                 ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
                 ->where('itp_citype',$datas->ity_code)
                 ->where('m_item.status_data','true')
-                ->get();
+                ->count();
 
                 $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
                 $type = DB::table('m_itemtype')->get();
@@ -293,15 +293,81 @@ class ProdukController extends Controller
                 }else{
                     $keranjang = '';
                 }
+                $status_filter = '';
         return view('frontpage.produk.produk-kategori-frontpage',array(
             'test'=>$data,
             'test1'=> $data1,
             'namakategori'=>$datas,
             'kategori'=>$kategori,
             'tipe'=>$type,
+            'statusfilter' => $status_filter,
             'wish'=>$wish,
             'gambar'=>$gambar,
             'keranjang'=> $keranjang,
         ));
+    }
+    public function filter_product_frontpage(Request $request){
+            if(\Auth::check()){
+                $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
+            }else{
+                    $keranjang = '';
+            }
+
+            $type = DB::table('m_itemtype')->get(); 
+
+            $namakategori = DB::table('m_itemtype')->where('ity_code',$request->kategori)->first();
+            $data = DB::table('m_item')
+                ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+                ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                ->leftJoin('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                ->leftJoin('m_groupperprice', function($join){
+                    $join->on('m_groupperprice.gpp_ciproduct','=','m_item.i_code')
+                    ->where('m_groupperprice.status_data','=','true');
+                })
+                ->where('ity_code', $request->kategori)
+                ->where('m_item.status_data','true')
+                ->groupBy('i_name');
+                
+
+            $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->join('m_itemproduct','itp_ciproduct','i_code')->groupBy('i_code')->get();
+
+            $data1 = DB::table('m_item')
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+                ->join('m_itemtype','ity_code','itp_citype')
+                ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                ->where('itp_citype',$namakategori->ity_code)
+                ->where('m_item.status_data','true')
+                ->count();
+
+
+
+            $wish = DB::table('d_wishlist')->where('status_data','true')->get();
+
+            if($request->status_filter == 'terbaru'){
+                $datas = $data->orderBy('i_id','desc');
+            }else if($request->status_filter == 'termurah'){
+                $datas = $data->orderBy('ipr_sunitprice','asc');
+            }else if($request->status_filter == 'termahal'){
+                $datas = $data->orderBy('ipr_sunitprice','desc');
+            }
+            $status_filter = $request->status_filter;
+            $namabarang = $request->search;
+            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+            return view('frontpage.produk.produk-kategori-frontpage',array(
+                'test' => $datas->paginate(12),
+                'test1'=> $data1,
+                'gambar' => $gambar,
+                'statusfilter' => $status_filter,
+                'wish' => $wish,
+                'namakategori' => $namakategori,
+                'tipe' => $type,
+                'namabarang' => $namabarang,
+                'kategori'=>$kategori,
+                'keranjang'=> $keranjang,
+                
+            ));
     }
 }

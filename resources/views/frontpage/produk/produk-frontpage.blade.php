@@ -339,6 +339,10 @@
                         </div>
                     </div>
                     @endforeach
+                    <div class="col-lg-12 mb-5">
+                        {{$data->appends(request()->input())->Links()}}
+                    </div>
+                    
                     <!--  -->
                     @else
                     <div class="column-empty-transaction">

@@ -95,6 +95,9 @@ Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.c
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
 
 Route::get('pembelian/detail/{id}','Frontpage\PembelianController@detail_transaksi')->name('detail_transaksi');
+
+Route::get('/filter-produk','Frontpage/ProdukController@filter_category_product')->name('filter_category_product');
+Route::get('/produk-filter', 'Frontpage\ProdukController@filter_product_frontpage')->name('produk-filter-frontpage');
 Broadcast::channel('my-channel', function ($user) {
     return true; // change this to your authentication logic
 });

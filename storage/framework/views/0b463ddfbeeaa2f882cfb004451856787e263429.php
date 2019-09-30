@@ -205,10 +205,7 @@
                                         <div class="text">
                                             <div class="text-line" style="width:200px;height:15px;border-radius:0;">
                                             </div>
-                                            <div style="margin-top:15px;">
-                                                <div class="text-line title-product-load"
-                                                    style="width:100px;height:15px;border-radius:0;"> </div>
-                                            </div>
+                                            
                                         </div>
                                         <hr>
                                     </div>
@@ -273,9 +270,9 @@
                                     <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($roww->ip_ciproduct): ?>
                                     <div>
-                                        <a href="env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>" sty
+                                        <a href="<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>" sty
                                             data-gallery="">
-                                            <img src="env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
+                                            <img src="<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
                                         </a>
                                     </div>
                                     <?php endif; ?>
@@ -290,13 +287,6 @@
 
                                         <span class="text-info-title-detail-product" id="stocknya"></span>
                                     </h2>
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     <hr>
                                 </div>
                                 <div class="col-lg-12">
@@ -415,7 +405,7 @@
                     <?php $__currentLoopData = $gambarsejenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if($rows->i_code == $roww->ip_ciproduct): ?>
                     <div class="image-product-box"
-                        style="background:url('env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
+                        style="background:url('<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
                     </div>
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -431,14 +421,10 @@
                                 class="title-product-item"><?php echo e($rows->i_name); ?></a>
                         </div>
                         <div class="footer-product-item">
-                            <div class="">
-                                <i class="fa fa-star f-14 c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-gold"></i>
-                                <i class="fa fa-star c-grey"></i>
-                            </div>
                             <div class="price-product-item">Rp. <?php echo e($rows->ipr_sunitprice); ?></div>
+                            <div class="">
+                                <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($rows->ity_name); ?></span>
+                            </div>
                         </div>
                     </div>
 
@@ -457,13 +443,7 @@
                 <img src="<?php echo e(asset('assets/img/img-product/product-4.png')); ?>" width="50px" height="50px">
                 <div class="d-inline-block detail-product-sticky">
                     <a href="" class="title-sticky-product"><?php echo e($row->i_name); ?> </a>
-                    <span class="rating-sticky-product">
-                        <i class="fa fa-star f-14 c-gold"></i>
-                        <i class="fa fa-star c-gold"></i>
-                        <i class="fa fa-star c-gold"></i>
-                        <i class="fa fa-star c-gold"></i>
-                        <i class="fa fa-star c-grey"></i>
-                    </span>
+                    
                     <p class="desc-sticky-product">Warung Islami Bogor</p>
                 </div>
 
@@ -501,6 +481,8 @@
 <script>
     $(document).ready(function () {
         $('#cabang').on('change', function () {
+            $('#stocknya').removeClass('selected');                    
+
             setInterval(function () {
                 ajax_helper('<?php echo e(route("stock_check")); ?>', 'POST', {
                     '_token': '<?php echo e(csrf_token()); ?>',

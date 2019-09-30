@@ -319,13 +319,6 @@
                                     </div>
                                     <?php endif; ?>
                                 <div class="footer-product-item">
-                                    <div class="">
-                                        <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i>
-                                    </div>
                                     <?php if($row->gpp_sellprice == null): ?>
                                     <div class="price-product-item">
                                         Rp. <?php echo e($row->ipr_sunitprice); ?>
@@ -337,6 +330,9 @@
 
                                     </div>
                                     <?php endif; ?>
+                                    <div class="">
+                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"><?php echo e($row->ity_name); ?></span>
+                                    </div>
                                 </div>
                                 </div>
 
@@ -344,6 +340,11 @@
                         </div>
                     </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-12 mb-5">
+                        <?php echo e($data->appends(request()->input())->Links()); ?>
+
+                    </div>
+                    
                     <!--  -->
                     <?php else: ?>
                     <div class="column-empty-transaction">
