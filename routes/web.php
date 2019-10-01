@@ -58,6 +58,11 @@ Route::post('/keranjang/table_keranjang','Frontpage\KeranjangController@table_ke
 Route::post('/keranjang/updatecart', 'Frontpage\KeranjangController@updatecart')->name('updatecart.keranjang');
 Route::get('/getnow_price-cart','Frontpage\KeranjangController@getnow_price_cart')->name('getnow_price-cart');
 Route::get('/getnow_qty-cart','Frontpage\KeranjangController@getnow_qty_cart')->name('getnow_qty-cart');
+
+//
+Route::get('/antrian_layanan','AntrianLayananController@index')->name('antrian_layanan');
+Route::post('/tambah_antrian','AntrianLayananController@add_antrian')->name('add.antrian');
+Route::post('/nonaktif-antrian','AntrianLayananController@nonaktif_antrian')->name('nonaktif-antrian');
 // Status semua
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
 Route::post('pembelian/table_allstatus', 'Frontpage\PembelianController@table_allstatus')->name('table_allstatus');

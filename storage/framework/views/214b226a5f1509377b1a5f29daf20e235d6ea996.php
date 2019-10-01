@@ -129,10 +129,13 @@
     .table {
         border: 0 !important;
     }
-    .responsive-transaction{
+    @media(max-width: 992px){
+        .responsive-transaction{
             max-width: 100%;
-    overflow: scroll;
+            overflow-x: auto;
+        }    
     }
+    
 </style>
 <?php $__env->stopSection(); ?>
 

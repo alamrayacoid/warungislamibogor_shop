@@ -192,6 +192,7 @@
                                 <ul class="list-account-content-profile">
                                     <li style="border-left:0 !important;"><a href="<?php echo e(route('wishlist-frontpage')); ?>">Barang Favorit</a></li>
                                     <li style="border-left:0 !important;"><a href="<?php echo e(route('profile')); ?>">Pengaturan</a></li>
+                                    <li style="border-left:0 !important;"><a href="<?php echo e(route('antrian_layanan')); ?>">Antrian Layanan</a></li>
                                     <li class="mt-5 border-0"><a href="<?php echo e(route('logout')); ?>"
                                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>&ensp;Logout</a></li>
                                         <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">

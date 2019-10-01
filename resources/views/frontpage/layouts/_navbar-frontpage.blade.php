@@ -192,6 +192,7 @@
                                 <ul class="list-account-content-profile">
                                     <li style="border-left:0 !important;"><a href="{{route('wishlist-frontpage')}}">Barang Favorit</a></li>
                                     <li style="border-left:0 !important;"><a href="{{route('profile')}}">Pengaturan</a></li>
+                                    <li style="border-left:0 !important;"><a href="{{route('antrian_layanan')}}">Antrian Layanan</a></li>
                                     <li class="mt-5 border-0"><a href="{{route('logout')}}"
                                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>&ensp;Logout</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
