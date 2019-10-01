@@ -131,6 +131,10 @@
     .table {
         border: 0 !important;
     }
+    .responsive-transaction{
+            max-width: 100%;
+    overflow: scroll;
+    }
 </style>
 @endsection
 
@@ -268,7 +272,7 @@
                                         </div>
                                     </form>
                                     @if($group !='[]')
-                                    <div id="itemproduct-group-paymentstatus" class="row">
+                                    <div id="itemproduct-group-paymentstatus" class="responsive-transaction">
                                         
                                         <table class="table table-striped table-bordered table-hover" id="detail_1"
                                             style="width: 100%">
@@ -338,7 +342,7 @@
                                         </div>
                                     </form>
                                     @if($groupp !='[]')
-                                    <div id="itemproduct-group-paymentstatus" class="">
+                                    <div id="itemproduct-group-paymentstatus" class="responsive-transaction">
                                         <table class="table table-striped table-bordered table-hover" id="detail_2"
                                             style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">
@@ -408,7 +412,7 @@
                                     </form>
                                     <h5></h5>
                                     @if($groupprostat > 0)
-                                    <div id="itemproduct-group-prosesstatus">
+                                    <div id="itemproduct-group-prosesstatus" class="responsive-transaction">
                                         <table class="table table-striped table-bordered table-hover" id="detail_3"
                                             style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">
@@ -477,7 +481,7 @@
                                         </div>
                                     </form>
                                     @if($groupppengstat > 0)
-                                    <div id="itemproduct-group-pengirimanstatus">
+                                    <div id="itemproduct-group-pengirimanstatus" class="responsive-transaction">
                                         <table class="table table-striped table-bordered table-hover" id="detail_4"
                                             style="width: 100%">
                                             <thead style="opacity: 0; position: absolute;">

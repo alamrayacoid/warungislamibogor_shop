@@ -8,7 +8,7 @@
                     <h4 class="modal-title text-center">Edit Foto</h4>
                     
                 </div>
-                <div class="modal-body">
+                <div class="modal-body mt-4">
 
                     <div class="row">
 
@@ -24,7 +24,7 @@
                             <label>Preview Foto</label>
                             <div class="image-preview"></div>
 
-                            <label class="btn btn-primary d-flex justify-content-center align-items-center btn-sm btn-block mt-3 mb-3" for="input-foto" style="height:50px;font-size:14px;">
+                            <label class="btn btn-primary bg-primary-wib d-flex justify-content-center align-items-center btn-sm btn-block mt-3 mb-3" for="input-foto" style="height:40px;font-size:14px;">
                                 Pilih Foto
                                 <input type="file" accept="image/*" name="gambar" id="input-foto" class="d-none">
                             </label>
@@ -43,7 +43,7 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary simpan-foto" type="button" id="update-foto" data-dismiss="modal">Update Foto</button>
+                    <button class="btn btn-primary bg-primary-wib simpan-foto" type="button" id="update-foto" data-dismiss="modal">Update Foto</button>
                 </div>
             </div>
         </div>

@@ -174,7 +174,7 @@ class KeranjangController extends Controller
                     ->join('m_item','i_code','cart_ciproduct')
                     ->join('m_itemproduct','itp_ciproduct','i_code')
                     ->join('m_itemprice','ipr_ciproduct','i_code')
-                    ->where('cart_cmember',$request->idcustomer)
+                    ->where('cart_cmember',Auth::user()->cm_code)
                     ->where('d_cart.status_data','true')
                     ->groupBy('cart_ciproduct')
                     ->get();
