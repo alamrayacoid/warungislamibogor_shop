@@ -192,13 +192,12 @@
         $(document).ready(function () {
             $('#stocknya').removeClass('selected');
 
-            setInterval(function () {
                 ajax_helper('{{route("stock_check")}}', 'POST', {
                     '_token': '{{csrf_token()}}',
                     'cabang': '{{$stokies}}',
                     'produk': '{{$code}}'
                 });
-            }, 1000);
+
 
             function ajax_helper(url, type, data, success, error, modal) {
                 $.ajax({
