@@ -70,6 +70,9 @@
     .jscroll-added{
         padding: 0 15px;
     }
+    .icon-onwishlist {
+        color: #ed5565 !important;
+    }
 </style>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -124,7 +127,7 @@
                             <?php endif; ?>
                         <div class="caption">
                             <div class="title-product-group">
-                                <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                                <a href="<?php echo e(url('product',$row->i_link)); ?>"
                                     class="title-product-item"><?php echo e($row->i_name); ?></a>
                             </div>
                             <?php if($row->gpp_sellprice == null): ?>
@@ -185,7 +188,7 @@
                             <?php endif; ?>
                         <div class="caption">
                             <div class="title-product-group">
-                                <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($rows->i_code); ?>"
+                                <a href="<?php echo e(url('product',$rows->i_link)); ?>"
                                     class="title-product-item"><?php echo e($rows->i_name); ?></a>
                             </div>
                             <?php if($rows->gpp_sellprice == null): ?>
@@ -234,31 +237,17 @@
                             <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if(Auth::check()): ?>
                             <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
-                            <div class="product-wishlist onproduk-page onwishlist">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                    type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
-                            </div>
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart icon-onwishlist"></i></button>
                             <?php else: ?>
-                            <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button>
-                            </div>
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
                             <?php endif; ?>
                             <?php else: ?>
-                            <div class="product-wishlist onproduk-page">
 
-                                <a href="<?php echo e(route('login-frontpage')); ?>"><button class="btn btn-circle btn-lg btn-wishlist" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button></a>
-                            </div>
+                                <a href="<?php echo e(route('login-frontpage')); ?>"><button class="btn btn-wishlist-frontpage" type="button"><i class="fa fa-heart"></i></button></a>
                             <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php if($wish == '[]'): ?>
-                            <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="<?php echo e($row->i_code); ?>"
-                                    id="<?php echo e($row->i_code); ?>" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button>
-                            </div>
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
                             <?php endif; ?>
                             <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if($row->i_code == $roww->ip_ciproduct): ?>
@@ -276,7 +265,7 @@
                             <?php endif; ?>
                             <div class="caption">
                                 <div class="title-product-group">
-                                    <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                                    <a href="<?php echo e(url('product',$row->i_link)); ?>"
                                         class="title-product-item"><?php echo e($row->i_name); ?></a>
                                 </div>
                                 <?php if($row->gpp_sellprice == null): ?>
@@ -447,10 +436,9 @@
                 infinite: true,
                 variableWidth: true
             });
-            $('.infinite-scroll').on('click', '.btn-wishlist', function () {
-                var code = $(this).data('ciproduct');
-                $(this).find('i').toggleClass('fa far');
-                $(this).parents('.product-wishlist').toggleClass('onwishlist');
+            $('.infinite-scroll').on('click','.btn-wishlist-frontpage',function(){
+                $(this).find('i').toggleClass('icon-onwishlist');
+               var code = $(this).data('ciproduct');
                 $.ajax({
                     url: '<?php echo e(route("addwishlist")); ?>',
                     method: 'POST',
@@ -460,7 +448,7 @@
                     },
 
                 })
-            })
+            });
             $('.your-class').slick({
                 slidesToShow: 1,
                 arrows: false,

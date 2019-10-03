@@ -124,6 +124,7 @@ class WishlistController extends Controller
 		$wish = DB::table('d_wishlist')
 
 				->where('status_data','true')
+                ->groupBy('wl_id')
 
 				->get();
 

@@ -31,8 +31,7 @@
 <section style="margin-top:4.5em;">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="">Checkout</a></li>
-        <li class="active">@foreach($produk as $row){{$row->i_name}},@endforeach</li>
+        <li class="active">Checkout</a></li>
     </ol>
     <div class="container-fluid mt-5">
         <div class="loader-wib"></div>

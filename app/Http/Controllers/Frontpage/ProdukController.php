@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontpage;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
@@ -178,7 +179,7 @@ class ProdukController extends Controller
 
     	return view('frontpage.produk.produk-frontpage',array(
 
-                'data' => $data->paginate(12),
+                'data' => $data->paginate(24),
 
                 'cekdata' => $data->get(),
 
@@ -208,49 +209,84 @@ class ProdukController extends Controller
 
     }
 
-    public function produk_detail(Request $request)
+    public function produk_detail($slug)
 
     {
-        if(\Auth::check()){
+    //     if(\Auth::check()){
 
-            $dataseen = DB::table('d_lastseen')
+    //         $dataseen = DB::table('d_lastseen')
 
-                    ->where('ls_ccustomer',Auth::user()->cm_code)            
+    //                 ->where('ls_ccustomer',Auth::user()->cm_code)            
 
-                    ->first();
+    //                 ->first();
 
-        if (is_null($dataseen)) {
+    //     if (is_null($dataseen)) {
 
-            DB::table('d_lastseen')->insert([
+    //         DB::table('d_lastseen')->insert([
 
-                'ls_cproduct'=>$request->code,
+    //             'ls_cproduct'=>$request->code,
 
-                'ls_ccustomer'=>Auth::user()->cm_code,
+    //             'ls_ccustomer'=>Auth::user()->cm_code,
 
-                'status_data'=>'true',
+    //             'status_data'=>'true',
 
-            ]);
+    //         ]);
 
-        } 
+    //     } 
 
-        else {
+    //     else {
 
-            DB::table('d_lastseen')->where('ls_ccustomer',Auth::user()->cm_code)->update([
+    //         DB::table('d_lastseen')->where('ls_ccustomer',Auth::user()->cm_code)->update([
 
-                'ls_cproduct'=>$request->code,
+    //             'ls_cproduct'=>$request->code,
 
-                'status_data'=>'true',
+    //             'status_data'=>'true',
 
-            ]);
+    //         ]);
+    //     }
+
+    // }
+
+    // else{
+
+    //     }
+
+    // 	$code = $request->code;
+        $datas = DB::table('m_item')
+
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+
+                ->join('m_itemtype','ity_code','itp_citype')
+
+                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
+
+                ->where('i_link',$slug)
+
+                ->groupBy('i_name')
+
+                ->first();
+        $cekadatidak = DB::table('m_item')
+
+                ->join('m_itemprice','ipr_ciproduct','i_code')
+
+                ->join('m_itemproduct','itp_ciproduct','i_code')
+
+                ->join('m_itemtype','ity_code','itp_citype')
+
+                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
+
+                ->where('i_link',$slug)
+
+                ->groupBy('i_name')
+
+                ->count();
+
+        if($cekadatidak == null || $cekadatidak ==0){
+            return redirect()->back();
         }
 
-    }
-
-    else{
-
-        }
-
-    	$code = $request->code;
 
         $cabang = DB::table('d_stock')
 
@@ -266,17 +302,17 @@ class ProdukController extends Controller
 
             ->get();
 
-        $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->where('i_code',$code)->get();
+        $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->where('i_code',$datas->i_code)->get();
 
         $gambarsejenis = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
 
         $satuan = [];
 
-        $satuan1 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit')->where('itp_ciproduct',$code)->get();
+        $satuan1 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit')->where('itp_ciproduct',$datas->i_code)->get();
 
-        $satuan2 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit2')->where('itp_ciproduct',$code)->get();
+        $satuan2 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit2')->where('itp_ciproduct',$datas->i_code)->get();
 
-        $satuan3 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit3')->where('itp_ciproduct',$code)->get();
+        $satuan3 = DB::table('m_itemproduct')->leftJoin('m_itemunit','iu_code','itp_ciunit3')->where('itp_ciproduct',$datas->i_code)->get();
 
         array_push($satuan,$satuan1);
 
@@ -300,27 +336,11 @@ class ProdukController extends Controller
 
                 })
 
-                ->where('i_code',$code)
+                ->where('i_code',$datas->i_code)
 
                 ->groupBy('i_name')
 
                 ->get();
-
-        $datas = DB::table('m_item')
-
-                ->join('m_itemprice','ipr_ciproduct','i_code')
-
-                ->join('m_itemproduct','itp_ciproduct','i_code')
-
-                ->join('m_itemtype','ity_code','itp_citype')
-
-                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
-
-                ->where('i_code',$code)
-
-                ->groupBy('i_name')
-
-                ->first();
 
         $produksejenis = DB::table('m_item')
 
@@ -346,7 +366,7 @@ class ProdukController extends Controller
                 
                 ->where('itp_citype',$datas->itp_citype)
                 
-                ->where('i_code','!=',$code)
+                ->where('i_code','!=',$datas->i_code)
                 
                 ->take(5)
                 
@@ -362,7 +382,7 @@ class ProdukController extends Controller
 
                     ->where('status_data','true')
 
-                    ->where('wl_ciproduct',$code)
+                    ->where('wl_ciproduct',$datas->i_code)
 
                     ->where('wl_cmember',Auth::user()->cm_code)
 
@@ -388,7 +408,7 @@ class ProdukController extends Controller
 
             'gambarsejenis'=>$gambarsejenis,
 
-            'code' => $code,
+            'code' => $datas->i_code,
 
             'cabang' => $cabang,
 
@@ -479,13 +499,21 @@ class ProdukController extends Controller
         return response()->json(['stock' => $stocknow]);
     }
 
-    public function produk_kategori($id){
+    public function produk_kategori($slug){
 
         $datas = DB::table('m_itemtype')
 
-                ->where('ity_name',$id)
+                ->where('ity_link',$slug)
 
                 ->first();
+        $cekadatidak = DB::table('m_itemtype')
+        
+                ->where('ity_link',$slug)
+
+                ->count();
+        if($cekadatidak == null || $cekadatidak == 0){
+            return redirect()->back();
+        }
 
         $data = DB::table('m_item')
 
@@ -511,7 +539,7 @@ class ProdukController extends Controller
 
                 ->groupBy('i_code')
 
-                ->paginate(12);
+                ->paginate(24);
 
         $data1 = DB::table('m_item')
 
@@ -696,7 +724,7 @@ class ProdukController extends Controller
 
             return view('frontpage.produk.produk-kategori-frontpage',array(
 
-                'test' => $datas->paginate(12),
+                'test' => $datas->paginate(24),
 
                 'test1'=> $data1,
 

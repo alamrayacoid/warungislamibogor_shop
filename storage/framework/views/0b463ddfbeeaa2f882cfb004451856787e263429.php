@@ -34,9 +34,7 @@
         }
     }
 
-    .icon-onwishlist {
-        color: #ed5565 !important;
-    }
+    
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -46,7 +44,7 @@
     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Produk</a></li>
+        <li>Produk</li>
         <li class="active"><?php echo e($row->i_name); ?></li>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </ol>
@@ -170,7 +168,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5" style="margin-top:2em">
             <div class="col-lg-12">
                 <div class="ibox product-description">
                     <div class="ibox-title" style="background:#fafafa;">
@@ -208,7 +206,7 @@
                     <?php endif; ?>
                     <div class="caption">
                         <div class="title-product-group">
-                            <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($rows->i_code); ?>"
+                            <a href="<?php echo e(url('product',$rows->i_link)); ?>"
                                 class="title-product-item"><?php echo e($rows->i_name); ?></a>
                         </div>
                         <div class="footer-product-item">

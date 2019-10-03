@@ -100,7 +100,7 @@
                             class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
                         @foreach($kategori as $row)
-                        <li><a href="{{route('kategori-produk',['id'=> $row->ity_name ])}}">{{$row->ity_name}}</a></li>
+                        <li><a href="{{url('category',$row->ity_link)}}">{{$row->ity_name}}</a></li>
                         @endforeach
                     </ul>
                 </li>
@@ -193,7 +193,7 @@
                                     <li style="border-left:0 !important;"><a href="{{route('wishlist-frontpage')}}">Barang Favorit</a></li>
                                     <li style="border-left:0 !important;"><a href="{{route('profile')}}">Pengaturan</a></li>
                                     <li style="border-left:0 !important;"><a href="{{route('antrian_layanan')}}">Antrian Layanan</a></li>
-                                    <li class="mt-5 border-0"><a href="{{route('logout')}}"
+                                    <li class="mt-5 border-0" style="margin-top: 2em;"><a href="{{route('logout')}}"
                                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>&ensp;Logout</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}

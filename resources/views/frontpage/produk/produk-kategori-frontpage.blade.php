@@ -10,7 +10,7 @@
 <section style="margin-top:4.5em">
     <ol class="breadcrumb breadcumb-header" style="margin-bottom: 0 !important;">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Kategori Produk</a></li>
+        <li>Kategori Produk</li>
         <li class="active">{{$namakategori->ity_name}}</a></li>
     </ol>
     <section style="border-bottom: 1px solid #efeff4">
@@ -23,9 +23,6 @@
 
         </div>
         <div class="col-md-6 column-opsi-filter-group">
-            <!-- <button class="btn-filter-opsi"><i class="fa fa-th" aria-hidden="true"></i></button>
-            <button class="btn-filter-opsi"><i class="fa fa-list-ul" aria-hidden="true"></i></button> -->
-            
                     <form action="{{route('produk-filter-frontpage')}}" method="get">
                     <input type="hidden" class="d-none" value="{{$namakategori->ity_code}}" name="kategori">
                     <span>Urutkan<span>&nbsp;
@@ -51,9 +48,12 @@
     </section>
     <div class="container-fluid">
         <div class="row ">
-            <div class="col-sm-4 col-md-3 col-lg-2">
+            <div class="col-sm-4 col-md-3 col-lg-2 sidebar-filter-wrapper">
+                <div class="header--filter-sidebar">
                 <h5 class="entry-v-nav__heading pt-5">Cari Lebih Detail</h5>
-                <div class="product-filter-field-group">
+                <button type="button" class="btn btn-more-filter" style="position: relative;right: 5px;" data-toggle="collapse" data-target="#kategori"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="product-filter-field-group collapse" id="kategori">
                     <h5 class="entry-v-nav__heading">Kategori</h5>
                     <ul>
                         @foreach($kategori as $row)
@@ -64,14 +64,23 @@
                 </div>
                 <form action="{{route('produk-frontpage')}}" method="get">
                     <div class="product-filter-field-group">
-                        <h5 class="entry-v-nav__heading">Nama Produk</h5>
+                        <div class="header--filter-sidebar">
+                            <h5 class="entry-v-nav__heading pt-5">Nama Produk</h5>
+                            <button type="button" class="btn btn-more-filter" data-toggle="collapse" data-target="#produk"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <div class="collapse" id="produk">
                         <div class="form-group">
                             <input type="text" id="nama_produk" name="nama_produk" value="" placeholder="Nama Produk"
                                 class="form-control">
                         </div>
                     </div>
+                    </div>
                     <div class="product-filter-field-group">
-                        <h5 class="entry-v-nav__heading">Jenis Produk</h5>
+                        <div class="header--filter-sidebar">
+                            <h5 class="entry-v-nav__heading pt-5">Jenis Produk</h5>
+                            <button type="button" class="btn btn-more-filter" data-toggle="collapse" data-target="#jenisproduk"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <div class="collapse" id="jenisproduk">
                         <div class="form-group">
                             <select name="jenis" id="jenis" class="form-control select2">
                                 <option value="All">Semua</option>
@@ -81,8 +90,13 @@
                             </select>
                         </div>
                     </div>
+                    </div>
                     <div class="product-filter-field-group">
-                        <h5 class="entry-v-nav__heading">Rentang Harga</h5>
+                        <div class="header--filter-sidebar">
+                            <h5 class="entry-v-nav__heading pt-5">Rentang Harga</h5>
+                            <button type="button" class="btn btn-more-filter" data-toggle="collapse" data-target="#hargaprodukfilter"><i class="fa fa-plus"></i></button>
+                        </div>
+                    <div class="collapse" id="hargaprodukfilter">
                         <div class="form-group">
                             <input type="text" id="harga_min" name="harga_min" value="" placeholder="Min"
                                 class="form-control">
@@ -93,8 +107,10 @@
                         </div>
                         <input type="submit" name="" class="btn-submit-filter-item" value="Cari Sekarang">
                     </div>
+                    </div>
                 </form>
             </div>
+
             <div class="col-sm-8 col-md-9 col-lg-10 column-product-filter">
                 <h5 class="header-product-item-filter">Produk Warung Islami Bogor</h5>
                 <div class="row">
@@ -104,33 +120,20 @@
                         <div class="thumbnail product-box-item">
                             <input type="hidden" value="{{$row->ipr_sunitprice}}" class="harga" name="">
                             <div class="product-box">
-                                @foreach($wish as $wis)
+                            @foreach($wish as $wis)
                             @if(Auth::check())
                             @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
-                            <div class="product-wishlist onproduk-page onwishlist">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
-                                    type="button" title="Tambah ke wishlist"><i class="fa-heart fa"></i></button>
-                            </div>
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart icon-onwishlist"></i></button>
                             @else
-                            <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
-                                    id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button>
-                            </div>
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
                             @endif
                             @else
-                            <div class="product-wishlist onproduk-page">
-                                <a href="{{route('login-frontpage')}}"><button class="btn btn-circle btn-lg btn-wishlist" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button></a>
-                            </div>
+                            
+                                <a href="{{route('login-frontpage')}}"><button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button></a>
                             @endif
                             @endforeach
                             @if($wish == '[]')
-                            <div class="product-wishlist onproduk-page">
-                                <button class="btn btn-circle btn-lg btn-wishlist" data-ciproduct="{{$row->i_code}}"
-                                    id="{{$row->i_code}}" type="button" title="Tambah ke wishlist"><i
-                                        class="far fa-heart"></i></button>
-                            </div>
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
                             @endif
                                 @foreach($gambar as $roww)
                                 @if($row->i_code == $roww->ip_ciproduct)
@@ -147,7 +150,7 @@
                                 @endif
                                 <div class="caption">
                                     <div class="title-product-group">
-                                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                                        <a href="{{url('product',$row->i_link)}}"
                                             class="title-product-item">{{$row->i_name}}</a>
                                     </div>
                                     @if($row->gpp_sellprice == null)
@@ -178,7 +181,7 @@
                         </div>
                     </div>
                     @endforeach
-                    <div class="col-lg-12 mb-5">
+                    <div class="col-lg-12" style="margin-bottom: 3em;">
                         {{$test->appends(request()->input())->Links()}}
                     </div>
                     @else
@@ -227,5 +230,8 @@
         // })
 
     });
+    $('.header--filter-sidebar').on('click','.btn-more-filter',function(){
+        $(this).find('i').toggleClass('fa-minus');
+    })
 </script>
 @endsection

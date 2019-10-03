@@ -6,7 +6,7 @@
 <?php $__env->startSection('content'); ?>
 <section style="margin-top:4.5em;">
     <ol class="breadcrumb breadcumb-header">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
         <li class="active">Barang Favorit</li>
     </ol>
     <div class="container-fluid mt-5">
@@ -106,7 +106,7 @@
                                         <?php endif; ?>
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                                                <a href="<?php echo e(url('product',$row->i_link)); ?>"
                                                     class="title-product-item"><?php echo e($row->i_name); ?></a>
                                             </div>
                                             <div class="footer-product-item">
@@ -145,7 +145,7 @@
                                         <?php endif; ?>
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($rows->i_code); ?>"
+                                                <a href="<?php echo e(url('product',$rows->i_link)); ?>"
                                                     class="title-product-item"><?php echo e($rows->i_name); ?></a>
                                             </div>
                                             <div class="footer-product-item">
@@ -167,15 +167,21 @@
                             <div class="d-flex">
                                 <input placeholder="Cari Barang Favorit Anda" type="text" name=""
                                     class="form-control input-wishlist-filter searchwishlist">
-                                <button class="btn btn-wishlist-filter" type="button"><img
-                                        src="http://localhost/warungislamibogor_shop/assets/img/img-product/img-search.svg"></button>
+                                <button class="btn btn-wishlist-filter" type="button"><img src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
+
                             </div>
                             <?php if($data != '[]'): ?>
-                            <div class="row mt-5">
+                            <div class="row" style="margin-top: 1em;">
                                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-md-3 wishlist-content">
                                     <div class="thumbnail product-box-item">
                                         <div class="product-box">
+                                <?php if($row->ip_path == null): ?>
+                                <div class="image-product-box"
+                                      style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
+                                    alt="Sorry! Image not available at this time">
+                                </div>
+                                <?php endif; ?>
                                             <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                             <div class="image-product-box"
@@ -184,32 +190,31 @@
                                             <?php endif; ?>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <div class="caption">
-                                                <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
-                                                <div class="product-wishlist onproduk-page onwishlist">
-                                                    <button data-ciproduct="<?php echo e($wis->wl_ciproduct); ?>"
-                                                        data-member="<?php echo e(Auth::user()->cm_code); ?>"
-                                                        class="btn btn-circle btn-lg btn-danger btn-wishlist"
-                                                        type="button" title="Tambah ke wishlist"><i
-                                                            class="fa-heart fa"></i></button>
-                                                </div>
-                                                <?php endif; ?>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                <?php if($wish == '[]'): ?>
-                                                <div class="product-wishlist onproduk-page">
-                                                    <button data-ciproduct="<?php echo e($row->i_code); ?>"
-                                                        class="btn btn-circle btn-lg btn-wishlist" id="<?php echo e($row->i_code); ?>"
-                                                        type="button" title="Tambah ke wishlist"><i
-                                                            class="far fa-heart"></i></button>
-                                                </div>
-                                                <?php endif; ?>
+                            <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(Auth::check()): ?>
+                            <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
+
+                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
+                            <?php break; ?>
+                            <?php else: ?>
+                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart icon-onwishlist"></i></button>
+                            <?php break; ?>
+                            <?php endif; ?>
+                            <?php else: ?>
+                            
+                                <a href="<?php echo e(route('login-frontpage')); ?>"><button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button></a>
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($wish == '[]'): ?>
+                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
+                            <?php endif; ?>
                                                 <div class="">
                                                     <div class="title-product-group">
-                                                        <a href="<?php echo e(route('produk-detail-frontpage')); ?>?code=<?php echo e($row->i_code); ?>"
+                                                        <a href="<?php echo e(url('product',$row->i_link)); ?>"
                                                             class="title-product-item"><?php echo e($row->i_name); ?></a>
                                                     </div>
                                                     <div class="footer-product-item">
-                                                        <div class="price-product-item">Rp. Rp.
+                                                        <div class="price-product-item">Rp.
                                                             <?php echo e($row->ipr_sunitprice); ?>
 
                                                         </div>
@@ -262,22 +267,19 @@
             }
         })
 
-        $('.btn-wishlist').click(function () {
-            var code = $(this).data('ciproduct');
-            var member = $(this).data('wl_cmember');
-            $(this).find('i').toggleClass('fa far');
-            $(this).parents('.product-wishlist').toggleClass('onwishlist');
-            $.ajax({
-                url: '<?php echo e(route("addwishlist")); ?>',
-                method: 'POST',
-                data: {
-                    '_token': '<?php echo e(csrf_token()); ?>',
-                    'code': code,
-                    'member': member,
-                },
+        $('.btn-wishlist-frontpage').click(function(){
+                $(this).find('i').toggleClass('icon-onwishlist');
+               var code = $(this).data('ciproduct');
+                $.ajax({
+                    url: '<?php echo e(route("addwishlist")); ?>',
+                    method: 'POST',
+                    data: {
+                        '_token': '<?php echo e(csrf_token()); ?>',
+                        'code': code,
+                    },
 
-            })
-        })
+                })
+            });
     });
     $(document).ready(function () {
         $('.searchwishlist').keyup(function () {

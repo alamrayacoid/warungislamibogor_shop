@@ -295,6 +295,19 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <form id="form-checkout_repeat">
+                                        {{csrf_field()}}
+                                    <table id="tbl-salin-nota-item" class="d-none">
+                                        <thead>
+                                            <th>Nama Item</th>
+                                            <th>Jumlah</th>
+                                            <th>Cabang</th>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                </form>
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -503,7 +516,7 @@
                                             </tbody>
                                         </table>
 
-                                    </div>
+                                    </div>                                    
                                     @else
                                     <div class="column-empty-transaction">
                                         <img src="{{asset('assets/img/img-product/empty-transaction.png')}}">
@@ -1249,6 +1262,9 @@
                 $('#itemproduct-group-paymentstatus').append(appendini);
         }
     });
+
+
+           
         $('#detail_4').on('click', '#detail_pengiriman[data-detail]', function (e) {
             e.preventDefault();
             var url = $(this).data('detail');
@@ -1285,6 +1301,323 @@
 
             });
         });
+        $('#detail_1').on('click','.request-fastorder','click',function(e){
+             let item = $(this).data('item');
+             let qty = $(this).data('qty');
+             let cabang = $(this).data('cabang');
+             let member = $(this).data('member');
+             let satuan  = $(this).data('satuan');
+             $('.content-dropdown-cart').append(
+                    '<div class="loader-cart-nav-wib-group"><div class="loader-cart-nav--element"></div></div>'
+                    );
+            $('#cart-navbar').hide();
+            $.ajax({
+                    url: '{{route("addcart")}}',
+                    method: 'POST',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'code': item,
+                        'user': member,
+                        'cart_qty': qty,
+                        'satuan': satuan,
+                        'cart_location': cabang,
+                    },
+                    success:function(get){
+                        if (get['error'] == 'error') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Barang Sudah Di Keranjang',
+                            });
+                            $('.loader-cart-nav-wib-group').fadeOut();
+                            $('.nav-link-shopping-cart').addClass('open');
+                            setTimeout(function () {
+                                $('#cart-navbar').fadeIn();
+                            }, 300);
+                        } else if (get['done'] == 'done') {
+                            iziToast.success({
+                                title: 'Berhasil!',
+                                message: 'Memasukkan Barang ke Keranjang',
+                            });
+                            $('.cart-refresh').removeClass('d-none');
+                            $('.rounded-cart-nav').removeClass('d-none');
+                            $('.cart-nav-empty').addClass('d-none');
+                            $('.nav-link-shopping-cart').addClass('open');
+                            $('.cart-refresh').DataTable().ajax.reload();
+                            $.ajax({
+                                url: "{{route('getnow_qty-cart')}}",
+                                data: {
+                                    'idcustomer': $('#idcustomer').val(),
+                                },
+                                success: function (data) {
+                                    document.getElementById('qty-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-amount-cart--mobile').innerHTML = data;
+                                    $('.loader-cart-nav-wib-group').fadeOut();
+                                    setTimeout(function () {
+                                        $('#cart-navbar').fadeIn();
+                                    }, 300);
+                                }
+                            });
+                        } else if (get['error'] == 'stock') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Stock Gudang Tinggal ' + get['stock'],
+                            });
+                        }
+                    }
+            });
+        }); 
+        $('#detail_2').on('click','.request-fastorder','click',function(e){
+             let item = $(this).data('item');
+             let qty = $(this).data('qty');
+             let cabang = $(this).data('cabang');
+             let member = $(this).data('member');
+             let satuan  = $(this).data('satuan');
+             $('.content-dropdown-cart').append(
+                    '<div class="loader-cart-nav-wib-group"><div class="loader-cart-nav--element"></div></div>'
+                    );
+            $('#cart-navbar').hide();
+            $.ajax({
+                    url: '{{route("addcart")}}',
+                    method: 'POST',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'code': item,
+                        'user': member,
+                        'cart_qty': qty,
+                        'satuan': satuan,
+                        'cart_location': cabang,
+                    },
+                    success:function(get){
+                        if (get['error'] == 'error') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Barang Sudah Di Keranjang',
+                            });
+                            $('.loader-cart-nav-wib-group').fadeOut();
+                            $('.nav-link-shopping-cart').addClass('open');
+                            setTimeout(function () {
+                                $('#cart-navbar').fadeIn();
+                            }, 300);
+                        } else if (get['done'] == 'done') {
+                            iziToast.success({
+                                title: 'Berhasil!',
+                                message: 'Memasukkan Barang ke Keranjang',
+                            });
+                            $('.cart-refresh').removeClass('d-none');
+                            $('.rounded-cart-nav').removeClass('d-none');
+                            $('.cart-nav-empty').addClass('d-none');
+                            $('.nav-link-shopping-cart').addClass('open');
+                            $('.cart-refresh').DataTable().ajax.reload();
+                            $.ajax({
+                                url: "{{route('getnow_qty-cart')}}",
+                                data: {
+                                    'idcustomer': $('#idcustomer').val(),
+                                },
+                                success: function (data) {
+                                    document.getElementById('qty-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-amount-cart--mobile').innerHTML = data;
+                                    $('.loader-cart-nav-wib-group').fadeOut();
+                                    setTimeout(function () {
+                                        $('#cart-navbar').fadeIn();
+                                    }, 300);
+                                }
+                            });
+                        } else if (get['error'] == 'stock') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Stock Gudang Tinggal ' + get['stock'],
+                            });
+                        }
+                    }
+            });
+        }); 
+        $('#detail_3').on('click','.request-fastorder','click',function(e){
+             let item = $(this).data('item');
+             let qty = $(this).data('qty');
+             let cabang = $(this).data('cabang');
+             let member = $(this).data('member');
+             let satuan  = $(this).data('satuan');
+             $('.content-dropdown-cart').append(
+                    '<div class="loader-cart-nav-wib-group"><div class="loader-cart-nav--element"></div></div>'
+                    );
+            $('#cart-navbar').hide();
+            $.ajax({
+                    url: '{{route("addcart")}}',
+                    method: 'POST',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'code': item,
+                        'user': member,
+                        'cart_qty': qty,
+                        'satuan': satuan,
+                        'cart_location': cabang,
+                    },
+                    success:function(get){
+                        if (get['error'] == 'error') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Barang Sudah Di Keranjang',
+                            });
+                            $('.loader-cart-nav-wib-group').fadeOut();
+                            $('.nav-link-shopping-cart').addClass('open');
+                            setTimeout(function () {
+                                $('#cart-navbar').fadeIn();
+                            }, 300);
+                        } else if (get['done'] == 'done') {
+                            iziToast.success({
+                                title: 'Berhasil!',
+                                message: 'Memasukkan Barang ke Keranjang',
+                            });
+                            $('.cart-refresh').removeClass('d-none');
+                            $('.rounded-cart-nav').removeClass('d-none');
+                            $('.cart-nav-empty').addClass('d-none');
+                            $('.nav-link-shopping-cart').addClass('open');
+                            $('.cart-refresh').DataTable().ajax.reload();
+                            $.ajax({
+                                url: "{{route('getnow_qty-cart')}}",
+                                data: {
+                                    'idcustomer': $('#idcustomer').val(),
+                                },
+                                success: function (data) {
+                                    document.getElementById('qty-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-amount-cart--mobile').innerHTML = data;
+                                    $('.loader-cart-nav-wib-group').fadeOut();
+                                    setTimeout(function () {
+                                        $('#cart-navbar').fadeIn();
+                                    }, 300);
+                                }
+                            });
+                        } else if (get['error'] == 'stock') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Stock Gudang Tinggal ' + get['stock'],
+                            });
+                        }
+                    }
+            });
+        }); 
+        $('#detail_4').on('click','.request-fastorder','click',function(e){
+             let item = $(this).data('item');
+             let qty = $(this).data('qty');
+             let cabang = $(this).data('cabang');
+             let member = $(this).data('member');
+             let satuan  = $(this).data('satuan');
+             $('.content-dropdown-cart').append(
+                    '<div class="loader-cart-nav-wib-group"><div class="loader-cart-nav--element"></div></div>'
+                    );
+            $('#cart-navbar').hide();
+            $.ajax({
+                    url: '{{route("addcart")}}',
+                    method: 'POST',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'code': item,
+                        'user': member,
+                        'cart_qty': qty,
+                        'satuan': satuan,
+                        'cart_location': cabang,
+                    },
+                    success:function(get){
+                        if (get['error'] == 'error') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Barang Sudah Di Keranjang',
+                            });
+                            $('.loader-cart-nav-wib-group').fadeOut();
+                            $('.nav-link-shopping-cart').addClass('open');
+                            setTimeout(function () {
+                                $('#cart-navbar').fadeIn();
+                            }, 300);
+                        } else if (get['done'] == 'done') {
+                            iziToast.success({
+                                title: 'Berhasil!',
+                                message: 'Memasukkan Barang ke Keranjang',
+                            });
+                            $('.cart-refresh').removeClass('d-none');
+                            $('.rounded-cart-nav').removeClass('d-none');
+                            $('.cart-nav-empty').addClass('d-none');
+                            $('.nav-link-shopping-cart').addClass('open');
+                            $('.cart-refresh').DataTable().ajax.reload();
+                            $.ajax({
+                                url: "{{route('getnow_qty-cart')}}",
+                                data: {
+                                    'idcustomer': $('#idcustomer').val(),
+                                },
+                                success: function (data) {
+                                    document.getElementById('qty-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-cart-nav')
+                                        .innerHTML = data;
+                                    document.getElementById('js-amount-cart--mobile').innerHTML = data;
+                                    $('.loader-cart-nav-wib-group').fadeOut();
+                                    setTimeout(function () {
+                                        $('#cart-navbar').fadeIn();
+                                    }, 300);
+                                }
+                            });
+                        } else if (get['error'] == 'stock') {
+                            iziToast.error({
+                                title: 'Gagal!',
+                                message: 'Stock Gudang Tinggal ' + get['stock'],
+                            });
+                        }
+                    }
+            });
+        }); 
+
+        function carinota(id){
+            $.ajax({
+                url : "{{url('pembelian/salin-nota-baru')}}/" + id,
+                type : "GET",
+                dataType: 'json',
+                success:function(data){
+                    let dataagenda = data.item;
+                    let trHTML = '';
+                            $.each(dataagenda, function (i, item) {
+                            trHTML += '<tr><td><input type="text" value="' + item.sd_item + '" name="item[]"></td><td><input type="text" value="' + item.sd_qty + '" name="qty[]"></td><td><input type="text" value="'+item.sd_branch+'" name="cabang[]"></td></tr>';
+                        });
+                    $('#tbl-salin-nota-item tbody').html(trHTML);
+                    swal({
+                    title: "Apa anda yakin?",
+                    text: "Item pada transaksi ini akan langsung diarahkan ke checkout !",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Ya",
+                    cancelButtonText: "Tidak!",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                    },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                checkout();
+                            } else {
+                                //
+                            }
+                    });
+                }
+            })
+        }
+        function checkout(){
+            var form = $('#form-checkout_repeat').serialize();
+            $.ajax({
+                url: '{{route("checkout-repeat-order")}}',
+                method: 'POST',
+                data: form,
+                success: function (get) {
+                    window.location.href = '{{route("checkout")}}';
+                }
+            })
+        }
 </script>
 
 @endsection

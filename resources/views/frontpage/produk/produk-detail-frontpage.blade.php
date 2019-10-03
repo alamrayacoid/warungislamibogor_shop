@@ -36,9 +36,7 @@
         }
     }
 
-    .icon-onwishlist {
-        color: #ed5565 !important;
-    }
+    
 </style>
 @endsection
 
@@ -48,7 +46,7 @@
     @foreach($data as $row)
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Produk</a></li>
+        <li>Produk</li>
         <li class="active">{{$row->i_name}}</li>
         @endforeach
     </ol>
@@ -171,7 +169,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5" style="margin-top:2em">
             <div class="col-lg-12">
                 <div class="ibox product-description">
                     <div class="ibox-title" style="background:#fafafa;">
@@ -208,7 +206,7 @@
                     @endif
                     <div class="caption">
                         <div class="title-product-group">
-                            <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}"
+                            <a href="{{url('product',$rows->i_link)}}"
                                 class="title-product-item">{{$rows->i_name}}</a>
                         </div>
                         <div class="footer-product-item">

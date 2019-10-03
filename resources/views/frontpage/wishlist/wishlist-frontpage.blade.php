@@ -8,7 +8,7 @@
 @section('content')
 <section style="margin-top:4.5em;">
     <ol class="breadcrumb breadcumb-header">
-        <li><a href="#">Home</a></li>
+        <li><a href="{{url('/')}}">Home</a></li>
         <li class="active">Barang Favorit</li>
     </ol>
     <div class="container-fluid mt-5">
@@ -108,7 +108,7 @@
                                         @endif
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                                                <a href="{{url('product',$row->i_link)}}"
                                                     class="title-product-item">{{$row->i_name}}</a>
                                             </div>
                                             <div class="footer-product-item">
@@ -147,7 +147,7 @@
                                         @endif
                                         <div class="caption">
                                             <div class="title-product-group">
-                                                <a href="{{route('produk-detail-frontpage')}}?code={{$rows->i_code}}"
+                                                <a href="{{url('product',$rows->i_link)}}"
                                                     class="title-product-item">{{$rows->i_name}}</a>
                                             </div>
                                             <div class="footer-product-item">
@@ -169,15 +169,21 @@
                             <div class="d-flex">
                                 <input placeholder="Cari Barang Favorit Anda" type="text" name=""
                                     class="form-control input-wishlist-filter searchwishlist">
-                                <button class="btn btn-wishlist-filter" type="button"><img
-                                        src="http://localhost/warungislamibogor_shop/assets/img/img-product/img-search.svg"></button>
+                                <button class="btn btn-wishlist-filter" type="button"><img src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
+
                             </div>
                             @if($data != '[]')
-                            <div class="row mt-5">
+                            <div class="row" style="margin-top: 1em;">
                                 @foreach($data as $row)
                                 <div class="col-md-3 wishlist-content">
                                     <div class="thumbnail product-box-item">
                                         <div class="product-box">
+                                @if($row->ip_path == null)
+                                <div class="image-product-box"
+                                      style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                                    alt="Sorry! Image not available at this time">
+                                </div>
+                                @endif
                                             @foreach($gambar as $roww)
                                             @if($row->i_code == $roww->ip_ciproduct)
                                             <div class="image-product-box"
@@ -186,32 +192,31 @@
                                             @endif
                                             @endforeach
                                             <div class="caption">
-                                                @foreach($wish as $wis)
-                                                @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
-                                                <div class="product-wishlist onproduk-page onwishlist">
-                                                    <button data-ciproduct="{{$wis->wl_ciproduct}}"
-                                                        data-member="{{Auth::user()->cm_code}}"
-                                                        class="btn btn-circle btn-lg btn-danger btn-wishlist"
-                                                        type="button" title="Tambah ke wishlist"><i
-                                                            class="fa-heart fa"></i></button>
-                                                </div>
-                                                @endif
-                                                @endforeach
-                                                @if($wish == '[]')
-                                                <div class="product-wishlist onproduk-page">
-                                                    <button data-ciproduct="{{$row->i_code}}"
-                                                        class="btn btn-circle btn-lg btn-wishlist" id="{{$row->i_code}}"
-                                                        type="button" title="Tambah ke wishlist"><i
-                                                            class="far fa-heart"></i></button>
-                                                </div>
-                                                @endif
+                            @foreach($wish as $wis)
+                            @if(Auth::check())
+                            @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
+
+                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
+                            @break
+                            @else
+                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart icon-onwishlist"></i></button>
+                            @break
+                            @endif
+                            @else
+                            
+                                <a href="{{route('login-frontpage')}}"><button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button></a>
+                            @endif
+                            @endforeach
+                            @if($wish == '[]')
+                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
+                            @endif
                                                 <div class="">
                                                     <div class="title-product-group">
-                                                        <a href="{{route('produk-detail-frontpage')}}?code={{$row->i_code}}"
+                                                        <a href="{{url('product',$row->i_link)}}"
                                                             class="title-product-item">{{$row->i_name}}</a>
                                                     </div>
                                                     <div class="footer-product-item">
-                                                        <div class="price-product-item">Rp. Rp.
+                                                        <div class="price-product-item">Rp.
                                                             {{$row->ipr_sunitprice}}
                                                         </div>
                                                         <div class="">
@@ -263,22 +268,19 @@
             }
         })
 
-        $('.btn-wishlist').click(function () {
-            var code = $(this).data('ciproduct');
-            var member = $(this).data('wl_cmember');
-            $(this).find('i').toggleClass('fa far');
-            $(this).parents('.product-wishlist').toggleClass('onwishlist');
-            $.ajax({
-                url: '{{route("addwishlist")}}',
-                method: 'POST',
-                data: {
-                    '_token': '{{csrf_token()}}',
-                    'code': code,
-                    'member': member,
-                },
+        $('.btn-wishlist-frontpage').click(function(){
+                $(this).find('i').toggleClass('icon-onwishlist');
+               var code = $(this).data('ciproduct');
+                $.ajax({
+                    url: '{{route("addwishlist")}}',
+                    method: 'POST',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'code': code,
+                    },
 
-            })
-        })
+                })
+            });
     });
     $(document).ready(function () {
         $('.searchwishlist').keyup(function () {

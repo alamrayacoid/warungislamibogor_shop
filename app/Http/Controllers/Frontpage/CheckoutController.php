@@ -234,4 +234,20 @@ class CheckoutController extends Controller
     			'sell_province' => $request->provinsi,
     		]);
     }
+    public function checkout_repeat_order(Request $request){
+        DB::table('d_cart')
+        ->where('cart_cmember',Auth::user()->cm_code)
+        ->where('status_data','check')
+        ->delete();
+        for ($i=0; $i < count($request->item) ; $i++) { 
+                DB::table('d_cart')
+                ->insert([
+                    'cart_ciproduct'=>$request->item{$i},
+                    'cart_qty'=> $request->qty{$i},
+                    'cart_location'=> $request->cabang{$i},
+                    'cart_cmember'=> Auth::user()->cm_code,
+                    'status_data'=> 'check',
+                ]);
+        }
+    }
 }
