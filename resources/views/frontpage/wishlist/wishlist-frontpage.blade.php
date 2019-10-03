@@ -101,10 +101,10 @@
                                         @endif
                                         @endforeach
                                         @if($row->ip_path == null)
-                                            <div class="image-product-box"
+                                        <div class="image-product-box"
                                             style="background:url('{{asset('assets/img/noimage.jpg')}}')"
                                             alt="Sorry! Image not available at this time">
-                                            </div>
+                                        </div>
                                         @endif
                                         <div class="caption">
                                             <div class="title-product-group">
@@ -114,7 +114,8 @@
                                             <div class="footer-product-item">
                                                 <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
                                                 <div class="">
-                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span
+                                                        style="color: #595959;"> {{$row->ity_name}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,10 +141,10 @@
                                         @endif
                                         @endforeach
                                         @if($rows->ip_path == null)
-                                            <div class="image-product-box"
+                                        <div class="image-product-box"
                                             style="background:url('{{asset('assets/img/noimage.jpg')}}')"
                                             alt="Sorry! Image not available at this time">
-                                            </div>
+                                        </div>
                                         @endif
                                         <div class="caption">
                                             <div class="title-product-group">
@@ -153,7 +154,8 @@
                                             <div class="footer-product-item">
                                                 <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
                                                 <div class="">
-                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span
+                                                        style="color: #595959;"> {{$row->ity_name}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +171,8 @@
                             <div class="d-flex">
                                 <input placeholder="Cari Barang Favorit Anda" type="text" name=""
                                     class="form-control input-wishlist-filter searchwishlist">
-                                <button class="btn btn-wishlist-filter" type="button"><img src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
+                                <button class="btn btn-wishlist-filter" type="button"><img
+                                        src="{{asset('assets/img/img-product/img-search.svg')}}"></button>
 
                             </div>
                             @if($data != '[]')
@@ -178,12 +181,12 @@
                                 <div class="col-md-3 wishlist-content">
                                     <div class="thumbnail product-box-item">
                                         <div class="product-box">
-                                @if($row->ip_path == null)
-                                <div class="image-product-box"
-                                      style="background:url('{{asset('assets/img/noimage.jpg')}}')"
-                                    alt="Sorry! Image not available at this time">
-                                </div>
-                                @endif
+                                            @if($row->ip_path == null)
+                                            <div class="image-product-box"
+                                                style="background:url('{{asset('assets/img/noimage.jpg')}}')"
+                                                alt="Sorry! Image not available at this time">
+                                            </div>
+                                            @endif
                                             @foreach($gambar as $roww)
                                             @if($row->i_code == $roww->ip_ciproduct)
                                             <div class="image-product-box"
@@ -192,24 +195,9 @@
                                             @endif
                                             @endforeach
                                             <div class="caption">
-                            @foreach($wish as $wis)
-                            @if(Auth::check())
-                            @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
-
-                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
-                            @break
-                            @else
-                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart icon-onwishlist"></i></button>
-                            @break
-                            @endif
-                            @else
-                            
-                                <a href="{{route('login-frontpage')}}"><button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button></a>
-                            @endif
-                            @endforeach
-                            @if($wish == '[]')
-                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
-                            @endif
+                                                <button class="btn btn-wishlist-frontpage second-right-wishlist"
+                                                    type="button" data-ciproduct="{{$row->i_code}}"><i
+                                                        class="fa fa-heart icon-onwishlist"></i></button>
                                                 <div class="">
                                                     <div class="title-product-group">
                                                         <a href="{{url('product',$row->i_link)}}"
@@ -220,7 +208,9 @@
                                                             {{$row->ipr_sunitprice}}
                                                         </div>
                                                         <div class="">
-                                                            <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> {{$row->ity_name}}</span>
+                                                            <i class="fas fa-tags"
+                                                                style="color: #009a51;"></i>&ensp;<span
+                                                                style="color: #595959;"> {{$row->ity_name}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -268,19 +258,19 @@
             }
         })
 
-        $('.btn-wishlist-frontpage').click(function(){
-                $(this).find('i').toggleClass('icon-onwishlist');
-               var code = $(this).data('ciproduct');
-                $.ajax({
-                    url: '{{route("addwishlist")}}',
-                    method: 'POST',
-                    data: {
-                        '_token': '{{csrf_token()}}',
-                        'code': code,
-                    },
+        $('.btn-wishlist-frontpage').click(function () {
+            $(this).find('i').toggleClass('icon-onwishlist');
+            var code = $(this).data('ciproduct');
+            $.ajax({
+                url: '{{route("addwishlist")}}',
+                method: 'POST',
+                data: {
+                    '_token': '{{csrf_token()}}',
+                    'code': code,
+                },
 
-                })
-            });
+            })
+        });
     });
     $(document).ready(function () {
         $('.searchwishlist').keyup(function () {

@@ -99,10 +99,10 @@
                                         <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php if($row->ip_path == null): ?>
-                                            <div class="image-product-box"
+                                        <div class="image-product-box"
                                             style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
                                             alt="Sorry! Image not available at this time">
-                                            </div>
+                                        </div>
                                         <?php endif; ?>
                                         <div class="caption">
                                             <div class="title-product-group">
@@ -112,7 +112,8 @@
                                             <div class="footer-product-item">
                                                 <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
                                                 <div class="">
-                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span
+                                                        style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,10 +139,10 @@
                                         <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php if($rows->ip_path == null): ?>
-                                            <div class="image-product-box"
+                                        <div class="image-product-box"
                                             style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
                                             alt="Sorry! Image not available at this time">
-                                            </div>
+                                        </div>
                                         <?php endif; ?>
                                         <div class="caption">
                                             <div class="title-product-group">
@@ -151,7 +152,8 @@
                                             <div class="footer-product-item">
                                                 <div class="price-product-item">Rp. <?php echo e($row->ipr_sunitprice); ?></div>
                                                 <div class="">
-                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span
+                                                        style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,7 +169,8 @@
                             <div class="d-flex">
                                 <input placeholder="Cari Barang Favorit Anda" type="text" name=""
                                     class="form-control input-wishlist-filter searchwishlist">
-                                <button class="btn btn-wishlist-filter" type="button"><img src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
+                                <button class="btn btn-wishlist-filter" type="button"><img
+                                        src="<?php echo e(asset('assets/img/img-product/img-search.svg')); ?>"></button>
 
                             </div>
                             <?php if($data != '[]'): ?>
@@ -176,12 +179,12 @@
                                 <div class="col-md-3 wishlist-content">
                                     <div class="thumbnail product-box-item">
                                         <div class="product-box">
-                                <?php if($row->ip_path == null): ?>
-                                <div class="image-product-box"
-                                      style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
-                                    alt="Sorry! Image not available at this time">
-                                </div>
-                                <?php endif; ?>
+                                            <?php if($row->ip_path == null): ?>
+                                            <div class="image-product-box"
+                                                style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
+                                                alt="Sorry! Image not available at this time">
+                                            </div>
+                                            <?php endif; ?>
                                             <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                             <div class="image-product-box"
@@ -190,24 +193,9 @@
                                             <?php endif; ?>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <div class="caption">
-                            <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php if(Auth::check()): ?>
-                            <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
-
-                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
-                            <?php break; ?>
-                            <?php else: ?>
-                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart icon-onwishlist"></i></button>
-                            <?php break; ?>
-                            <?php endif; ?>
-                            <?php else: ?>
-                            
-                                <a href="<?php echo e(route('login-frontpage')); ?>"><button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button></a>
-                            <?php endif; ?>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <?php if($wish == '[]'): ?>
-                            <button class="btn btn-wishlist-frontpage second-right-wishlist" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
-                            <?php endif; ?>
+                                                <button class="btn btn-wishlist-frontpage second-right-wishlist"
+                                                    type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i
+                                                        class="fa fa-heart icon-onwishlist"></i></button>
                                                 <div class="">
                                                     <div class="title-product-group">
                                                         <a href="<?php echo e(url('product',$row->i_link)); ?>"
@@ -219,7 +207,9 @@
 
                                                         </div>
                                                         <div class="">
-                                                            <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                                            <i class="fas fa-tags"
+                                                                style="color: #009a51;"></i>&ensp;<span
+                                                                style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -267,19 +257,19 @@
             }
         })
 
-        $('.btn-wishlist-frontpage').click(function(){
-                $(this).find('i').toggleClass('icon-onwishlist');
-               var code = $(this).data('ciproduct');
-                $.ajax({
-                    url: '<?php echo e(route("addwishlist")); ?>',
-                    method: 'POST',
-                    data: {
-                        '_token': '<?php echo e(csrf_token()); ?>',
-                        'code': code,
-                    },
+        $('.btn-wishlist-frontpage').click(function () {
+            $(this).find('i').toggleClass('icon-onwishlist');
+            var code = $(this).data('ciproduct');
+            $.ajax({
+                url: '<?php echo e(route("addwishlist")); ?>',
+                method: 'POST',
+                data: {
+                    '_token': '<?php echo e(csrf_token()); ?>',
+                    'code': code,
+                },
 
-                })
-            });
+            })
+        });
     });
     $(document).ready(function () {
         $('.searchwishlist').keyup(function () {
