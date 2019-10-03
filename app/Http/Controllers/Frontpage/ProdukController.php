@@ -126,7 +126,28 @@ class ProdukController extends Controller
         }else{
 
         }
-    	$code = $request->code;
+
+        $data = DB::table('m_branch')->get();
+
+        $get = [];
+        foreach ($data as $row){
+            if ($row->b_stokies != null){
+                $parse = json_decode($row->b_stokies);
+                foreach ($parse as $row2){
+                if ($row2 == Auth::user()->cm_city){
+                    array_push($get,$row->b_code);
+                    break;
+                }else{
+                }
+                }
+            }
+        }
+
+        if ($get == '[]'){
+            $get = [0 => 'Tidak Ada Cabang Terdekat' ];
+        }
+
+        $code = $request->code;
         $cabang = DB::table('d_stock')
             ->leftJoin('m_whouse','w_code','st_cwhouse')
             ->join('m_branch','b_code','w_cbranch')
@@ -207,6 +228,7 @@ class ProdukController extends Controller
             'wish'=> $wish,
             'produksejenis'=> $produksejenis,
             'keranjang'=> $keranjang,
+            'stokies' => $get[0],
 
     	));
     }

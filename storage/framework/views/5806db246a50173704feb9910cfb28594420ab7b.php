@@ -100,7 +100,7 @@
                                             id="totalview"></span>
                                     </div>
                                         <div class="form-group">
-                                            <input type="checkbox" class="checkbox-lamar" id="check_1">
+                                            <input type="checkbox" class="checkbox-lamar" name="tunai" id="tunai" value="Y">
                                             <label for="check_1" class="cek">
                                         <span>Bayar Menggunakan Saldo WIB Store<span></span></span></label>
                                                 </div>
