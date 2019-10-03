@@ -6,69 +6,6 @@
         margin: 2em 15px 1em 15px;
     }
 
-    @keyframes placeHolderShimmer {
-        0% {
-            background-position: -468px 0;
-        }
-
-        100% {
-            background-position: 468px 0;
-        }
-    }
-
-    .title-product-load {
-        background: #f7c703 !important;
-        opacity: 0.5;
-    }
-
-    .desc-product-load {
-        background: #ff5722 !important;
-        opacity: 0.5;
-    }
-
-    .animated-background,
-    .image,
-    .text-line,
-    .image-product {
-        animation-duration: 1.25s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-        animation-name: placeHolderShimmer;
-        animation-timing-function: linear;
-        background: #f6f6f6;
-        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
-        background-size: 800px 104px;
-        height: 96px;
-        /* position: relative; */
-    }
-
-    .image-product {
-        height: 150px;
-        width: 100%;
-
-    }
-
-    .image {
-        height: 70px;
-        width: 70px;
-        border-radius: 10px;
-    }
-
-    .wrapper-cell {
-        display: flex;
-        margin-bottom: 30px;
-    }
-
-    .text {
-        /* margin-left: 20px; */
-    }
-
-    .text-line {
-        height: 9px;
-        border-radius: 5px;
-
-        margin: 4px 0;
-    }
 </style>
 <section style="margin-top:4.5em">
     <ol class="breadcrumb breadcumb-header" style="margin-bottom: 0 !important;">
@@ -86,15 +23,28 @@
 
         </div>
         <div class="col-md-6 column-opsi-filter-group">
-            <button class="btn-filter-opsi"><i class="fa fa-th" aria-hidden="true"></i></button>
-            <button class="btn-filter-opsi"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-            <span>Urutkan<span>
-                    <Select class="select-opsi-filter">
-                        <option>Terbaru</option>
-                        <option>Termurah</option>
-                        <option>Termahal</option>
-                        <option>Paling Banyak Dibeli</option>
+            <!-- <button class="btn-filter-opsi"><i class="fa fa-th" aria-hidden="true"></i></button>
+            <button class="btn-filter-opsi"><i class="fa fa-list-ul" aria-hidden="true"></i></button> -->
+            
+                    <form action="{{route('produk-filter-frontpage')}}" method="get">
+                    <input type="hidden" class="d-none" value="{{$namakategori->ity_code}}" name="kategori">
+                    <span>Urutkan<span>&nbsp;
+                    @if($statusfilter == null || $statusfilter == '')
+                    <Select class="select-opsi-filter" name="status_filter"  id="filter-product-js">
+                        <option value="terbaru">Terbaru</option>
+                        <option value="termurah">Termurah</option>
+                        <option value="termahal">Termahal</option>
                     </select>
+                    @else
+                    <Select class="select-opsi-filter" name="status_filter"  id="filter-product-js">
+                        <option value="terbaru" {{ ('terbaru' == $statusfilter) ? 'selected' : '' }}>Terbaru</option>
+                        <option value="termurah" {{ ('termurah' == $statusfilter) ? 'selected' : '' }}>Termurah</option>
+                        <option value="termahal" {{ ('termahal' == $statusfilter) ? 'selected' : '' }}>Termahal</option>
+                    </select>
+                    @endif
+                    
+                    <input type="submit" class="d-none" id="submit-filter-product" name="" hidden>
+                </form>
         </div>
         </div>
     </div>
@@ -147,115 +97,8 @@
             </div>
             <div class="col-sm-8 col-md-9 col-lg-10 column-product-filter">
                 <h5 class="header-product-item-filter">Produk Warung Islami Bogor</h5>
-                <div class="row mt-5 loader-wib">
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row content-wib d-none">
-                    @if($test1 != '[]')
+                <div class="row">
+                    @if($test1 > 0)
                     @foreach($test as $row)
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
@@ -328,11 +171,6 @@
                                     @endif
                                     <div class="">
                                         <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;">{{$row->ity_name}}</span>
-                                        <!-- <i class="fa fa-star f-14 c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-gold"></i>
-                                        <i class="fa fa-star c-grey"></i> -->
                                     </div>
                                 </div>
                                 </div>
@@ -341,7 +179,7 @@
                     </div>
                     @endforeach
                     <div class="col-lg-12 mb-5">
-                        {{$test->Links()}}
+                        {{$test->appends(request()->input())->Links()}}
                     </div>
                     @else
                     <div class="column-empty-transaction">
@@ -376,6 +214,9 @@
                 },
 
             })
+        });
+        $('#filter-product-js').change(function(){
+            $('#submit-filter-product').click();
         });
         // $('.column-product-item').each(function(){
         // var diskon = $(this).find('.discount-percent-val').val();

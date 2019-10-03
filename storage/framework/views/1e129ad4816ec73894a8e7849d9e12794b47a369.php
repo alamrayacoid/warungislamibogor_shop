@@ -5,69 +5,6 @@
         margin: 2em 15px 1em 15px;
     }
 
-    @keyframes  placeHolderShimmer {
-        0% {
-            background-position: -468px 0;
-        }
-
-        100% {
-            background-position: 468px 0;
-        }
-    }
-
-    .title-product-load {
-        background: #f7c703 !important;
-        opacity: 0.5;
-    }
-
-    .desc-product-load {
-        background: #ff5722 !important;
-        opacity: 0.5;
-    }
-
-    .animated-background,
-    .image,
-    .text-line,
-    .image-product {
-        animation-duration: 1.25s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-        animation-name: placeHolderShimmer;
-        animation-timing-function: linear;
-        background: #f6f6f6;
-        background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
-        background-size: 800px 104px;
-        height: 96px;
-        /* position: relative; */
-    }
-
-    .image-product {
-        height: 150px;
-        width: 100%;
-
-    }
-
-    .image {
-        height: 70px;
-        width: 70px;
-        border-radius: 10px;
-    }
-
-    .wrapper-cell {
-        display: flex;
-        margin-bottom: 30px;
-    }
-
-    .text {
-        /* margin-left: 20px; */
-    }
-
-    .text-line {
-        height: 9px;
-        border-radius: 5px;
-
-        margin: 4px 0;
-    }
     
 </style>
 <section style="margin-top:4.5em">
@@ -86,15 +23,20 @@
 
         </div>
         <div class="col-md-6 column-opsi-filter-group">
-            <button class="btn-filter-opsi"><i class="fa fa-th" aria-hidden="true"></i></button>
-            <button class="btn-filter-opsi"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-            <span>Urutkan</span>
-                    <Select class="select-opsi-filter">
-                        <option>Terbaru</option>
-                        <option>Termurah</option>
-                        <option>Termahal</option>
-                        <option>Paling Banyak Dibeli</option>
-                    </select>
+            <form action="<?php echo e(route('filter_produk')); ?>" method="get">
+            <span>Urutkan<span>&ensp;
+
+            <input type="text" value="<?php echo e($filternama); ?>" name="nama_produk2" hidden>
+            <input type="text" value="<?php echo e($filterjenis); ?>" name="jenis2" hidden>
+            <input type="text" value="<?php echo e($filterhargamax); ?>" name="harga_min2" hidden>
+            <input type="text" value="<?php echo e($filterhargamin); ?>" name="harga_max2" hidden>
+                <Select class="select-opsi-filter"id="status_filter" name="status_filter">
+                    <option value="terbaru" <?php echo e(('terbaru' == $statusfilter) ? 'selected' : ''); ?>>Terbaru</option>
+                    <option value="termurah" <?php echo e(('termurah' == $statusfilter) ? 'selected' : ''); ?>>Termurah</option>
+                    <option value="termahal" <?php echo e(('termahal' == $statusfilter) ? 'selected' : ''); ?>>Termahal</option>
+                </select>
+                <input type="submit" name="" class="btn-submit-filter-item" id="filter_status--btn" value="Cari Sekarang" hidden>
+            </form>
         </div>
     </div>
 </div>
@@ -116,7 +58,7 @@
                     <div class="product-filter-field-group">
                         <h5 class="entry-v-nav__heading">Nama Produk</h5>
                         <div class="form-group">
-                            <input type="text" id="nama_produk" name="nama_produk" value="" placeholder="Nama Produk"
+                            <input type="text" id="nama_produk" name="nama_produk" value="<?php echo e($filternama); ?>" placeholder="Nama Produk"
                                 class="form-control">
                         </div>
                     </div>
@@ -124,9 +66,9 @@
                         <h5 class="entry-v-nav__heading">Jenis Produk</h5>
                         <div class="form-group">
                             <select name="jenis" id="jenis" class="form-control select2">
-                                <option value="All">Semua</option>
+                                <option value="All" <?php echo e(($filterjenis == 'ALL') ? 'selected' : ''); ?>>Semua</option>
                                 <?php $__currentLoopData = $tipe; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($row->ity_code); ?>"><?php echo e($row->ity_name); ?></option>
+                                <option value="<?php echo e($row->ity_code); ?>" <?php echo e(($row->ity_code == $filterjenis) ? 'selected' : ''); ?>><?php echo e($row->ity_name); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
@@ -134,11 +76,11 @@
                     <div class="product-filter-field-group">
                         <h5 class="entry-v-nav__heading">Rentang Harga</h5>
                         <div class="form-group">
-                            <input type="text" id="harga_min" name="harga_min" value="" placeholder="Min"
+                            <input type="text" id="harga_min" name="harga_min" value="<?php echo e($filterhargamin); ?>" placeholder="Min"
                                 class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="text" id="harga_max" name="harga_max" value="" placeholder="Max"
+                            <input type="text" id="harga_max" name="harga_max" value="<?php echo e($filterhargamax); ?>" placeholder="Max"
                                 class="form-control">
                         </div>
                         <input type="submit" name="" class="btn-submit-filter-item" value="Cari Sekarang">
@@ -148,116 +90,9 @@
             <div class="col-sm-8 col-md-9 col-lg-10 column-product-filter">
                 <h5 class="header-product-item-filter">Produk Warung Islami Bogor</h5>
                 <!-- jangan dihapus -->
-                <div class="row mt-5 loader-wib">
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-product col-md-4">
-                        <div class="thumbnail product-box-item">
-                            <div class="image-product"></div>
-                            <div class="caption">
-                                <div class="text">
-                                    <div class="text-line" style="width:100px;height:13px;border-radius:0;">
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="text-line title-product-load"
-                                            style="width:60px;height:10px;border-radius:0;">
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-line desc-product-load"
-                                                style="width:60px;height:10px;border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- end -->
-                <div class="row content-wib d-none">
-                    <?php if($data != '[]'): ?>
+                <div class="row">
+                    <?php if($cekdata != '[]'): ?>
                     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 column-product-item">
                         <div class="thumbnail product-box-item">
@@ -293,16 +128,17 @@
                                 <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($row->i_code == $roww->ip_ciproduct): ?>
                                 <div class="image-product-box"
-                                    style="background:url('<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
+                                    style="background:url('env('APP_WIB')}}storage/image/master/produk/<?php echo e($roww->ip_path); ?>')">
+                                    <!-- <img src="/warungislamibogor/storage/image/master/produk/<?php echo e($roww->ip_path); ?>"> -->
                                 </div>
                                 <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
-
-
-
-
+                                <?php if($row->ip_path == null): ?>
+                                <div class="image-product-box"
+                                      style="background:url('<?php echo e(asset('assets/img/noimage.jpg')); ?>')"
+                                        alt="Sorry! Image not available at this time">
+                                </div>
+                                <?php endif; ?>
                                 <div class="caption">
                                     <div class="title-product-group">
                                         <a href="<?php echo e(route('produk-detail-frontpage', ['code'=>$row->i_code])); ?>"
@@ -339,6 +175,11 @@
                         </div>
                     </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-12 mb-5">
+                        <?php echo e($data->appends(request()->input())->Links()); ?>
+
+                    </div>
+                    
                     <!--  -->
                     <?php else: ?>
                     <div class="column-empty-transaction">
@@ -371,8 +212,11 @@
                     'code': code,
                 },
 
-            })
-        })
+            });
+        });
+        $('#status_filter').change(function(){
+            $('#filter_status--btn').click();
+        });
 
     });
 </script>

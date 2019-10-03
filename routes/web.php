@@ -36,11 +36,14 @@ Route::post('/ganti-password-member','Frontpage\ResetPasswordController@ganti_pa
 
 
 Route::get('/produk', 'Frontpage\ProdukController@produk')->name('produk-frontpage');
+Route::get('/filter-produk-frontpage','Frontpage\ProdukController@filter_produk')->name('filter_produk');
 Route::post('/stock_check', 'Frontpage\ProdukController@stock_check')->name('stock_check');
 Route::get('/produk-detail', 'Frontpage\ProdukController@produk_detail')->name('produk-detail-frontpage');
 Route::get('produk/kategori-produk/{id}','Frontpage\ProdukController@produk_kategori')->name('kategori-produk');
 
 Route::get('/cari-barang','Frontpage\ProdukController@caribarang')->name('cari-barang');
+Route::get('/filter-produk','Frontpage/ProdukController@filter_category_product')->name('filter_category_product');
+Route::get('/produk-filter', 'Frontpage\ProdukController@filter_product_frontpage')->name('produk-filter-frontpage');
 // Group wib-cpanel
 //add cart 
 Route::post('/addcart', 'Frontpage\KeranjangController@addcart')->name('addcart');
@@ -55,6 +58,11 @@ Route::post('/keranjang/table_keranjang','Frontpage\KeranjangController@table_ke
 Route::post('/keranjang/updatecart', 'Frontpage\KeranjangController@updatecart')->name('updatecart.keranjang');
 Route::get('/getnow_price-cart','Frontpage\KeranjangController@getnow_price_cart')->name('getnow_price-cart');
 Route::get('/getnow_qty-cart','Frontpage\KeranjangController@getnow_qty_cart')->name('getnow_qty-cart');
+
+//
+Route::get('/antrian_layanan','AntrianLayananController@index')->name('antrian_layanan');
+Route::post('/tambah_antrian','AntrianLayananController@add_antrian')->name('add.antrian');
+Route::post('/nonaktif-antrian','AntrianLayananController@nonaktif_antrian')->name('nonaktif-antrian');
 // Status semua
 Route::get('pembelian/semua', 'Frontpage\PembelianController@pembelian')->name('pembelian-semua-frontpage');
 Route::post('pembelian/table_allstatus', 'Frontpage\PembelianController@table_allstatus')->name('table_allstatus');
@@ -95,6 +103,8 @@ Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.c
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
 
 Route::get('pembelian/detail/{id}','Frontpage\PembelianController@detail_transaksi')->name('detail_transaksi');
+
+
 Broadcast::channel('my-channel', function ($user) {
     return true; // change this to your authentication logic
 });

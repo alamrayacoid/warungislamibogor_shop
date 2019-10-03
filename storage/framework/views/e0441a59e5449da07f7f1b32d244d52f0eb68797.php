@@ -2,12 +2,13 @@
 <html>
 <?php echo $__env->make('frontpage.layouts._head-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->yieldContent('extra_style'); ?>
-<body class="canvas-menu top-navigation overflow-hidden">
+<body class="canvas-menu top-navigation">
 	
 
 	<div class="mini-navbar-show"></div>
 	
 	<div id="wrapper" style="background:white;">
+
 
 		
 
@@ -16,6 +17,19 @@
 		
 
         <div id="page-wrapper" class="white-bg dashbard-1" style="padding:0;">
+            <div class="loader-new-wrapper">
+<div class="loader-new-wib">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+</div>
 			
 			<?php echo $__env->make('frontpage.layouts._navbar-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 		

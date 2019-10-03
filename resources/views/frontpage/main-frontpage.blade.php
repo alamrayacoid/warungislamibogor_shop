@@ -2,12 +2,13 @@
 <html>
 @include('frontpage.layouts._head-frontpage')
 @yield('extra_style')
-<body class="canvas-menu top-navigation overflow-hidden">
+<body class="canvas-menu top-navigation">
 	
 
 	<div class="mini-navbar-show"></div>
 	
 	<div id="wrapper" style="background:white;">
+
 
 		{{-- @if(Cookie::get('tes_frontpage')) --}}
 
@@ -16,6 +17,19 @@
 		{{-- @endif --}}
 
         <div id="page-wrapper" class="white-bg dashbard-1" style="padding:0;">
+            <div class="loader-new-wrapper">
+<div class="loader-new-wib">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+</div>
 			
 			@include('frontpage.layouts._navbar-frontpage')
 		

@@ -1,82 +1,32 @@
 <?php $__env->startSection('extra_style'); ?>
-    <style type="text/css">
-        @keyframes  placeHolderShimmer {
-            0% {
-                background-position: -468px 0;
-            }
+<style type="text/css">
 
-            100% {
-                background-position: 468px 0;
-            }
-        }
+    .select2 .select2-selection--single {
+        height: 35px !important;
+        display: flex;
+        align-items: center;
+    }
 
-        .title-product-load {
-            background: #f7c703 !important;
-            opacity: 0.5;
-        }
+    .select2-selection__arrow {
+        height: 35px !important;
+        top: 0 !important;
+    }
 
-        .desc-product-load {
-            background: #ff5722 !important;
-            opacity: 0.5;
-        }
+    .d-inline-block {
+        display: inline-block;
+    }
 
-        .animated-background,
-        .image,
-        .text-line,
-        .image-product {
-            animation-duration: 1.25s;
-            animation-fill-mode: forwards;
-            animation-iteration-count: infinite;
-            animation-name: placeHolderShimmer;
-            animation-timing-function: linear;
-            background: #f6f6f6;
-            background: linear-gradient(to right, #e6e6e6 8%, #f0f0f0 18%, #e6e6e6 33%);
-            background-size: 800px 104px;
-            height: 96px;
-            /* position: relative; */
-        }
+    .footer-copy--wrapper {
+        margin-bottom: 7.2em;
+    }
 
-        .image-product {
-            height: 150px;
-            width: 100%;
+    .footer-new-wrapper {
+        margin-top: 4em;
+    }
 
-        }
-
-        .image {
-            height: 70px;
-            width: 70px;
-            border-radius: 10px;
-        }
-
-        .wrapper-cell {
-            display: flex;
-            margin-bottom: 30px;
-        }
-
-        .text {
-            /* margin-left: 20px; */
-        }
-
-        .text-line {
-            height: 9px;
-            border-radius: 5px;
-
-            margin: 4px 0;
-        }
-
-        .select2 .select2-selection--single {
-            height: 35px !important;
-            display: flex;
-            align-items: center;
-        }
-
-        .select2-selection__arrow {
-            height: 35px !important;
-            top: 0 !important;
-        }
-
-        .d-inline-block {
-            display: inline-block;
+    @media(max-width:992px) {
+        .sticky-footer-product {
+            display: none !important;
         }
 
         .footer-copy--wrapper {
@@ -105,317 +55,33 @@
 
 <?php $__env->startSection('content'); ?>
 
-    <section style="margin-top:4.5em;">
-        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <ol class="breadcrumb breadcumb-header">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Produk</a></li>
-                <li class="active"><?php echo e($row->i_name); ?></li>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </ol>
-            <div class="container-fluid">
-                
-                
-                <div class="ibox-content d-none">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="text">
-                                <div class="text-line" style="width:100%;height:400px"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="text">
-                                        <div class="text-line" style="width:200px;height:15px;border-radius:0;"></div>
-                                        <div style="margin-top:15px;">
-                                            <div class="text-line title-product-load"
-                                                 style="width:100px;height:15px;border-radius:0;"></div>
-                                        </div>
+<section style="margin-top:4.5em;">
+    <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <ol class="breadcrumb breadcumb-header">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Produk</a></li>
+        <li class="active"><?php echo e($row->i_name); ?></li>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </ol>
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="ibox product-detail" style="border:1px solid #efeff4;">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="product-images product-imitations" style="outline:none;border:0;">
+                                    <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($roww->ip_ciproduct): ?>
+                                    <div>
+                                        <a href="<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>" sty
+                                            data-gallery="">
+                                            <img src="<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
+                                        </a>
                                     </div>
-                                    <hr>
+                                    <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
-                                <div class="col-lg-12 mt-2">
-                                    <div class="text">
-                                        <div class="text-line" style="width:120px;height:15px;border-radius:0;"></div>
-                                        <div class="mt-4">
-                                            <div class="text-line"
-                                                 style="width:120px;height:15px;border-radius:0;"></div>
-                                        </div>
-                                        <div class="mt-4">
-                                            <div class="text-line"
-                                                 style="width:120px;height:15px;border-radius:0;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mt-5">
-                                    <div class="text">
-                                        <div class="text-line" style="width:200px;height:15px;border-radius:0;"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mt-5">
-                                </div>
-                                <div class="col-lg-6 p-detail-product-first">
-                                    <div class="text">
-                                        <div class="text-line" style="width:100%;height:25px;border-radius:0;"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 p-detail-product-last">
-                                    <div class="text">
-                                        <div class="text-line" style="width:100%;height:25px;border-radius:0;"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="text">
-                                        <div class="text-line" style="width:100%;height:25px;border-radius:0;"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="text">
-                                        <div class="text-line" style="width:100%;height:25px;border-radius:0;"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 p-detail-product-first">
-                                    <div class="text">
-                                        <div class="text-line" style="width:100%;height:25px;border-radius:0;"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 p-detail-product-last">
-                                    <div class="text">
-                                        <div class="text-line" style="width:100%;height:25px;border-radius:0;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class="row mt-5">
-                    <div class="col-lg-12">
-                        <div class="ibox product-detail" style="border:1px solid #efeff4;">
-                            <div class="ibox-content">
-                                <div class="row loader-wib">
-                                    <div class="col-lg-5">
-                                        <div class="text">
-                                            <div class="text-line" style="width:100%;height:400px"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:200px;height:15px;border-radius:0;">
-                                                    </div>
-
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div class="col-lg-12 mt-2">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:120px;height:15px;border-radius:0;">
-                                                    </div>
-                                                    <div class="mt-4">
-                                                        <div class="text-line"
-                                                             style="width:120px;height:15px;border-radius:0;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-4">
-                                                        <div class="text-line"
-                                                             style="width:120px;height:15px;border-radius:0;">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 mt-5">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:200px;height:15px;border-radius:0;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 mt-5">
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:100%;height:25px;border-radius:0;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:100%;height:25px;border-radius:0;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:100%;height:25px;border-radius:0;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:100%;height:25px;border-radius:0;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="text">
-                                                    <div class="text-line"
-                                                         style="width:100%;height:25px;border-radius:0;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row content-wib d-none">
-                                    <div class="col-md-5">
-                                        <div class="product-images product-imitations" style="outline:none;border:0;">
-                                            <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php if($roww->ip_ciproduct): ?>
-                                                    <div>
-                                                        <a href="<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>"
-                                                           sty
-                                                           data-gallery="">
-                                                            <img src="<?php echo e(env('APP_WIB')); ?>storage/image/master/produk/<?php echo e($roww->ip_path); ?>">
-                                                        </a>
-                                                    </div>
-                                                <?php endif; ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </div>
-                                    </div>
-                                    <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <input type="hidden" value="<?php echo e($row->i_code); ?>" id="codedetailproduk" name="">
-                                        <div class="col-md-7">
-                                            <div class="col-lg-12">
-                                                <h2 class="title-detail-product"><?php echo e($row->i_name); ?>
-
-                                                    <span class="text-info-title-detail-product" id="stocknya"></span>
-                                                </h2>
-                                                <hr>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <p class=""><i class="fa fa-archive"></i>  Warung Islami Bogor</p>
-                                                <p class=""><i class="fa fa-clock-o"></i>  05 Januari 2019</p>
-                                                <p class=""><i class="fa fa-map-marker"></i>  Bogor</p>
-                                                <div class="m-t-md">
-                                                    <?php if($row->gpp_sellprice == null): ?>
-                                                        <h2 class="product-detail-price">Rp. <?php echo e($row->ipr_sunitprice); ?>
-
-                                                            <small
-                                                                    class="text-info-price">Tidak Termasuk Pajak
-                                                                pengiriman
-                                                            </small>
-                                                        </h2>
-                                                    <?php else: ?>
-                                                        <span class="product-detail-percent">Rp. <?php echo e($row->ipr_sunitprice); ?></span>
-                                                        <h2 class="product-detail-price">Rp. <?php echo e($row->gpp_sellprice); ?>
-
-                                                            <small
-                                                                    class="text-info-price">Tidak Termasuk Pajak
-                                                                pengiriman
-                                                            </small>
-                                                        </h2>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 column-input-detail-product">
-                                                <div class="d-flex">
-                                                    <button class="btn btn-count-product-stock border-right-0"
-                                                            onclick="minus()"><i
-                                                                class="fa fa-minus"></i></button>
-                                                    <input type="number" id="qty" value="1" min="1"
-                                                           class="form-control border-radius-0 text-center jumlahbelibarang"
-                                                           name="">
-                                                    <button class="btn btn-count-product-stock border-left-0"
-                                                            onclick="plus()"><i
-                                                                class="fa fa-plus"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 column-add-cart mt-2 w-100">
-                                                <div class="row">
-                                                    <?php if(Auth::check()): ?>
-                                                        <div class="col-md-12">
-                                                            <button class="btn btn-product-detail-cart addcart"
-                                                                    data-product="<?php echo e($code); ?>"><i
-                                                                        class="fa fa-cart-plus"></i>&ensp;Tambahkan
-                                                                ke
-                                                                keranjang
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-md-6 p-detail-product-first">
-                                                            <?php if($wish > 0): ?>
-                                                                <button class="btn btn-product-detail-wishlist addwishlist"
-                                                                        style="color:#676a6c;" data-ciproduct="<?php echo e($row->i_code); ?>" id="<?php echo e($row->i_code); ?>" type="button"><i
-                                                                        class="fa fa-heart  icon-onwishlist"></i>&ensp;
-                                                                Add to wishlist
-                                                                </button>
-                                                            <?php else: ?>
-                                                                <button class="btn btn-product-detail-wishlist addwishlist"
-                                                                        style="color:#676a6c;" data-ciproduct="<?php echo e($row->i_code); ?>" id="<?php echo e($row->i_code); ?>" type="button"><i
-                                                                        class="fa fa-heart"></i>&ensp;Add to wishlist
-                                                                </button>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                        <div class="col-md-6 p-detail-product-last">
-                                                            <a href="<?php echo e(url('/')); ?>" style="color:#676a6c;">
-                                                                <button
-                                                                        class="btn btn-product-detail-wishlist">Lihat
-                                                                    Produk Lainnya
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                    <?php else: ?>
-                                                        <div class="col-md-12 ">
-                                                            <a href="<?php echo e(url('/signin')); ?>">
-                                                                <button class="btn btn-product-detail-cart"><i
-                                                                            class="fa fa-cart-plus"></i> Tambahkan ke
-                                                                    keranjang
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-6 p-detail-product-first">
-                                                            <a href="<?php echo e(route('login-frontpage')); ?>"
-                                                               style="color:#676a6c;">
-                                                                <button
-                                                                        class="btn btn-product-detail-wishlist"><i
-                                                                            class="fa fa-star"></i>
-                                                                    Add to wishlist
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-6 p-detail-product-last">
-                                                            <a href="<?php echo e(url('/')); ?>" style="color:#676a6c;">
-                                                                <button
-                                                                        class="btn btn-product-detail-wishlist">Lihat
-                                                                    Produk Lainnya
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-lg-12">
-                        <div class="ibox product-description">
-                            <div class="ibox-title" style="background:#fafafa;">
-                                Detail Keterangan Barang
                             </div>
                             <div class="ibox-content">
                                 <div class="" style="line-height:2;">
