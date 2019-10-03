@@ -97,7 +97,11 @@ class CheckoutController extends Controller
                 ->where('w_cbranch',$request->gudang)
                 ->where('st_qty','>=',$request->qty[$run])
                 ->orderBy('st_qty' ,'desc')
-                ->get(); 
+                ->get();
+
+            if($pilih_gudang == '[]'){
+                return response()->json(['error' => 'Tidak Ada Cabang Terdekat']);
+            }
 
             $id = $request->id[$run];
 
@@ -137,6 +141,25 @@ class CheckoutController extends Controller
 
                     $stat_pay = 'N';
                     $method_pay = 'T';
+
+                    if($request->tunai == 'Y'){
+                        $dompet = DB::table('d_walletmember')
+                                    ->where('wm_ccustomer',Auth::user()->cm_code)
+                                    ->get();
+                        $uang = 0;
+                        foreach ($dompet as $row){
+                            $uang += (float)$row->wm_total;
+                        }
+                        DB::table('d_walletmember')
+                            ->where('wm_ccustomer',Auth::user()->cm_code)
+                            ->update([
+                               'wm_total' => $uang - (float)$total_pembelian,
+                                'wm_last' => $uang,
+                            ]);
+
+                        $stat_pay = 'Y';
+                        $method_pay = 'T';
+                    }
 
                 DB::table('d_sales')->insert([
                     's_id' => $urutan,

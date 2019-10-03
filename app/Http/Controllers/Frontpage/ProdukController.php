@@ -212,79 +212,101 @@ class ProdukController extends Controller
     public function produk_detail($slug)
 
     {
-    //     if(\Auth::check()){
-
-    //         $dataseen = DB::table('d_lastseen')
-
-    //                 ->where('ls_ccustomer',Auth::user()->cm_code)            
-
-    //                 ->first();
-
-    //     if (is_null($dataseen)) {
-
-    //         DB::table('d_lastseen')->insert([
-
-    //             'ls_cproduct'=>$request->code,
-
-    //             'ls_ccustomer'=>Auth::user()->cm_code,
-
-    //             'status_data'=>'true',
-
-    //         ]);
-
-    //     } 
-
-    //     else {
-
-    //         DB::table('d_lastseen')->where('ls_ccustomer',Auth::user()->cm_code)->update([
-
-    //             'ls_cproduct'=>$request->code,
-
-    //             'status_data'=>'true',
-
-    //         ]);
-    //     }
-
-    // }
-
-    // else{
-
-    //     }
-
-    // 	$code = $request->code;
         $datas = DB::table('m_item')
 
-                ->join('m_itemprice','ipr_ciproduct','i_code')
+        ->join('m_itemprice','ipr_ciproduct','i_code')
 
-                ->join('m_itemproduct','itp_ciproduct','i_code')
+        ->join('m_itemproduct','itp_ciproduct','i_code')
 
-                ->join('m_itemtype','ity_code','itp_citype')
+        ->join('m_itemtype','ity_code','itp_citype')
 
-                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
+        ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
 
-                ->where('i_link',$slug)
+        ->where('i_link',$slug)
 
-                ->groupBy('i_name')
+        ->groupBy('i_name')
 
-                ->first();
+        ->first();
+
         $cekadatidak = DB::table('m_item')
 
-                ->join('m_itemprice','ipr_ciproduct','i_code')
+        ->join('m_itemprice','ipr_ciproduct','i_code')
 
-                ->join('m_itemproduct','itp_ciproduct','i_code')
+        ->join('m_itemproduct','itp_ciproduct','i_code')
 
-                ->join('m_itemtype','ity_code','itp_citype')
+        ->join('m_itemtype','ity_code','itp_citype')
 
-                ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
+        ->leftJoin('m_groupperprice','gpp_ciproduct','i_code')
 
-                ->where('i_link',$slug)
+        ->where('i_link',$slug)
 
-                ->groupBy('i_name')
+        ->groupBy('i_name')
 
-                ->count();
+        ->count();
 
         if($cekadatidak == null || $cekadatidak ==0){
             return redirect()->back();
+        }
+        if(\Auth::check()){
+
+            $dataseen = DB::table('d_lastseen')
+
+                    ->where('ls_ccustomer',Auth::user()->cm_code)            
+
+                    ->first();
+
+        if (is_null($dataseen)) {
+
+            DB::table('d_lastseen')->insert([
+
+                'ls_cproduct'=>$datas->i_code,
+
+                'ls_ccustomer'=>Auth::user()->cm_code,
+
+                'status_data'=>'true',
+
+            ]);
+
+        } 
+
+        else {
+
+            DB::table('d_lastseen')->where('ls_ccustomer',Auth::user()->cm_code)->update([
+
+                'ls_cproduct'=>$datas->i_code,
+
+                'status_data'=>'true',
+
+            ]);
+        }
+
+    }
+
+    else{
+
+        }
+
+    
+    
+
+        $data = DB::table('m_branch')->get();
+
+        $get = [];
+        foreach ($data as $row){
+            if ($row->b_stokies != null){
+                $parse = json_decode($row->b_stokies);
+                foreach ($parse as $row2){
+                if ($row2 == Auth::user()->cm_city){
+                    array_push($get,$row->b_code);
+                    break;
+                }else{
+                }
+                }
+            }
+        }
+
+        if ($get == '[]'){
+            $get = [0 => 'Tidak Ada Cabang Terdekat' ];
         }
 
 
@@ -421,6 +443,7 @@ class ProdukController extends Controller
             'produksejenis'=> $produksejenis,
 
             'keranjang'=> $keranjang,
+            'stokies' => $get[0],
 
     	));
 
