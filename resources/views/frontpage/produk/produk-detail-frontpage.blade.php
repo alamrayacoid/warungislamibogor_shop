@@ -111,15 +111,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 column-input-detail-product">
-                                    <select id="cabang" name="" class="form-control select2 c-pointer">
-                                        <option value="-" selected="" disabled="">Pilih Cabang Pengiriman</option>
-                                        @foreach($cabang as $cbng)
-                                        <option value="{{$cbng->b_code}}">{{$cbng->c_nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-6 column-input-detail-product">
+                                
+                                <div class="col-md-12 column-input-detail-product">
                                     <div class="d-flex">
                                         <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i
                                                 class="fa fa-minus"></i></button>
@@ -204,7 +197,6 @@
             @else
             <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
             @foreach($produksejenis as $rows)
-            <!-- @if($rows->itp_citype == $typeproduk->itp_citype && $rows->i_code != $typeproduk->i_code) -->
             <div class="col-lg-product col-md-3 col-sm-6 ">
                 <div class="thumbnail product-box-item">
                     @foreach($gambarsejenis as $roww)
@@ -234,7 +226,6 @@
 
                 </div>
             </div>
-            <!-- @endif -->
             @endforeach
             @endif
         </div>

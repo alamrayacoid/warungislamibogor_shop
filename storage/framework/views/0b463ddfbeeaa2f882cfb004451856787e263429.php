@@ -110,15 +110,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 column-input-detail-product">
-                                    <select id="cabang" name="" class="form-control select2 c-pointer">
-                                        <option value="-" selected="" disabled="">Pilih Cabang Pengiriman</option>
-                                        <?php $__currentLoopData = $cabang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cbng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($cbng->b_code); ?>"><?php echo e($cbng->c_nama); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 column-input-detail-product">
+                                
+                                <div class="col-md-12 column-input-detail-product">
                                     <div class="d-flex">
                                         <button class="btn btn-count-product-stock border-right-0" onclick="minus()"><i
                                                 class="fa fa-minus"></i></button>
@@ -204,7 +197,6 @@
             <?php else: ?>
             <h3 class="title-product-opsi-same">Pembeli Yang Melihat Barang Ini, Juga Tertarik Dengan</h3>
             <?php $__currentLoopData = $produksejenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rows): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <!-- <?php if($rows->itp_citype == $typeproduk->itp_citype && $rows->i_code != $typeproduk->i_code): ?> -->
             <div class="col-lg-product col-md-3 col-sm-6 ">
                 <div class="thumbnail product-box-item">
                     <?php $__currentLoopData = $gambarsejenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -234,7 +226,6 @@
 
                 </div>
             </div>
-            <!-- <?php endif; ?> -->
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php endif; ?>
         </div>

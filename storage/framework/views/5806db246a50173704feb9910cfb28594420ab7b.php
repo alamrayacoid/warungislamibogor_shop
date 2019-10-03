@@ -168,6 +168,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -300,18 +301,24 @@
                     method: 'POST',
                     data: form,
                     success: function (get) {
-                        swal("Informasi!",
-                            "Transfer ke Rekening WIB dan kirim bukti transfer di menu pembayaran.",
-                            "success");
-                        setTimeout(function () {
-                            window.location.href =
-                                "<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>";
-                        }, 500)
+                        if (get['error'] != null){
+                            swal("Informasi!",
+                                get['error'],
+                                "error");
+                        } else{
+                            swal("Informasi!",
+                                "Transfer ke Rekening WIB dan kirim bukti transfer di menu pembayaran.",
+                                "success");
+                            setTimeout(function () {
+                                window.location.href =
+                                    "<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>";
+                            }, 500)
+                        }
                     },
                     error: function (xhr, textStatus, errorThrowl) {
                         swal({
                                 title: "Error",
-                                text: "Coba Cek Barang Anda, atau stock kosong",
+                                text: "Hubungi Pengembang Software",
                                 type: "error",
                                 confirmButtonColor: "#DD6B55",
                                 closeOnConfirm: true,
