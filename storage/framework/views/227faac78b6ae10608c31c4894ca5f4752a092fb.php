@@ -100,7 +100,7 @@
                             class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
                         <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <li><a href="<?php echo e(route('kategori-produk',['id'=> $row->ity_name ])); ?>"><?php echo e($row->ity_name); ?></a></li>
+                        <li><a href="<?php echo e(url('category',$row->ity_link)); ?>"><?php echo e($row->ity_name); ?></a></li>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </li>
@@ -193,7 +193,7 @@
                                     <li style="border-left:0 !important;"><a href="<?php echo e(route('wishlist-frontpage')); ?>">Barang Favorit</a></li>
                                     <li style="border-left:0 !important;"><a href="<?php echo e(route('profile')); ?>">Pengaturan</a></li>
                                     <li style="border-left:0 !important;"><a href="<?php echo e(route('antrian_layanan')); ?>">Antrian Layanan</a></li>
-                                    <li class="mt-5 border-0"><a href="<?php echo e(route('logout')); ?>"
+                                    <li class="mt-5 border-0" style="margin-top: 2em;"><a href="<?php echo e(route('logout')); ?>"
                                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>&ensp;Logout</a></li>
                                         <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
                                             <?php echo e(csrf_field()); ?>

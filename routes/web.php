@@ -23,27 +23,31 @@ Route::get('data/lokasi/desa', 'indonesia@desa')->name('desa');
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'guest'], function () {
 Route::get('/signup', 'Frontpage\FrontpageController@register_frontpage')->name('register_frontpage-frontpage');
 Route::get('/signin', 'Frontpage\FrontpageController@login_frontpage')->name('login-frontpage');
 Route::post('/login', 'Frontpage\FrontpageController@login')->name('login');
 Route::post('/register', 'Frontpage\FrontpageController@register')->name('register');
-Route::post('/logout', 'Frontpage\FrontpageController@logout')->name('logout');
 
 Route::get('/reset-password','Frontpage\ResetPasswordController@index')->name('lupa_password');
 Route::post('/kirim-reset-password','Frontpage\ResetPasswordController@kirim_request_password')->name('kirim_request_password');
 Route::get('/password/reset/{token}/{email}','Frontpage\ResetPasswordController@resetpasswordform')->name('reset.password.form');
 Route::post('/ganti-password-member','Frontpage\ResetPasswordController@ganti_password_member')->name('ganti_password_member');
+});
+Route::post('/logout', 'Frontpage\FrontpageController@logout')->name('logout');
 
 
-Route::get('/produk', 'Frontpage\ProdukController@produk')->name('produk-frontpage');
-Route::get('/filter-produk-frontpage','Frontpage\ProdukController@filter_produk')->name('filter_produk');
+
+
+Route::get('/product', 'Frontpage\ProdukController@produk')->name('produk-frontpage');
+Route::get('/filter-product','Frontpage\ProdukController@filter_produk')->name('filter_produk');
 Route::post('/stock_check', 'Frontpage\ProdukController@stock_check')->name('stock_check');
-Route::get('/produk-detail', 'Frontpage\ProdukController@produk_detail')->name('produk-detail-frontpage');
-Route::get('produk/kategori-produk/{id}','Frontpage\ProdukController@produk_kategori')->name('kategori-produk');
+Route::get('/product/{slug}', 'Frontpage\ProdukController@produk_detail')->name('produk-detail-frontpage');
+Route::get('/category/{slug}','Frontpage\ProdukController@produk_kategori')->name('kategori-produk');
 
 Route::get('/cari-barang','Frontpage\ProdukController@caribarang')->name('cari-barang');
 Route::get('/filter-produk','Frontpage/ProdukController@filter_category_product')->name('filter_category_product');
-Route::get('/produk-filter', 'Frontpage\ProdukController@filter_product_frontpage')->name('produk-filter-frontpage');
+Route::get('/product-filter', 'Frontpage\ProdukController@filter_product_frontpage')->name('produk-filter-frontpage');
 // Group wib-cpanel
 //add cart 
 Route::post('/addcart', 'Frontpage\KeranjangController@addcart')->name('addcart');
@@ -101,8 +105,11 @@ Route::post('/profile/update', 'Frontpage\ProfileController@update')->name('upda
 Route::get('/checkout', 'Frontpage\CheckoutController@checkout')->name('checkout');
 Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.checkout');
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
+Route::post('/checkout-repeat-order','Frontpage\CheckoutController@checkout_repeat_order')->name('checkout-repeat-order');
 
 Route::get('pembelian/detail/{id}','Frontpage\PembelianController@detail_transaksi')->name('detail_transaksi');
+
+Route::get('pembelian/salin-nota-baru/{id}','Frontpage\PembelianController@salin_notabaru');
 
 
 Broadcast::channel('my-channel', function ($user) {

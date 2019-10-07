@@ -31,8 +31,7 @@
 <section style="margin-top:4.5em;">
     <ol class="breadcrumb breadcumb-header">
         <li><a href="#">Home</a></li>
-        <li><a href="">Checkout</a></li>
-        <li class="active"><?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php echo e($row->i_name); ?>,<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></li>
+        <li class="active">Checkout</a></li>
     </ol>
     <div class="container-fluid mt-5">
         <div class="loader-wib"></div>
@@ -169,6 +168,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -301,18 +301,24 @@
                     method: 'POST',
                     data: form,
                     success: function (get) {
-                        swal("Informasi!",
-                            "Transfer ke Rekening WIB dan kirim bukti transfer di menu pembayaran.",
-                            "success");
-                        setTimeout(function () {
-                            window.location.href =
-                                "<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>";
-                        }, 500)
+                        if (get['error'] != null){
+                            swal("Informasi!",
+                                get['error'],
+                                "error");
+                        } else{
+                            swal("Informasi!",
+                                "Transfer ke Rekening WIB dan kirim bukti transfer di menu pembayaran.",
+                                "success");
+                            setTimeout(function () {
+                                window.location.href =
+                                    "<?php echo e(route('pembelian-pembayaran-frontpage', ['status' => 2])); ?>";
+                            }, 500)
+                        }
                     },
                     error: function (xhr, textStatus, errorThrowl) {
                         swal({
                                 title: "Error",
-                                text: "Coba Cek Barang Anda, atau stock kosong",
+                                text: "Hubungi Pengembang Software",
                                 type: "error",
                                 confirmButtonColor: "#DD6B55",
                                 closeOnConfirm: true,

@@ -31,7 +31,7 @@
     <link href="<?php echo e(asset('assets/css/plugins/sweetalert/sweetalert.css')); ?>" rel="stylesheet">
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/alamraya-customer-style.css')); ?>">
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/alamraya-customer-style.css')); ?>"> -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/custom-customer.css')); ?>">
 
 </head>

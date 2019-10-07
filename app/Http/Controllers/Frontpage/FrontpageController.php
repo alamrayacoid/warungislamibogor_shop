@@ -42,7 +42,7 @@ class FrontpageController extends Controller
 
                     ->where('m_item.status_data','true')
 
-                    ->select('m_item.i_name','m_item.i_code','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
+                    ->select('m_item.i_name','m_item.i_code','m_item.i_link','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
 
                     ->paginate(5);
 
@@ -50,7 +50,7 @@ class FrontpageController extends Controller
 
                         ->where('status_data','true')
 
-                        ->select('ity_name')
+                        ->select('ity_name','ity_link')
 
                         ->get();
             $gambar = DB::table('m_item')
@@ -138,7 +138,7 @@ class FrontpageController extends Controller
                                     
                                     ->where('i_code','!=',$rekomendasi->i_code)
 
-                                    ->select('m_item.i_name','m_item.i_code','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
+                                    ->select('m_item.i_name','m_item.i_code','m_item.i_link','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
                                     
                                     ->take(10)
                                     

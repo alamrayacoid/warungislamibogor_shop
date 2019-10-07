@@ -212,7 +212,7 @@ class PembelianController extends Controller
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
                     <div class="col-lg-4">
-                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
 
@@ -232,12 +232,21 @@ class PembelianController extends Controller
                             </span> 
                             </div> <div class="col-lg-4 col-md-4">                            
                                 <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
+                                <button class="btn btn-replace-nota" onclick="carinota(\''.$data->s_id.'\')">Salin Ke Nota Baru</button>
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
         })
         ->rawColumns(['all'])
         ->make(true);
+    }
+    public function salin_notabaru($id){
+        $cek = DB::table('d_sales')->where('s_id',$id)->first();
+        
+        $item = DB::table('d_salesdt')->where('sd_sales',$cek->s_id)->get();
+        return response()->json([
+            'item'=> $item,
+        ]);
     }
     public function detail_transaksi($id){
         $datas = DB::table('d_sales')
@@ -384,7 +393,7 @@ class PembelianController extends Controller
             $totalbeli = 0 ;
             foreach ($data2 as $row) {
                 $daftar_barang .= '
-                    <div class="row column-item-product item-product-allstatus">
+                    <div class="row column-item-product item-product-allstatus fastorder">
                         <div class="col-lg-6">
                             <div class="d-flex">
                                 <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
@@ -401,7 +410,7 @@ class PembelianController extends Controller
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
                     <div class="col-lg-4">
-                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
 
@@ -420,8 +429,7 @@ class PembelianController extends Controller
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.$data->s_total.'</span>
                             </span> 
                             </div> <div class="col-lg-4 col-md-4">
-                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
-                            <button class="btn btn-payment-transaction bayar" data-nota="'.$data->s_nota.'" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar Sekarang</button>
+                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button><button class="btn btn-payment-transaction bayar" data-nota="'.$data->s_nota.'" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar Sekarang</button>
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
@@ -568,7 +576,7 @@ class PembelianController extends Controller
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
                     <div class="col-lg-4">
-                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
 
@@ -746,7 +754,7 @@ class PembelianController extends Controller
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
                     <div class="col-lg-4">
-                        <a href="'.route('produk-detail-frontpage', ['code'=>$row->i_code]).'"><button class="btn btn-buy-more-product">Beli Lagi</button></a>
+                        <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
 

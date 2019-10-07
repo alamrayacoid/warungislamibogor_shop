@@ -31,7 +31,7 @@
     <link href="{{asset('assets/css/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet">
 
 
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/alamraya-customer-style.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('assets/css/alamraya-customer-style.css')}}"> -->
     <link rel="stylesheet" href="{{asset('assets/css/custom-customer.css')}}">
 
 </head>
