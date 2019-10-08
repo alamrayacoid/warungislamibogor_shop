@@ -12,4 +12,12 @@ class menuController extends Controller
     $menu = DB::table('m_itemtype')->get();
     return $menu;
 	}
+	static function category(){
+		$category = DB::table('m_itemtype')
+					->where('status_data','true')
+					->select('ity_name','ity_link')
+					->get();
+
+		return $category;
+	}	
 }

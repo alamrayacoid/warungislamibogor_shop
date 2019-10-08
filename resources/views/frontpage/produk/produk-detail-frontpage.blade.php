@@ -181,7 +181,7 @@
         <div class="row mt-5" style="margin-top:2em">
             <div class="col-lg-12">
                 <div class="ibox product-description">
-                    <div class="ibox-title" style="background:#fafafa;">
+                    <div class="ibox-title border-top-none" style="background:#fafafa;">
                         Detail Keterangan Barang
                     </div>
                     <div class="ibox-content">
@@ -218,7 +218,7 @@
                         <div class="footer-product-item">
                             <div class="price-product-item">Rp. {{$rows->ipr_sunitprice}}</div>
                             <div class="">
-                                <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;">
+                                <i class="fa fa-tag" style="color: #009a51;"></i>&ensp;<span style="color: #595959;">
                                     {{$rows->ity_name}}</span>
                             </div>
                         </div>

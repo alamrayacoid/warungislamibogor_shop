@@ -26,7 +26,6 @@ class CheckoutController extends Controller
                     
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
-        $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
         if(\Auth::check()){
         $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
         }else{
@@ -36,7 +35,6 @@ class CheckoutController extends Controller
             'produk' => $produk->get(),
             'gambar' => $gambar,
             'count' => $produk->count(),
-            'kategori' => $kategori,
             'provinsi' => $provinsi,
             'keranjang'=> $keranjang,
         ));

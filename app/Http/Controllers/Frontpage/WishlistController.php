@@ -231,4 +231,53 @@ class WishlistController extends Controller
 
     	}
 	}
+    public function listWishlistAndroid(){
+        $data = DB::table('d_wishlist')
+                ->leftJoin('m_item','i_code','wl_ciproduct')
+                ->leftJoin('m_member','cm_code','wl_cmember')
+                ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+                ->where('d_wishlist.status_data','true')
+                ->select('d_wishlist.*','m_item.*','m_member.cm_name','m_itemprice.ipr_sunitprice','m_itemprice.ipr_bunitprice')
+                ->where('d_wishlist.wl_cmember',Auth::user()->cm_code)
+                ->get();
+
+        return response()->json($data);
+    }
+    public function removeWishlistAndrouid(Request $request){
+        DB::beginTransaction();
+            try{
+                $cek = DB::table('d_wishlist')
+                        ->where('wl_id',$request->id_wishlist)
+                        ->where('wl_cmember',Auth::user()->cm_code)
+                        ->count();
+                if($cek == 0 || $cek == null){
+                    return response()->json([
+                        'status' => 'Error',
+                ]);
+
+                }else{
+
+                    DB::table('d_wishlist')->where('wl_id',$request->id_wishlist)->update([
+
+                    'status_data'=>'false',
+
+                    ]);
+
+                    DB::commit();
+                    return response()->json([
+                        'status' => 'success',
+                    ]);
+                }
+            }
+            catch (\Exception $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
+             } catch (\Throwable $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
+        }
+    }
 }
