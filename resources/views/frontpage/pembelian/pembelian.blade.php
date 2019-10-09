@@ -131,12 +131,6 @@
     .table {
         border: 0 !important;
     }
-    @media(max-width: 992px){
-        .responsive-transaction{
-            max-width: 100%;
-            overflow-x: auto;
-        }    
-    }
     
 </style>
 @endsection
@@ -154,7 +148,7 @@
     <div class="container-fluid mt-5">
         <div class="loader-wib"></div>
         <div class="row" style="padding-bottom: 3em;">
-            <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
+            <div class="col-lg-2 col-md-3 column-profile-frame--sidebar">
                 <div class="thumbnail profile-frame--sidebar">
                     <div class="d-flex align-items-center padding-0-15">
                         <img src="alamraya.site/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}"
@@ -236,8 +230,8 @@
                                             Pengiriman</span></a>
                                 </li>
                             </ul>
-                            <div class="tab-content padding-15">
-                                <div id="tab-1" class="tab-pane animated fadeIn tabe-allstatus active">
+                            <div class="tab-content">
+                                <div id="tab-1" class="tab-pane animated fadeIn tab-payment-transaction active">
                                     <form id="">
                                         <div class="row">
                                             <div class="col-lg-5 mt-4">
@@ -318,7 +312,7 @@
                                     </div>
                                     @endif
                                 </div>
-                                <div id="tab-2" class="tab-pane animated fadeIn">
+                                <div id="tab-2" class="tab-pane animated tab-payment-transaction fadeIn">
                                     
                                     <form id="">
                                         <div class="row">
@@ -387,7 +381,7 @@
                                     </div>
                                     @endif
                                 </div>
-                                <div id="tab-3" class="tab-pane animated fadeIn">
+                                <div id="tab-3" class="tab-pane animated tab-payment-transaction fadeIn">
                                     <form id="">
                                         <div class="row">
                                             <div class="col-lg-5 mt-4">
@@ -457,7 +451,7 @@
                                     </div>
                                     @endif
                                 </div>
-                                <div id="tab-4" class="tab-pane animated fadeIn">
+                                <div id="tab-4" class="tab-pane animated tab-payment-transaction fadeIn">
                                     <form id="">
                                         <div class="row">
                                             <div class="col-lg-5 mt-4">

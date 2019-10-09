@@ -9,6 +9,7 @@
       $notifpem = App\Http\Controllers\notifController::pembayaran();
       $notifpen = App\Http\Controllers\notifController::pengiriman();
       $saldo = App\Http\Controllers\notifController::saldo();
+      $category = App\Http\Controllers\menuController::category();
  ?>
 
 @if(!Auth::check())
@@ -31,7 +32,7 @@
                         data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
                             class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
-                        @foreach($kategori as $row)
+                        @foreach($category as $row)
                         <li><a href="{{route('kategori-produk',['id'=> $row->ity_name ])}}">{{$row->ity_name}}</a></li>
                         @endforeach
                     </ul>
@@ -47,14 +48,6 @@
                     <button class="btn btn-search-header" type="submit" id="tombolcaribarang"><i
                             class="fa fa-search"></i></button>
                 </div>
-                <!-- <div class="opsi-categories-navbar">
-
-                    @foreach($kategori as $row)
-                    <div>
-                        <a href="">{{$row->ity_name}}</a>
-                    </div>
-                    @endforeach
-                </div> -->
             </form>
             <ul class="nav navbar-nav navbar-right btn-group-header">
                 <li class="nav-link border-0"><a href="{{route('login-frontpage')}}"><button
@@ -99,7 +92,7 @@
                         data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
                             class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
-                        @foreach($kategori as $row)
+                        @foreach($category as $row)
                         <li><a href="{{url('category',$row->ity_link)}}">{{$row->ity_name}}</a></li>
                         @endforeach
                     </ul>

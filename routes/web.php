@@ -115,4 +115,9 @@ Route::get('pembelian/salin-nota-baru/{id}','Frontpage\PembelianController@salin
 Broadcast::channel('my-channel', function ($user) {
     return true; // change this to your authentication logic
 });
+});
+Route::get('/page/not/found',function($closure){
+  // second parameter is optional. 
+  abort(404,'Page not found');
+  abort(403); 
 }); //End Route::Group wib-cpanel

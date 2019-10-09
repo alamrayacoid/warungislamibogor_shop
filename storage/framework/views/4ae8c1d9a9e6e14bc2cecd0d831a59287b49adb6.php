@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-3">
-                <h5 class="text-payment-method">METODE PEMBAYARAN</h5>
+                <h5 class="text-payment-method">METODE PENGIRIMAN</h5>
                 <ul class="list-bank">
                     <li><img src="<?php echo e(asset('assets/img/icon/icon-tiki.png')); ?>" alt="TIKI"></li>
                     <li><img src="<?php echo e(asset('assets/img/icon/icon-jne.png')); ?>" alt="JNE"></li>
@@ -91,7 +91,7 @@
                 </ul>
             </div>
             <div class="col-lg-3 col-md-3">
-                <h5 class="text-payment-method">METODE PENGIRIMAN</h5>
+                <h5 class="text-payment-method">METODE PEMBAYARAN</h5>
                 <ul class="list-bank">
                     <li><img src="<?php echo e(asset('assets/img/icon/icon-bni.jpg')); ?>" alt="BNI"></li>
                     <li><img src="<?php echo e(asset('assets/img/icon/icon-bri.jpg')); ?>" alt="BRI"></li>

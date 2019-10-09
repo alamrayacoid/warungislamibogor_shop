@@ -8,11 +8,8 @@
     <title>Warung Islami Bogor</title>
 
     <link href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('assets/fontawesome-new/css/all.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-    
-
     <link href="<?php echo e(asset('assets/css/plugins/jQueryUI/jquery-ui.css')); ?>" rel="stylesheet">
 
 
@@ -30,8 +27,6 @@
 
     <link href="<?php echo e(asset('assets/css/plugins/sweetalert/sweetalert.css')); ?>" rel="stylesheet">
 
-
-    <!-- <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/alamraya-customer-style.css')); ?>"> -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/custom-customer.css')); ?>">
 
 </head>

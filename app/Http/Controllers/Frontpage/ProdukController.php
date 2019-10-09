@@ -174,8 +174,9 @@ class ProdukController extends Controller
 
             $statusfilter = '';
 
-
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+
+
 
     	return view('frontpage.produk.produk-frontpage',array(
 
@@ -191,7 +192,6 @@ class ProdukController extends Controller
 
                 'namabarang' => $namabarang,
 
-                'kategori'=>$kategori,
 
                 'keranjang'=> $keranjang,
 
@@ -204,6 +204,8 @@ class ProdukController extends Controller
                 'filterjenis' => $filterjenis,
 
                 'statusfilter' => $statusfilter,
+
+                'kategori'=> $kategori,
 
             ));
 
@@ -394,7 +396,6 @@ class ProdukController extends Controller
                 
                 ->get();
             
-            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
 
             if(\Auth::check()){
 
@@ -433,8 +434,6 @@ class ProdukController extends Controller
             'code' => $datas->i_code,
 
             'cabang' => $cabang,
-
-            'kategori' => $kategori,
 
             'satuan' => $satuan,
 
@@ -583,12 +582,6 @@ class ProdukController extends Controller
 
                 ->count();
 
-                $kategori = DB::table('m_itemtype')
-
-                        ->where('status_data','true')
-
-                        ->get();
-
                 $type = DB::table('m_itemtype')
 
                         ->get();
@@ -623,6 +616,8 @@ class ProdukController extends Controller
 
                 $status_filter = '';
 
+                $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
+
         return view('frontpage.produk.produk-kategori-frontpage',array(
 
             'test'=>$data,
@@ -630,8 +625,6 @@ class ProdukController extends Controller
             'test1'=> $data1,
 
             'namakategori'=>$datas,
-
-            'kategori'=>$kategori,
 
             'tipe'=>$type,
 
@@ -642,6 +635,8 @@ class ProdukController extends Controller
             'gambar'=>$gambar,
 
             'keranjang'=> $keranjang,
+            
+            'kategori'=> $kategori,
 
         ));
 
@@ -746,6 +741,7 @@ class ProdukController extends Controller
 
             $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
 
+
             return view('frontpage.produk.produk-kategori-frontpage',array(
 
                 'test' => $datas->paginate(24),
@@ -764,9 +760,9 @@ class ProdukController extends Controller
 
                 'namabarang' => $namabarang,
 
-                'kategori'=>$kategori,
-
                 'keranjang'=> $keranjang,
+
+                'kategori'=> $kategori,
                 
             ));
 
@@ -901,8 +897,6 @@ class ProdukController extends Controller
 
                 'namabarang' => $namabarang,
 
-                'kategori'=>$kategori,
-
                 'keranjang'=> $keranjang,
 
                 'statusfilter' => $status_filter,
@@ -914,6 +908,8 @@ class ProdukController extends Controller
                 'filterhargamin' => $filterhargamin,
 
                 'filterjenis' => $filterjenis,
+
+                'kategori' => $kategori,
             ));
     }
 }

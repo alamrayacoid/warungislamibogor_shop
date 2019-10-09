@@ -22,7 +22,6 @@ class KeranjangController extends Controller
                     ->get();
 
         $gambar = DB::table('m_item')->join('m_imgproduct','ip_ciproduct','i_code')->groupBy('i_code')->get();
-        $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
         if(\Auth::check()){
         $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
         }else{
@@ -31,7 +30,6 @@ class KeranjangController extends Controller
     	return view('frontpage.keranjang.keranjang-frontpage',array(
             'produk' => $produk,
             'gambar' => $gambar,
-            'kategori'=>$kategori,
             'keranjang'=> $keranjang,
         ));
     }
@@ -275,6 +273,153 @@ class KeranjangController extends Controller
                     'cart_cmember'=> Auth::user()->cm_code,
                     'status_data'=> 'check',
                 ]);
+        }
+    }
+
+    public function listKeranjangAndroid(Request $request){
+        $data = DB::table('d_cart')
+                    ->leftJoin('m_item','i_code','cart_ciproduct')
+                    ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                    ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
+                    ->leftJoin('m_member','cm_code','cart_cmember')
+                    ->where('d_cart.cart_cmember',Auth::user()->cm_code)
+                    ->where('d_cart.status_data','true')
+                    ->groupBy('cart_ciproduct')
+                    ->select('d_cart.*','m_item.*','m_itemprice.ipr_sunitprice','m_itemprice.ipr_bunitprice','m_member.cm_name')
+                    ->get();
+        return response()->json($data);
+    }
+    public function addQtyKeranjangAndroid(Request $request){
+        DB::beginTransaction();
+            try{
+                $cek = DB::table('d_cart')
+                        ->where('cart_id',$request->id_keranjang)
+                        ->where('d_cart.cart_cmember',Auth::user()->cm_code)
+                        ->count();
+                $get_data = DB::table('d_cart')
+                            ->where('cart_id',$request->id_keranjang)
+                            ->get();
+
+                if($cek == 0 || $cek == null){
+
+                    return response()->json([
+                        'status' => 'Error',
+                    ]);
+
+                }else{
+
+                    $data =DB::table('d_cart')
+                            ->where('cart_id',$request->id_keranjang)
+                            ->update([
+                            'cart_qty' => $get_data[0]->cart_qty + 1,
+                    ]);
+
+                    DB::commit();
+
+                    return response()->json([
+
+                        'status' => 'Success',
+                    ]);
+
+                }                       
+            }
+            catch (\Exception $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
+             } catch (\Throwable $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
+            }
+    }
+    public function reduceQtyKeranjangAndroid(Request $request){
+        DB::beginTransaction();
+            try{
+                $cek = DB::table('d_cart')
+                        ->where('cart_id',$request->id_keranjang)
+                        ->where('d_cart.cart_cmember',Auth::user()->cm_code)
+                        ->count();
+                $get_data = DB::table('d_cart')
+                            ->where('cart_id',$request->id_keranjang)
+                            ->get();
+
+                if($cek == 0 || $cek == null){
+
+                    return response()->json([
+                        'status' => 'Error',
+                    ]);
+
+                }else{
+
+                    $data =DB::table('d_cart')
+                            ->where('cart_id',$request->id_keranjang)
+                            ->update([
+                            'cart_qty' => $get_data[0]->cart_qty - 1,
+                    ]);
+
+                    DB::commit();
+
+                    return response()->json([
+
+                        'status' => 'Success',
+                    ]);
+
+                }                       
+            }
+            catch (\Exception $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
+             } catch (\Throwable $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
+            }
+    }
+    public function removelistKeranjangAndroind(Request $request){
+     DB::beginTransaction();
+            try{
+                $cek = DB::table('d_cart')
+                        ->where('cart_id',$request->id_keranjang)
+                        ->where('d_cart.cart_cmember',Auth::user()->cm_code)
+                        ->count();
+                $get_data = DB::table('d_cart')
+                            ->where('cart_id',$request->id_keranjang)
+                            ->get();
+
+                if($cek == 0 || $cek == null){
+
+                    return response()->json([
+                        'status' => 'Error',
+                    ]);
+
+                }else{
+
+                    $data =DB::table('d_cart')
+                            ->where('cart_id',$request->id_keranjang)
+                            ->update([
+                            'status_data' => 'false',
+                    ]);
+
+                    DB::commit();
+
+                    return response()->json([
+
+                        'status' => 'Success',
+                    ]);
+
+                }                                       
+                
+            }
+            catch (\Exception $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
+             } catch (\Throwable $e) {
+             DB::rollBack();
+             throw $e;
+             return response()->json(['status' => 'Error', 'message' => 'Hubungi Pengembang Software']);
         }
     }
 }

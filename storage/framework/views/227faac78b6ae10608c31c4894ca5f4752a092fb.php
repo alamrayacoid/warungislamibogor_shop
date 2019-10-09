@@ -9,6 +9,7 @@
       $notifpem = App\Http\Controllers\notifController::pembayaran();
       $notifpen = App\Http\Controllers\notifController::pengiriman();
       $saldo = App\Http\Controllers\notifController::saldo();
+      $category = App\Http\Controllers\menuController::category();
  ?>
 
 <?php if(!Auth::check()): ?>
@@ -31,7 +32,7 @@
                         data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
                             class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
-                        <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li><a href="<?php echo e(route('kategori-produk',['id'=> $row->ity_name ])); ?>"><?php echo e($row->ity_name); ?></a></li>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
@@ -47,14 +48,6 @@
                     <button class="btn btn-search-header" type="submit" id="tombolcaribarang"><i
                             class="fa fa-search"></i></button>
                 </div>
-                <!-- <div class="opsi-categories-navbar">
-
-                    <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div>
-                        <a href=""><?php echo e($row->ity_name); ?></a>
-                    </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div> -->
             </form>
             <ul class="nav navbar-nav navbar-right btn-group-header">
                 <li class="nav-link border-0"><a href="<?php echo e(route('login-frontpage')); ?>"><button
@@ -99,7 +92,7 @@
                         data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
                             class="fa fa-list-ul" aria-hidden="true"></i>&ensp;Kategori</a>
                     <ul class="dropdown-menu dropdown-categories-menu">
-                        <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li><a href="<?php echo e(url('category',$row->ity_link)); ?>"><?php echo e($row->ity_name); ?></a></li>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>

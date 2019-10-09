@@ -105,7 +105,7 @@
         <div class="container-fluid mt-5">
             <div class="loader-wib"></div>
             <div class="row">
-                <div class="col-lg-2 col-md-3 column-profile-frame--sidebar" style="padding:0;">
+                <div class="col-lg-2 col-md-3 column-profile-frame--sidebar">
                     <div class="thumbnail profile-frame--sidebar">
                         <div class="d-flex align-items-center padding-0-15">
                             <img src="env('APP_WIB')}}storage/image/member/profile/{{Auth::user()->cm_path}}"

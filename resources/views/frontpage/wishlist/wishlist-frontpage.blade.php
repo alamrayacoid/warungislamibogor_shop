@@ -13,7 +13,7 @@
     </ol>
     <div class="container-fluid mt-5">
         <div class="row">
-            <div class="col-lg-2" style="padding:0;">
+            <div class="col-lg-2 column-profile-frame--sidebar">
                 <div class="thumbnail profile-frame--sidebar">
                     <div class="d-flex align-items-center padding-0-15">
                         <img src="alamraya.site/warungislamibogor_shop/storage/image/member/profile/{{Auth::user()->cm_path}}"

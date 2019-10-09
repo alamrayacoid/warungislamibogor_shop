@@ -152,7 +152,7 @@
                                     </div>
                                     <?php endif; ?>
                                     <div class="">
-                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                        <i class="fa fa-tag" style="color: #009a51;"></i>&nbsp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
                                     </div>
                                 </div>
                         </div>
@@ -213,7 +213,7 @@
                                     </div>
                                     <?php endif; ?>
                                     <div class="">
-                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($rows->ity_name); ?></span>
+                                        <i class="fa fa-tag" style="color: #009a51;"></i>&nbsp;<span style="color: #595959;"> <?php echo e($rows->ity_name); ?></span>
                                     </div>
                                 </div>
                         </div>
@@ -290,7 +290,7 @@
                                     </div>
                                     <?php endif; ?>
                                     <div class="">
-                                        <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
+                                        <i class="fa fa-tag" style="color: #009a51;"></i>&nbsp;<span style="color: #595959;"> <?php echo e($row->ity_name); ?></span>
                                     </div>
                                 </div>
                             </div>

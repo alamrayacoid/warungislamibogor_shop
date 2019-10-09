@@ -24,8 +24,6 @@ class ProfileController extends Controller
 
     	$password = Auth::user()->password;
 
-        $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-
         $provinsi = DB::table('d_province')->get();
 
         $alamat = DB::table('m_member')
@@ -53,8 +51,6 @@ class ProfileController extends Controller
         	'wishlist' => $wishlist,
 
             'transaksi' => $transaksi,
-
-            'kategori'=>$kategori,
 
             'provinsi' => $provinsi,
 

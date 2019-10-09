@@ -46,13 +46,6 @@ class FrontpageController extends Controller
 
                     ->paginate(5);
 
-            $kategori = DB::table('m_itemtype')
-
-                        ->where('status_data','true')
-
-                        ->select('ity_name','ity_link')
-
-                        ->get();
             $gambar = DB::table('m_item')
 
                         ->leftjoin('m_imgproduct','ip_ciproduct','i_code')
@@ -184,8 +177,6 @@ class FrontpageController extends Controller
 
                 'wish' => $wish,
 
-                'kategori' => $kategori,
-
                 'imgslider'=> $imageslider,
 
                 'imgbasic'=> $imagesbasic,
@@ -247,7 +238,6 @@ class FrontpageController extends Controller
                     'cm_lastlogin' => Carbon::now('Asia/Jakarta')
         
                 ]);
-        
             return redirect()->route('home')->with(['berhasil' => 'berhasil']);
         
         } else {

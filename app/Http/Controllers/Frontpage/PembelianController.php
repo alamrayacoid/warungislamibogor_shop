@@ -63,8 +63,7 @@ class PembelianController extends Controller
             }
 
             $gambar = DB::table('d_sales')->leftJoin('d_salesdt','sd_sales','s_id')->join('m_imgproduct','ip_ciproduct','sd_item')->groupBy('s_nota');
-            $kategori = DB::table('m_itemtype')->where('status_data','true')->get();
-            $countproses = DB::table('d_sales')->where('s_isapprove','Y')->where('s_member',Auth::user()->cm_code)->count();
+            $countproses = DB::table('d_sales')->where('s_isapprove','Y')->where('s_delivered','N')->where('s_member',Auth::user()->cm_code)->count();
             $countkirim = DB::table('d_sales')->whereIn('s_delivered',['L','P'])->where('s_member',Auth::user()->cm_code)->count();
             $keranjang = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->count();
     	return view('frontpage.pembelian.pembelian',array(
@@ -80,7 +79,6 @@ class PembelianController extends Controller
             'groupppengstat' => $countkirim,
     		'groupppeng' => $group->whereIn('s_delivered',['P','L'])->get(),
             'gambar' => $gambar->get(),
-            'kategori'=>$kategori,
             'keranjang'=> $keranjang,
     	));
     }
@@ -196,11 +194,11 @@ class PembelianController extends Controller
             foreach ($data2 as $row) {
                 $daftar_barang .= '
                     <div class="row column-item-product item-product-allstatus">
-                        <div class="col-lg-6">
-                            <div class="d-flex">
+                        <div class="col-lg-6 col-sm-6 p-transaction-respon">
+                            <div class="heading-item-description-transaction">
                                 <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
                                                             width="100px" height="100px">
-                                <div class="padding-0-15">
+                                <div class="padding-0-15 line-height-normal">
                                     <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
                                     <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
                                     <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
@@ -208,10 +206,10 @@ class PembelianController extends Controller
                                 </div>
                             </div>
                         </div>
-                    <div class="col-lg-2 text-center">
+                    <div class="col-lg-2 col-sm-3 text-center label-transaction-group">
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-sm-3 btn-group-buy-more">
                         <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
@@ -225,14 +223,15 @@ class PembelianController extends Controller
 
             return '<div class="column-group-item-product mt-5">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-7 col-md-7 line-height-normal">
                             <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
-                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                            <span class="text-full-payment-transaction">Total : 
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
                             </span> 
-                            </div> <div class="col-lg-4 col-md-4">                            
-                                <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
+                            </div> <div class="col-lg-5 col-md-5 btn-group-payment-transaction">                            
                                 <button class="btn btn-replace-nota" onclick="carinota(\''.$data->s_id.'\')">Salin Ke Nota Baru</button>
+                                <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
+                                
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
@@ -394,8 +393,8 @@ class PembelianController extends Controller
             foreach ($data2 as $row) {
                 $daftar_barang .= '
                     <div class="row column-item-product item-product-allstatus fastorder">
-                        <div class="col-lg-6">
-                            <div class="d-flex">
+                        <div class="col-lg-6 col-sm-6 p-transaction-respon">
+                            <div class="heading-item-description-transaction">
                                 <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
                                                             width="100px" height="100px">
                                 <div class="padding-0-15">
@@ -406,10 +405,10 @@ class PembelianController extends Controller
                                 </div>
                             </div>
                         </div>
-                    <div class="col-lg-2 text-center">
+                    <div class="col-lg-2 col-sm-3 text-center label-transaction-group">
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-sm-3 btn-group-buy-more">
                         <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
@@ -423,13 +422,15 @@ class PembelianController extends Controller
 
             return '<div class="column-group-item-product mt-5">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-7 col-md-7 line-height-normal">
                             <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
-                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                            <span class="text-full-payment-transaction">Total : 
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.$data->s_total.'</span>
                             </span> 
-                            </div> <div class="col-lg-4 col-md-4">
-                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button><button class="btn btn-payment-transaction bayar" data-nota="'.$data->s_nota.'" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar Sekarang</button>
+                            </div>
+                            <div class="col-lg-5 col-md-5 btn-group-payment-transaction">
+                            <button class="btn btn-payment-transaction bayar" data-nota="'.$data->s_nota.'" type="button" data-toggle="modal" data-target="#modal-bayar">Bayar Sekarang</button>
+                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
@@ -560,8 +561,8 @@ class PembelianController extends Controller
             foreach ($data2 as $row) {
                 $daftar_barang .= '
                     <div class="row column-item-product item-product-allstatus">
-                        <div class="col-lg-6">
-                            <div class="d-flex">
+                        <div class="col-lg-6 col-sm-6 p-transaction-respon">
+                            <div class="heading-item-description-transaction">
                                 <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
                                                             width="100px" height="100px">
                                 <div class="padding-0-15">
@@ -572,10 +573,10 @@ class PembelianController extends Controller
                                 </div>
                             </div>
                         </div>
-                    <div class="col-lg-2 text-center">
+                    <div class="col-lg-2 col-sm-3 text-center label-transaction-group">
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-sm-3 btn-group-buy-more">
                         <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
@@ -589,14 +590,16 @@ class PembelianController extends Controller
 
             return '<div class="column-group-item-product mt-5">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-7 col-md-7 line-height-normal">
                             <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
-                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                            <span class="text-full-payment-transaction">Total : 
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
                             </span> 
-                            </div> <div class="col-lg-4 col-md-4">
-                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
+                            </div>
+                            <div class="col-lg-5 col-md-5 btn-group-payment-transaction">
                             <button class="btn btn-delivery-transaction detail_transaksi" id="detail_pengiriman" data-detail="'.route('detail_pengiriman', ['id'=> $data->s_id]).'">Lacak Pengiriman</button>
+                            <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
+                            
                             </div>
                         </div>'.$daftar_barang.'
                     </div>';
@@ -737,8 +740,8 @@ class PembelianController extends Controller
             foreach ($data2 as $row) {
                 $daftar_barang .= '
                     <div class="row column-item-product item-product-allstatus">
-                        <div class="col-lg-6">
-                            <div class="d-flex">
+                        <div class="col-lg-6 col-sm-6 p-transaction-respon">
+                            <div class="heading-item-description-transaction">
                                 <img src="'.env("APP_WIB").'storage/image/master/produk/'.$row->ip_path.'"
                                                             width="100px" height="100px">
 
@@ -750,10 +753,10 @@ class PembelianController extends Controller
                                 </div>
                             </div>
                         </div>
-                    <div class="col-lg-2 text-center">
+                    <div class="col-lg-2 col-sm-3 text-center label-transaction-group">
                         <label class="label label-primary bg-primary-wib">'. $status .'</label>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-sm-3 btn-group-buy-more">
                         <button class="btn btn-buy-more-product request-fastorder" type="button" data-satuan="'.$row->itp_ciunit.'" data-member="'.$row->s_member.'" data-cabang="'.$row->sd_branch.'" data-item="'.$row->sd_item.'" data-qty="'.$row->sd_qty.'">Beli Lagi</button>
                         </div>
                     </div>';
@@ -767,12 +770,12 @@ class PembelianController extends Controller
 
             return '<div class="column-group-item-product mt-5">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-7 col-md-7 line-height-normal">
                             <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
-                            <span class="text-full-payment-transaction">Total Semua Barang : 
+                            <span class="text-full-payment-transaction">Total : 
                                 <span class="text-full-price-transaction semi-bold" id="count">Rp. '.number_format($data->s_total,2).'</span>
                             </span> 
-                            </div> <div class="col-lg-4 col-md-4">
+                            </div> <div class="col-lg-5 col-md-5 btn-group-payment-transaction">
                             <button class="btn btn-view-more-transaction detail_transaksi" data-id="'.route('detail_transaksi', ['id'=>$data->s_id]).'">Lihat Detail Transaksi</button>
                             </div>
                         </div>'.$daftar_barang.'
