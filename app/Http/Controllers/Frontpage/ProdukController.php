@@ -305,8 +305,8 @@ class ProdukController extends Controller
             }
         }
 
-        if ($get == '[]'){
-            $get = [0 => 'Tidak Ada Cabang Terdekat' ];
+        if (!$get){
+            $get = [ 0 => 'Tidak Ada Cabang Terdekat' ];
         }
 
 
@@ -443,6 +443,7 @@ class ProdukController extends Controller
             'produksejenis'=> $produksejenis,
 
             'keranjang'=> $keranjang,
+
             'stokies' => $get[0],
 
     	));

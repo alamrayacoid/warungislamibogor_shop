@@ -89,7 +89,11 @@
                             <div class="col-md-7">
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product">{{$row->i_name}}
-                                        <span class="text-info-title-detail-product" id="stocknya"></span>
+                                        @if($stokies == 'Tidak Ada Cabang Terdekat')
+                                            <span class="text-info-title-detail-product">Ubah Alamat Di Pengaturan untuk Membeli</span>
+                                        @else
+                                            <span class="text-info-title-detail-product" id="stocknya"></span>
+                                        @endif
                                     </h2>
                                     <hr>
                                 </div>

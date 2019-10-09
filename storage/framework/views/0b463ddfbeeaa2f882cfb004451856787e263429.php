@@ -88,7 +88,11 @@
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product"><?php echo e($row->i_name); ?>
 
-                                        <span class="text-info-title-detail-product" id="stocknya"></span>
+                                        <?php if($stokies == 'Tidak Ada Cabang Terdekat'): ?>
+                                            <span class="text-info-title-detail-product">Ubah Alamat Di Pengaturan untuk Membeli</span>
+                                        <?php else: ?>
+                                            <span class="text-info-title-detail-product" id="stocknya"></span>
+                                        <?php endif; ?>
                                     </h2>
                                     <hr>
                                 </div>
