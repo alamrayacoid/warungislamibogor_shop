@@ -49,9 +49,9 @@
     <div class="container-fluid">
         <div class="row ">
             <div class="col-sm-4 col-md-3 col-lg-2 sidebar-filter-wrapper">
-                <div class="header--filter-sidebar">
+                <div class="header--filter-sidebar" data-toggle="collapse" data-target="#kategori">
                 <h5 class="entry-v-nav__heading pt-5">Cari Lebih Detail</h5>
-                <button type="button" class="btn btn-more-filter" style="position: relative;right: 5px;" data-toggle="collapse" data-target="#kategori"><i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-more-filter" style="position: relative;right: 5px;"><i class="fa fa-plus"></i></button>
                 </div>
                 <div class="product-filter-field-group collapse" id="kategori">
                     <h5 class="entry-v-nav__heading">Kategori</h5>
@@ -64,9 +64,9 @@
                 </div>
                 <form action="<?php echo e(route('produk-frontpage')); ?>" method="get">
                     <div class="product-filter-field-group">
-                        <div class="header--filter-sidebar">
+                        <div class="header--filter-sidebar" data-toggle="collapse" data-target="#produk">
                             <h5 class="entry-v-nav__heading pt-5">Nama Produk</h5>
-                            <button type="button" class="btn btn-more-filter" data-toggle="collapse" data-target="#produk"><i class="fa fa-plus"></i></button>
+                            <button type="button" class="btn btn-more-filter"><i class="fa fa-plus"></i></button>
                         </div>
                         <div class="collapse" id="produk">
                         <div class="form-group">
@@ -76,9 +76,9 @@
                     </div>
                     </div>
                     <div class="product-filter-field-group">
-                        <div class="header--filter-sidebar">
+                        <div class="header--filter-sidebar" data-toggle="collapse" data-target="#jenisproduk">
                             <h5 class="entry-v-nav__heading pt-5">Jenis Produk</h5>
-                            <button type="button" class="btn btn-more-filter" data-toggle="collapse" data-target="#jenisproduk"><i class="fa fa-plus"></i></button>
+                            <button type="button" class="btn btn-more-filter"><i class="fa fa-plus"></i></button>
                         </div>
                         <div class="collapse" id="jenisproduk">
                         <div class="form-group">
@@ -92,9 +92,9 @@
                     </div>
                     </div>
                     <div class="product-filter-field-group">
-                        <div class="header--filter-sidebar">
+                        <div class="header--filter-sidebar" data-toggle="collapse" data-target="#hargaprodukfilter">
                             <h5 class="entry-v-nav__heading pt-5">Rentang Harga</h5>
-                            <button type="button" class="btn btn-more-filter" data-toggle="collapse" data-target="#hargaprodukfilter"><i class="fa fa-plus"></i></button>
+                            <button type="button" class="btn btn-more-filter"><i class="fa fa-plus"></i></button>
                         </div>
                     <div class="collapse" id="hargaprodukfilter">
                         <div class="form-group">
@@ -233,9 +233,10 @@
         // })
 
     });
-    $('.header--filter-sidebar').on('click','.btn-more-filter',function(){
+    $('.header--filter-sidebar').click(function(){
         $(this).find('i').toggleClass('fa-minus');
     })
+        
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontpage.main-frontpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\warungislamibogor_shop\resources\views/frontpage/produk/produk-kategori-frontpage.blade.php ENDPATH**/ ?>

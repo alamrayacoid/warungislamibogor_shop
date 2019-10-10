@@ -2990,3 +2990,7 @@ top: 21px;
     top: 6em;
     padding: 0;
 }
+.header--filter-sidebar{
+    cursor: pointer;
+    z-index: 2;
+}
