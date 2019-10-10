@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class saldoController extends Controller
 {
-    public function tarik_dana()
+    public function tarik_dana(Request $request)
     {
         DB::beginTransaction();
         try {
