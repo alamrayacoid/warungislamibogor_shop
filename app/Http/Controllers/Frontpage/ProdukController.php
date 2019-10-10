@@ -298,11 +298,13 @@ class ProdukController extends Controller
             if ($row->b_stokies != null){
                 $parse = json_decode($row->b_stokies);
                 foreach ($parse as $row2){
-                if ($row2 == Auth::user()->cm_city){
-                    array_push($get,$row->b_code);
-                    break;
-                }else{
-                }
+                    if(Auth::check()){
+                        if ($row2 == Auth::user()->cm_city){
+                            array_push($get,$row->b_code);
+                            break;
+                        }else{
+                        }
+                    }
                 }
             }
         }

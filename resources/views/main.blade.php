@@ -3,29 +3,29 @@
 @include('layouts._head')
 @yield('extra_style')
 <body class="top-navigation ">
-	
-	<div id="wrapper">
 
-		{{-- @include('layouts._sidebar') --}}
+<div id="wrapper">
 
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-			
-			@include('layouts._navbar')
+    {{-- @include('layouts._sidebar') --}}
 
-			<div class="wrapper wrapper-content">
-				<div class="container">
-					@yield('content')
-				</div>
-			</div>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
 
-			@include('layouts._footer')
+        @include('layouts._navbar')
 
-			{{-- @include('layouts._smallchat') --}}
+        <div class="wrapper wrapper-content">
+            <div class="container">
+                @yield('content')
+            </div>
+        </div>
 
-			{{-- @include('layouts._rightsidebar') --}}
-		</div>
-	</div>
-	@include('layouts._script')
-	@yield('extra_script')
+        @include('layouts._footer')
+
+        {{-- @include('layouts._smallchat') --}}
+
+        {{-- @include('layouts._rightsidebar') --}}
+    </div>
+</div>
+@include('layouts._script')
+@yield('extra_script')
 </body>
 </html>
