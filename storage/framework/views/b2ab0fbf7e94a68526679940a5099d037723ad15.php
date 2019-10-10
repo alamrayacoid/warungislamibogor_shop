@@ -4,7 +4,9 @@
         float: right;
         margin: 2em 15px 1em 15px;
     }
-
+    .btn-wishlist-frontpage{
+        right: 25px;
+    }
 </style>
 <section style="margin-top:4.5em">
     <ol class="breadcrumb breadcumb-header" style="margin-bottom: 0 !important;">
@@ -120,20 +122,15 @@
                         <div class="thumbnail product-box-item">
                             <input type="hidden" value="<?php echo e($row->ipr_sunitprice); ?>" class="harga" name="">
                             <div class="product-box">
-                            <?php $__currentLoopData = $wish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wis): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php if(Auth::check()): ?>
-                            <?php if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code): ?>
-                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart icon-onwishlist"></i></button>
-                            <?php else: ?>
-                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
-                            <?php endif; ?>
-                            <?php else: ?>
                             
-                                <a href="<?php echo e(route('login-frontpage')); ?>"><button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button></a>
-                            <?php endif; ?>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <?php if($wish == '[]'): ?>
+                            <?php if(Auth::check()): ?>
+                            <?php if($row->wl_ciproduct == null): ?>
                             <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart"></i></button>
+                            <?php else: ?>
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="<?php echo e($row->i_code); ?>"><i class="fa fa-heart icon-onwishlist"></i></button>
+                            <?php endif; ?>
+                            <?php else: ?>
+                            <a href="<?php echo e(route('login-frontpage')); ?>"><button class="btn btn-wishlist-frontpage" type="button"><i class="fa fa-heart"></i></button></a>
                             <?php endif; ?>
                                 <?php $__currentLoopData = $gambar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roww): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($row->i_code == $roww->ip_ciproduct): ?>
@@ -206,20 +203,20 @@
     $(document).ready(function () {
         $('#ncart').html($('.ncart').length);
 
-        $('.btn-wishlist').click(function () {
+        $('.btn-wishlist-frontpage').click(function () {
             
             var code = $(this).data('ciproduct');
-            $(this).find('i').toggleClass('fa far');
-            $(this).parents('.product-wishlist').toggleClass('onwishlist');
-            $.ajax({
-                url: '<?php echo e(route("addwishlist")); ?>',
-                method: 'POST',
-                data: {
-                    '_token': '<?php echo e(csrf_token()); ?>',
-                    'code': code,
-                },
+            $(this).find('i').toggleClass('icon-onwishlist');
+               var code = $(this).data('ciproduct');
+                $.ajax({
+                    url: '<?php echo e(route("addwishlist")); ?>',
+                    method: 'POST',
+                    data: {
+                        '_token': '<?php echo e(csrf_token()); ?>',
+                        'code': code,
+                    },
 
-            })
+                })
         });
         $('#filter-product-js').change(function(){
             $('#submit-filter-product').click();

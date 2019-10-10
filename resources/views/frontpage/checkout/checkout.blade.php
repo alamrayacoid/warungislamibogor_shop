@@ -30,8 +30,8 @@
     @include('frontpage.checkout.modal_gantialamat')
     <section style="margin-top:4.5em;">
         <ol class="breadcrumb breadcumb-header">
-            <li><a href="#">Home</a></li>
-            <li class="active"><a>Checkout</a></li>
+            <li><a href="{{url('/')}}">Home</a></li>
+            <li class="active">Checkout</li>
         </ol>
         <div class="container-fluid mt-5">
             <div class="loader-wib"></div>
@@ -310,7 +310,12 @@
                         method: 'POST',
                         data: form,
                         success: function (get) {
-                            if (get['error'] != null) {
+                            if(get.status == 'saldokurang'){
+                                swal("Informasi!",
+                                    "Saldo anda tidak mencukupi untuk transaksi ini.",
+                                    "error");
+                            }else{
+                                if (get['error'] != null) {
                                 swal("Informasi!",
                                     get['error'],
                                     "error");
@@ -322,7 +327,9 @@
                                     window.location.href =
                                         "{{route('pembelian-pembayaran-frontpage', ['status' => 2])}}";
                                 }, 500)
+                            }    
                             }
+                            
                         },
                         error: function (xhr, textStatus, errorThrowl) {
                             swal({

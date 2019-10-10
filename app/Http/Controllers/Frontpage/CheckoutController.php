@@ -139,6 +139,7 @@ class CheckoutController extends Controller
 
                     $stat_pay = 'N';
                     $method_pay = 'T';
+                    $approve = 'C';
 
                     if($request->tunai == 'Y'){
                         $dompet = DB::table('d_walletmember')
@@ -147,6 +148,12 @@ class CheckoutController extends Controller
                         $uang = 0;
                         foreach ($dompet as $row){
                             $uang += (float)$row->wm_total;
+                        }
+                        if($uang < (float)$total_pembelian){
+                            return response()->json([
+                                'status' => 'saldokurang'
+                            ]);
+                            return false;
                         }
                         DB::table('d_walletmember')
                             ->where('wm_ccustomer',Auth::user()->cm_code)
@@ -157,6 +164,7 @@ class CheckoutController extends Controller
 
                         $stat_pay = 'Y';
                         $method_pay = 'T';
+                        $approve = 'P';
                     }
 
                 DB::table('d_sales')->insert([
@@ -173,7 +181,7 @@ class CheckoutController extends Controller
                     's_address' => $request->alamat,
                     's_paystatus' => $stat_pay,
                     's_paymethod' => $method_pay,
-                    's_isapprove' => 'P',
+                    's_isapprove' => $approve,
                     's_category' => 'ON',
                     's_created_at' => Carbon::now('Asia/Jakarta'),
                     's_created_by' => Auth::user()->cm_code,

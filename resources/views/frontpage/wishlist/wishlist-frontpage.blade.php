@@ -114,7 +114,7 @@
                                             <div class="footer-product-item">
                                                 <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
                                                 <div class="">
-                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span
+                                                    <i class="fa fa-tag" style="color: #009a51;"></i>&ensp;<span
                                                         style="color: #595959;"> {{$row->ity_name}}</span>
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@
                                             <div class="footer-product-item">
                                                 <div class="price-product-item">Rp. {{$row->ipr_sunitprice}}</div>
                                                 <div class="">
-                                                    <i class="fas fa-tags" style="color: #009a51;"></i>&ensp;<span
+                                                    <i class="fa fa-tag" style="color: #009a51;"></i>&ensp;<span
                                                         style="color: #595959;"> {{$row->ity_name}}</span>
                                                 </div>
                                             </div>
@@ -208,7 +208,7 @@
                                                             {{$row->ipr_sunitprice}}
                                                         </div>
                                                         <div class="">
-                                                            <i class="fas fa-tags"
+                                                            <i class="fa fa-tag"
                                                                 style="color: #009a51;"></i>&ensp;<span
                                                                 style="color: #595959;"> {{$row->ity_name}}</span>
                                                         </div>
