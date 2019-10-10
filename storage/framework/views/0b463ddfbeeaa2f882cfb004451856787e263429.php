@@ -84,7 +84,7 @@
                             </div>
                             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <input type="hidden" value="<?php echo e($row->i_code); ?>" id="codedetailproduk" name="">
-                            <div class="col-md-7">
+                            <div class="col-md-7">a
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product"><?php echo e($row->i_name); ?>
 
