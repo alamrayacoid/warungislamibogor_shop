@@ -29,7 +29,14 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/listWishlistAndroid','Frontpage\WishlistController@listWishlistAndroid');
 	Route::post('/removeWishlistAndrouid','Frontpage\WishlistController@removeWishlistAndrouid');
 
-
-
 });
+
+	
+
+
+	Route::get('/listKategoriAndroid','Frontpage\FrontpageController@listKategoriAndroid');
+	Route::post('/listProdukKategoriAndroid','Frontpage\FrontpageController@listProdukKategoriAndroid');
+	Route::get('/saldoCustomerAndroid','Frontpage\ProfileController@saldoCustomerAndroid');
+
+	Route::post('/trackingPosisiPengiriman','Frontpage\PembelianController@trackingPosisiPengiriman');
 

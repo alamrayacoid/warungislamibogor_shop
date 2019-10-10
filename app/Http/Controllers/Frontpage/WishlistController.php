@@ -64,6 +64,8 @@ class WishlistController extends Controller
 				
 				->where('m_item.status_data','true')
 
+                ->groupBy('i_code')
+
 				->get();
 
 		$getlast = DB::table('d_lastseen')
@@ -236,13 +238,19 @@ class WishlistController extends Controller
                 ->leftJoin('m_item','i_code','wl_ciproduct')
                 ->leftJoin('m_member','cm_code','wl_cmember')
                 ->leftJoin('m_itemproduct','itp_ciproduct','i_code')
+                ->leftJoin('m_itemtype','ity_code','m_itemproduct.itp_citype')
                 ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
                 ->where('d_wishlist.status_data','true')
-                ->select('d_wishlist.*','m_item.*','m_member.cm_name','m_itemprice.ipr_sunitprice','m_itemprice.ipr_bunitprice')
+                ->select('d_wishlist.*','m_item.*','m_member.cm_name','m_itemprice.ipr_sunitprice','m_itemprice.ipr_bunitprice','m_itemtype.ity_name')
                 ->where('d_wishlist.wl_cmember',Auth::user()->cm_code)
                 ->get();
 
-        return response()->json($data);
+        $gambar = DB::table('m_imgproduct')->groupBy('ip_ciproduct')->select('ip_path','ip_ciproduct')->get();
+
+        return response()->json(array(
+            'image' => $gambar,
+            'item' => $data,
+        ));
     }
     public function removeWishlistAndrouid(Request $request){
         DB::beginTransaction();

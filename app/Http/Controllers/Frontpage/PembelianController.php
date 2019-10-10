@@ -879,4 +879,46 @@ class PembelianController extends Controller
         ->rawColumns(['daftar','harga','namabarang','satuanbarang','jumlahbeli'])
         ->make(true);
     }
+    public function detail_transaksi_wib(){
+        if(\Auth::check()){
+
+                $keranjang = DB::table('d_cart')
+
+                            ->where('cart_cmember',Auth::user()->cm_code)
+
+                            ->where('status_data','true')
+
+                            ->count();
+
+                }
+
+                else{
+
+                    $keranjang = '';
+
+                }
+        return view('frontpage.pembelian.detail-transaction',array(
+            'keranjang' => $keranjang,
+        ));
+    }
+    public function trackingPosisiPengiriman(Request $request){
+        setlocale(LC_TIME, 'IND');
+        $data = DB::table('d_sales')
+                ->leftJoin('m_member','cm_code','d_sales.s_member')
+                ->leftJoin('d_province','p_id','d_sales.s_province')
+                ->leftJoin('d_city','c_id','s_city')
+                ->leftJoin('d_district','d_id','s_district')
+                ->where('d_sales.s_nota',$request->nota)
+                ->select('s_id','m_member.cm_name','s_nota','s_total','s_resi','d_province.p_nama','d_city.c_nama','d_district.d_nama','s_postalcode','s_address','s_delivered','s_payexpedition','s_expedition')
+                ->first();
+        $tracking = DB::table('d_salestracking')
+                    ->where('st_sales',$data->s_id)
+                    ->select(DB::raw("(DATE_FORMAT(st_date,'%d %M %Y %h:%i:%s')) as tanggal"),'st_position')
+                    ->get();
+
+        return response()->json(array(
+            'nota' => $data,
+            'tracking' => $tracking,
+        ));
+    }
 }

@@ -231,20 +231,14 @@
                 <div class="col-lg-product col-md-4">
                     <div class="thumbnail product-box-item">
                         <div class="product-box">
-                            @foreach($wish as $wis)
                             @if(Auth::check())
-                            @if($wis->wl_cmember == Auth::user()->cm_code && $wis->wl_ciproduct == $row->i_code)
+                            @if($row->wl_ciproduct == null)
+                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
+                            @else
                             <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart icon-onwishlist"></i></button>
-                            @else
-                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
                             @endif
                             @else
-
-                                <a href="{{route('login-frontpage')}}"><button class="btn btn-wishlist-frontpage" type="button"><i class="fa fa-heart"></i></button></a>
-                            @endif
-                            @endforeach
-                            @if($wish == '[]')
-                            <button class="btn btn-wishlist-frontpage" type="button" data-ciproduct="{{$row->i_code}}"><i class="fa fa-heart"></i></button>
+                            <a href="{{route('login-frontpage')}}"><button class="btn btn-wishlist-frontpage" type="button"><i class="fa fa-heart"></i></button></a>
                             @endif
                             @foreach($gambar as $roww)
                             @if($row->i_code == $roww->ip_ciproduct)
