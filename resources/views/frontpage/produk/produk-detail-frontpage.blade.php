@@ -86,7 +86,7 @@
                             </div>
                             @foreach($data as $row)
                             <input type="hidden" value="{{$row->i_code}}" id="codedetailproduk" name="">
-                            <div class="col-md-7">
+                            <div class="col-md-7">a
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product">{{$row->i_name}}
                                         @if($stokies == 'Tidak Ada Cabang Terdekat')
