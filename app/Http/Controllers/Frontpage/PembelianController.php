@@ -188,6 +188,11 @@ class PembelianController extends Controller
                     $stat = 'D';
                 }
 
+            if ($data->s_isapprove == 'C') {
+                $status = 'Menunggu Konfirmasi';
+                $stat = 'C';
+            }
+
             $daftar_barang = '';
 
             $totalbeli = 0 ;
