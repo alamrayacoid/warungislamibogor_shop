@@ -1,6 +1,5 @@
 @extends('frontpage.main-frontpage')
 
-@section('extra_style')
 <style type="text/css">
     .select2 .select2-selection--single {
         height: 35px !important;
@@ -38,20 +37,21 @@
             margin-top: 4em;
         }
 
-        @media (max-width: 992px) {
-            .sticky-footer-product {
-                display: none !important;
-            }
+        /*@media (max-width: 992px) {*/
+        /*    .sticky-footer-product {*/
+        /*        display: none !important;*/
+        /*    }*/
 
-            .footer-copy--wrapper {
-                margin-bottom: 0 !important;
-            }
+        /*    .footer-copy--wrapper {*/
+        /*        margin-bottom: 0 !important;*/
+        /*    }*/
         }
 
         .icon-onwishlist {
             color: #ed5565 !important;
         }
 </style>
+@section('extra_style')
 @endsection
 
 @section('content')
@@ -137,13 +137,13 @@
                                         </div>
                                         <div class="col-md-6 p-detail-product-first">
                                             @if($wish > 0)
-                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;
-                                                data-ciproduct=" {{$row->i_code}}" id="{{$row->i_code}}"
+                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;"
+                                                data-ciproduct="{{$row->i_code}}" id="{{$row->i_code}}"
                                                 type="button"><i class="fa fa-heart  icon-onwishlist"></i>&ensp;Add to
                                                 wishlist
                                             </button>
                                             @else
-                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;
+                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;"
                                                 data-ciproduct=" {{$row->i_code}}" id="{{$row->i_code}}"
                                                 type="button"><i class="fa fa-heart"></i>&ensp;Add to wishlist
                                             </button>
