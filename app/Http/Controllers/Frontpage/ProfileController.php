@@ -255,8 +255,7 @@ class ProfileController extends Controller
         }
         public function saldoCustomerAndroid(){
             $saldo = DB::table('d_walletmember')
-                    ->where('wm_ccustomer','SA4191134')
-                // ->where('wm_ccustomer',Auth::user()->cm_code)
+                    ->where('wm_ccustomer',Auth::user()->cm_code)
                 ->get();
 
             if($saldo != '[]'){

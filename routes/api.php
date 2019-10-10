@@ -29,14 +29,15 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/listWishlistAndroid','Frontpage\WishlistController@listWishlistAndroid');
 	Route::post('/removeWishlistAndrouid','Frontpage\WishlistController@removeWishlistAndrouid');
 
-});
-
-	
-
-
+	//kategori - produk kategori
 	Route::get('/listKategoriAndroid','Frontpage\FrontpageController@listKategoriAndroid');
 	Route::post('/listProdukKategoriAndroid','Frontpage\FrontpageController@listProdukKategoriAndroid');
+
+	//saldo customer
 	Route::get('/saldoCustomerAndroid','Frontpage\ProfileController@saldoCustomerAndroid');
 
+	//tracking posisi pengiriman
 	Route::post('/trackingPosisiPengiriman','Frontpage\PembelianController@trackingPosisiPengiriman');
+});
+
 
