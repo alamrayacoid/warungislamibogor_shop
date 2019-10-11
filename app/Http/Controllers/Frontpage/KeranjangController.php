@@ -90,6 +90,7 @@ class KeranjangController extends Controller
                                     <div class="column-description-cart-product">
                                         <h5 class="title-cart-product-item">'.$data->i_name.'</h5>
                                         <input type="hidden" class="" value="'.$data->i_code.'" name="ciproduct[]">
+                                        <input type="hidden" class="" value="'.$data->cart_weight.'" name="berat[]">
                                         <input type="hidden" class="id_produk" value="'.$data->cart_id.'">
                                         <input type="hidden" class="cabangproduk" value="'.$data->cart_location.'" name="cabang[]">
                                         
@@ -218,6 +219,16 @@ class KeranjangController extends Controller
     		$code = $request->code;
             $stock = DB::table('d_stock')->where('st_ciproduct',$code)->sum('st_qty');
     	    $cek = DB::table('d_cart')->where('cart_cmember',Auth::user()->cm_code)->where('status_data','true')->where('cart_ciproduct',$code)->count();
+    	    $getwheigt = DB::table('m_itemproduct')
+                ->where('itp_ciproduct',$request->code)
+                ->get();
+
+    	    if ($getwheigt == '[]'){
+    	        return response()->json([
+    	           'error' => 'Berat Barang Belum Di Set'
+                ]);
+            }
+
             $update = $stock - $request->cart_qty;
             if ($stock >= $request->cart_qty) {
                 if ($cek == 0) {
@@ -227,8 +238,10 @@ class KeranjangController extends Controller
         	    		'cart_cmember' => Auth::user()->cm_code,
                         'cart_qty' => $request->cart_qty,
         	    		'cart_location' =>$request->cart_location,
+        	    		'cart_weight' => (int)$getwheigt[0]->itp_weight * (int)$request->cart_qty,
         	    		'status_data' => 'true',
         	    	]);
+
                     return response()->json(array(
                         'done' => 'done',
                     ));
@@ -264,6 +277,7 @@ class KeranjangController extends Controller
         DB::table('d_cart')
         ->where('cart_cmember',Auth::user()->cm_code)
         ->delete();
+
         for ($i=0; $i < count($request->ciproduct) ; $i++) { 
                 DB::table('d_cart')
                 ->insert([
@@ -271,6 +285,7 @@ class KeranjangController extends Controller
                     'cart_qty'=> $request->qty{$i},
                     'cart_location'=> $request->cabang{$i},
                     'cart_cmember'=> Auth::user()->cm_code,
+                    'cart_weight' => $request->berat{$i},
                     'status_data'=> 'check',
                 ]);
         }

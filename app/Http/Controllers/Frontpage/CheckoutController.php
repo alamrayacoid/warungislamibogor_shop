@@ -10,6 +10,7 @@ use DB;
 use DataTables;
 use App\orderpenjualan;
 use App\Events\PushPembelian;
+use GuzzleHttp\Client;
 
 class CheckoutController extends Controller
 {
@@ -38,6 +39,88 @@ class CheckoutController extends Controller
             'provinsi' => $provinsi,
             'keranjang'=> $keranjang,
         ));
+    }
+
+    public function ongkir(Request $request)
+    {
+
+        $getkota  = DB::table('d_city')
+            ->where('c_id',$request->kota)
+            ->select('c_city_ro')
+            ->get();
+
+        if ($getkota == '[]'){
+            return response()->json([
+                'error' => 'Anda Belum Memilih Lokasi Kirim'
+            ]);
+        }
+
+        $getcart = DB::table('d_cart')
+            ->where('cart_cmember',Auth::user()->cm_code)
+            ->select('cart_location','cart_weight')
+            ->get();
+
+        $ongkir_real = 0;
+        foreach ($getcart as $row){
+            $ongkir_real += $row->cart_weight;
+        }
+
+        if ($getcart == '[]'){
+            return response()->json([
+                'error' => 'tidak ada barang di checkout'
+            ]);
+        }
+
+        $cabangkota = DB::table('m_whouse')
+            ->leftJoin('m_branch','b_code','w_cbranch')
+            ->leftJoin('d_city','c_id','b_city')
+            ->where('w_code',$getcart[0]->cart_location)
+            ->groupBy('w_id')
+            ->select('c_city_ro')
+            ->get();
+
+        if ($cabangkota == '[]'){
+            return resposnse()->json([
+                'error' => 'tidak ada Cabang Terdekat'
+            ]);
+        }
+
+
+        $client = new Client();
+
+        try {
+            $response = $client->request('POST','https://api.rajaongkir.com/starter/cost',
+                [
+                    'body' => 'origin='.$cabangkota[0]->c_city_ro.'&destination='.$getkota[0]->c_city_ro.'&weight='.$ongkir_real.'&courier=jne',
+                    'headers' => [
+                        'key' => 'a8a1d75c6420a4cd7dd4f17018791219',
+                        'content-type' => 'application/x-www-form-urlencoded',
+                    ],
+                ]
+            );
+        } catch (RequestException $e) {
+            var_dump($e->getResponse()->getBody()->getContents());
+        }
+
+        $json = $response->getBody()->getContents();
+
+        $total_ongkir = json_decode($json, true);
+
+        // dd($total_ongkir);
+//        $kota_asal = $total_ongkir["rajaongkir"]["origin_details"]["city_name"];
+//        $kota_tujuan = $total_ongkir["rajaongkir"]["destination_details"]["city_name"];
+
+
+        // print_r($array_result);
+        // echo $array_result["rajaongkir"]["results"][0]["costs"][1]["cost"][0]["value"];
+
+        // return response()->json(['status' => 'nonaktif']);
+
+//        return view('master.ongkir.result_ongkir', compact('kota_asal', 'kota_tujuan', 'total_ongkir'));
+
+        return response()->json([
+            'total' => $total_ongkir['rajaongkir']['results'][0]['costs'][1]['cost'][0]['value'],
+        ]);
     }
 
     public function sell(Request $request){
@@ -79,7 +162,7 @@ class CheckoutController extends Controller
 
             $harga_total = ($request->hargabarang[$run] * $request->qty[$run]) - $get_discount;
 
-            $dengan_ppn = $harga_total + ($harga_total * $ppn);
+            $dengan_ppn = $harga_total;
 
             $total_pembelian += $dengan_ppn;
 
@@ -126,7 +209,7 @@ class CheckoutController extends Controller
 
             $harga_total = ($request->hargabarang[$run] * $request->qty[$run]) - $get_discount;
 
-            $dengan_ppn = $harga_total + ($harga_total * $ppn);
+            $dengan_ppn = $harga_total;
 
             $total_barang = $dengan_ppn;
 
@@ -181,7 +264,7 @@ class CheckoutController extends Controller
                     's_member' => Auth::user()->cm_code,
                     's_date' => $date,
                     's_nota' => $nota,
-                    's_total' => $total_pembelian,
+                    's_total' => $total_pembelian + $request->ongkir,
                     's_province' => $request->provinsi,
                     's_city' => $request->kota,
                     's_district' => $request->kecamatan,
@@ -191,6 +274,7 @@ class CheckoutController extends Controller
                     's_paymethod' => $method_pay,
                     's_isapprove' => $approve,
                     's_category' => 'ON',
+                    's_payexpedition' => $request->ongkir,
                     's_created_at' => Carbon::now('Asia/Jakarta'),
                     's_created_by' => Auth::user()->cm_code,
                 ]);
@@ -207,36 +291,6 @@ class CheckoutController extends Controller
                     'sd_branch' => $pilih_gudang[0]->w_cbranch,
                     'sd_total' => $total_barang,
                 );
-
-        $cabang = DB::table('m_whouse')->join('m_branch','b_code','w_cbranch')->where('w_code',$pilih_gudang[0]->st_cwhouse)->get();
-        
-        foreach ($cabang as $row) {
-
-            $cek_lokasi = DB::table('d_otostockies')
-                ->where('os_nota',$nota)
-                ->where('os_address',$row->b_address)
-                ->where('os_province',$row->b_province)
-                ->where('os_city',$row->b_city)
-                ->count();
-
-        if ($cek_lokasi == 0) {   
-
-            DB::table('d_otostockies')->insert([
-                'os_branch' => $row->b_name,
-                'os_date' => $date,
-                'os_nota' => $nota,
-                'os_cprovince' => $request->provinsi,
-                'os_ccity' => $request->kota,
-                'os_cdistrict' => $request->kecamatan,
-                'os_caddress' => $request->alamat,
-                'os_address' => $row->b_address,
-                'os_province' => $row->b_province,
-                'os_city' => $row->b_city,
-                'status_data' => 'true',
-            ]);
-
-            }
-        }
 
             array_push($data, $arr);
 

@@ -123,6 +123,7 @@
                                     </div>
                                     <div class="caption" style="padding:0;">
                                         <input type="hidden" id="count" name="count">
+                                        <input type="hidden" id="ongkir" name="ongkir">
                                         @foreach($produk as $row)
                                             <input type="hidden" class="count" value="{{$row->cart_id}}" name="id[]">
                                             <div class="row column-group-cart-item-product">
@@ -191,6 +192,7 @@
 
 @section('extra_script')
     <script type="text/javascript">
+        var ppn;
         $(document).ready(function () {
             var total = 0;
             $('.total').each(function () {
@@ -199,9 +201,10 @@
             var harga_ppn = (total * 10 / 100);
 
             var total_produk = $('.column-group-cart-item-product').length;
-            $('.text-item-full-cart').html('Total Barang : ' + total_produk + ' <br><br>@foreach($produk as $row)<div class="column-full-price-cart" style="border: 1px #ffffff;"><h5 class="">{{$row->i_name}}</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber("{{$row->ipr_sunitprice * $row->cart_qty}}") + '</span></div> @endforeach <div class="column-full-price-cart" style="margin-bottom:-30px;opacity:0.8;"><h5 class=""> PPN : 10 %</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber(harga_ppn) + '</span></div>');
+            $('.text-item-full-cart').html('Total Barang : ' + total_produk + ' <br><br>@foreach($produk as $row)<div class="column-full-price-cart" style="border: 1px #ffffff;"><h5 class="">{{$row->i_name}}</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber("{{$row->ipr_sunitprice * $row->cart_qty}}") + '</span></div> @endforeach <div class="column-full-price-cart ongkir" style="margin-bottom:-30px;opacity:0.8;"></div>');
 
             $('#provinsi').change(function () {
+                $('#kota').html('');
                 $.ajax({
                     url: '{{route("kota")}}',
                     type: 'get',
@@ -218,11 +221,35 @@
                                 [i].c_nama + '</option>';
                         }
                         $('#kota').html(html);
+                        if ($('#kota').html() != ''){
+                            $('#kota').val('{{Auth::user()->cm_city}}').trigger('change');
+                        }
                     }
                 });
             })
 
             $('#kota').change(function () {
+                $.ajax({
+                    url: '{{route("ongkir")}}',
+                    type: 'post',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'kota': $('#kota').val()
+                    },
+                    success: function (get) {
+                        if (get != null){
+                            var tot = get.total;
+                        } else{
+                            var tot = 0;
+                        }
+                        $('.ongkir').html('<h5 class=""> ongkir</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber(tot) + '</span>')
+                        ppn = parseFloat(total) + parseFloat(tot)
+                        $('#ongkir').val(tot)
+                        $('#totalview').html('Rp. ' + accounting.formatNumber(ppn));
+                    }
+                });
+
+                $('#kecamatan').html('');
                 $.ajax({
                     url: '{{route("desa")}}',
                     type: 'get',
@@ -239,19 +266,15 @@
                                 'desa'][i].d_nama + '</option>';
                         }
                         $('#kecamatan').html(htmll);
-                    }
-                });
-            })
+                            if ($('#kecamatan').html() != ''){
+                                $('#kecamatan').val('{{Auth::user()->cm_district}}').trigger('change');
+                            }
+                        }
+                    });
+                })
 
             setTimeout(function () {
                 $('#provinsi').val('{{Auth::user()->cm_province}}').trigger('change');
-                setTimeout(function () {
-                    $('#kota').val('{{Auth::user()->cm_city}}').trigger('change');
-                    setTimeout(function () {
-                        $('#kecamatan').val('{{Auth::user()->cm_district}}').trigger(
-                            'change');
-                    }, 800)
-                }, 800)
             }, 200)
 
             $('#update-alamat').on('click', function () {
@@ -271,11 +294,12 @@
             })
 
 
-            setInterval(function () {
+            var inter = setInterval(function () {
+                if ($('.count').length > 0) clearInterval(inter);
                 $('#itemt').html($('.count').length);
             }, 500);
 
-            var ppn = total + (total * 10 / 100);
+            ppn = total + 0;
 
             $('#totalview').html('Rp. ' + accounting.formatNumber(ppn));
 
