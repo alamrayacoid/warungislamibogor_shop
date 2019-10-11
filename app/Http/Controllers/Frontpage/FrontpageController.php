@@ -18,7 +18,7 @@ class FrontpageController extends Controller
 
     {
 
-            $data = DB::table('m_item')
+            $data2 = DB::table('m_item')
 
                     ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
 
@@ -36,15 +36,40 @@ class FrontpageController extends Controller
 
                     })
 
-                    ->leftJoin('m_imgproduct','ip_ciproduct','i_code')
+                    ->leftJoin('m_imgproduct','ip_ciproduct','i_code');
 
-                    ->groupBy('i_name')
+                    
+            if(\Auth::check()){
 
-                    ->where('m_item.status_data','true')
+                $data = $data2
+                        ->leftJoin('d_wishlist',function($join){
 
-                    ->select('m_item.i_name','m_item.i_code','m_item.i_link','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
+                            $join->on('d_wishlist.wl_ciproduct','=','m_item.i_code')
 
-                    ->paginate(5);
+                            ->where('d_wishlist.status_data','=','true')      
+
+                            ->where('d_wishlist.wl_cmember','=',Auth::user()->cm_code);
+                        })
+                        ->groupBy('i_name')
+
+                        ->where('m_item.status_data','true')
+
+                        ->select('m_item.i_name','m_item.i_code','m_item.i_link','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name','d_wishlist.wl_ciproduct')
+
+                        ->paginate(5);
+
+            }else{
+
+                        $data = $data2
+
+                                ->groupBy('i_name')
+
+                                ->where('m_item.status_data','true')
+
+                                ->select('m_item.i_name','m_item.i_code','m_item.i_link','m_itemprice.ipr_sunitprice','m_imgproduct.ip_path','m_groupperprice.gpp_sellprice','m_itemtype.ity_name')
+
+                                ->paginate(5);
+            }
 
             $gambar = DB::table('m_item')
 
@@ -321,6 +346,25 @@ class FrontpageController extends Controller
         
         }
 
+    }
+    public function listKategoriAndroid(){
+        $data = DB::table('m_itemtype')->where('status_data','true')->get();
+        return response()->json($data);
+    }
+    public function listProdukKategoriAndroid(Request $request){
+        $data = DB::table('m_item')
+                ->leftJoin('m_itemprice','ipr_ciproduct','m_item.i_code')
+                ->leftJoin('m_itemproduct','itp_ciproduct','m_item.i_code')
+                ->leftJoin('m_itemtype','ity_code','m_itemproduct.itp_citype')
+                ->leftJoin('m_itemunit','iu_code','itp_ciunit')
+                ->select('m_item.*','m_itemprice.ipr_bunitprice','m_itemprice.ipr_sunitprice','m_itemtype.ity_name','m_itemunit.iu_name')
+                ->where('ity_code',$request->kategori)
+                ->get();
+        $gambar = DB::table('m_imgproduct')->groupBy('ip_ciproduct')->select('ip_path','ip_ciproduct')->get();
+        return response()->json(array(
+            'image' => $gambar,
+            'item' => $data,
+        ));
     }
 
 }

@@ -1,4 +1,3 @@
-<?php $__env->startSection('extra_style'); ?>
 <style type="text/css">
     .select2 .select2-selection--single {
         height: 35px !important;
@@ -36,20 +35,21 @@
             margin-top: 4em;
         }
 
-        @media (max-width: 992px) {
-            .sticky-footer-product {
-                display: none !important;
-            }
+        /*@media (max-width: 992px) {*/
+        /*    .sticky-footer-product {*/
+        /*        display: none !important;*/
+        /*    }*/
 
-            .footer-copy--wrapper {
-                margin-bottom: 0 !important;
-            }
+        /*    .footer-copy--wrapper {*/
+        /*        margin-bottom: 0 !important;*/
+        /*    }*/
         }
 
         .icon-onwishlist {
             color: #ed5565 !important;
         }
 </style>
+<?php $__env->startSection('extra_style'); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -84,7 +84,7 @@
                             </div>
                             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <input type="hidden" value="<?php echo e($row->i_code); ?>" id="codedetailproduk" name="">
-                            <div class="col-md-7">a
+                            <div class="col-md-7">
                                 <div class="col-lg-12">
                                     <h2 class="title-detail-product"><?php echo e($row->i_name); ?>
 
@@ -136,13 +136,13 @@
                                         </div>
                                         <div class="col-md-6 p-detail-product-first">
                                             <?php if($wish > 0): ?>
-                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;
-                                                data-ciproduct=" <?php echo e($row->i_code); ?>" id="<?php echo e($row->i_code); ?>"
+                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;"
+                                                data-ciproduct="<?php echo e($row->i_code); ?>" id="<?php echo e($row->i_code); ?>"
                                                 type="button"><i class="fa fa-heart  icon-onwishlist"></i>&ensp;Add to
                                                 wishlist
                                             </button>
                                             <?php else: ?>
-                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;
+                                            <button class="btn btn-product-detail-wishlist addwishlist" style="color:#676a6c;"
                                                 data-ciproduct=" <?php echo e($row->i_code); ?>" id="<?php echo e($row->i_code); ?>"
                                                 type="button"><i class="fa fa-heart"></i>&ensp;Add to wishlist
                                             </button>

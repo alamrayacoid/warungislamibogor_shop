@@ -232,6 +232,12 @@ class CheckoutController extends Controller
                         foreach ($dompet as $row){
                             $uang += (float)$row->wm_total;
                         }
+                        if($uang < (float)$total_pembelian){
+                            return response()->json([
+                                'status' => 'saldokurang'
+                            ]);
+                            return false;
+                        }
                         DB::table('d_walletmember')
                             ->where('wm_ccustomer',Auth::user()->cm_code)
                             ->update([

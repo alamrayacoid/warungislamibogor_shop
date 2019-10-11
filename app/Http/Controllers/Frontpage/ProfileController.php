@@ -253,6 +253,17 @@ class ProfileController extends Controller
                 
             }
         }
-        
+        public function saldoCustomerAndroid(){
+            $saldo = DB::table('d_walletmember')
+                    ->where('wm_ccustomer',Auth::user()->cm_code)
+                ->get();
+
+            if($saldo != '[]'){
+                $sisasaldo = 'Rp. '.number_format($saldo[0]->wm_total,2).'';
+            }else{
+                $sisasaldo = 'Rp. 0';
+            }
+            return response()->json($sisasaldo);
+        }
     }
 

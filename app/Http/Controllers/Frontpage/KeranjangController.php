@@ -302,7 +302,13 @@ class KeranjangController extends Controller
                     ->groupBy('cart_ciproduct')
                     ->select('d_cart.*','m_item.*','m_itemprice.ipr_sunitprice','m_itemprice.ipr_bunitprice','m_member.cm_name')
                     ->get();
-        return response()->json($data);
+
+        $gambar = DB::table('m_imgproduct')->groupBy('ip_ciproduct')->select('ip_path','ip_ciproduct')->get();
+
+        return response()->json(array(
+            'image'=> $gambar,
+            'item' => $data,
+        ));
     }
     public function addQtyKeranjangAndroid(Request $request){
         DB::beginTransaction();

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -29,6 +31,15 @@ class HomeController extends Controller
 
     public function user()
     {
+        DB::table('m_member')
+        
+                ->where('cm_username', '=', Auth::user()->cm_username)
+        
+                ->update([
+        
+                    'cm_lastlogin' => Carbon::now('Asia/Jakarta')
+        
+                ]);
         $user = Auth::user();
 
         return response()->json($user);

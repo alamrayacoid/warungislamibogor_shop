@@ -118,6 +118,7 @@ Broadcast::channel('my-channel', function ($user) {
     return true; // change this to your authentication logic
 });
 });
+Route::get('/detail-transaksi-wib','Frontpage\PembelianController@detail_transaksi_wib')->name('detail_transaksi_wib');
 Route::get('/page/not/found',function($closure){
   // second parameter is optional. 
   abort(404,'Page not found');

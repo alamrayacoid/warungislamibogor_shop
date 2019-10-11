@@ -33,7 +33,7 @@ class ProdukController extends Controller
 
             if ($kategory != null) {
 
-            $data = DB::table('m_item')
+            $data2 = DB::table('m_item')
 
                 ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
 
@@ -54,6 +54,7 @@ class ProdukController extends Controller
                 ->where('m_item.status_data','true')
 
                 ->groupBy('i_name');
+        
 
             $gambar = DB::table('m_item')
 
@@ -65,25 +66,25 @@ class ProdukController extends Controller
 
             if ($request->search != null) {
 
-                $data->where('i_name','LIKE', $request->search.'%')->get();
+                $data2->where('i_name','LIKE', $request->search.'%');
 
             }
 
             if ($request->nama_produk != null) {
 
-                $data->where('i_name','LIKE', $request->nama_produk.'%')->get();
+                $data2->where('i_name','LIKE', $request->nama_produk.'%');
 
             }
 
             if ($request->harga_min != null && $request->harga_max != null) {
 
-                $data->whereBetween('ipr_sunitprice',[$request->harga_min,$request->harga_max])->get();
+                $data2->whereBetween('ipr_sunitprice',[$request->harga_min,$request->harga_max]);
 
             }
 
             if ($request->jenis != null) {
 
-                $data->where('itp_citype',$request->jenis)->get();
+                $data2->where('itp_citype',$request->jenis);
 
             }
 
@@ -91,7 +92,7 @@ class ProdukController extends Controller
 
         else{
 
-            $data = DB::table('m_item')
+            $data2 = DB::table('m_item')
 
                     ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
 
@@ -130,19 +131,19 @@ class ProdukController extends Controller
 
             if ($request->search != null) {
 
-                $data->where('i_name','LIKE', $request->search.'%')->get();
+                $data2->where('i_name','LIKE', $request->search.'%');
 
             }
 
             if ($request->nama_produk != null) {
 
-                $data->where('i_name','LIKE', $request->nama_produk.'%')->get();
+                $data2->where('i_name','LIKE', $request->nama_produk.'%');
 
             }
 
             if ($request->harga_min != null && $request->harga_max != null) {
 
-                $data->whereBetween('ipr_sunitprice',[$request->harga_min,$request->harga_max])->get();
+                $data2->whereBetween('ipr_sunitprice',[$request->harga_min,$request->harga_max]);
 
             }
 
@@ -150,17 +151,35 @@ class ProdukController extends Controller
 
                 if ($request->jenis == 'All') {
 
-                    $data->get();
+                    $data2;
 
                 }
 
                 else{
 
-                    $data->where('itp_citype',$request->jenis)->get();
+                    $data2->where('itp_citype',$request->jenis);
 
                 }
 
             }
+            if(\Auth::check()){
+
+            $data = $data2
+                    ->leftJoin('d_wishlist',function($join){
+
+                        $join->on('d_wishlist.wl_ciproduct','=','m_item.i_code')
+
+                        ->where('d_wishlist.status_data','=','true')      
+
+                        ->where('d_wishlist.wl_cmember','=',Auth::user()->cm_code);
+                    });
+                    
+            
+
+        }else{
+
+            $data = $data2;
+        }
 
             $namabarang = $request->search;
 
@@ -256,8 +275,12 @@ class ProdukController extends Controller
                     ->where('ls_ccustomer',Auth::user()->cm_code)            
 
                     ->first();
+            $cekbarang = DB::table('d_lastseen')
+                        ->where('ls_ccustomer',Auth::user()->cm_code)
+                        ->where('ls_cproduct',$datas->i_code)
+                        ->count();
 
-        if (is_null($dataseen)) {
+        if ($cekbarang == 0 || $cekbarang == null) {
 
             DB::table('d_lastseen')->insert([
 
@@ -539,8 +562,7 @@ class ProdukController extends Controller
         if($cekadatidak == null || $cekadatidak == 0){
             return redirect()->back();
         }
-
-        $data = DB::table('m_item')
+        $data2 = DB::table('m_item')
 
                 ->leftJoin('m_itemprice','ipr_ciproduct','i_code')
 
@@ -556,8 +578,21 @@ class ProdukController extends Controller
 
                     ->where('m_groupperprice.status_data','=','true');
 
-                })
+                });
 
+
+                
+        if(\Auth::check()){
+
+            $data = $data2
+                    ->leftJoin('d_wishlist',function($join){
+
+                        $join->on('d_wishlist.wl_ciproduct','=','m_item.i_code')
+
+                        ->where('d_wishlist.status_data','=','true')      
+
+                        ->where('d_wishlist.wl_cmember','=',Auth::user()->cm_code);
+                    })
                 ->where('itp_citype',$datas->ity_code)
 
                 ->where('m_item.status_data','true')
@@ -565,6 +600,18 @@ class ProdukController extends Controller
                 ->groupBy('i_code')
 
                 ->paginate(24);
+
+        }else{
+
+            $data = $data2->where('itp_citype',$datas->ity_code)
+
+                ->where('m_item.status_data','true')
+
+                ->groupBy('i_code')
+
+                ->paginate(24);
+        }
+        
 
         $data1 = DB::table('m_item')
 
@@ -587,12 +634,22 @@ class ProdukController extends Controller
                 $type = DB::table('m_itemtype')
 
                         ->get();
+                if(\Auth::check()){                        
 
                 $wish = DB::table('d_wishlist')
 
+                        ->where('wl_cmember',Auth::user()->cm_code)
+
                         ->where('status_data','true')
 
-                        ->get();
+                        ->groupBy('wl_ciproduct')
+
+                        ->first();
+                }else{
+
+                    $wish = '';
+
+                }
 
                 $gambar = DB::table('m_item')
 
@@ -721,20 +778,36 @@ class ProdukController extends Controller
 
             if($request->status_filter == 'terbaru'){
 
-                $datas = $data->orderBy('i_id','desc');
+                $data->orderBy('i_id','desc');
 
             }
 
             else if($request->status_filter == 'termurah'){
 
-                $datas = $data->orderBy('ipr_sunitprice','asc');
+                $data->orderBy('ipr_sunitprice','asc');
 
             }
 
             else if($request->status_filter == 'termahal'){
 
-                $datas = $data->orderBy('ipr_sunitprice','desc');
+                $data->orderBy('ipr_sunitprice','desc');
 
+            }
+            if(\Auth::check()){
+
+            $datas = $data
+                    ->leftJoin('d_wishlist',function($join){
+
+                        $join->on('d_wishlist.wl_ciproduct','=','m_item.i_code')
+
+                        ->where('d_wishlist.status_data','=','true')      
+
+                        ->where('d_wishlist.wl_cmember','=',Auth::user()->cm_code);
+                    });
+
+            }else{
+
+            $datas = $data;
             }
 
             $status_filter = $request->status_filter;
@@ -823,19 +896,19 @@ class ProdukController extends Controller
 
             if($request->status_filter == 'terbaru'){
 
-                $datas = $data->orderBy('i_id','desc');
+                 $data->orderBy('i_id','desc');
 
             }
 
             else if($request->status_filter == 'termurah'){
 
-                $datas = $data->orderBy('ipr_sunitprice','asc');
+                $data->orderBy('ipr_sunitprice','asc');
 
             }
 
             else if($request->status_filter == 'termahal'){
 
-                $datas = $data->orderBy('ipr_sunitprice','desc');
+                $data->orderBy('ipr_sunitprice','desc');
             }
 
 
@@ -869,6 +942,22 @@ class ProdukController extends Controller
 
                 }
 
+            }
+            if(\Auth::check()){
+
+            $datas = $data
+                    ->leftJoin('d_wishlist',function($join){
+
+                        $join->on('d_wishlist.wl_ciproduct','=','m_item.i_code')
+
+                        ->where('d_wishlist.status_data','=','true')      
+
+                        ->where('d_wishlist.wl_cmember','=',Auth::user()->cm_code);
+                    });
+
+            }else{
+
+            $datas = $data;
             }
 
             $status_filter = $request->status_filter;
