@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
