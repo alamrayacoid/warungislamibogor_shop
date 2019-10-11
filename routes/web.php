@@ -106,6 +106,8 @@ Route::get('/checkout', 'Frontpage\CheckoutController@checkout')->name('checkout
 Route::post('/checkout/sell', 'Frontpage\CheckoutController@sell')->name('sell.checkout');
 Route::post('/checkout/ubahalamat', 'Frontpage\CheckoutController@ubahalamat')->name('ubah.checkout');
 Route::post('/checkout-repeat-order','Frontpage\CheckoutController@checkout_repeat_order')->name('checkout-repeat-order');
+    Route::post('/ongkir','Frontpage\CheckoutController@ongkir')->name('ongkir');
+
 
 Route::get('pembelian/detail/{id}','Frontpage\PembelianController@detail_transaksi')->name('detail_transaksi');
 

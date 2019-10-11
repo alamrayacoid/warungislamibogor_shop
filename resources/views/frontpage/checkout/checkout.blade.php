@@ -163,6 +163,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-5 column-right-cart-item-product">
+                                                    <input type="hidden" id="ongkir" name="ongkir">
                                                     <h5 class="">Rp. {{$row->ipr_sunitprice * $row->cart_qty}}</h5>
                                                     <input type="hidden"
                                                            value="{{$row->ipr_sunitprice * $row->cart_qty}}"
@@ -191,6 +192,7 @@
 
 @section('extra_script')
     <script type="text/javascript">
+        var ppn;
         $(document).ready(function () {
             var total = 0;
             $('.total').each(function () {
@@ -199,7 +201,7 @@
             var harga_ppn = (total * 10 / 100);
 
             var total_produk = $('.column-group-cart-item-product').length;
-            $('.text-item-full-cart').html('Total Barang : ' + total_produk + ' <br><br>@foreach($produk as $row)<div class="column-full-price-cart" style="border: 1px #ffffff;"><h5 class="">{{$row->i_name}}</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber("{{$row->ipr_sunitprice * $row->cart_qty}}") + '</span></div> @endforeach <div class="column-full-price-cart" style="margin-bottom:-30px;opacity:0.8;"><h5 class=""> PPN : 10 %</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber(harga_ppn) + '</span></div>');
+            $('.text-item-full-cart').html('Total Barang : ' + total_produk + ' <br><br>@foreach($produk as $row)<div class="column-full-price-cart" style="border: 1px #ffffff;"><h5 class="">{{$row->i_name}}</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber("{{$row->ipr_sunitprice * $row->cart_qty}}") + '</span></div> @endforeach <div class="column-full-price-cart ongkir" style="margin-bottom:-30px;opacity:0.8;"></div>');
 
             $('#provinsi').change(function () {
                 $.ajax({
@@ -223,6 +225,26 @@
             })
 
             $('#kota').change(function () {
+                $.ajax({
+                    url: '{{route("ongkir")}}',
+                    type: 'post',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'kota': $('#kota').val()
+                    },
+                    success: function (get) {
+                        if (get != null){
+                            var tot = get.total;
+                        } else{
+                            var tot = 0;
+                        }
+                        $('.ongkir').html('<h5 class=""> ongkir</h5><span class="text-price-cart-product">Rp. ' + accounting.formatNumber(tot) + '</span>')
+                        ppn = parseFloat(ppn) + parseFloat(tot)
+                        $('#totalview').html('Rp. ' + accounting.formatNumber(ppn));
+                        $('#ongkir').val(tot)
+                    }
+                });
+
                 $.ajax({
                     url: '{{route("desa")}}',
                     type: 'get',
@@ -271,11 +293,12 @@
             })
 
 
-            setInterval(function () {
+            var inter = setInterval(function () {
+                if ($('.count').length > 0) clearInterval(inter);
                 $('#itemt').html($('.count').length);
             }, 500);
 
-            var ppn = total + (total * 10 / 100);
+            ppn = total + 0;
 
             $('#totalview').html('Rp. ' + accounting.formatNumber(ppn));
 

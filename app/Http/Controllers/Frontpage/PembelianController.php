@@ -206,8 +206,8 @@ class PembelianController extends Controller
                                 <div class="padding-0-15 line-height-normal">
                                     <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
                                     <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
-                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
-                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Harga Barang :
+                                    <span class="text-full-price-transaction">Rp. '.number_format($row->sd_total,2).'</span></span></div>
                                 </div>
                             </div>
                         </div>
@@ -405,8 +405,8 @@ class PembelianController extends Controller
                                 <div class="padding-0-15">
                                     <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
                                     <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
-                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
-                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Harga Barang :
+                                    <span class="text-full-price-transaction">Rp. '.number_format($row->sd_total,2).'</span></span></div>
                                 </div>
                             </div>
                         </div>
@@ -430,7 +430,7 @@ class PembelianController extends Controller
                             <div class="col-lg-7 col-md-7 line-height-normal">
                             <span class="fs-14 semi-bold">'.$data->s_nota.'</span>
                             <span class="text-full-payment-transaction">Total : 
-                                <span class="text-full-price-transaction semi-bold" id="count">Rp. '.$data->s_total.'</span>
+                                <span class="text-full-price-transaction semi-bold" id="count">Rp. '. number_format($data->s_total,2).'</span>
                             </span> 
                             </div>
                             <div class="col-lg-5 col-md-5 btn-group-payment-transaction">
@@ -573,8 +573,8 @@ class PembelianController extends Controller
                                 <div class="padding-0-15">
                                     <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
                                     <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
-                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
-                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Harga Barang :
+                                    <span class="text-full-price-transaction">Rp. '.number_format($row->sd_total,2).'</span></span></div>
                                 </div>
                             </div>
                         </div>
@@ -753,8 +753,8 @@ class PembelianController extends Controller
                                 <div class="padding-0-15">
                                     <div class="fs-14 semi-bold nameproduct">'.$row->i_name.'</div>
                                     <div class="fs-14 semi-bold pt-3">'.$row->s_nota.'<span></div>
-                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Pembayaran :
-                                    <span class="text-full-price-transaction">Rp. '.$row->sd_total.'</span></span></div>
+                                    <div class="fs-14 semi-bold pt-3">'.Carbon::parse($row->s_date)->formatLocalized('%d %B %Y').'<span class="text-full-payment-transaction">Total Harga Barang :
+                                    <span class="text-full-price-transaction">Rp. '.number_format($row->sd_total,2).'</span></span></div>
                                 </div>
                             </div>
                         </div>
