@@ -161,6 +161,14 @@ class CheckoutController extends Controller
                                'wm_total' => $uang - (float)$total_pembelian,
                                 'wm_last' => $uang,
                             ]);
+                        DB::table('d_historysaldomember')->insert([
+                            'hsm_member' => Auth::user()->cm_code,
+                            'hsm_type' => 'K',
+                            'hsm_lastsaldo' => $uang,
+                            'hsm_total' => $uang - (float)$total_pembelian,
+                            'hsm_date' => Carbon::now(),
+                            'hsm_note' => 'Pembelian Barang Online',
+                        ]);
 
                         $stat_pay = 'Y';
                         $method_pay = 'T';
