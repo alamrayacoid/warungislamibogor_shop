@@ -179,6 +179,9 @@
                                         <div>Saldo Anda : </div>
                                         <span class="balance-profile-navbar">Rp. <?php echo e($saldo); ?></span>
                                     </li>
+                                    <li class="d-flex justify-content-between" style="margin: 0 20px !important;border-right:0 !important;border-left:0 !important;">
+                                        <a href="javascript:void()">Tarik dana dari saldo</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="navbar-account-content-right">
